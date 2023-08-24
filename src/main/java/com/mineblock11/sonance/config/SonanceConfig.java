@@ -71,7 +71,7 @@ public class SonanceConfig {
                                             Option.<Boolean>createBuilder()
                                                     .name(Text.translatable("sonance.config.dynamic.hotbar_scroll.name"))
                                                     .description(OptionDescription.createBuilder()
-                                                            .text(Text.translatable("sonance.config.dynamic.hotbar_scroll.desc")).build())
+                                                            .text(Text.translatable("sonance.config.dynamic.opt.desc")).build())
                                                     .listener((opt, val) -> {
                                                         for (Option<?> option : hotbarScrollGroup.options()) {
                                                             if(option.pendingValue() instanceof Boolean) {
@@ -84,7 +84,7 @@ public class SonanceConfig {
                                             Option.<Boolean>createBuilder()
                                                     .name(Text.translatable("sonance.config.dynamic.hotbar_pick.name"))
                                                     .description(OptionDescription.createBuilder()
-                                                            .text(Text.translatable("sonance.config.dynamic.hotbar_pick.desc")).build())
+                                                            .text(Text.translatable("sonance.config.dynamic.opt.desc")).build())
                                                     .listener((opt, val) -> {
                                                         for (Option<?> option : hotbarPickGroup.options()) {
                                                             if(option.pendingValue() instanceof Boolean) {

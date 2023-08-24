@@ -19,7 +19,6 @@ public class ChatScreenMixin {
             case GLFW.GLFW_KEY_CAPS_LOCK:
             case GLFW.GLFW_KEY_TAB:
             case GLFW.GLFW_KEY_ENTER:
-            case GLFW.GLFW_KEY_BACKSPACE:
             case GLFW.GLFW_KEY_INSERT:
             case GLFW.GLFW_KEY_DELETE:
             case GLFW.GLFW_KEY_END:

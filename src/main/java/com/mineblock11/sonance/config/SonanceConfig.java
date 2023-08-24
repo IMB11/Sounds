@@ -36,7 +36,12 @@ public class SonanceConfig {
     public final ConfiguredSound hotbarScrollSoundEffect = new ConfiguredSound(true, "hotbarScroll", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.8f, 0.2f);
 
     @ConfigEntry
-    public boolean useDynamicHotbar = true;
+    public final ConfiguredSound hotbarPickSoundEffect = new ConfiguredSound(true, "hotbarPick", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.8f, 0.2f);
+
+    @ConfigEntry
+    public boolean useDynamicHotbarScroll = true;
+    @ConfigEntry
+    public boolean useDynamicHotbarPick = true;
 
     public static SonanceConfig get() {
         return GSON.getConfig();
@@ -50,6 +55,7 @@ public class SonanceConfig {
         return YetAnotherConfigLib.create(GSON,
                 ((defaults, config, builder) -> {
                     var hotbarScrollGroup = config.hotbarScrollSoundEffect.getOptionGroup(defaults.hotbarScrollSoundEffect);
+                    var hotbarPickGroup = config.hotbarPickSoundEffect.getOptionGroup(defaults.hotbarPickSoundEffect);
                     return builder
                             .title(Text.empty())
                             .category(
@@ -57,14 +63,15 @@ public class SonanceConfig {
                                             config.typingSoundEffect.getOptionGroup(defaults.typingSoundEffect),
                                             config.messageSoundEffect.getOptionGroup(defaults.messageSoundEffect),
                                             config.mentionSoundEffect.getOptionGroup(defaults.mentionSoundEffect),
-                                            hotbarScrollGroup
+                                            hotbarScrollGroup,
+                                            hotbarPickGroup
                                     )).name(Text.translatable("sonance.config.static")).build())
                             .category(
                                     ConfigCategory.createBuilder().options(List.of(
                                             Option.<Boolean>createBuilder()
-                                                    .name(Text.translatable("sonance.config.dynamic.hotbar.name"))
+                                                    .name(Text.translatable("sonance.config.dynamic.hotbar_scroll.name"))
                                                     .description(OptionDescription.createBuilder()
-                                                            .text(Text.translatable("sonance.config.dynamic.hotbar.desc")).build())
+                                                            .text(Text.translatable("sonance.config.dynamic.hotbar_scroll.desc")).build())
                                                     .listener((opt, val) -> {
                                                         for (Option<?> option : hotbarScrollGroup.options()) {
                                                             if(option.pendingValue() instanceof Boolean) {
@@ -72,7 +79,20 @@ public class SonanceConfig {
                                                             }
                                                         }
                                                     })
-                                                    .binding(defaults.useDynamicHotbar, () -> config.useDynamicHotbar, val -> config.useDynamicHotbar = val)
+                                                    .binding(defaults.useDynamicHotbarScroll, () -> config.useDynamicHotbarScroll, val -> config.useDynamicHotbarScroll = val)
+                                                    .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter()).build(),
+                                            Option.<Boolean>createBuilder()
+                                                    .name(Text.translatable("sonance.config.dynamic.hotbar_pick.name"))
+                                                    .description(OptionDescription.createBuilder()
+                                                            .text(Text.translatable("sonance.config.dynamic.hotbar_pick.desc")).build())
+                                                    .listener((opt, val) -> {
+                                                        for (Option<?> option : hotbarPickGroup.options()) {
+                                                            if(option.pendingValue() instanceof Boolean) {
+                                                                option.setAvailable(!val);
+                                                            }
+                                                        }
+                                                    })
+                                                    .binding(defaults.useDynamicHotbarPick, () -> config.useDynamicHotbarPick, val -> config.useDynamicHotbarPick = val)
                                                     .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter()).build()
                                     )).name(Text.translatable("sonance.config.dynamic")).build());
                 }));

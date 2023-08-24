@@ -1,5 +1,5 @@
 package com.mineblock11.sonance.compat;
-;
+
 import com.mineblock11.sonance.config.SonanceConfig;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;

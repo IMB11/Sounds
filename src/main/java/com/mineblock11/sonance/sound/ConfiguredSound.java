@@ -34,6 +34,7 @@ public class ConfiguredSound {
     public float volume = 1f;
     private float defaultPitch;
     private float defaultVolume;
+
     public ConfiguredSound(boolean shouldPlay, Identifier soundEvent, float pitch, float volume, String id) {
         this.defaultPitch = defaultPitch;
         this.defaultVolume = defaultVolume;
@@ -43,6 +44,7 @@ public class ConfiguredSound {
         this.volume = volume;
         this.id = id;
     }
+
     public ConfiguredSound(String id, RegistryEntry.Reference<SoundEvent> soundEvent, float pitch, float volume) {
         this.id = id;
         this.soundEvent = soundEvent;
@@ -51,7 +53,7 @@ public class ConfiguredSound {
     }
 
     public void playSound() {
-        if(this.shouldPlay) {
+        if (this.shouldPlay) {
             MinecraftClient client = MinecraftClient.getInstance();
             final SoundEvent event = Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
             client.getSoundManager().play(PositionedSoundInstance.master(event, pitch, volume));

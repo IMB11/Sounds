@@ -3,7 +3,6 @@ package com.mineblock11.sonance.config;
 import com.google.gson.*;
 import com.mineblock11.sonance.sound.ConfiguredSound;
 import com.mojang.serialization.JsonOps;
-import net.minecraft.util.Identifier;
 
 import java.lang.reflect.Type;
 

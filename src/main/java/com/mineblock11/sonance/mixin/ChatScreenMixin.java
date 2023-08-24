@@ -54,7 +54,7 @@ public class ChatScreenMixin {
 
     @Inject(method = "keyPressed", at = @At("HEAD"), cancellable = false)
     public void $typing_sound_effect(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
-        if(isNotSpecialKey(keyCode)) {
+        if (isNotSpecialKey(keyCode)) {
             SonanceConfig.get().typingSoundEffect.playSound();
         }
     }

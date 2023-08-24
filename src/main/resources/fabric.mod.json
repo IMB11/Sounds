@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "sonance",
+  "version": "${version}",
+  "name": "Sonance",
+  "description": "A highly configurable UI sound overhaul.",
+  "authors": [
+    "mineblock11"
+  ],
+  "contact": {
+    "website": "https://mineblock11.dev/",
+    "repo": "https://github.com/mineblock11/Sonance"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/sonance/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.mineblock11.sonance.SonanceClient"
+    ],
+    "modmenu": [
+      "com.mineblock11.sonance.compat.ModMenuCompat"
+    ]
+  },
+  "mixins": [
+    "sonance.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": ">=1.20"
+  }
+}

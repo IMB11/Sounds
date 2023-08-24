@@ -25,24 +25,7 @@ public class DynamicSoundHelper {
         }
 
         if (item instanceof ArmorItem armorItem) {
-            var mat = armorItem.getMaterial();
-            if (mat.equals(ArmorMaterials.TURTLE)) {
-                return SoundEvents.ITEM_ARMOR_EQUIP_TURTLE;
-            } else if (mat.equals(ArmorMaterials.LEATHER)) {
-                return SoundEvents.ITEM_ARMOR_EQUIP_LEATHER;
-            } else if (mat.equals(ArmorMaterials.NETHERITE)) {
-                return SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE;
-            } else if (mat.equals(ArmorMaterials.IRON)) {
-                return SoundEvents.ITEM_ARMOR_EQUIP_IRON;
-            } else if (mat.equals(ArmorMaterials.GOLD)) {
-                return SoundEvents.ITEM_ARMOR_EQUIP_GOLD;
-            } else if (mat.equals(ArmorMaterials.DIAMOND)) {
-                return SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
-            } else if (mat.equals(ArmorMaterials.CHAIN)) {
-                return SoundEvents.ITEM_ARMOR_EQUIP_CHAIN;
-            } else {
-                return SoundEvents.ITEM_ARMOR_EQUIP_GENERIC;
-            }
+            return armorItem.getEquipSound();
         }
 
         if (item instanceof ElytraItem) {

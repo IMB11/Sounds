@@ -3,11 +3,12 @@
   "minVersion": "0.8",
   "package": "com.mineblock11.sonance.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [],
+  "mixins": [
+    "PlayerInventoryMixin"
+  ],
   "client": [
     "ChatHudMixin",
-    "ChatScreenMixin",
-    "PlayerInventoryMixin"
+    "ChatScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

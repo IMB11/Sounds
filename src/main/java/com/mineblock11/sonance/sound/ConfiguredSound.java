@@ -13,6 +13,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -28,7 +29,7 @@ public class ConfiguredSound {
                     Codec.STRING.fieldOf("id").forGetter(ConfiguredSound::getId)
             ).apply(instance, ConfiguredSound::new));
     public final String id;
-    public boolean shouldPlay = true;
+    public boolean shouldPlay;
     public RegistryEntry.Reference<SoundEvent> soundEvent;
     public float pitch = 1f;
     public float volume = 1f;
@@ -45,11 +46,16 @@ public class ConfiguredSound {
         this.id = id;
     }
 
-    public ConfiguredSound(String id, RegistryEntry.Reference<SoundEvent> soundEvent, float pitch, float volume) {
+    public ConfiguredSound(boolean shouldPlay, String id, RegistryEntry.Reference<SoundEvent> soundEvent, float pitch, float volume) {
+        this.shouldPlay = shouldPlay;
         this.id = id;
         this.soundEvent = soundEvent;
         this.pitch = pitch;
         this.volume = volume;
+    }
+
+    public final SoundEvent fetchSoundEvent() {
+        return Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
     }
 
     public void playSound() {
@@ -58,6 +64,11 @@ public class ConfiguredSound {
             final SoundEvent event = Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
             client.getSoundManager().play(PositionedSoundInstance.master(event, pitch, volume));
         }
+    }
+
+    public void forceSound(SoundEvent event) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        client.getSoundManager().play(PositionedSoundInstance.master(event, pitch, volume));
     }
 
     public OptionGroup getOptionGroup(ConfiguredSound defaults) {

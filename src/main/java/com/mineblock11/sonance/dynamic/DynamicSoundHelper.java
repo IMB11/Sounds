@@ -5,7 +5,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
 public class DynamicSoundHelper {
-    public SoundEvent getItemSound(ItemStack itemStack) {
+    public static SoundEvent getItemSound(ItemStack itemStack, SoundEvent defaultSoundEvent) {
         var item = itemStack.getItem();
         if (item instanceof ToolItem toolItem) {
             var mat = toolItem.getMaterial();
@@ -41,6 +41,6 @@ public class DynamicSoundHelper {
             return block.getSoundGroup(block.getDefaultState()).getPlaceSound();
         }
 
-        return SoundEvents.ITEM_ARMOR_EQUIP_GENERIC;
+        return defaultSoundEvent;
     }
 }

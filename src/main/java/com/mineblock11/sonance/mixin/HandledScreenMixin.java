@@ -8,9 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
+import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -26,10 +28,18 @@ public class HandledScreenMixin<T extends ScreenHandler> {
     protected Set<Slot> cursorDragSlots;
 
     @Shadow @Final protected T handler;
+    @Unique
+    private double prevTime = 0D;
 
     @Inject(method = "mouseDragged", at = @At(value = "INVOKE", target = "Ljava/util/Set;add(Ljava/lang/Object;)Z"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void $item_drag_sound_effect(double mouseX, double mouseY, int button, double deltaX, double deltaY, CallbackInfoReturnable<Boolean> cir, Slot slot) {
-        if (!cursorDragSlots.contains(slot) && cursorDragSlots.size() > 0)
-            SonanceConfig.get().itemDragSoundEffect.playDynamicSound(this.handler.getCursorStack(), DynamicSoundHelper.BlockSoundType.PLACE);
+        double currentTime = GLFW.glfwGetTime();
+        double timeElapsed = currentTime - prevTime;
+
+        if (timeElapsed >= 0.085D) {
+            if (!cursorDragSlots.contains(slot) && cursorDragSlots.size() > 0)
+                SonanceConfig.get().itemDragSoundEffect.playDynamicSound(this.handler.getCursorStack(), DynamicSoundHelper.BlockSoundType.PLACE);
+            prevTime = currentTime;
+        }
     }
 }

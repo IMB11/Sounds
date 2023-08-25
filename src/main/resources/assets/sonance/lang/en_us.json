@@ -1,0 +1,29 @@
+{
+  "sonance.config.static": "Sonance",
+  "sonance.config.shouldPlay.name": "Enable Sound",
+  "sonance.config.shouldPlay.desc": "Should this sound be played?",
+  "sonance.config.dynamic.name": "Dynamic Sounds",
+  "sonance.config.dynamic.desc": "Should the sound event that is played be dependent on the item, block, or action that is currently happening?\n\nFor items and blocks, the sound event will be determined by what type of item/block it is.",
+  "sonance.config.volume.name": "Sound Volume",
+  "sonance.config.volume.desc": "The volume of the sound.",
+  "sonance.config.pitch.name": "Sound Pitch",
+  "sonance.config.pitch.desc": "The pitch of the sound.\n\nA lower pitch gives a deeper sound, whilst a higher pitch gives a more squeakier sound.",
+
+  "sonance.config.typing.name": "Chat Typing",
+  "sonance.config.typing.desc": "A sound effect that is played when you type or remove characters from the chat input bar.",
+
+  "sonance.config.message.name": "Chat Messages",
+  "sonance.config.message.desc": "A sound effect that is played when you receive a message in the chat.",
+
+  "sonance.config.mention.name": "Chat Mentions",
+  "sonance.config.mention.desc": "A sound effect that is played when you are mentioned in a new chat message.",
+
+  "sonance.config.hotbarScroll.name": "Hotbar Scroll",
+  "sonance.config.hotbarScroll.desc": "A sound effect that is played when you scroll through your hotbar or use the number keys to select a hotbar slot.",
+
+  "sonance.config.hotbarPick.name": "Pick Block",
+  "sonance.config.hotbarPick.desc": "A sound effect that is played when you use the 'Pick Block' action.",
+
+  "sonance.config.itemDrop.name": "Item Drop",
+  "sonance.config.itemDrop.desc": "A sound effect that is played when you drop an item from your inventory."
+}

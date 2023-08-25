@@ -4,6 +4,7 @@
   "package": "com.mineblock11.sonance.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "PlayerEntityMixin",
     "PlayerInventoryMixin"
   ],
   "client": [

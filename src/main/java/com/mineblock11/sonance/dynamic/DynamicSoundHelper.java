@@ -1,11 +1,31 @@
 package com.mineblock11.sonance.dynamic;
 
 import net.minecraft.item.*;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
+import java.util.function.Function;
+
 public class DynamicSoundHelper {
-    public static SoundEvent getItemSound(ItemStack itemStack, SoundEvent defaultSoundEvent) {
+    public enum BlockSoundType {
+        PLACE(BlockSoundGroup::getPlaceSound),
+        HIT(BlockSoundGroup::getHitSound),
+        BREAK(BlockSoundGroup::getBreakSound),
+        FALL(BlockSoundGroup::getFallSound),
+        STEP(BlockSoundGroup::getFallSound);
+
+        public Function<BlockSoundGroup, SoundEvent> getTransformer() {
+            return transformer;
+        }
+
+        private final Function<BlockSoundGroup, SoundEvent> transformer;
+
+        BlockSoundType(Function<BlockSoundGroup, SoundEvent> transformer) {
+            this.transformer = transformer;
+        }
+    }
+    public static SoundEvent getItemSound(ItemStack itemStack, SoundEvent defaultSoundEvent, BlockSoundType type) {
         var item = itemStack.getItem();
         if (item instanceof ToolItem toolItem) {
             var mat = toolItem.getMaterial();
@@ -38,7 +58,7 @@ public class DynamicSoundHelper {
 
         if (item instanceof BlockItem blockItem) {
             var block = blockItem.getBlock();
-            return block.getSoundGroup(block.getDefaultState()).getPlaceSound();
+            return type.getTransformer().apply(block.getSoundGroup(block.getDefaultState()));
         }
 
         return defaultSoundEvent;

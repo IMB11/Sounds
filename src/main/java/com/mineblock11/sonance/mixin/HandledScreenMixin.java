@@ -28,18 +28,10 @@ public class HandledScreenMixin<T extends ScreenHandler> {
     protected Set<Slot> cursorDragSlots;
 
     @Shadow @Final protected T handler;
-    @Unique
-    private double prevTime = 0D;
 
     @Inject(method = "mouseDragged", at = @At(value = "INVOKE", target = "Ljava/util/Set;add(Ljava/lang/Object;)Z"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void $item_drag_sound_effect(double mouseX, double mouseY, int button, double deltaX, double deltaY, CallbackInfoReturnable<Boolean> cir, Slot slot) {
-        double currentTime = GLFW.glfwGetTime();
-        double timeElapsed = currentTime - prevTime;
-
-        if (timeElapsed >= 0.085D) {
             if (!cursorDragSlots.contains(slot) && cursorDragSlots.size() > 0)
                 SonanceConfig.get().itemDragSoundEffect.playDynamicSound(this.handler.getCursorStack(), DynamicSoundHelper.BlockSoundType.PLACE);
-            prevTime = currentTime;
-        }
     }
 }

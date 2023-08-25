@@ -15,6 +15,7 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -53,6 +54,16 @@ public class ConfiguredSound {
         this.volume = volume;
     }
 
+    public ConfiguredSound(boolean shouldPlay, String id, SoundEvent soundEvent, float pitch, float volume) {
+        this.shouldPlay = shouldPlay;
+        this.id = id;
+        this.pitch = pitch;
+        this.volume = volume;
+
+        var key = Registries.SOUND_EVENT.getKey(soundEvent).orElseThrow();
+        this.soundEvent = Registries.SOUND_EVENT.getEntry(key).orElseThrow();
+    }
+
     public final SoundEvent fetchSoundEvent() {
         return Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
     }
@@ -65,9 +76,9 @@ public class ConfiguredSound {
         }
     }
 
-    public void forceSound(SoundEvent event) {
+    public void forceSound(@Nullable SoundEvent event, @Nullable Float _pitch, @Nullable Float _volume) {
         MinecraftClient client = MinecraftClient.getInstance();
-        client.getSoundManager().play(PositionedSoundInstance.master(event, pitch, volume));
+        client.getSoundManager().play(PositionedSoundInstance.master(event != null ? event : this.fetchSoundEvent(), _pitch != null ? _pitch : pitch, _volume != null ? _volume : volume));
     }
 
     public OptionGroup getOptionGroup(ConfiguredSound defaults) {

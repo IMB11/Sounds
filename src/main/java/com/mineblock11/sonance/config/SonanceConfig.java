@@ -32,12 +32,27 @@ public class SonanceConfig {
     @ConfigEntry
     public final ConfiguredSound mentionSoundEffect = new ConfiguredSound(true, "mention", SoundEvents.BLOCK_NOTE_BLOCK_CHIME, 1.8f, 0.9f);
     @ConfigEntry
+    public final ConfiguredSound inventoryOpenSoundEffect = new ConfiguredSound(true, "inventoryOpen", SoundEvents.UI_TOAST_IN, 2f, 0.5f);
+    @ConfigEntry
+    public final ConfiguredSound inventoryCloseSoundEffect = new ConfiguredSound(true, "inventoryClose", SoundEvents.UI_TOAST_OUT, 2f, 0.5f);
+    @ConfigEntry
+    public final ConfiguredSound inventoryScrollSoundEffect = new ConfiguredSound(true, "inventoryScroll", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.8f, 0.2f);
+
+    @ConfigEntry
     public final DynamicConfiguredSound hotbarScrollSoundEffect = new DynamicConfiguredSound(true, true, "hotbarScroll", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.8f, 0.2f);
 
     @ConfigEntry
     public final DynamicConfiguredSound hotbarPickSoundEffect = new DynamicConfiguredSound(true, true, "hotbarPick", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.8f, 0.2f);
     @ConfigEntry
     public final DynamicConfiguredSound itemDropSoundEffect = new DynamicConfiguredSound(true, true, "itemDrop", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.4f, 0.2f);
+    @ConfigEntry
+    public final DynamicConfiguredSound itemCopySoundEffect = new DynamicConfiguredSound(true, true, "itemCopy", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.4f, 0.2f);
+    @ConfigEntry
+    public final DynamicConfiguredSound itemDeleteSoundEffect = new DynamicConfiguredSound(true, true, "itemDelete", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.4f, 0.1f);
+    @ConfigEntry
+    public final DynamicConfiguredSound itemDragSoundEffect = new DynamicConfiguredSound(true, true, "itemDrag", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.4f, 0.2f);
+    @ConfigEntry
+    public final DynamicConfiguredSound itemClickSoundEffect = new DynamicConfiguredSound(true, true, "itemPick", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.4f, 0.2f);
 
     public static SonanceConfig get() {
         return GSON.getConfig();
@@ -49,18 +64,22 @@ public class SonanceConfig {
 
     public static YetAnotherConfigLib getInstance() {
         return YetAnotherConfigLib.create(GSON,
-                ((defaults, config, builder) -> {
-                    return builder
-                            .title(Text.empty())
-                            .category(
-                                    ConfigCategory.createBuilder().groups(List.of(
-                                            config.typingSoundEffect.getOptionGroup(defaults.typingSoundEffect),
-                                            config.messageSoundEffect.getOptionGroup(defaults.messageSoundEffect),
-                                            config.mentionSoundEffect.getOptionGroup(defaults.mentionSoundEffect),
-                                            config.hotbarScrollSoundEffect.getOptionGroup(defaults.hotbarScrollSoundEffect),
-                                            config.hotbarPickSoundEffect.getOptionGroup(defaults.hotbarPickSoundEffect),
-                                            config.itemDropSoundEffect.getOptionGroup(defaults.itemDropSoundEffect)
-                                    )).name(Text.translatable("sonance.config.static")).build());
-                }));
+                ((defaults, config, builder) -> builder
+                        .title(Text.empty())
+                        .category(
+                                ConfigCategory.createBuilder().groups(List.of(
+                                        config.typingSoundEffect.getOptionGroup(defaults.typingSoundEffect),
+                                        config.messageSoundEffect.getOptionGroup(defaults.messageSoundEffect),
+                                        config.mentionSoundEffect.getOptionGroup(defaults.mentionSoundEffect),
+                                        config.hotbarScrollSoundEffect.getOptionGroup(defaults.hotbarScrollSoundEffect),
+                                        config.hotbarPickSoundEffect.getOptionGroup(defaults.hotbarPickSoundEffect),
+                                        config.itemDropSoundEffect.getOptionGroup(defaults.itemDropSoundEffect),
+                                        config.itemCopySoundEffect.getOptionGroup(defaults.itemCopySoundEffect),
+                                        config.itemDeleteSoundEffect.getOptionGroup(defaults.itemDeleteSoundEffect),
+                                        config.itemDragSoundEffect.getOptionGroup(defaults.itemDragSoundEffect),
+                                        config.inventoryOpenSoundEffect.getOptionGroup(defaults.inventoryOpenSoundEffect),
+                                        config.inventoryCloseSoundEffect.getOptionGroup(defaults.inventoryCloseSoundEffect),
+                                        config.inventoryScrollSoundEffect.getOptionGroup(defaults.inventoryScrollSoundEffect)
+                                )).name(Text.translatable("sonance.config.static")).build())));
     }
 }

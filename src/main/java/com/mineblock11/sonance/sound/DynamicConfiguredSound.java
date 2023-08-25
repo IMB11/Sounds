@@ -44,7 +44,7 @@ public class DynamicConfiguredSound extends ConfiguredSound {
 
     public void playDynamicSound(ItemStack stack, DynamicSoundHelper.BlockSoundType soundType) {
         if (enabledDynamic && stack != null) {
-            this.forceSound(DynamicSoundHelper.getItemSound(stack, this.fetchSoundEvent(), soundType));
+            this.forceSound(DynamicSoundHelper.getItemSound(stack, this.fetchSoundEvent(), soundType), null, null);
         } else {
             this.playSound();
         }

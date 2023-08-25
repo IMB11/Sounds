@@ -4,6 +4,7 @@ import com.mineblock11.sonance.config.SonanceConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.MessageIndicator;
+import net.minecraft.client.util.ChatMessages;
 import net.minecraft.network.message.MessageSignatureData;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Final;
@@ -23,6 +24,8 @@ public class ChatHudMixin {
     public void $mention_recieve_sound_effect(Text message, MessageSignatureData signature, int ticks, MessageIndicator indicator, boolean refresh, CallbackInfo ci) {
         String messageString = message.getString();
         String username = client.getSession().getUsername();
+
+        messageString = messageString.replace("<" + username + ">", "");
 
         if (messageString.toLowerCase().contains(username.toLowerCase()))
             SonanceConfig.get().mentionSoundEffect.playSound();

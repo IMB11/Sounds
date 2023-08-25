@@ -8,23 +8,6 @@ import net.minecraft.sound.SoundEvents;
 import java.util.function.Function;
 
 public class DynamicSoundHelper {
-    public enum BlockSoundType {
-        PLACE(BlockSoundGroup::getPlaceSound),
-        HIT(BlockSoundGroup::getHitSound),
-        BREAK(BlockSoundGroup::getBreakSound),
-        FALL(BlockSoundGroup::getFallSound),
-        STEP(BlockSoundGroup::getFallSound);
-
-        public Function<BlockSoundGroup, SoundEvent> getTransformer() {
-            return transformer;
-        }
-
-        private final Function<BlockSoundGroup, SoundEvent> transformer;
-
-        BlockSoundType(Function<BlockSoundGroup, SoundEvent> transformer) {
-            this.transformer = transformer;
-        }
-    }
     public static SoundEvent getItemSound(ItemStack itemStack, SoundEvent defaultSoundEvent, BlockSoundType type) {
         var item = itemStack.getItem();
         if (item instanceof ToolItem toolItem) {
@@ -62,5 +45,23 @@ public class DynamicSoundHelper {
         }
 
         return defaultSoundEvent;
+    }
+
+    public enum BlockSoundType {
+        PLACE(BlockSoundGroup::getPlaceSound),
+        HIT(BlockSoundGroup::getHitSound),
+        BREAK(BlockSoundGroup::getBreakSound),
+        FALL(BlockSoundGroup::getFallSound),
+        STEP(BlockSoundGroup::getStepSound);
+
+        private final Function<BlockSoundGroup, SoundEvent> transformer;
+
+        BlockSoundType(Function<BlockSoundGroup, SoundEvent> transformer) {
+            this.transformer = transformer;
+        }
+
+        public Function<BlockSoundGroup, SoundEvent> getTransformer() {
+            return transformer;
+        }
     }
 }

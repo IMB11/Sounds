@@ -8,8 +8,10 @@ import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.OptionGroup;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -45,6 +47,14 @@ public class DynamicConfiguredSound extends ConfiguredSound {
     public void playDynamicSound(ItemStack stack, DynamicSoundHelper.BlockSoundType soundType) {
         if (enabledDynamic && stack != null) {
             this.forceSound(DynamicSoundHelper.getItemSound(stack, this.fetchSoundEvent(), soundType), null, null);
+        } else {
+            this.playSound();
+        }
+    }
+
+    public void playDynamicSound(ScreenHandler screen) {
+        if (enabledDynamic && screen != null) {
+            this.forceSound(DynamicSoundHelper.getScreenSound(screen), null, null);
         } else {
             this.playSound();
         }

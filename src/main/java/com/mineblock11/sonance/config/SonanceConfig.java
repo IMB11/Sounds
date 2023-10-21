@@ -8,6 +8,10 @@ import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.ConfigEntry;
 import dev.isxander.yacl3.config.GsonConfigInstance;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 
@@ -32,9 +36,9 @@ public class SonanceConfig {
     @ConfigEntry
     public final ConfiguredSound mentionSoundEffect = new ConfiguredSound(true, "mention", SoundEvents.BLOCK_NOTE_BLOCK_CHIME, 1.8f, 0.9f);
     @ConfigEntry
-    public final ConfiguredSound inventoryOpenSoundEffect = new ConfiguredSound(true, "inventoryOpen", SoundEvents.UI_TOAST_IN, 2f, 0.5f);
+    public final DynamicConfiguredSound inventoryOpenSoundEffect = new DynamicConfiguredSound(true, true, "inventoryOpen", getSoundEventReference(SoundEvents.UI_TOAST_IN), 2f, 0.2f);
     @ConfigEntry
-    public final ConfiguredSound inventoryCloseSoundEffect = new ConfiguredSound(true, "inventoryClose", SoundEvents.UI_TOAST_OUT, 2f, 0.5f);
+    public final DynamicConfiguredSound inventoryCloseSoundEffect = new DynamicConfiguredSound(true, false, "inventoryClose", getSoundEventReference(SoundEvents.UI_TOAST_OUT), 2f, 0.2f);
     @ConfigEntry
     public final ConfiguredSound inventoryScrollSoundEffect = new ConfiguredSound(true, "inventoryScroll", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.8f, 0.2f);
 
@@ -60,6 +64,10 @@ public class SonanceConfig {
 
     public static void load() {
         GSON.load();
+    }
+
+    public static RegistryEntry.Reference<SoundEvent> getSoundEventReference(SoundEvent soundEvent) {
+        return Registries.SOUND_EVENT.getEntry(RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent.getId())).get();
     }
 
     public static YetAnotherConfigLib getInstance() {

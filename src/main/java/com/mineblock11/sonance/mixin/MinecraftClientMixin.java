@@ -12,16 +12,16 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftClient.class)
-public class MinecraftClientMixin {
+public abstract class MinecraftClientMixin {
     @Shadow
     @Nullable
     public Screen currentScreen;
 
     @Inject(method = "setScreen", at = @At("HEAD"), cancellable = false)
     public void $open_close_inventory_sound_effect(Screen screen, CallbackInfo ci) {
-        if (screen == null && currentScreen instanceof HandledScreen<?>)
-            SonanceConfig.get().inventoryCloseSoundEffect.playSound();
-        else if (currentScreen != screen && screen instanceof HandledScreen<?>)
-            SonanceConfig.get().inventoryOpenSoundEffect.playSound();
+        if (screen == null && currentScreen instanceof HandledScreen<?> handledScreen)
+            SonanceConfig.get().inventoryCloseSoundEffect.playDynamicSound(handledScreen.getScreenHandler());
+        else if (currentScreen != screen && screen instanceof HandledScreen<?> handledScreen)
+            SonanceConfig.get().inventoryOpenSoundEffect.playDynamicSound(handledScreen.getScreenHandler());
     }
 }

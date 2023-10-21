@@ -49,6 +49,10 @@ public class SonanceConfig {
     public final DynamicConfiguredSound hotbarPickSoundEffect = new DynamicConfiguredSound(true, true, "hotbarPick", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.8f, 0.2f);
     @ConfigEntry
     public final DynamicConfiguredSound itemDropSoundEffect = new DynamicConfiguredSound(true, true, "itemDrop", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.4f, 0.2f);
+
+//    @ConfigEntry
+//    public final DynamicConfiguredSound itemPickupSoundEffect = new DynamicConfiguredSound(true, true, "itemPickup", getSoundEventReference(SoundEvents.ENTITY_ITEM_PICKUP), 1.4f, 0.2f);
+
     @ConfigEntry
     public final DynamicConfiguredSound itemCopySoundEffect = new DynamicConfiguredSound(true, true, "itemCopy", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.4f, 0.2f);
     @ConfigEntry
@@ -81,6 +85,7 @@ public class SonanceConfig {
                                         config.mentionSoundEffect.getOptionGroup(defaults.mentionSoundEffect),
                                         config.hotbarScrollSoundEffect.getOptionGroup(defaults.hotbarScrollSoundEffect),
                                         config.hotbarPickSoundEffect.getOptionGroup(defaults.hotbarPickSoundEffect),
+//                                        config.itemPickupSoundEffect.getOptionGroup(defaults.itemPickupSoundEffect),
                                         config.itemDropSoundEffect.getOptionGroup(defaults.itemDropSoundEffect),
                                         config.itemCopySoundEffect.getOptionGroup(defaults.itemCopySoundEffect),
                                         config.itemDeleteSoundEffect.getOptionGroup(defaults.itemDeleteSoundEffect),

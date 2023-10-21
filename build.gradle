@@ -48,6 +48,8 @@ dependencies {
 
     include modImplementation("dev.isxander.yacl:yet-another-config-lib-fabric:${project.yacl_version}")
     modLocalRuntime modCompileOnly("com.terraformersmc:modmenu:${project.modmenu_version}")
+
+    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.0")))
 }
 
 processResources {

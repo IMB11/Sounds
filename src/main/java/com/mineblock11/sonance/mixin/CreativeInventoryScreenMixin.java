@@ -60,7 +60,7 @@ public class CreativeInventoryScreenMixin {
         @Unique private float prevValue = -69420f;
 
         @Inject(method = "scrollItems", at = @At("TAIL"))
-        public void scrollItems(float position, CallbackInfo ci) {
+        public void $inventory_scroll_sound_effect(float position, CallbackInfo ci) {
             double currentTime = GLFW.glfwGetTime();
             double timeElapsed = currentTime - prevTime;
 

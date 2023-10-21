@@ -80,14 +80,14 @@ public class SonanceConfig {
                         .title(Text.empty())
                         .category(
                                 ConfigCategory.createBuilder().groups(List.of(
-                                        config.typingSoundEffect.getOptionGroup(defaults.typingSoundEffect),
-                                        config.messageSoundEffect.getOptionGroup(defaults.messageSoundEffect),
+                                        config.typingSoundEffect.getOptionGroup(defaults.typingSoundEffect, true),
+                                        config.messageSoundEffect.getOptionGroup(defaults.messageSoundEffect, true),
                                         config.mentionSoundEffect.getOptionGroup(defaults.mentionSoundEffect),
-                                        config.hotbarScrollSoundEffect.getOptionGroup(defaults.hotbarScrollSoundEffect),
-                                        config.hotbarPickSoundEffect.getOptionGroup(defaults.hotbarPickSoundEffect),
+                                        config.hotbarScrollSoundEffect.getOptionGroup(defaults.hotbarScrollSoundEffect, true),
+                                        config.hotbarPickSoundEffect.getOptionGroup(defaults.hotbarPickSoundEffect, true),
 //                                        config.itemPickupSoundEffect.getOptionGroup(defaults.itemPickupSoundEffect),
-                                        config.itemDropSoundEffect.getOptionGroup(defaults.itemDropSoundEffect),
-                                        config.itemCopySoundEffect.getOptionGroup(defaults.itemCopySoundEffect),
+                                        config.itemDropSoundEffect.getOptionGroup(defaults.itemDropSoundEffect, true),
+                                        config.itemCopySoundEffect.getOptionGroup(defaults.itemCopySoundEffect, true),
                                         config.itemDeleteSoundEffect.getOptionGroup(defaults.itemDeleteSoundEffect, true),
                                         config.itemDragSoundEffect.getOptionGroup(defaults.itemDragSoundEffect, true),
                                         config.inventoryOpenSoundEffect.getOptionGroup(defaults.inventoryOpenSoundEffect, true),

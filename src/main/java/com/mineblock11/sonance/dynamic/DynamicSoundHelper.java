@@ -3,6 +3,7 @@ package com.mineblock11.sonance.dynamic;
 import com.mineblock11.sonance.config.SonanceConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.screen.ingame.SmithingScreen;
 import net.minecraft.client.gui.screen.ingame.StonecutterScreen;
 import net.minecraft.item.*;
 import net.minecraft.screen.*;
@@ -15,13 +16,16 @@ import java.util.function.Function;
 public class DynamicSoundHelper {
     public static SoundEvent getScreenSound(ScreenHandler screen) {
         if(screen instanceof CraftingScreenHandler) {
-            return SoundEvents.ENTITY_VILLAGER_WORK_TOOLSMITH;
+            return SoundEvents.BLOCK_WOOD_HIT;
+        }
+        if(screen instanceof SmithingScreenHandler) {
+            return SoundEvents.ENTITY_IRON_GOLEM_STEP;
         }
         if(screen instanceof AnvilScreenHandler) {
-            return SoundEvents.ENTITY_VILLAGER_WORK_TOOLSMITH;
+            return SoundEvents.BLOCK_ANVIL_PLACE;
         }
         if(screen instanceof SmokerScreenHandler) {
-            return SoundEvents.ENTITY_VILLAGER_WORK_BUTCHER;
+            return SoundEvents.BLOCK_CAMPFIRE_CRACKLE;
         }
         if(screen instanceof BlastFurnaceScreenHandler) {
             return SoundEvents.BLOCK_FIRE_AMBIENT;
@@ -36,13 +40,22 @@ public class DynamicSoundHelper {
             return SoundEvents.ENTITY_VILLAGER_WORK_MASON;
         }
         if(screen instanceof GrindstoneScreenHandler) {
-            return SoundEvents.UI_STONECUTTER_SELECT_RECIPE;
+            return SoundEvents.BLOCK_STONE_PLACE;
+        }
+        if(screen instanceof BeaconScreenHandler) {
+            return SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE;
+        }
+        if(screen instanceof BrewingStandScreenHandler) {
+            return SoundEvents.ITEM_BOTTLE_EMPTY;
+        }
+        if(screen instanceof LoomScreenHandler) {
+            return SoundEvents.BLOCK_TRIPWIRE_DETACH;
         }
         if(screen instanceof CartographyTableScreenHandler) {
             return SoundEvents.ENTITY_VILLAGER_WORK_CARTOGRAPHER;
         }
         if(screen instanceof EnchantmentScreenHandler) {
-            return SoundEvents.BLOCK_CHISELED_BOOKSHELF_INSERT_ENCHANTED;
+            return SoundEvents.BLOCK_END_PORTAL_FRAME_FILL;
         }
         return SonanceConfig.get().inventoryOpenSoundEffect.fetchSoundEvent();
     }

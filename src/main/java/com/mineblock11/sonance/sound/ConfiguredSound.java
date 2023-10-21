@@ -82,11 +82,61 @@ public class ConfiguredSound {
     }
 
     public OptionGroup getOptionGroup(ConfiguredSound defaults) {
+        return this.getOptionGroup(defaults, false);
+    }
+
+    public OptionGroup getOptionGroup(ConfiguredSound defaults, boolean hasImage) {
+        if(hasImage) {
+            var volumeOpt = Option.<Float>createBuilder()
+                    .name(Text.translatable("sonance.config.volume.name"))
+                    .description(OptionDescription.createBuilder()
+                            .webpImage(new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
+                            .text(Text.translatable("sonance.config.volume.desc"))
+                            .build())
+                    .binding(defaults.volume, () -> this.volume, (val) -> this.volume = val)
+                    .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
+                    .build();
+
+            var pitchOpt = Option.<Float>createBuilder()
+                    .name(Text.translatable("sonance.config.pitch.name"))
+                    .description(OptionDescription.createBuilder()
+                            .webpImage(new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
+                            .text(Text.translatable("sonance.config.pitch.desc"))
+                            .build())
+                    .binding(defaults.pitch, () -> this.pitch, (val) -> this.pitch = val)
+                    .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
+                    .build();
+
+            var shouldPlay = Option.<Boolean>createBuilder()
+                    .name(Text.translatable("sonance.config.shouldPlay.name"))
+                    .description(OptionDescription.createBuilder()
+                            .webpImage(new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
+                            .text(Text.translatable("sonance.config.shouldPlay.desc"))
+                            .build())
+                    .binding(defaults.shouldPlay, () -> this.shouldPlay, (val) -> this.shouldPlay = val)
+                    .listener((opt, val) -> {
+                        pitchOpt.setAvailable(val);
+                        volumeOpt.setAvailable(val);
+                    })
+                    .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
+                    .build();
+
+            return OptionGroup
+                    .createBuilder()
+                    .name(Text.translatable("sonance.config." + id + ".name"))
+                    .description(OptionDescription.createBuilder()
+                            .webpImage(new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
+                            .text(Text.translatable("sonance.config." + id + ".description"))
+                            .build())
+                    .options(List.of(shouldPlay, volumeOpt, pitchOpt))
+                    .collapsed(true)
+                    .build();
+        }
+
         var volumeOpt = Option.<Float>createBuilder()
                 .name(Text.translatable("sonance.config.volume.name"))
                 .description(OptionDescription.createBuilder()
                         .text(Text.translatable("sonance.config.volume.desc"))
-//                        .webpImage(new Identifier("sonance", "images/" + id + ".webp"))
                         .build())
                 .binding(defaults.volume, () -> this.volume, (val) -> this.volume = val)
                 .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
@@ -96,7 +146,6 @@ public class ConfiguredSound {
                 .name(Text.translatable("sonance.config.pitch.name"))
                 .description(OptionDescription.createBuilder()
                         .text(Text.translatable("sonance.config.pitch.desc"))
-//                        .webpImage(new Identifier("sonance", "images/" + id + ".webp"))
                         .build())
                 .binding(defaults.pitch, () -> this.pitch, (val) -> this.pitch = val)
                 .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
@@ -106,7 +155,6 @@ public class ConfiguredSound {
                 .name(Text.translatable("sonance.config.shouldPlay.name"))
                 .description(OptionDescription.createBuilder()
                         .text(Text.translatable("sonance.config.shouldPlay.desc"))
-//                        .webpImage(new Identifier("sonance", "images/" + id + ".webp"))
                         .build())
                 .binding(defaults.shouldPlay, () -> this.shouldPlay, (val) -> this.shouldPlay = val)
                 .listener((opt, val) -> {
@@ -121,7 +169,6 @@ public class ConfiguredSound {
                 .name(Text.translatable("sonance.config." + id + ".name"))
                 .description(OptionDescription.createBuilder()
                         .text(Text.translatable("sonance.config." + id + ".description"))
-//                        .webpImage(new Identifier("sonance", "images/" + id + ".webp"))
                         .build())
                 .options(List.of(shouldPlay, volumeOpt, pitchOpt))
                 .collapsed(true)

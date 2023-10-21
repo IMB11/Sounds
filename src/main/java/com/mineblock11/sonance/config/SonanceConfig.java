@@ -88,11 +88,11 @@ public class SonanceConfig {
 //                                        config.itemPickupSoundEffect.getOptionGroup(defaults.itemPickupSoundEffect),
                                         config.itemDropSoundEffect.getOptionGroup(defaults.itemDropSoundEffect),
                                         config.itemCopySoundEffect.getOptionGroup(defaults.itemCopySoundEffect),
-                                        config.itemDeleteSoundEffect.getOptionGroup(defaults.itemDeleteSoundEffect),
-                                        config.itemDragSoundEffect.getOptionGroup(defaults.itemDragSoundEffect),
-                                        config.inventoryOpenSoundEffect.getOptionGroup(defaults.inventoryOpenSoundEffect),
-                                        config.inventoryCloseSoundEffect.getOptionGroup(defaults.inventoryCloseSoundEffect),
-                                        config.inventoryScrollSoundEffect.getOptionGroup(defaults.inventoryScrollSoundEffect)
+                                        config.itemDeleteSoundEffect.getOptionGroup(defaults.itemDeleteSoundEffect, true),
+                                        config.itemDragSoundEffect.getOptionGroup(defaults.itemDragSoundEffect, true),
+                                        config.inventoryOpenSoundEffect.getOptionGroup(defaults.inventoryOpenSoundEffect, true),
+                                        config.inventoryCloseSoundEffect.getOptionGroup(defaults.inventoryCloseSoundEffect, true),
+                                        config.inventoryScrollSoundEffect.getOptionGroup(defaults.inventoryScrollSoundEffect, true)
                                 )).name(Text.translatable("sonance.config.static")).build())));
     }
 }

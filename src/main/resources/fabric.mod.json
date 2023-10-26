@@ -11,7 +11,7 @@
     "website": "https://mineblock11.dev/",
     "repo": "https://github.com/mineblock11/Sonance"
   },
-  "license": "All-Rights-Reserved",
+  "license": "LGPL-2.1",
   "icon": "assets/sonance/icon.png",
   "environment": "client",
   "entrypoints": {

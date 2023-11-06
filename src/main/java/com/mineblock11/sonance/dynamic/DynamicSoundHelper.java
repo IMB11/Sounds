@@ -1,20 +1,48 @@
 package com.mineblock11.sonance.dynamic;
 
+import com.mineblock11.sonance.api.SoundDefinition;
 import com.mineblock11.sonance.config.SonanceConfig;
+import com.mojang.serialization.Codec;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.SmithingScreen;
 import net.minecraft.client.gui.screen.ingame.StonecutterScreen;
 import net.minecraft.item.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.screen.*;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Pair;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.function.Function;
 
 public class DynamicSoundHelper {
+    protected static HashMap<String, Codec<?>> loadDirectories = new HashMap<>();
+    protected static HashMap<String, ArrayList<?>> loadedDefinitions = new HashMap<>();
+
+    protected static void declareDefinitionsToLoad(String directory, Codec<?> codec) {
+        loadDirectories.put(directory, codec);
+        loadedDefinitions.put(directory, new ArrayList<>());
+    }
+
+    protected static void clearDefinitions() {
+        loadedDefinitions.values().forEach(ArrayList::clear);
+    }
+
+    public static void initialize() {
+        declareDefinitionsToLoad("items", SoundDefinition.getCodec(Registries.ITEM.getKey()));
+        declareDefinitionsToLoad("screens", SoundDefinition.getCodec(Registries.SCREEN_HANDLER.getKey()));
+    }
+
+    @Deprecated
     public static SoundEvent getScreenSound(ScreenHandler screen) {
+
         if(screen instanceof CraftingScreenHandler) {
             return SoundEvents.BLOCK_WOOD_HIT;
         }
@@ -60,35 +88,14 @@ public class DynamicSoundHelper {
         return SonanceConfig.get().inventoryOpenSoundEffect.fetchSoundEvent();
     }
 
+    @Deprecated
     public static SoundEvent getItemSound(ItemStack itemStack, SoundEvent defaultSoundEvent, BlockSoundType type) {
         var item = itemStack.getItem();
-        if (item instanceof ToolItem toolItem) {
-            var mat = toolItem.getMaterial();
-            if (mat.equals(ToolMaterials.WOOD)) {
-                return SoundEvents.ITEM_AXE_STRIP;
-            } else if (mat.equals(ToolMaterials.NETHERITE)) {
-                return SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE;
-            } else if (mat.equals(ToolMaterials.IRON)) {
-                return SoundEvents.ITEM_ARMOR_EQUIP_IRON;
-            } else if (mat.equals(ToolMaterials.GOLD)) {
-                return SoundEvents.ITEM_ARMOR_EQUIP_GOLD;
-            } else if (mat.equals(ToolMaterials.DIAMOND)) {
-                return SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
-            } else {
-                return SoundEvents.ITEM_ARMOR_EQUIP_GENERIC;
+
+        for (SoundDefinition<Item> definition : (ArrayList<SoundDefinition<Item>>) loadedDefinitions.get("items")) {
+            if(definition.keys.isValid(item)) {
+                return definition.soundEvent;
             }
-        }
-
-        if (item instanceof ArmorItem armorItem) {
-            return armorItem.getEquipSound();
-        }
-
-        if (item instanceof ElytraItem) {
-            return SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA;
-        }
-
-        if (item instanceof DyeItem) {
-            return SoundEvents.ITEM_DYE_USE;
         }
 
         if (item instanceof BlockItem blockItem) {

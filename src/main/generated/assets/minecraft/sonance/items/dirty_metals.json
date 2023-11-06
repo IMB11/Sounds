@@ -1,0 +1,9 @@
+{
+  "keys": [
+    "minecraft:coal",
+    "minecraft:charcoal",
+    "minecraft:flint",
+    "minecraft:clay_ball"
+  ],
+  "soundEvent": "minecraft:block.gravel.hit"
+}

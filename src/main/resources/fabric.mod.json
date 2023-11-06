@@ -20,6 +20,9 @@
     ],
     "modmenu": [
       "com.mineblock11.sonance.compat.ModMenuCompat"
+    ],
+    "fabric-datagen": [
+      "com.mineblock11.sonance.datagen.SonanceDatagenEntrypoint"
     ]
   },
   "mixins": [

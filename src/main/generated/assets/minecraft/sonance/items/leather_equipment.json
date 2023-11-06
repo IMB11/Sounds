@@ -1,0 +1,10 @@
+{
+  "keys": [
+    "minecraft:leather_horse_armor",
+    "minecraft:leather_helmet",
+    "minecraft:leather_chestplate",
+    "minecraft:leather_leggings",
+    "minecraft:leather_boots"
+  ],
+  "soundEvent": "minecraft:item.armor.equip_leather"
+}

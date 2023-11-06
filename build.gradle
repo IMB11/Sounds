@@ -12,32 +12,33 @@ repositories {
     maven { url "https://maven.isxander.dev/releases" }
     maven { url "https://jitpack.io" }
     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    maven { url "https://maven.mineblock11.dev/releases" }
 }
 
-//loom {
-//    runs {
-//        datagenClient {
-//            client()
-//            name "Data Generation Client"
-//            vmArg "-Dfabric-api.datagen"
-//            vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-//            vmArg "-Dfabric-api.datagen.modid=sonance"
-//
-//            ideConfigGenerated = true
-//            runDir "build/datagen"
-//        }
-//    }
-//}
-//
-//sourceSets {
-//    main {
-//        resources {
-//            srcDirs += [
-//                    'src/main/generated'
-//            ]
-//        }
-//    }
-//}
+loom {
+    runs {
+        datagenClient {
+            client()
+            name "Data Generation Client"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+            vmArg "-Dfabric-api.datagen.modid=sonance"
+
+            ideConfigGenerated = true
+            runDir "build/datagen"
+        }
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs += [
+                    'src/main/generated'
+            ]
+        }
+    }
+}
 
 dependencies {
     // To change the versions see the gradle.properties file
@@ -48,6 +49,7 @@ dependencies {
 
     include modImplementation("dev.isxander.yacl:yet-another-config-lib-fabric:${project.yacl_version}")
     modLocalRuntime modCompileOnly("com.terraformersmc:modmenu:${project.modmenu_version}")
+    modImplementation "com.mineblock11:MRU:${project.mru_version}"
 
     include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.0")))
 }

@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:fishing_rod"
+  ],
+  "soundEvent": "minecraft:entity.fishing_bobber.splash"
+}

@@ -1,0 +1,14 @@
+{
+  "keys": [
+    "minecraft:wooden_axe",
+    "minecraft:wooden_hoe",
+    "minecraft:wooden_pickaxe",
+    "minecraft:wooden_shovel",
+    "minecraft:wooden_sword",
+    "minecraft:carrot_on_a_stick",
+    "minecraft:stick",
+    "minecraft:warped_fungus_on_a_stick",
+    "minecraft:debug_stick"
+  ],
+  "soundEvent": "minecraft:item.axe.strip"
+}

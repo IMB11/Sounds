@@ -4,7 +4,9 @@
     "minecraft:leather_helmet",
     "minecraft:leather_chestplate",
     "minecraft:leather_leggings",
-    "minecraft:leather_boots"
+    "minecraft:leather_boots",
+    "minecraft:leather",
+    "minecraft:rabbit_hide"
   ],
   "soundEvent": "minecraft:item.armor.equip_leather"
 }

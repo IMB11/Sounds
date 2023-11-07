@@ -10,6 +10,7 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
@@ -103,7 +104,9 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.LEATHER_HELMET)
                 .addKey(Items.LEATHER_CHESTPLATE)
                 .addKey(Items.LEATHER_LEGGINGS)
-                .addKey(Items.LEATHER_BOOTS));
+                .addKey(Items.LEATHER_BOOTS)
+                .addKey(Items.LEATHER)
+                .addKey(Items.RABBIT_HIDE));
 
         provider.accept("elytra", create(SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA)
                 .addKey(Items.ELYTRA));
@@ -150,6 +153,46 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.COAL)
                 .addKey(Items.CHARCOAL)
                 .addKey(Items.FLINT)
-                .addKey(Items.CLAY_BALL));
+                .addKey(Items.CLAY_BALL)
+                .addKey(Items.REDSTONE)
+                .addKey(Items.GLOWSTONE)
+                .addKey(Items.GUNPOWDER));
+
+        provider.accept("pottery_shards", create(SoundEvents.BLOCK_DECORATED_POT_STEP)
+                .addKey(ItemTags.DECORATED_POT_SHERDS));
+
+        provider.accept("smithing_templates", create(SoundEvents.ENTITY_IRON_GOLEM_STEP)
+                .addKey(ItemTags.TRIM_TEMPLATES));
+
+        provider.accept("banner_templates", create(SoundEvents.BLOCK_WOOL_HIT)
+                .addKey(Items.CREEPER_BANNER_PATTERN)
+                .addKey(Items.FLOWER_BANNER_PATTERN)
+                .addKey(Items.GLOBE_BANNER_PATTERN)
+                .addKey(Items.MOJANG_BANNER_PATTERN)
+                .addKey(Items.SKULL_BANNER_PATTERN)
+                .addKey(Items.PIGLIN_BANNER_PATTERN));
+
+        provider.accept("brewing_items", create(SoundEvents.ITEM_BOTTLE_FILL)
+                .addKey(Items.GLASS_BOTTLE)
+                .addKey(Items.POTION)
+                .addKey(Items.SPLASH_POTION)
+                .addKey(Items.LINGERING_POTION));
+
+        provider.accept("wet_mob_drops", create(SoundEvents.BLOCK_SLIME_BLOCK_HIT)
+                .addKey(Items.SLIME_BALL)
+                .addKey(Items.HONEYCOMB)
+                .addKey(Items.HONEY_BOTTLE)
+                .addKey(Items.FERMENTED_SPIDER_EYE)
+                .addKey(Items.BLAZE_POWDER)
+                .addKey(Items.RABBIT_FOOT)
+                .addKey(Items.SPIDER_EYE)
+                .addKey(Items.ROTTEN_FLESH)
+                .addKey(Items.GLISTERING_MELON_SLICE)
+                .addKey(Items.MAGMA_CREAM)
+                .addKey(Items.GHAST_TEAR));
+
+        provider.accept("bones", create(SoundEvents.ENTITY_SKELETON_AMBIENT)
+                .addKey(Items.BONE)
+                .addKey(Items.BONE_MEAL));
     }
 }

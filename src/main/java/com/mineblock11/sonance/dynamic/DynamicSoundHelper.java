@@ -41,51 +41,18 @@ public class DynamicSoundHelper {
     }
 
     @Deprecated
-    public static SoundEvent getScreenSound(ScreenHandler screen) {
+    public static SoundEvent getScreenSound(ScreenHandler screen, boolean isOpening) {
+        var type = screen.getType();
 
-        if(screen instanceof CraftingScreenHandler) {
-            return SoundEvents.BLOCK_WOOD_HIT;
+        for (SoundDefinition<ScreenHandlerType<?>> definition : (ArrayList<SoundDefinition<ScreenHandlerType<?>>>) loadedDefinitions.get("screens")) {
+            if(definition.keys.isValid(type)) {
+                return definition.soundEvent;
+            }
         }
-        if(screen instanceof SmithingScreenHandler) {
-            return SoundEvents.ENTITY_IRON_GOLEM_STEP;
-        }
-        if(screen instanceof AnvilScreenHandler) {
-            return SoundEvents.BLOCK_ANVIL_PLACE;
-        }
-        if(screen instanceof SmokerScreenHandler) {
-            return SoundEvents.BLOCK_CAMPFIRE_CRACKLE;
-        }
-        if(screen instanceof BlastFurnaceScreenHandler) {
-            return SoundEvents.BLOCK_FIRE_AMBIENT;
-        }
-        if(screen instanceof FurnaceScreenHandler) {
-                return SoundEvents.BLOCK_FIRE_AMBIENT;
-        }
-        if(screen instanceof LecternScreenHandler) {
-            return SoundEvents.ENTITY_VILLAGER_WORK_LIBRARIAN;
-        }
-        if(screen instanceof StonecutterScreenHandler) {
-            return SoundEvents.ENTITY_VILLAGER_WORK_MASON;
-        }
-        if(screen instanceof GrindstoneScreenHandler) {
-            return SoundEvents.BLOCK_STONE_PLACE;
-        }
-        if(screen instanceof BeaconScreenHandler) {
-            return SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE;
-        }
-        if(screen instanceof BrewingStandScreenHandler) {
-            return SoundEvents.ITEM_BOTTLE_EMPTY;
-        }
-        if(screen instanceof LoomScreenHandler) {
-            return SoundEvents.BLOCK_TRIPWIRE_DETACH;
-        }
-        if(screen instanceof CartographyTableScreenHandler) {
-            return SoundEvents.ENTITY_VILLAGER_WORK_CARTOGRAPHER;
-        }
-        if(screen instanceof EnchantmentScreenHandler) {
-            return SoundEvents.BLOCK_END_PORTAL_FRAME_FILL;
-        }
-        return SonanceConfig.get().inventoryOpenSoundEffect.fetchSoundEvent();
+
+        return isOpening ?
+                SonanceConfig.get().inventoryOpenSoundEffect.fetchSoundEvent() :
+                SonanceConfig.get().inventoryCloseSoundEffect.fetchSoundEvent();
     }
 
     @Deprecated

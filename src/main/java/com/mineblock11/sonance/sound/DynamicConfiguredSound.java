@@ -61,9 +61,9 @@ public class DynamicConfiguredSound extends ConfiguredSound {
         }
     }
 
-    public void playDynamicSound(ScreenHandler screen) {
+    public void playDynamicSound(ScreenHandler screen, boolean isOpening) {
         if (enabledDynamic && screen != null) {
-            this.forceSound(DynamicSoundHelper.getScreenSound(screen), null, null);
+            this.forceSound(DynamicSoundHelper.getScreenSound(screen, isOpening), null, null);
         } else {
             this.playSound();
         }

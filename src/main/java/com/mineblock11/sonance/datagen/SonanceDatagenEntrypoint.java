@@ -9,5 +9,6 @@ public class SonanceDatagenEntrypoint implements DataGeneratorEntrypoint {
         final FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
         pack.addProvider(DynamicItemSounds::new);
+        pack.addProvider(DynamicScreenSounds::new);
     }
 }

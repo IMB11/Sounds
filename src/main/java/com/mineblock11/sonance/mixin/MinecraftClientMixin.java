@@ -27,8 +27,8 @@ public abstract class MinecraftClientMixin {
         } else if (currentScreen != screen && (screen instanceof BookScreen || screen instanceof BookEditScreen)) {
             SonanceConfig.get().inventoryOpenSoundEffect.playDynamicSound(SoundEvents.ENTITY_VILLAGER_WORK_LIBRARIAN);
         } else if (screen == null && currentScreen instanceof HandledScreen<?> handledScreen)
-            SonanceConfig.get().inventoryCloseSoundEffect.playDynamicSound(handledScreen.getScreenHandler());
+            SonanceConfig.get().inventoryCloseSoundEffect.playDynamicSound(handledScreen.getScreenHandler(), false);
         else if (currentScreen != screen && screen instanceof HandledScreen<?> handledScreen)
-            SonanceConfig.get().inventoryOpenSoundEffect.playDynamicSound(handledScreen.getScreenHandler());
+            SonanceConfig.get().inventoryOpenSoundEffect.playDynamicSound(handledScreen.getScreenHandler(), true);
     }
 }

@@ -1,13 +1,13 @@
 package com.mineblock11.sonance.config;
 
 import com.google.gson.GsonBuilder;
+import com.mineblock11.mru.config.YACLHelper;
 import com.mineblock11.sonance.sound.ConfiguredSound;
 import com.mineblock11.sonance.sound.DynamicConfiguredSound;
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.ConfigEntry;
-import dev.isxander.yacl3.config.GsonConfigInstance;
-import net.fabricmc.loader.api.FabricLoader;
+import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -15,20 +15,16 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 
-import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 public class SonanceConfig {
-    private static final Path CONFIG_FILE_PATH = FabricLoader.getInstance().getConfigDir().resolve("sonance.config.json");
-    private static final GsonConfigInstance<SonanceConfig> GSON = GsonConfigInstance.createBuilder(SonanceConfig.class)
-            .overrideGsonBuilder(new GsonBuilder()
-                    .disableHtmlEscaping()
-                    .setPrettyPrinting()
-                    .registerTypeAdapter(ConfiguredSound.class, new ConfiguredSoundTypeAdapter())
-                    .registerTypeAdapter(DynamicConfiguredSound.class, new DynamicConfiguredSoundTypeAdapter())
-                    .create())
-            .setPath(CONFIG_FILE_PATH)
-            .build();
+    private static final YACLHelper.NamespacedHelper HELPER = new YACLHelper.NamespacedHelper("sonance");
+    private static final ConfigClassHandler<SonanceConfig> GSON = HELPER.createHandler(SonanceConfig.class, new ArrayList<UnaryOperator<GsonBuilder>>(List.of(
+            builder -> builder.registerTypeAdapter(ConfiguredSound.class, new ConfiguredSoundTypeAdapter()),
+            builder -> builder.registerTypeAdapter(DynamicConfiguredSound.class, new DynamicConfiguredSoundTypeAdapter())
+    )));
     @ConfigEntry
     public final ConfiguredSound typingSoundEffect = new ConfiguredSound(true, "typing", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.6f, 0.4f);
     @ConfigEntry
@@ -63,7 +59,7 @@ public class SonanceConfig {
     public final DynamicConfiguredSound itemClickSoundEffect = new DynamicConfiguredSound(true, true, "itemPick", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.4f, 0.2f);
 
     public static SonanceConfig get() {
-        return GSON.getConfig();
+        return GSON.instance();
     }
 
     public static void load() {

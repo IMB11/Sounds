@@ -32,6 +32,6 @@ public abstract class SoundDefinitionProvider<T> extends FabricCodecDataProvider
 
     @Override
     public String getName() {
-        return "SoundDefinition";
+        return "SoundDefinition[" + this.registry.getKey().getValue() + "]Provider";
     }
 }

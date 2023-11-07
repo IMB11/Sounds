@@ -3,7 +3,8 @@
     "minecraft:amethyst_shard",
     "minecraft:quartz",
     "minecraft:emerald",
-    "minecraft:diamond_helmet"
+    "minecraft:lapis_lazuli",
+    "minecraft:diamond"
   ],
   "soundEvent": "minecraft:block.amethyst_cluster.hit"
 }

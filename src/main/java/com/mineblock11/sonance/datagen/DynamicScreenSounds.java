@@ -56,5 +56,9 @@ public class DynamicScreenSounds extends SoundDefinitionProvider<ScreenHandlerTy
 
         provider.accept("enchantment_table", create(SoundEvents.BLOCK_END_PORTAL_FRAME_FILL)
                 .addKey(ScreenHandlerType.ENCHANTMENT));
+
+        provider.accept("redstone_item_movement", create(SoundEvents.BLOCK_STONE_HIT)
+                .addKey(ScreenHandlerType.GENERIC_3X3)
+                .addKey(ScreenHandlerType.HOPPER));
     }
 }

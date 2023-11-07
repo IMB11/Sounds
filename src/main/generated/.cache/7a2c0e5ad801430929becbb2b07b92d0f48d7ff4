@@ -1,4 +1,4 @@
-// 1.20.1	2023-11-06T22:22:41.710192641	Sonance/SoundDefinition
+// 1.20.1	2023-11-07T08:35:03.722939443	Sonance/SoundDefinition[minecraft:item]Provider
 5f301271346ae4b8475d3cf515ecaaa216e5ed92 assets/minecraft/sonance/items/netherite_equipment.json
 4c55800d1c1530c27220438ea642d38f7ec7f684 assets/minecraft/sonance/items/diamond_equipment.json
 30c9f8fa0111443eeeed7e35065f285097fcdf3d assets/minecraft/sonance/items/dyes.json
@@ -6,14 +6,14 @@
 7d2a68148a2bc690a7710e212f427acb2510c61d assets/minecraft/sonance/items/iron_equipment.json
 1a947c9d0b5147a866326fca006f2cca0d1f437d assets/minecraft/sonance/items/chainmail_equipment.json
 431ba2e9040b95bbe5313e461ec0afa4a66a13b9 assets/minecraft/sonance/items/bows.json
-71489366370aabc435678de657b257a8d5491e14 assets/minecraft/sonance/items/wooden_equipment.json
 8842f28f212b34af44b9144919b6d7504c1c0089 assets/minecraft/sonance/items/golden_equipment.json
+71489366370aabc435678de657b257a8d5491e14 assets/minecraft/sonance/items/wooden_equipment.json
 98fe688a7e1a97236b6e785ae503d2f20a02a356 assets/minecraft/sonance/items/trident.json
 53157448948e9b468054024611e09131d50491cb assets/minecraft/sonance/items/leather_equipment.json
-cae8facf544c5a820a7c13931918b2e739330fc1 assets/minecraft/sonance/items/ingot_metals.json
 0e7bdc722a81dcc0eccdb06cdbdbe48ab906770e assets/minecraft/sonance/items/dirty_metals.json
+41ad90dc098e2b6cc942136eb93767070ce8144f assets/minecraft/sonance/items/ingot_metals.json
 a0dde023cc6ea91d76818648aebff1a02854568a assets/minecraft/sonance/items/fireworks.json
-d6937e2b73edbb8077b24a6d99f408cad4159743 assets/minecraft/sonance/items/elytra.json
 d917889e6138b34f026f19342388886bf6aa8775 assets/minecraft/sonance/items/flint_and_steel.json
-7d5cff47a451526565c28847fb1e6844e4ee341c assets/minecraft/sonance/items/shiny_metals.json
+d6937e2b73edbb8077b24a6d99f408cad4159743 assets/minecraft/sonance/items/elytra.json
+7abd5dabb80d0ec46afaec781cb046fdafc1b3d7 assets/minecraft/sonance/items/shiny_metals.json
 971960070c0ea4cdbdd0e26c029abd71f6a84ae3 assets/minecraft/sonance/items/stone_equipment.json

@@ -16,6 +16,8 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import java.util.HashMap;
 import java.util.function.Function;
 
 public class DynamicSoundHelper {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicSoundHelper.class);
     protected static HashMap<String, Codec<?>> loadDirectories = new HashMap<>();
     protected static HashMap<String, ArrayList<?>> loadedDefinitions = new HashMap<>();
 
@@ -42,12 +45,15 @@ public class DynamicSoundHelper {
 
     @Deprecated
     public static SoundEvent getScreenSound(ScreenHandler screen, boolean isOpening) {
-        var type = screen.getType();
-
-        for (SoundDefinition<ScreenHandlerType<?>> definition : (ArrayList<SoundDefinition<ScreenHandlerType<?>>>) loadedDefinitions.get("screens")) {
-            if(definition.keys.isValid(type)) {
-                return definition.soundEvent;
+        try {
+            var type = screen.getType();
+            for (SoundDefinition<ScreenHandlerType<?>> definition : (ArrayList<SoundDefinition<ScreenHandlerType<?>>>) loadedDefinitions.get("screens")) {
+                if(definition.keys.isValid(type)) {
+                    return definition.soundEvent;
+                }
             }
+        } catch (Exception ignored) {
+            LOGGER.warn("Screen of type {} has no declared ScreenHandlerType - ignoring.", screen.getClass().getName());
         }
 
         return isOpening ?

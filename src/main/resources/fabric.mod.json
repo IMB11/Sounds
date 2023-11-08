@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "example",
+  "version": "${mod_version}",
+  "name": "Example Mod",
+  "description": "Lorum ipsum nadara un petit mozrango.",
+  "authors": [
+    "You!"
+  ],
+  "license": "MIT",
+  "icon": "assets/example/icon.png",
+  "contact": {
+    "homepage": "https://your.site/",
+    "sources": "https://github.com/your/repo",
+    "issues": "https://github.com/your/repo"
+  },
+  "environment": "*",
+  "accessWidener" : "example.accesswidener",
+  "mixins": [
+    "example.mixins.json"
+  ],
+  "depends": {
+    "fabric": "*",
+    "fabricloader": "*",
+    "minecraft": "${target_minecraft}"
+  }
+}

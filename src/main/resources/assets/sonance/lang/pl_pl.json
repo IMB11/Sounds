@@ -1,0 +1,48 @@
+{
+  "sonance.config.static": "Sonans",
+  "sonance.config.shouldPlay.name": "Włącz dźwięk",
+  "sonance.config.shouldPlay.description": "Czy ten dźwięk powinien być odtwarzany?",
+
+  "sonance.config.dynamic.name": "Dźwięki dynamiczne",
+  "sonance.config.dynamic.description": "Czy dźwięk zdarzenia powinien zależeć od przedmiotu, bloku lub akcji, która aktualnie ma miejsce?\n\nDla przedmiotów i bloków zdarzenie dźwiękowe będzie określone przez typ przedmiotu/bloku.",
+  "sonance.config.volume.name": "Głośność dźwięku",
+  "sonance.config.volume.description": "Głośność dźwięku.",
+  "sonance.config.pitch.name": "Ton dźwięku",
+  "sonance.config.pitch.description": "Ton dźwięku.\n\nNiższy ton daje głęboki dźwięk, podczas gdy wyższy ton daje bardziej piskliwy dźwięk.",
+
+  "sonance.config.typing.name": "Pisanie w czacie",
+  "sonance.config.typing.description": "Efekt dźwiękowy, który jest odtwarzany podczas wpisywania lub usuwania znaków z paska wprowadzania tekstu.",
+
+  "sonance.config.message.name": "Wiadomości czatu",
+  "sonance.config.message.description": "Efekt dźwiękowy, który jest odtwarzany, gdy otrzymujesz wiadomość w czacie.",
+
+  "sonance.config.mention.name": "Wzmianki w czacie",
+  "sonance.config.mention.description": "Efekt dźwiękowy, który jest odtwarzany, gdy zostajesz wymieniony w nowej wiadomości czatu.",
+
+  "sonance.config.hotbarScroll.name": "Przewijanie paska narzędzi",
+  "sonance.config.hotbarScroll.description": "Efekt dźwiękowy, który jest odtwarzany podczas przewijania paska narzędzi lub używania klawiszy numerycznych do wyboru miejsca na pasku narzędzi.",
+
+  "sonance.config.hotbarPick.name": "Wybieranie bloku",
+  "sonance.config.hotbarPick.description": "Efekt dźwiękowy, który jest odtwarzany podczas używania akcji 'Wybieranie bloku'.",
+
+  "sonance.config.itemCopy.name": "Klonowanie przedmiotu",
+  "sonance.config.itemCopy.description": "Efekt dźwiękowy, który jest odtwarzany podczas klonowania przedmiotu w swoim ekwipunku.",
+
+  "sonance.config.itemDelete.name": "Usuwanie przedmiotu",
+  "sonance.config.itemDelete.description": "Efekt dźwiękowy, który jest odtwarzany podczas usuwania przedmiotu za pomocą kosza/pojemnika na śmieci w kreatywnym ekwipunku.",
+
+  "sonance.config.itemDrop.name": "Upuszczanie przedmiotu",
+  "sonance.config.itemDrop.description": "Efekt dźwiękowy, który jest odtwarzany podczas upuszczania przedmiotu z ekwipunku.",
+
+  "sonance.config.itemDrag.name": "Przeciąganie przedmiotu",
+  "sonance.config.itemDrag.description": "Efekt dźwiękowy, który jest odtwarzany podczas przeciągania przedmiotu między slotami w ekwipunku.",
+
+  "sonance.config.inventoryOpen.name": "Otwieranie inwentarza",
+  "sonance.config.inventoryOpen.description": "Efekt dźwiękowy, który jest odtwarzany podczas otwierania ekranu z ekwipunku, takiego jak stół do zaklęć.",
+
+  "sonance.config.inventoryScroll.name": "Przewijanie inwentarza",
+  "sonance.config.inventoryScroll.description": "Efekt dźwiękowy, który jest odtwarzany podczas korzystania ze scrollbara w dowolnym ekwipunku.",
+
+  "sonance.config.inventoryClose.name": "Zamykanie inwentarza",
+  "sonance.config.inventoryClose.description": "Efekt dźwiękowy, który jest odtwarzany podczas zamykania ekranu z ekwipunku, takiego jak stół do zaklęć."
+}

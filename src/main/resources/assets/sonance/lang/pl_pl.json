@@ -26,23 +26,23 @@
   "sonance.config.hotbarPick.description": "Efekt dźwiękowy, który jest odtwarzany podczas używania akcji 'Wybieranie bloku'.",
 
   "sonance.config.itemCopy.name": "Klonowanie przedmiotu",
-  "sonance.config.itemCopy.description": "Efekt dźwiękowy, który jest odtwarzany podczas klonowania przedmiotu w swoim inwentarzu.",
+  "sonance.config.itemCopy.description": "Efekt dźwiękowy, który jest odtwarzany podczas klonowania przedmiotu w swoim ekwipunku.",
 
   "sonance.config.itemDelete.name": "Usuwanie przedmiotu",
-  "sonance.config.itemDelete.description": "Efekt dźwiękowy, który jest odtwarzany podczas usuwania przedmiotu za pomocą kosza/pojemnika na śmieci w kreatywnym inwentarzu.",
+  "sonance.config.itemDelete.description": "Efekt dźwiękowy, który jest odtwarzany podczas usuwania przedmiotu za pomocą kosza/pojemnika na śmieci w kreatywnym ekwipunku.",
 
   "sonance.config.itemDrop.name": "Upuszczanie przedmiotu",
-  "sonance.config.itemDrop.description": "Efekt dźwiękowy, który jest odtwarzany podczas upuszczania przedmiotu z inwentarza.",
+  "sonance.config.itemDrop.description": "Efekt dźwiękowy, który jest odtwarzany podczas upuszczania przedmiotu z ekwipunku.",
 
   "sonance.config.itemDrag.name": "Przeciąganie przedmiotu",
-  "sonance.config.itemDrag.description": "Efekt dźwiękowy, który jest odtwarzany podczas przeciągania przedmiotu między slotami w inwentarzu.",
+  "sonance.config.itemDrag.description": "Efekt dźwiękowy, który jest odtwarzany podczas przeciągania przedmiotu między slotami w ekwipunku.",
 
   "sonance.config.inventoryOpen.name": "Otwieranie inwentarza",
-  "sonance.config.inventoryOpen.description": "Efekt dźwiękowy, który jest odtwarzany podczas otwierania ekranu z inwentarzem, takiego jak stół do zaklęć.",
+  "sonance.config.inventoryOpen.description": "Efekt dźwiękowy, który jest odtwarzany podczas otwierania ekranu z ekwipunku, takiego jak stół do zaklęć.",
 
   "sonance.config.inventoryScroll.name": "Przewijanie inwentarza",
-  "sonance.config.inventoryScroll.description": "Efekt dźwiękowy, który jest odtwarzany podczas korzystania ze scrollbara w dowolnym inwentarzu.",
+  "sonance.config.inventoryScroll.description": "Efekt dźwiękowy, który jest odtwarzany podczas korzystania ze scrollbara w dowolnym ekwipunku.",
 
   "sonance.config.inventoryClose.name": "Zamykanie inwentarza",
-  "sonance.config.inventoryClose.description": "Efekt dźwiękowy, który jest odtwarzany podczas zamykania ekranu z inwentarzem, takiego jak stół do zaklęć."
+  "sonance.config.inventoryClose.description": "Efekt dźwiękowy, który jest odtwarzany podczas zamykania ekranu z ekwipunku, takiego jak stół do zaklęć."
 }

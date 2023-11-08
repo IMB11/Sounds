@@ -7,7 +7,9 @@ import com.mineblock11.sonance.sound.DynamicConfiguredSound;
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.ConfigEntry;
+import dev.isxander.yacl3.config.GsonConfigInstance;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -21,10 +23,16 @@ import java.util.function.UnaryOperator;
 
 public class SonanceConfig {
     private static final YACLHelper.NamespacedHelper HELPER = new YACLHelper.NamespacedHelper("sonance");
-    private static final ConfigClassHandler<SonanceConfig> GSON = HELPER.createHandler(SonanceConfig.class, new ArrayList<UnaryOperator<GsonBuilder>>(List.of(
-            builder -> builder.registerTypeAdapter(ConfiguredSound.class, new ConfiguredSoundTypeAdapter()),
-            builder -> builder.registerTypeAdapter(DynamicConfiguredSound.class, new DynamicConfiguredSoundTypeAdapter())
-    )));
+    private static final GsonConfigInstance<SonanceConfig> GSON = GsonConfigInstance.createBuilder(SonanceConfig.class)
+            .overrideGsonBuilder(new GsonBuilder()
+                    .disableHtmlEscaping()
+                    .setPrettyPrinting()
+                    .registerTypeAdapter(ConfiguredSound.class, new ConfiguredSoundTypeAdapter())
+                    .registerTypeAdapter(DynamicConfiguredSound.class, new DynamicConfiguredSoundTypeAdapter())
+                    .create())
+            .setPath(FabricLoader.getInstance().getConfigDir().resolve("sonance.config.json"))
+            .build();
+
     @ConfigEntry
     public final ConfiguredSound typingSoundEffect = new ConfiguredSound(true, "typing", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.6f, 0.4f);
     @ConfigEntry
@@ -59,7 +67,7 @@ public class SonanceConfig {
     public final DynamicConfiguredSound itemClickSoundEffect = new DynamicConfiguredSound(true, true, "itemPick", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.4f, 0.2f);
 
     public static SonanceConfig get() {
-        return GSON.instance();
+        return GSON.getConfig();
     }
 
     public static void load() {

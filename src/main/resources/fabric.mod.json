@@ -1,27 +1,37 @@
 {
   "schemaVersion": 1,
-  "id": "example",
+  "id": "sonance",
   "version": "${mod_version}",
-  "name": "Example Mod",
-  "description": "Lorum ipsum nadara un petit mozrango.",
+  "name": "Sonance",
+  "description": "A highly configurable UI sound overhaul.",
   "authors": [
-    "You!"
+    "mineblock11"
   ],
-  "license": "MIT",
-  "icon": "assets/example/icon.png",
   "contact": {
-    "homepage": "https://your.site/",
-    "sources": "https://github.com/your/repo",
-    "issues": "https://github.com/your/repo"
+    "website": "https://mineblock11.dev/",
+    "repo": "https://github.com/mineblock11/Sonance"
   },
-  "environment": "*",
-  "accessWidener" : "example.accesswidener",
+  "license": "LGPL-2.1",
+  "icon": "assets/sonance/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.mineblock11.sonance.SonanceClient"
+    ],
+    "modmenu": [
+      "com.mineblock11.sonance.compat.ModMenuCompat"
+    ],
+    "fabric-datagen": [
+      "com.mineblock11.sonance.datagen.SonanceDatagenEntrypoint"
+    ]
+  },
   "mixins": [
-    "example.mixins.json"
+    "sonance.mixins.json"
   ],
   "depends": {
-    "fabric": "*",
     "fabricloader": "*",
+    "fabric": "*",
+    "mru": "*",
     "minecraft": "${target_minecraft}"
   }
 }

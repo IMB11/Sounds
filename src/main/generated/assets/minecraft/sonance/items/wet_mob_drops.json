@@ -1,0 +1,16 @@
+{
+  "keys": [
+    "minecraft:slime_ball",
+    "minecraft:honeycomb",
+    "minecraft:honey_bottle",
+    "minecraft:fermented_spider_eye",
+    "minecraft:blaze_powder",
+    "minecraft:rabbit_foot",
+    "minecraft:spider_eye",
+    "minecraft:rotten_flesh",
+    "minecraft:glistering_melon_slice",
+    "minecraft:magma_cream",
+    "minecraft:ghast_tear"
+  ],
+  "soundEvent": "minecraft:block.slime_block.hit"
+}

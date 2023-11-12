@@ -5,6 +5,12 @@ version = "${property('mod.version')}+${stonecutter.current().version()}"
 repositories {
     mavenCentral()
     mavenLocal()
+    mavenCentral()
+    maven { url "https://maven.terraformersmc.com/releases" }
+    maven { url "https://maven.isxander.dev/releases" }
+    maven { url "https://jitpack.io" }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    maven { url "https://maven.mineblock11.dev/releases" }
 }
 
 dependencies {
@@ -14,11 +20,15 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${property('deps.fabric_loader')}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fabric_api')}"
 
-    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.0-rc.4")))
+    include modImplementation("dev.isxander.yacl:yet-another-config-lib-fabric:${property("deps.yacl")}")
+    modLocalRuntime modCompileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
+    modImplementation "com.mineblock11:MRU:${property("deps.mru")}"
+
+    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.0")))
 }
 
 loom {
-    accessWidenerPath = file("../../src/main/resources/example.accesswidener")
+//    accessWidenerPath = file("../../src/main/resources/sonance.accesswidener")
 
     runConfigs.server.ideConfigGenerated = false
 }
@@ -34,7 +44,7 @@ java {
 
 processResources {
     filesMatching('fabric.mod.json') {
-        expand 'mod_version': version, 'target_minecraft': project.property('target')
+        expand 'mod_version': version, 'target_minecraft': project.property('mod.target')
     }
 }
 

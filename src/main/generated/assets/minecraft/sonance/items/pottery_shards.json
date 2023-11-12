@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "#minecraft:decorated_pot_sherds"
+  ],
+  "soundEvent": "minecraft:block.decorated_pot.step"
+}

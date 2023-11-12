@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "#c:dyes"
+  ],
+  "soundEvent": "minecraft:item.dye.use"
+}

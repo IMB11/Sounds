@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:anvil"
+  ],
+  "soundEvent": "minecraft:block.anvil.place"
+}

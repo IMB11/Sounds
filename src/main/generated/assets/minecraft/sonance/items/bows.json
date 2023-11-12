@@ -1,0 +1,7 @@
+{
+  "keys": [
+    "minecraft:bow",
+    "minecraft:crossbow"
+  ],
+  "soundEvent": "minecraft:entity.arrow.shoot"
+}

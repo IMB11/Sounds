@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "#minecraft:trim_templates"
+  ],
+  "soundEvent": "minecraft:entity.iron_golem.step"
+}

@@ -1,0 +1,45 @@
+name: Distribute JARs
+on: [release, workflow_dispatch]
+runs:
+  build:
+    strategy:
+      matrix:
+        game_version: ["1.20.1", "1.20.2"]
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+      - uses: burrunan/gradle-cache-action@v1
+        with:
+          gradle-distribution-sha-256-sum-warning: false
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+            distribution: temurin
+            cache: gradle
+            java-version: 17
+      - run: chmod +x gradlew
+      - name: Set Active Version
+        run: ./gradlew "Set active version to ${{ matrix.game_version }}"
+      - name: Build Version
+        run: ./gradlew buildActive
+  publish:
+    needs: build
+    strategy:
+      matrix:
+        game_version: [ "1.20.1", "1.20.2" ]
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: Kir-Antipov/mc-publish@v3.3
+        with:
+            files: | 
+              versions/${{ matrix.game_version }}/build/libs/!(*-@(dev|sources|javadoc)).jar
+              versions/${{ matrix.game_version }}/build/libs/*-@(dev|sources|javadoc).jar
+            version: ${{ github.ref_name }}+${{ matrix.game_version }}
+            modrinth-id: ${{ vars.MODRINTH_ID }}
+            modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+            curseforge-id: ${{ vars.CURSEFORGE_ID }}
+            curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+            github-token: ${{ secrets.CLASSIC_GITHUB_TOKEN }}

@@ -39,7 +39,7 @@ java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 
-    archivesBaseName = "${property('mod.name')}-${version}"
+    archivesBaseName = "${property('mod.name')}"
 }
 
 processResources {

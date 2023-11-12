@@ -30,6 +30,19 @@ dependencies {
 loom {
 //    accessWidenerPath = file("../../src/main/resources/sonance.accesswidener")
 
+        runs {
+            datagenClient {
+                client()
+                name "Data Generation Client"
+                vmArg "-Dfabric-api.datagen"
+                vmArg "-Dfabric-api.datagen.output-dir=" + getRootDir().toPath().resolve("src/main/generated")
+                vmArg "-Dfabric-api.datagen.modid=sonance"
+
+                ideConfigGenerated = false
+                runDir "build/datagen"
+            }
+        }
+
     runConfigs.server.ideConfigGenerated = false
 }
 validateAccessWidener.enabled = false
@@ -54,7 +67,18 @@ jar {
     from rootProject.file('LICENSE')
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDirs += [
+                    rootProject.file('src/main/generated')
+            ]
+        }
+    }
+}
+
 if (stonecutter.current().isActiveVersion()) {
+
     rootProject.tasks.register('buildActive') {
         setGroup 'project'
 

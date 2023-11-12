@@ -1,6 +1,9 @@
 name: Distribute JARs
-on: [release, workflow_dispatch]
-runs:
+on:
+  release:
+    types: [published]
+    
+jobs:
   build:
     strategy:
       matrix:

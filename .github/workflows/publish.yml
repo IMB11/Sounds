@@ -28,21 +28,14 @@ jobs:
         run: ./gradlew "Set active version to ${{ matrix.game_version }}"
       - name: Build Version
         run: ./gradlew buildActive
-  publish:
-    needs: build
-    strategy:
-      matrix:
-        game_version: [ "1.20.1", "1.20.2" ]
-    runs-on: "ubuntu-latest"
-    steps:
       - uses: Kir-Antipov/mc-publish@v3.3
         with:
-            files: | 
-              versions/${{ matrix.game_version }}/build/libs/!(*-@(dev|sources|javadoc)).jar
-              versions/${{ matrix.game_version }}/build/libs/*-@(dev|sources|javadoc).jar
-            version: ${{ github.ref_name }}+${{ matrix.game_version }}
-            modrinth-id: ${{ vars.MODRINTH_ID }}
-            modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-            curseforge-id: ${{ vars.CURSEFORGE_ID }}
-            curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-            github-token: ${{ secrets.CLASSIC_GITHUB_TOKEN }}
+          files: |
+            versions/${{ matrix.game_version }}/build/libs/!(*-@(dev|sources|javadoc)).jar
+            versions/${{ matrix.game_version }}/build/libs/*-@(dev|sources|javadoc).jar
+          version: ${{ github.ref_name }}+${{ matrix.game_version }}
+          modrinth-id: ${{ vars.MODRINTH_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          curseforge-id: ${{ vars.CURSEFORGE_ID }}
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          github-token: ${{ secrets.CLASSIC_GITHUB_TOKEN }}

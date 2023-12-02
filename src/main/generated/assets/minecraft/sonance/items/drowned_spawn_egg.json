@@ -1,6 +1,0 @@
-{
-  "keys": [
-    "minecraft:drowned_spawn_egg"
-  ],
-  "soundEvent": "minecraft:entity.drowned.ambient"
-}

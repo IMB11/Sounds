@@ -52,6 +52,22 @@ public class SoundDefinition<T> {
             return this;
         }
 
+        @SafeVarargs
+        public final Builder<T> addMultipleKeys(T... keys) {
+            for(T key : keys) {
+                addKey(key);
+            }
+            return this;
+        }
+
+        @SafeVarargs
+        public final Builder<T> addMultipleKeys(TagKey<T>... keys) {
+            for(TagKey<T> key : keys) {
+                addKey(key);
+            }
+            return this;
+        }
+
         public Builder<T> addKey(TagKey<T> key) {
             keys.add(Either.right(key));
             return this;

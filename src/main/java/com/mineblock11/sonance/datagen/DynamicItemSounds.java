@@ -20,6 +20,7 @@ import net.minecraft.util.Pair;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
@@ -215,22 +216,27 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.BONE_MEAL));
 
         // Spawn Eggs
-        for (Item item : Registries.ITEM) {
-            if (item instanceof SpawnEggItem spawnEggItem) {
-                EntityType<?> entityType = spawnEggItem.getEntityType(null);
-                Identifier soundEventID = getAmbientSoundForEntity(entityType);
-                @Nullable SoundEvent soundEvent = Registries.SOUND_EVENT.get(soundEventID);
-                if (soundEvent != null) {
-                    String spawnEggName = Registries.ITEM.getId(spawnEggItem).getPath();
-                    provider.accept(spawnEggName, create(soundEvent).addKey(spawnEggItem));
-                } else {
-                    LOGGER.warn("Could not find ambient sound event for entity type " + entityType.getTranslationKey());
-                }
-            }
-        }
+//        for (Item item : Registries.ITEM) {
+//            if (item instanceof SpawnEggItem spawnEggItem) {
+//                EntityType<?> entityType = spawnEggItem.getEntityType(null);
+//                Identifier soundEventID = getAmbientSoundForEntity(entityType);
+//                @Nullable SoundEvent soundEvent = Registries.SOUND_EVENT.get(soundEventID);
+//                if (soundEvent != null) {
+//                    String spawnEggName = Registries.ITEM.getId(spawnEggItem).getPath();
+//                    provider.accept(spawnEggName, create(soundEvent).addKey(spawnEggItem));
+//                } else {
+//                    LOGGER.warn("Could not find ambient sound event for entity type " + entityType.getTranslationKey());
+//                }
+//            }
+//        }
+
+        List<Item> spawnEggs = Registries.ITEM.stream().filter(item -> item instanceof SpawnEggItem).toList();
+        provider.accept("spawn_eggs", create(SoundEvents.BLOCK_SNIFFER_EGG_PLOP)
+                .addKey(Items.EGG)
+                .addMultipleKeys(spawnEggs.toArray(Item[]::new)));
     }
 
-    private Identifier getAmbientSoundForEntity(EntityType<?> entityType) {
-        return new Identifier("entity." + entityType.getUntranslatedName() + ".ambient");
-    }
+//    private Identifier getAmbientSoundForEntity(EntityType<?> entityType) {
+//        return new Identifier("entity." + entityType.getUntranslatedName() + ".ambient");
+//    }
 }

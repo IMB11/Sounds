@@ -13,12 +13,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Inventory.class)
-public class PlayerInventoryMixin {
+public class InventoryMixin {
     @Shadow
     @Final
     public Player player;
 
-    @Inject(method = "scrollInHotbar", at = @At("RETURN"), cancellable = false)
+    @Inject(method = "swapPaint", at = @At("RETURN"), cancellable = false)
     public void $hotbar_scroll_sound_effect(double scrollAmount, CallbackInfo ci) {
         SonanceConfig.get().hotbarScrollSoundEffect.playDynamicSound(this.player.getMainHandItem(), DynamicSoundHelper.BlockSoundType.PLACE);
     }
@@ -28,7 +28,7 @@ public class PlayerInventoryMixin {
 //        SonanceConfig.get().itemDropSoundEffect.playDynamicSound(this.player.getMainHandStack(), DynamicSoundHelper.BlockSoundType.FALL);
 //    }
 
-    @Inject(method = "addPickBlock", at = @At("RETURN"), cancellable = false)
+    @Inject(method = "setPickedItem", at = @At("RETURN"), cancellable = false)
     public void $hotbar_pick_sound_effect(ItemStack stack, CallbackInfo ci) {
         SonanceConfig.get().hotbarPickSoundEffect.playDynamicSound(stack, DynamicSoundHelper.BlockSoundType.STEP);
     }

@@ -10,7 +10,7 @@ pluginManagement {
 
 plugins {
     id 'io.shcm.shsupercm.fabric.stonecutter' version '1.5'
-    id 'fabric-loom' version '1.3-SNAPSHOT' apply false
+    id 'fabric-loom' version '1.4-SNAPSHOT' apply false
 }
 
 stonecutter {

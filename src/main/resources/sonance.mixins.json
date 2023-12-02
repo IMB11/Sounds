@@ -4,17 +4,17 @@
   "package": "com.mineblock11.sonance.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "PlayerEntityMixin",
-    "PlayerInventoryMixin",
-    "ScreenHandlerMixin"
+    "PlayerMixin",
+    "InventoryMixin",
+    "AbstractContainerMenuMixin"
   ],
   "client": [
-    "ChatHudMixin",
+    "ChatComponentMixin",
     "ChatScreenMixin",
-    "CreativeInventoryScreenMixin",
+    "CreativeModeInventoryScreenMixin",
     "CreativeInventoryScreenMixin$CreativeScreenHandlerMixin",
-    "HandledScreenMixin",
-    "MinecraftClientMixin"
+    "AbstractContainerScreenMixin",
+    "MinecraftMixin"
   ],
   "injectors": {
     "defaultRequire": 1

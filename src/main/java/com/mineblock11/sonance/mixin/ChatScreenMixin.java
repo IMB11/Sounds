@@ -4,51 +4,20 @@ import com.mineblock11.sonance.config.SonanceConfig;
 import net.minecraft.client.gui.screens.ChatScreen;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChatScreen.class)
 public class ChatScreenMixin {
+    @Unique
     private static boolean isNotSpecialKey(int keycode) {
-        switch (keycode) {
-            case GLFW.GLFW_KEY_LEFT_SHIFT:
-            case GLFW.GLFW_KEY_RIGHT_SHIFT:
-            case GLFW.GLFW_KEY_LEFT_CONTROL:
-            case GLFW.GLFW_KEY_RIGHT_CONTROL:
-            case GLFW.GLFW_KEY_CAPS_LOCK:
-            case GLFW.GLFW_KEY_TAB:
-            case GLFW.GLFW_KEY_ENTER:
-            case GLFW.GLFW_KEY_INSERT:
-            case GLFW.GLFW_KEY_DELETE:
-            case GLFW.GLFW_KEY_END:
-            case GLFW.GLFW_KEY_HOME:
-            case GLFW.GLFW_KEY_PAGE_DOWN:
-            case GLFW.GLFW_KEY_PAGE_UP:
-            case GLFW.GLFW_KEY_PAUSE:
-            case GLFW.GLFW_KEY_SCROLL_LOCK:
-            case GLFW.GLFW_KEY_PRINT_SCREEN:
-            case GLFW.GLFW_KEY_ESCAPE:
-            case GLFW.GLFW_KEY_LEFT_ALT:
-            case GLFW.GLFW_KEY_RIGHT_ALT:
-            case GLFW.GLFW_KEY_NUM_LOCK:
-            case GLFW.GLFW_KEY_KP_ENTER:
-            case GLFW.GLFW_KEY_F1:
-            case GLFW.GLFW_KEY_F2:
-            case GLFW.GLFW_KEY_F3:
-            case GLFW.GLFW_KEY_F4:
-            case GLFW.GLFW_KEY_F5:
-            case GLFW.GLFW_KEY_F6:
-            case GLFW.GLFW_KEY_F7:
-            case GLFW.GLFW_KEY_F8:
-            case GLFW.GLFW_KEY_F9:
-            case GLFW.GLFW_KEY_F10:
-            case GLFW.GLFW_KEY_F11:
-            case GLFW.GLFW_KEY_F12:
-                return false;
-            default:
-                return true;
-        }
+        return switch (keycode) {
+            case GLFW.GLFW_KEY_LEFT_SHIFT, GLFW.GLFW_KEY_RIGHT_SHIFT, GLFW.GLFW_KEY_LEFT_CONTROL, GLFW.GLFW_KEY_RIGHT_CONTROL, GLFW.GLFW_KEY_CAPS_LOCK, GLFW.GLFW_KEY_TAB, GLFW.GLFW_KEY_ENTER, GLFW.GLFW_KEY_INSERT, GLFW.GLFW_KEY_DELETE, GLFW.GLFW_KEY_END, GLFW.GLFW_KEY_HOME, GLFW.GLFW_KEY_PAGE_DOWN, GLFW.GLFW_KEY_PAGE_UP, GLFW.GLFW_KEY_PAUSE, GLFW.GLFW_KEY_SCROLL_LOCK, GLFW.GLFW_KEY_PRINT_SCREEN, GLFW.GLFW_KEY_ESCAPE, GLFW.GLFW_KEY_LEFT_ALT, GLFW.GLFW_KEY_RIGHT_ALT, GLFW.GLFW_KEY_NUM_LOCK, GLFW.GLFW_KEY_KP_ENTER, GLFW.GLFW_KEY_F1, GLFW.GLFW_KEY_F2, GLFW.GLFW_KEY_F3, GLFW.GLFW_KEY_F4, GLFW.GLFW_KEY_F5, GLFW.GLFW_KEY_F6, GLFW.GLFW_KEY_F7, GLFW.GLFW_KEY_F8, GLFW.GLFW_KEY_F9, GLFW.GLFW_KEY_F10, GLFW.GLFW_KEY_F11, GLFW.GLFW_KEY_F12 ->
+                    false;
+            default -> true;
+        };
     }
 
     @Inject(method = "keyPressed", at = @At("HEAD"), cancellable = false)

@@ -14,15 +14,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ChatComponent.class)
-public class ChatHudMixin {
+public class ChatComponentMixin {
     @Shadow
     @Final
-    private Minecraft client;
+    private Minecraft minecraft;
 
-    @Inject(method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V", at = @At("HEAD"), cancellable = false)
+    @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V", at = @At("HEAD"), cancellable = false)
     public void $mention_recieve_sound_effect(Component message, MessageSignature signature, int ticks, GuiMessageTag indicator, boolean refresh, CallbackInfo ci) {
         String messageString = message.getString();
-        String username = client.getUser().getName();
+        String username = minecraft.getUser().getName();
 
         messageString = messageString.replace("<" + username + ">", "");
 

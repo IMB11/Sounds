@@ -8,35 +8,32 @@ import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.OptionGroup;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-
 import java.util.List;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 
 public class DynamicConfiguredSound extends ConfiguredSound {
     public static final Codec<DynamicConfiguredSound> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.BOOL.fieldOf("shouldPlay").forGetter(ConfiguredSound::isShouldPlay),
                     Codec.BOOL.fieldOf("enabledDynamic").forGetter(DynamicConfiguredSound::isEnabledDynamic),
-                    Identifier.CODEC.fieldOf("soundEvent").forGetter(sound -> sound.soundEvent.registryKey().getValue()),
+                    ResourceLocation.CODEC.fieldOf("soundEvent").forGetter(sound -> sound.soundEvent.key().location()),
                     Codec.FLOAT.fieldOf("pitch").forGetter(ConfiguredSound::getPitch),
                     Codec.FLOAT.fieldOf("volume").forGetter(ConfiguredSound::getVolume),
                     Codec.STRING.fieldOf("id").forGetter(ConfiguredSound::getId)
             ).apply(instance, DynamicConfiguredSound::new));
     public boolean enabledDynamic;
 
-    public DynamicConfiguredSound(boolean shouldPlay, boolean enabledDynamic, Identifier soundEvent, float pitch, float volume, String id) {
+    public DynamicConfiguredSound(boolean shouldPlay, boolean enabledDynamic, ResourceLocation soundEvent, float pitch, float volume, String id) {
         super(shouldPlay, soundEvent, pitch, volume, id);
         this.enabledDynamic = enabledDynamic;
     }
 
-    public DynamicConfiguredSound(boolean shouldPlay, boolean enabledDynamic, String id, RegistryEntry.Reference<SoundEvent> soundEvent, float pitch, float volume) {
+    public DynamicConfiguredSound(boolean shouldPlay, boolean enabledDynamic, String id, Holder.Reference<SoundEvent> soundEvent, float pitch, float volume) {
         super(shouldPlay, id, soundEvent, pitch, volume);
         this.enabledDynamic = enabledDynamic;
     }
@@ -61,7 +58,7 @@ public class DynamicConfiguredSound extends ConfiguredSound {
         }
     }
 
-    public void playDynamicSound(ScreenHandler screen, boolean isOpening) {
+    public void playDynamicSound(AbstractContainerMenu screen, boolean isOpening) {
         if (enabledDynamic && screen != null) {
             this.forceSound(DynamicSoundHelper.getScreenSound(screen, isOpening), null, null);
         } else {
@@ -76,30 +73,30 @@ public class DynamicConfiguredSound extends ConfiguredSound {
     public OptionGroup getOptionGroup(DynamicConfiguredSound defaults, boolean enableImage) {
         if(enableImage) {
             var volumeOpt = Option.<Float>createBuilder()
-                    .name(Text.translatable("sonance.config.volume.name"))
+                    .name(Component.translatable("sonance.config.volume.name"))
                     .description(OptionDescription.createBuilder()
-                            .text(Text.translatable("sonance.config.volume.description"))
-                            .webpImage(new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
+                            .text(Component.translatable("sonance.config.volume.description"))
+                            .webpImage(new ResourceLocation("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
                             .build())
                     .binding(defaults.volume, () -> this.volume, (val) -> this.volume = val)
                     .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
                     .build();
 
             var pitchOpt = Option.<Float>createBuilder()
-                    .name(Text.translatable("sonance.config.pitch.name"))
+                    .name(Component.translatable("sonance.config.pitch.name"))
                     .description(OptionDescription.createBuilder()
-                            .text(Text.translatable("sonance.config.pitch.description"))
-                            .webpImage(new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
+                            .text(Component.translatable("sonance.config.pitch.description"))
+                            .webpImage(new ResourceLocation("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
                             .build())
                     .binding(defaults.pitch, () -> this.pitch, (val) -> this.pitch = val)
                     .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
                     .build();
 
             var shouldPlay = Option.<Boolean>createBuilder()
-                    .name(Text.translatable("sonance.config.shouldPlay.name"))
+                    .name(Component.translatable("sonance.config.shouldPlay.name"))
                     .description(OptionDescription.createBuilder()
-                            .text(Text.translatable("sonance.config.shouldPlay.description"))
-                            .webpImage(new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
+                            .text(Component.translatable("sonance.config.shouldPlay.description"))
+                            .webpImage(new ResourceLocation("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
                             .build())
                     .binding(defaults.shouldPlay, () -> this.shouldPlay, (val) -> this.shouldPlay = val)
                     .listener((opt, val) -> {
@@ -110,10 +107,10 @@ public class DynamicConfiguredSound extends ConfiguredSound {
                     .build();
 
             var shouldDynamic = Option.<Boolean>createBuilder()
-                    .name(Text.translatable("sonance.config.dynamic.name"))
+                    .name(Component.translatable("sonance.config.dynamic.name"))
                     .description(OptionDescription.createBuilder()
-                            .text(Text.translatable("sonance.config.dynamic.description"))
-                            .webpImage(new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
+                            .text(Component.translatable("sonance.config.dynamic.description"))
+                            .webpImage(new ResourceLocation("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
                             .build())
                     .binding(defaults.enabledDynamic, () -> this.enabledDynamic, (val) -> this.enabledDynamic = val)
                     .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).onOffFormatter())
@@ -121,10 +118,10 @@ public class DynamicConfiguredSound extends ConfiguredSound {
 
             return OptionGroup
                     .createBuilder()
-                    .name(Text.translatable("sonance.config." + id + ".name"))
+                    .name(Component.translatable("sonance.config." + id + ".name"))
                     .description(OptionDescription.createBuilder()
-                            .text(Text.translatable("sonance.config." + id + ".description"))
-                            .webpImage(new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
+                            .text(Component.translatable("sonance.config." + id + ".description"))
+                            .webpImage(new ResourceLocation("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
                             .build())
                     .options(List.of(shouldPlay, shouldDynamic, volumeOpt, pitchOpt))
                     .collapsed(true)
@@ -132,9 +129,9 @@ public class DynamicConfiguredSound extends ConfiguredSound {
         }
 
         var volumeOpt = Option.<Float>createBuilder()
-                .name(Text.translatable("sonance.config.volume.name"))
+                .name(Component.translatable("sonance.config.volume.name"))
                 .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sonance.config.volume.description"))
+                        .text(Component.translatable("sonance.config.volume.description"))
 //                        .webpImage(new Identifier("sonance", "textures/config/" + id + ".webp"))
                         .build())
                 .binding(defaults.volume, () -> this.volume, (val) -> this.volume = val)
@@ -142,9 +139,9 @@ public class DynamicConfiguredSound extends ConfiguredSound {
                 .build();
 
         var pitchOpt = Option.<Float>createBuilder()
-                .name(Text.translatable("sonance.config.pitch.name"))
+                .name(Component.translatable("sonance.config.pitch.name"))
                 .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sonance.config.pitch.description"))
+                        .text(Component.translatable("sonance.config.pitch.description"))
 //                        .webpImage(new Identifier("sonance", "images/" + id + ".webp"))
                         .build())
                 .binding(defaults.pitch, () -> this.pitch, (val) -> this.pitch = val)
@@ -152,9 +149,9 @@ public class DynamicConfiguredSound extends ConfiguredSound {
                 .build();
 
         var shouldPlay = Option.<Boolean>createBuilder()
-                .name(Text.translatable("sonance.config.shouldPlay.name"))
+                .name(Component.translatable("sonance.config.shouldPlay.name"))
                 .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sonance.config.shouldPlay.description"))
+                        .text(Component.translatable("sonance.config.shouldPlay.description"))
 //                        .webpImage(new Identifier("sonance", "images/" + id + ".webp"))
                         .build())
                 .binding(defaults.shouldPlay, () -> this.shouldPlay, (val) -> this.shouldPlay = val)
@@ -166,9 +163,9 @@ public class DynamicConfiguredSound extends ConfiguredSound {
                 .build();
 
         var shouldDynamic = Option.<Boolean>createBuilder()
-                .name(Text.translatable("sonance.config.dynamic.name"))
+                .name(Component.translatable("sonance.config.dynamic.name"))
                 .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sonance.config.dynamic.description"))
+                        .text(Component.translatable("sonance.config.dynamic.description"))
 //                        .webpImage(new Identifier("sonance", "images/" + id + ".webp"))
                         .build())
                 .binding(defaults.enabledDynamic, () -> this.enabledDynamic, (val) -> this.enabledDynamic = val)
@@ -177,9 +174,9 @@ public class DynamicConfiguredSound extends ConfiguredSound {
 
         return OptionGroup
                 .createBuilder()
-                .name(Text.translatable("sonance.config." + id + ".name"))
+                .name(Component.translatable("sonance.config." + id + ".name"))
                 .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sonance.config." + id + ".description"))
+                        .text(Component.translatable("sonance.config." + id + ".description"))
 //                        .webpImage(new Identifier("sonance", "images/" + id + ".webp"))
                         .build())
                 .options(List.of(shouldPlay, shouldDynamic, volumeOpt, pitchOpt))

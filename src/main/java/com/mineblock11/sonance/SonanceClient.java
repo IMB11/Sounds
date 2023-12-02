@@ -5,12 +5,12 @@ import com.mineblock11.sonance.dynamic.DynamicSoundHelper;
 import com.mineblock11.sonance.dynamic.SonanceReloadListener;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.resource.ResourceType;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 
 public class SonanceClient implements ClientModInitializer {
-    public static Identifier id(String id) {
-        return new Identifier("sonance", id);
+    public static ResourceLocation id(String id) {
+        return new ResourceLocation("sonance", id);
     }
 
     @Override
@@ -18,6 +18,6 @@ public class SonanceClient implements ClientModInitializer {
         SonanceConfig.load();
         DynamicSoundHelper.initialize();
 
-        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SonanceReloadListener());
+        ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new SonanceReloadListener());
     }
 }

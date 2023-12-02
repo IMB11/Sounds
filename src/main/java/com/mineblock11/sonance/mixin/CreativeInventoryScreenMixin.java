@@ -3,10 +3,6 @@ package com.mineblock11.sonance.mixin;
 import com.mineblock11.sonance.MixinStatics;
 import com.mineblock11.sonance.config.SonanceConfig;
 import com.mineblock11.sonance.dynamic.DynamicSoundHelper;
-import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.slot.Slot;
-import net.minecraft.screen.slot.SlotActionType;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,8 +15,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.List;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
-@Mixin(CreativeInventoryScreen.class)
+@Mixin(CreativeModeInventoryScreen.class)
 public class CreativeInventoryScreenMixin {
     @Shadow
     @Nullable
@@ -29,7 +29,7 @@ public class CreativeInventoryScreenMixin {
     @Shadow @Nullable private List<Slot> slots;
 
     @Inject(method = "onMouseClick", at = @At("HEAD"), cancellable = false)
-    public void $pre_item_delete_sound_effect(Slot slot, int slotId, int button, SlotActionType actionType, CallbackInfo ci) {
+    public void $pre_item_delete_sound_effect(Slot slot, int slotId, int button, ClickType actionType, CallbackInfo ci) {
         MixinStatics.CURRENT_SLOT = slot;
         MixinStatics.DELETE_ITEM_SLOT = deleteItemSlot;
     }
@@ -37,16 +37,16 @@ public class CreativeInventoryScreenMixin {
     @Unique private double prevDeleteAllTime = 0L;
 
     @Inject( method = "onMouseClick", at = @At(value = "INVOKE", ordinal = 0, target = "Lnet/minecraft/client/network/ClientPlayerInteractionManager;clickCreativeStack(Lnet/minecraft/item/ItemStack;I)V"), cancellable = false)
-    void $mass_item_delete_sound_effect(Slot slot, int slotId, int button, SlotActionType actionType, CallbackInfo ci)
+    void $mass_item_delete_sound_effect(Slot slot, int slotId, int button, ClickType actionType, CallbackInfo ci)
     {
         double currentTime = GLFW.glfwGetTime();
         double timeElapsed = currentTime - prevDeleteAllTime;
-        if (this.slots != null && slots.stream().anyMatch(Slot::hasStack) && timeElapsed >= 0.1)
+        if (this.slots != null && slots.stream().anyMatch(Slot::hasItem) && timeElapsed >= 0.1)
             SonanceConfig.get().itemDeleteSoundEffect.playSound();
         prevDeleteAllTime = currentTime;
     }
 
-    @Mixin(CreativeInventoryScreen.CreativeScreenHandler.class)
+    @Mixin(CreativeModeInventoryScreen.ItemPickerMenu.class)
     public static abstract class CreativeScreenHandlerMixin {
         @Shadow public abstract ItemStack getCursorStack();
 

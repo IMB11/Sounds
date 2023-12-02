@@ -3,19 +3,17 @@ package com.mineblock11.sonance.dynamic;
 import com.mineblock11.sonance.api.SoundDefinition;
 import com.mineblock11.sonance.config.SonanceConfig;
 import com.mojang.serialization.Codec;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.client.gui.screen.ingame.SmithingScreen;
-import net.minecraft.client.gui.screen.ingame.StonecutterScreen;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.item.*;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
 import net.minecraft.screen.*;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Pair;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,15 +37,15 @@ public class DynamicSoundHelper {
     }
 
     public static void initialize() {
-        declareDefinitionsToLoad("items", SoundDefinition.getCodec(Registries.ITEM.getKey()));
-        declareDefinitionsToLoad("screens", SoundDefinition.getCodec(Registries.SCREEN_HANDLER.getKey()));
+        declareDefinitionsToLoad("items", SoundDefinition.getCodec(BuiltInRegistries.ITEM.key()));
+        declareDefinitionsToLoad("screens", SoundDefinition.getCodec(BuiltInRegistries.MENU.key()));
     }
 
     @Deprecated
-    public static SoundEvent getScreenSound(ScreenHandler screen, boolean isOpening) {
+    public static SoundEvent getScreenSound(AbstractContainerMenu screen, boolean isOpening) {
         try {
             var type = screen.getType();
-            for (SoundDefinition<ScreenHandlerType<?>> definition : (ArrayList<SoundDefinition<ScreenHandlerType<?>>>) loadedDefinitions.get("screens")) {
+            for (SoundDefinition<MenuType<?>> definition : (ArrayList<SoundDefinition<MenuType<?>>>) loadedDefinitions.get("screens")) {
                 if(definition.keys.isValid(type)) {
                     return definition.soundEvent;
                 }
@@ -73,26 +71,26 @@ public class DynamicSoundHelper {
 
         if (item instanceof BlockItem blockItem) {
             var block = blockItem.getBlock();
-            return type.getTransformer().apply(block.getSoundGroup(block.getDefaultState()));
+            return type.getTransformer().apply(block.getSoundType(block.defaultBlockState()));
         }
 
         return defaultSoundEvent;
     }
 
     public enum BlockSoundType {
-        PLACE(BlockSoundGroup::getPlaceSound),
-        HIT(BlockSoundGroup::getHitSound),
-        BREAK(BlockSoundGroup::getBreakSound),
-        FALL(BlockSoundGroup::getFallSound),
-        STEP(BlockSoundGroup::getStepSound);
+        PLACE(SoundType::getPlaceSound),
+        HIT(SoundType::getHitSound),
+        BREAK(SoundType::getBreakSound),
+        FALL(SoundType::getFallSound),
+        STEP(SoundType::getStepSound);
 
-        private final Function<BlockSoundGroup, SoundEvent> transformer;
+        private final Function<SoundType, SoundEvent> transformer;
 
-        BlockSoundType(Function<BlockSoundGroup, SoundEvent> transformer) {
+        BlockSoundType(Function<SoundType, SoundEvent> transformer) {
             this.transformer = transformer;
         }
 
-        public Function<BlockSoundGroup, SoundEvent> getTransformer() {
+        public Function<SoundType, SoundEvent> getTransformer() {
             return transformer;
         }
     }

@@ -11,13 +11,12 @@ import dev.isxander.yacl3.config.GsonConfigInstance;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
-
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
@@ -30,37 +29,37 @@ public class SonanceConfig {
     )));
 
     @SerialEntry
-    public final ConfiguredSound typingSoundEffect = new ConfiguredSound(true, "typing", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.6f, 0.4f);
+    public final ConfiguredSound typingSoundEffect = new ConfiguredSound(true, "typing", SoundEvents.NOTE_BLOCK_HAT, 1.6f, 0.4f);
     @SerialEntry
-    public final ConfiguredSound messageSoundEffect = new ConfiguredSound(true, "message", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 2.0f, 0.8f);
+    public final ConfiguredSound messageSoundEffect = new ConfiguredSound(true, "message", SoundEvents.NOTE_BLOCK_HAT, 2.0f, 0.8f);
     @SerialEntry
-    public final ConfiguredSound mentionSoundEffect = new ConfiguredSound(true, "mention", SoundEvents.BLOCK_NOTE_BLOCK_CHIME, 1.8f, 0.9f);
+    public final ConfiguredSound mentionSoundEffect = new ConfiguredSound(true, "mention", SoundEvents.NOTE_BLOCK_CHIME, 1.8f, 0.9f);
     @SerialEntry
     public final DynamicConfiguredSound inventoryOpenSoundEffect = new DynamicConfiguredSound(true, true, "inventoryOpen", getSoundEventReference(SoundEvents.UI_TOAST_IN), 2f, 0.2f);
     @SerialEntry
     public final DynamicConfiguredSound inventoryCloseSoundEffect = new DynamicConfiguredSound(true, false, "inventoryClose", getSoundEventReference(SoundEvents.UI_TOAST_OUT), 2f, 0.2f);
     @SerialEntry
-    public final ConfiguredSound inventoryScrollSoundEffect = new ConfiguredSound(true, "inventoryScroll", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.8f, 0.2f);
+    public final ConfiguredSound inventoryScrollSoundEffect = new ConfiguredSound(true, "inventoryScroll", SoundEvents.NOTE_BLOCK_HAT, 1.8f, 0.2f);
 
     @SerialEntry
-    public final DynamicConfiguredSound hotbarScrollSoundEffect = new DynamicConfiguredSound(true, true, "hotbarScroll", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.8f, 0.2f);
+    public final DynamicConfiguredSound hotbarScrollSoundEffect = new DynamicConfiguredSound(true, true, "hotbarScroll", SoundEvents.NOTE_BLOCK_HAT, 1.8f, 0.2f);
 
     @SerialEntry
-    public final DynamicConfiguredSound hotbarPickSoundEffect = new DynamicConfiguredSound(true, true, "hotbarPick", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.8f, 0.2f);
+    public final DynamicConfiguredSound hotbarPickSoundEffect = new DynamicConfiguredSound(true, true, "hotbarPick", SoundEvents.NOTE_BLOCK_HAT, 1.8f, 0.2f);
     @SerialEntry
-    public final DynamicConfiguredSound itemDropSoundEffect = new DynamicConfiguredSound(true, true, "itemDrop", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.4f, 0.2f);
+    public final DynamicConfiguredSound itemDropSoundEffect = new DynamicConfiguredSound(true, true, "itemDrop", SoundEvents.NOTE_BLOCK_HAT, 1.4f, 0.2f);
 
 //    @SerialEntry
 //    public final DynamicConfiguredSound itemPickupSoundEffect = new DynamicConfiguredSound(true, true, "itemPickup", getSoundEventReference(SoundEvents.ENTITY_ITEM_PICKUP), 1.4f, 0.2f);
 
     @SerialEntry
-    public final DynamicConfiguredSound itemCopySoundEffect = new DynamicConfiguredSound(true, true, "itemCopy", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.4f, 0.2f);
+    public final DynamicConfiguredSound itemCopySoundEffect = new DynamicConfiguredSound(true, true, "itemCopy", SoundEvents.NOTE_BLOCK_HAT, 1.4f, 0.2f);
     @SerialEntry
-    public final DynamicConfiguredSound itemDeleteSoundEffect = new DynamicConfiguredSound(true, true, "itemDelete", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.4f, 0.1f);
+    public final DynamicConfiguredSound itemDeleteSoundEffect = new DynamicConfiguredSound(true, true, "itemDelete", SoundEvents.NOTE_BLOCK_HAT, 1.4f, 0.1f);
     @SerialEntry
-    public final DynamicConfiguredSound itemDragSoundEffect = new DynamicConfiguredSound(true, true, "itemDrag", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.4f, 0.2f);
+    public final DynamicConfiguredSound itemDragSoundEffect = new DynamicConfiguredSound(true, true, "itemDrag", SoundEvents.NOTE_BLOCK_HAT, 1.4f, 0.2f);
     @SerialEntry
-    public final DynamicConfiguredSound itemClickSoundEffect = new DynamicConfiguredSound(true, true, "itemPick", SoundEvents.BLOCK_NOTE_BLOCK_HAT, 1.4f, 0.2f);
+    public final DynamicConfiguredSound itemClickSoundEffect = new DynamicConfiguredSound(true, true, "itemPick", SoundEvents.NOTE_BLOCK_HAT, 1.4f, 0.2f);
 
     public static SonanceConfig get() {
         return GSON.instance();
@@ -70,14 +69,14 @@ public class SonanceConfig {
         GSON.load();
     }
 
-    public static RegistryEntry.Reference<SoundEvent> getSoundEventReference(SoundEvent soundEvent) {
-        return Registries.SOUND_EVENT.getEntry(RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent.getId())).get();
+    public static Holder.Reference<SoundEvent> getSoundEventReference(SoundEvent soundEvent) {
+        return BuiltInRegistries.SOUND_EVENT.getHolder(ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), soundEvent.getLocation())).get();
     }
 
     public static YetAnotherConfigLib getInstance() {
         return YetAnotherConfigLib.create(GSON,
                 ((defaults, config, builder) -> builder
-                        .title(Text.empty())
+                        .title(Component.empty())
                         .category(
                                 ConfigCategory.createBuilder().groups(List.of(
                                         config.typingSoundEffect.getOptionGroup(defaults.typingSoundEffect, true),
@@ -93,6 +92,6 @@ public class SonanceConfig {
                                         config.inventoryOpenSoundEffect.getOptionGroup(defaults.inventoryOpenSoundEffect, true),
                                         config.inventoryCloseSoundEffect.getOptionGroup(defaults.inventoryCloseSoundEffect, true),
                                         config.inventoryScrollSoundEffect.getOptionGroup(defaults.inventoryScrollSoundEffect, true)
-                                )).name(Text.translatable("sonance.config.static")).build())));
+                                )).name(Component.translatable("sonance.config.static")).build())));
     }
 }

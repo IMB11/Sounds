@@ -1,7 +1,7 @@
 package com.mineblock11.sonance.mixin;
 
 import com.mineblock11.sonance.config.SonanceConfig;
-import net.minecraft.client.gui.screen.ChatScreen;
+import net.minecraft.client.gui.screens.ChatScreen;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

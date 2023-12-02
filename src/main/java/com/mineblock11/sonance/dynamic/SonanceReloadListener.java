@@ -7,11 +7,12 @@ import com.mineblock11.sonance.SonanceClient;
 import com.mineblock11.sonance.api.SoundDefinition;
 import com.mojang.serialization.JsonOps;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.ResourceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -20,21 +21,21 @@ public class SonanceReloadListener implements SimpleSynchronousResourceReloadLis
     private static final Gson GSON = new Gson();
 
     @Override
-    public Identifier getFabricId() {
+    public ResourceLocation getFabricId() {
         return SonanceClient.id("sonance_reload_listener");
     }
 
     @Override
-    public void reload(ResourceManager manager) {
+    public void onResourceManagerReload(ResourceManager manager) {
         DynamicSoundHelper.clearDefinitions();
 
         DynamicSoundHelper.loadDirectories.forEach((directory, codec) -> {
             ArrayList<SoundDefinition<?>> resultList = (ArrayList<SoundDefinition<?>>) DynamicSoundHelper.loadedDefinitions.get(directory);
 
-            for(Identifier id : manager.findResources("sonance/" + directory, path -> path.getPath().endsWith(".json")).keySet()) {
+            for(ResourceLocation id : manager.listResources("sonance/" + directory, path -> path.getPath().endsWith(".json")).keySet()) {
                 try {
                     var resource = manager.getResource(id).orElseThrow();
-                    var inputStream = resource.getInputStream();
+                    var inputStream = resource.open();
                     var reader = new JsonReader(new InputStreamReader(inputStream));
 
                     SoundDefinition<?> result = (SoundDefinition<?>) codec.parse(JsonOps.INSTANCE, GSON.fromJson(reader, JsonObject.class)).getOrThrow(false, s -> {

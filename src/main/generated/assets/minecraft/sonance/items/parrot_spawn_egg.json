@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:parrot_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.parrot.ambient"
+}

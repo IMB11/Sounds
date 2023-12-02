@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:snow_golem_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.snow_golem.ambient"
+}

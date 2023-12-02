@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:tropical_fish_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.tropical_fish.ambient"
+}

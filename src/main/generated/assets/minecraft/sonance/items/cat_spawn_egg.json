@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:cat_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.cat.ambient"
+}

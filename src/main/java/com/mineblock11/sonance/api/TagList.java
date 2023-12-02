@@ -22,7 +22,7 @@ public class TagList<T> {
         ).xmap(TagList::new, TagList::getInternalList);
     }
 
-    private List<Either<RegistryKey<T>, TagKey<T>>> getInternalList() {
+    public List<Either<RegistryKey<T>, TagKey<T>>> getInternalList() {
         return _list;
     }
 

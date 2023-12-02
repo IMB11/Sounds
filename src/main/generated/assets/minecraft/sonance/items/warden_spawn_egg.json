@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:warden_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.warden.ambient"
+}

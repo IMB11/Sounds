@@ -1,4 +1,4 @@
-package com.mineblock11.sonance.mixin;
+package com.mineblock11.sonance.mixin.ui;
 
 import com.mineblock11.sonance.config.SonanceConfig;
 import net.minecraft.client.MinecraftClient;
@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftClient.class)
-public abstract class MinecraftClientMixin {
+public abstract class ScreenSoundEffect {
     @Shadow
     @Nullable
     public Screen currentScreen;

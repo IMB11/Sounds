@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:dolphin_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.dolphin.ambient"
+}

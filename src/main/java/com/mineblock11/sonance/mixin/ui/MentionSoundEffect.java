@@ -1,10 +1,9 @@
-package com.mineblock11.sonance.mixin;
+package com.mineblock11.sonance.mixin.ui;
 
 import com.mineblock11.sonance.config.SonanceConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.MessageIndicator;
-import net.minecraft.client.util.ChatMessages;
 import net.minecraft.network.message.MessageSignatureData;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Final;
@@ -15,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ChatHud.class)
-public class ChatHudMixin {
+public class MentionSoundEffect {
     @Shadow
     @Final
     private MinecraftClient client;

@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:skeleton_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.skeleton.ambient"
+}

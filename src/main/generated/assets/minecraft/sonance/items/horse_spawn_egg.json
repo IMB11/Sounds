@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:horse_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.horse.ambient"
+}

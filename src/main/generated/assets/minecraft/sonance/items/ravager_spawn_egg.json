@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:ravager_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.ravager.ambient"
+}

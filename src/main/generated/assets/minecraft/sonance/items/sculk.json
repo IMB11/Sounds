@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:echo_shard"
+  ],
+  "soundEvent": "minecraft:block.sculk_vein.fall"
+}

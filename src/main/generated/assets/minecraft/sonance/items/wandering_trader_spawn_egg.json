@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:wandering_trader_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.wandering_trader.ambient"
+}

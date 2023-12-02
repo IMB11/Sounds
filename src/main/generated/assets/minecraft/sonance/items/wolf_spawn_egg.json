@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:wolf_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.wolf.ambient"
+}

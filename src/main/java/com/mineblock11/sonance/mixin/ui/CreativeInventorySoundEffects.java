@@ -1,12 +1,16 @@
-package com.mineblock11.sonance.mixin;
+package com.mineblock11.sonance.mixin.ui;
 
 import com.mineblock11.sonance.MixinStatics;
 import com.mineblock11.sonance.config.SonanceConfig;
 import com.mineblock11.sonance.dynamic.DynamicSoundHelper;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
+import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,19 +18,21 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.List;
 
 @Mixin(CreativeInventoryScreen.class)
-public class CreativeInventoryScreenMixin {
+public abstract class CreativeInventorySoundEffects extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeScreenHandler> {
     @Shadow
     @Nullable
     private Slot deleteItemSlot;
 
     @Shadow @Nullable private List<Slot> slots;
+
+    protected CreativeInventorySoundEffects(CreativeInventoryScreen.CreativeScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
+        super(screenHandler, playerInventory, text);
+    }
 
     @Inject(method = "onMouseClick", at = @At("HEAD"), cancellable = false)
     public void $pre_item_delete_sound_effect(Slot slot, int slotId, int button, SlotActionType actionType, CallbackInfo ci) {
@@ -44,6 +50,12 @@ public class CreativeInventoryScreenMixin {
         if (this.slots != null && slots.stream().anyMatch(Slot::hasStack) && timeElapsed >= 0.1)
             SonanceConfig.get().itemDeleteSoundEffect.playSound();
         prevDeleteAllTime = currentTime;
+    }
+
+    @Inject(method = "onMouseClick", at = @At(value = "INVOKE", target="Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen$CreativeScreenHandler;setCursorStack(Lnet/minecraft/item/ItemStack;)V", shift = At.Shift.AFTER, ordinal = 4))
+    public void $choose_item_sound_effect(Slot slot, int slotId, int button, SlotActionType actionType, CallbackInfo ci) {
+        ItemStack stack = this.handler.getCursorStack();
+        SonanceConfig.get().itemClickSoundEffect.playDynamicSound(stack, DynamicSoundHelper.BlockSoundType.PLACE);
     }
 
     @Mixin(CreativeInventoryScreen.CreativeScreenHandler.class)

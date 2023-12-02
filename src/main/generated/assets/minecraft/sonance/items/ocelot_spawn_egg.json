@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:ocelot_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.ocelot.ambient"
+}

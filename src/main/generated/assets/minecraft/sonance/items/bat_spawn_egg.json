@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:bat_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.bat.ambient"
+}

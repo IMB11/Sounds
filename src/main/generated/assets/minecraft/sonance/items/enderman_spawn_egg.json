@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:enderman_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.enderman.ambient"
+}

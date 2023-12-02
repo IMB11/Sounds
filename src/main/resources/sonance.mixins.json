@@ -3,18 +3,17 @@
   "minVersion": "0.8",
   "package": "com.mineblock11.sonance.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [
-    "PlayerEntityMixin",
-    "PlayerInventoryMixin",
-    "ScreenHandlerMixin"
-  ],
+  "mixins": [],
   "client": [
-    "ChatHudMixin",
-    "ChatScreenMixin",
-    "CreativeInventoryScreenMixin",
-    "CreativeInventoryScreenMixin$CreativeScreenHandlerMixin",
-    "HandledScreenMixin",
-    "MinecraftClientMixin"
+    "ui.CreativeInventorySoundEffects",
+    "ui.CreativeInventorySoundEffects$CreativeScreenHandlerMixin",
+    "ui.ItemDragSoundEffect",
+    "ui.MentionSoundEffect",
+    "ui.ScreenSoundEffect",
+    "ui.TypingSoundEffect",
+    "ui.HotbarSoundEffects",
+    "ui.ItemDropSoundEffect",
+    "ui.ItemTransferSoundEffects"
   ],
   "injectors": {
     "defaultRequire": 1

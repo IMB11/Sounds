@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:donkey_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.donkey.ambient"
+}

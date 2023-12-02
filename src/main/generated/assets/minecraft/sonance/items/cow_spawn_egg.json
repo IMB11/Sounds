@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:cow_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.cow.ambient"
+}

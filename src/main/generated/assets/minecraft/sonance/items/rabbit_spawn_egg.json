@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:rabbit_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.rabbit.ambient"
+}

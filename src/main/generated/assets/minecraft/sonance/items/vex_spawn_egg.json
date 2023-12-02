@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:vex_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.vex.ambient"
+}

@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:spider_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.spider.ambient"
+}

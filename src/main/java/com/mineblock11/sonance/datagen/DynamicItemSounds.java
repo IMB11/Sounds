@@ -5,8 +5,10 @@ import com.mineblock11.sonance.api.SoundDefinition;
 import com.mineblock11.sonance.api.datagen.SoundDefinitionProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -14,7 +16,10 @@ import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
@@ -106,6 +111,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.LEATHER_LEGGINGS)
                 .addKey(Items.LEATHER_BOOTS)
                 .addKey(Items.LEATHER)
+                .addKey(Items.BRUSH)
                 .addKey(Items.RABBIT_HIDE));
 
         provider.accept("elytra", create(SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA)
@@ -158,11 +164,20 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.GLOWSTONE)
                 .addKey(Items.GUNPOWDER));
 
-        provider.accept("pottery_shards", create(SoundEvents.BLOCK_DECORATED_POT_STEP)
+        provider.accept("shards", create(SoundEvents.BLOCK_DECORATED_POT_STEP)
+                .addKey(Items.DISC_FRAGMENT_5)
                 .addKey(ItemTags.DECORATED_POT_SHERDS));
 
         provider.accept("smithing_templates", create(SoundEvents.ENTITY_IRON_GOLEM_STEP)
+                .addKey(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)
                 .addKey(ItemTags.TRIM_TEMPLATES));
+
+        provider.accept("filled_buckets", create(SoundEvents.ITEM_BUCKET_FILL)
+                .addKey(ConventionalItemTags.WATER_BUCKETS)
+                .addKey(ConventionalItemTags.ENTITY_WATER_BUCKETS));
+
+        provider.accept("moo", create(SoundEvents.ENTITY_COW_AMBIENT)
+                .addKey(Items.MILK_BUCKET));
 
         provider.accept("banner_templates", create(SoundEvents.BLOCK_WOOL_HIT)
                 .addKey(Items.CREEPER_BANNER_PATTERN)
@@ -175,6 +190,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
         provider.accept("brewing_items", create(SoundEvents.ITEM_BOTTLE_FILL)
                 .addKey(Items.GLASS_BOTTLE)
                 .addKey(Items.POTION)
+                .addKey(Items.DRAGON_BREATH)
                 .addKey(Items.SPLASH_POTION)
                 .addKey(Items.LINGERING_POTION));
 
@@ -191,8 +207,30 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.MAGMA_CREAM)
                 .addKey(Items.GHAST_TEAR));
 
+        provider.accept("sculk", create(SoundEvents.BLOCK_SCULK_VEIN_FALL)
+                .addKey(Items.ECHO_SHARD));
+
         provider.accept("bones", create(SoundEvents.ENTITY_SKELETON_AMBIENT)
                 .addKey(Items.BONE)
                 .addKey(Items.BONE_MEAL));
+
+        // Spawn Eggs
+        for (Item item : Registries.ITEM) {
+            if (item instanceof SpawnEggItem spawnEggItem) {
+                EntityType<?> entityType = spawnEggItem.getEntityType(null);
+                Identifier soundEventID = getAmbientSoundForEntity(entityType);
+                @Nullable SoundEvent soundEvent = Registries.SOUND_EVENT.get(soundEventID);
+                if (soundEvent != null) {
+                    String spawnEggName = Registries.ITEM.getId(spawnEggItem).getPath();
+                    provider.accept(spawnEggName, create(soundEvent).addKey(spawnEggItem));
+                } else {
+                    LOGGER.warn("Could not find ambient sound event for entity type " + entityType.getTranslationKey());
+                }
+            }
+        }
+    }
+
+    private Identifier getAmbientSoundForEntity(EntityType<?> entityType) {
+        return new Identifier("entity." + entityType.getUntranslatedName() + ".ambient");
     }
 }

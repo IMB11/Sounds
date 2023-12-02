@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:mule_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.mule.ambient"
+}

@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:ghast_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.ghast.ambient"
+}

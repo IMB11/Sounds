@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:goat_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.goat.ambient"
+}

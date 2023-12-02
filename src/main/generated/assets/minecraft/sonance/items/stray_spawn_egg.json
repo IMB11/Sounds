@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:stray_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.stray.ambient"
+}

@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:llama_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.llama.ambient"
+}

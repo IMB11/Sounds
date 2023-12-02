@@ -1,27 +1,22 @@
-package com.mineblock11.sonance.mixin;
+package com.mineblock11.sonance.mixin.ui;
 
 import com.mineblock11.sonance.config.SonanceConfig;
 import com.mineblock11.sonance.dynamic.DynamicSoundHelper;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
-import net.minecraft.util.ClickType;
-import net.minecraft.util.collection.DefaultedList;
 import org.lwjgl.glfw.GLFW;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(ScreenHandler.class)
-public abstract class ScreenHandlerMixin {
+public abstract class ItemTransferSoundEffects {
     @Shadow public abstract Slot getSlot(int index);
     @Unique
     private double prevTime = 0D;

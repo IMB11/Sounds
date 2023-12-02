@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:fox_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.fox.ambient"
+}

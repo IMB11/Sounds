@@ -5,11 +5,11 @@
   "name": "Sonance",
   "description": "A highly configurable UI sound overhaul.",
   "authors": [
-    "mineblock11"
+    "IMB11 (mineblock11)"
   ],
   "contact": {
-    "website": "https://mineblock11.dev/",
-    "repo": "https://github.com/mineblock11/Sonance"
+    "website": "https://imb11.dev/",
+    "repo": "https://github.com/IMB11/Sonance"
   },
   "license": "LGPL-2.1",
   "icon": "assets/sonance/icon.png",

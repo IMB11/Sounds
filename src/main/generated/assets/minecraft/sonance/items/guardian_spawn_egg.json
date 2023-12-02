@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:guardian_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.guardian.ambient"
+}

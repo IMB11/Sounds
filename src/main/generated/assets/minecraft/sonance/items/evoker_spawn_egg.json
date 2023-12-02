@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:evoker_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.evoker.ambient"
+}

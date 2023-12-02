@@ -6,6 +6,7 @@
     "minecraft:leather_leggings",
     "minecraft:leather_boots",
     "minecraft:leather",
+    "minecraft:brush",
     "minecraft:rabbit_hide"
   ],
   "soundEvent": "minecraft:item.armor.equip_leather"

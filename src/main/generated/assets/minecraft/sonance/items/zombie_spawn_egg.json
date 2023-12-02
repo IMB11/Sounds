@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:zombie_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.zombie.ambient"
+}

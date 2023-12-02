@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:hoglin_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.hoglin.ambient"
+}

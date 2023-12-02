@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:salmon_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.salmon.ambient"
+}

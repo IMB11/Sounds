@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:glow_squid_spawn_egg"
+  ],
+  "soundEvent": "minecraft:entity.glow_squid.ambient"
+}

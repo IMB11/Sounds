@@ -29,6 +29,11 @@ public class GameplaySoundConfig {
     public DynamicConfiguredSound<Integer, RepeaterSoundContext> repeaterUseSoundEffect = new DynamicConfiguredSound<>("repeaterUse", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 1.0F, 0.45F, true);
     @SerialEntry
     public ConfiguredSound jukeboxUseSoundEffect = new ConfiguredSound("jukeboxUse", SoundEvents.BLOCK_NOTE_BLOCK_BASEDRUM, true, 0.8F, 0.75F);
+    @SerialEntry
+    public ConfiguredSound daylightDetectorUseSoundEffect = new ConfiguredSound("daylightDetectorUse", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 0.8F, 0.45F);
+
+    @SerialEntry
+    public ConfiguredSound furnaceMinecartFuelSoundEffect = new ConfiguredSound("furnaceMinecartFuel", SoundEvents.ENTITY_CREEPER_HURT, true, 1.9F, 0.2F);
 
     public static void load() {
         GSON.load();
@@ -45,7 +50,9 @@ public class GameplaySoundConfig {
                                 .name(Text.translatable("sonance.config.gameplay.redstone"))
                                 .groups(List.of(
                                         config.repeaterUseSoundEffect.getOptionGroup(defaults.repeaterUseSoundEffect, true),
-                                        config.jukeboxUseSoundEffect.getOptionGroup(defaults.jukeboxUseSoundEffect)
+                                        config.jukeboxUseSoundEffect.getOptionGroup(defaults.jukeboxUseSoundEffect),
+                                        config.daylightDetectorUseSoundEffect.getOptionGroup(defaults.daylightDetectorUseSoundEffect),
+                                        config.furnaceMinecartFuelSoundEffect.getOptionGroup(defaults.furnaceMinecartFuelSoundEffect)
                                 ))
                                 .build())
                         .title(Text.empty())

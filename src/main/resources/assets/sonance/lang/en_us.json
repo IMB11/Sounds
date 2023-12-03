@@ -17,6 +17,9 @@
   "sonance.config.jukeboxUse.name": "Jukebox Insert/Remove Disc",
   "sonance.config.jukeboxUse.description": "A sound effect that is played when you insert or remove a music disc from a Jukebox.",
 
+  "sonance.config.daylightDetectorUse.name": "Change Daylight Detector Mode",
+  "sonance.config.daylightDetectorUse.description": "A sound effect that is played when you interact with a Daylight Detector to change it's detection mode.",
+
   "sonance.config.mod": "Mod Sounds",
   "sonance.config.shouldPlay.name": "Enable Sound",
   "sonance.config.shouldPlay.description": "Should this sound be played?",

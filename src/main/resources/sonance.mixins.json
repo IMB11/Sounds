@@ -8,6 +8,8 @@
   ],
   "client": [
     "SoundsOptionsScreenMixin",
+    "gameplay.RepeaterBlockMixin",
+    "gameplay.JukeboxBlockMixin",
     "ui.AnvilTypingEffect",
     "ui.CreativeInventorySoundEffects",
     "ui.CreativeInventorySoundEffects$CreativeScreenHandlerMixin",
@@ -17,8 +19,7 @@
     "ui.ItemTransferSoundEffects",
     "ui.MentionSoundEffect",
     "ui.ScreenSoundEffect",
-    "ui.TypingSoundEffect",
-    "gameplay.RepeaterBlockMixin"
+    "ui.TypingSoundEffect"
   ],
   "injectors": {
     "defaultRequire": 1

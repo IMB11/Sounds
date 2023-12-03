@@ -10,8 +10,12 @@
 
   "sonance.config.gameplay": "Gameplay Sounds",
   "sonance.config.gameplay.redstone": "Redstone Sounds",
-  "sonance.config.repeaterUse.name": "Use Repeater",
+
+  "sonance.config.repeaterUse.name": "Change Repeater Delay",
   "sonance.config.repeaterUse.description": "A sound effect that is played when you interact with a Redstone Repeater.",
+
+  "sonance.config.jukeboxUse.name": "Jukebox Insert/Remove Disc",
+  "sonance.config.jukeboxUse.description": "A sound effect that is played when you insert or remove a music disc from a Jukebox.",
 
   "sonance.config.mod": "Mod Sounds",
   "sonance.config.shouldPlay.name": "Enable Sound",

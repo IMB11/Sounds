@@ -107,7 +107,7 @@ public class ConfiguredSound {
     }
 
     public OptionGroup getOptionGroup(ConfiguredSound defaults, boolean hasImage) {
-        Identifier image = hasImage ? new Identifier("sonance", "textures/gui/" + id.toLowerCase() + ".webp") : null;
+        Identifier image = hasImage ? new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp") : null;
 
         ArrayList<Option<?>> defaultOptions = createDefaultOptions(defaults, image);
         ArrayList<Option<?>> extraOptions = addExtraOptions(defaults, image);

@@ -26,7 +26,9 @@ public class GameplaySoundConfig {
     )));
 
     @SerialEntry
-    public DynamicConfiguredSound<Integer, RepeaterSoundContext> repeaterUseSoundEffect = new DynamicConfiguredSound<>("repeaterUse", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 1.0F, 1.0F, true);
+    public DynamicConfiguredSound<Integer, RepeaterSoundContext> repeaterUseSoundEffect = new DynamicConfiguredSound<>("repeaterUse", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 1.0F, 0.45F, true);
+    @SerialEntry
+    public ConfiguredSound jukeboxUseSoundEffect = new ConfiguredSound("jukeboxUse", SoundEvents.BLOCK_NOTE_BLOCK_BASEDRUM, true, 0.8F, 0.75F);
 
     public static void load() {
         GSON.load();
@@ -42,7 +44,8 @@ public class GameplaySoundConfig {
                         .category(ConfigCategory.createBuilder()
                                 .name(Text.translatable("sonance.config.gameplay.redstone"))
                                 .groups(List.of(
-                                        config.repeaterUseSoundEffect.getOptionGroup(defaults.repeaterUseSoundEffect, true)
+                                        config.repeaterUseSoundEffect.getOptionGroup(defaults.repeaterUseSoundEffect, true),
+                                        config.jukeboxUseSoundEffect.getOptionGroup(defaults.jukeboxUseSoundEffect)
                                 ))
                                 .build())
                         .title(Text.empty())

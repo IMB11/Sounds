@@ -1,6 +1,8 @@
 package com.mineblock11.sonance.mixin.ui;
 
+import com.mineblock11.sonance.SonanceClient;
 import com.mineblock11.sonance.config.SonanceConfig;
+import com.mineblock11.sonance.config.UISoundConfig;
 import com.mineblock11.sonance.dynamic.DynamicSoundHelper;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,6 +14,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ConcurrentModificationException;
+
 @Mixin(PlayerEntity.class)
 public class ItemDropSoundEffect {
     @Unique
@@ -22,8 +26,13 @@ public class ItemDropSoundEffect {
         double currentTime = GLFW.glfwGetTime();
         double timeElapsed = currentTime - prevTime;
 
-        if (timeElapsed >= 0.085D) {
-            SonanceConfig.get().itemDropSoundEffect.playDynamicSound(stack, DynamicSoundHelper.BlockSoundType.FALL);
+        if (timeElapsed >= 0.09D) {
+            try {
+                UISoundConfig.get().itemDropSoundEffect.playDynamicSound(stack, DynamicSoundHelper.BlockSoundType.FALL);
+            } catch (ConcurrentModificationException ignored) {
+                SonanceClient.LOGGER.warn("Captured ConcurrentModificationException in ItemDropSoundEffect mixin.");
+            }
+
             prevTime = currentTime;
         }
     }

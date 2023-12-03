@@ -1,4 +1,4 @@
-package com.mineblock11.sonance.config;
+package com.mineblock11.sonance.config.adapters;
 
 import com.google.gson.*;
 import com.mineblock11.sonance.sound.ConfiguredSound;

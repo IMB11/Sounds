@@ -1,6 +1,7 @@
 package com.mineblock11.sonance.mixin.ui;
 
 import com.mineblock11.sonance.config.SonanceConfig;
+import com.mineblock11.sonance.config.UISoundConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.BookEditScreen;
@@ -23,12 +24,12 @@ public abstract class ScreenSoundEffect {
     @Inject(method = "setScreen", at = @At("HEAD"), cancellable = false)
     public void $open_close_inventory_sound_effect(Screen screen, CallbackInfo ci) {
         if (screen == null && (currentScreen instanceof BookScreen || currentScreen instanceof BookEditScreen)) {
-            SonanceConfig.get().inventoryCloseSoundEffect.playDynamicSound(SoundEvents.ENTITY_VILLAGER_WORK_LIBRARIAN);
+            UISoundConfig.get().inventoryCloseSoundEffect.playDynamicSound(SoundEvents.ENTITY_VILLAGER_WORK_LIBRARIAN);
         } else if (currentScreen != screen && (screen instanceof BookScreen || screen instanceof BookEditScreen)) {
-            SonanceConfig.get().inventoryOpenSoundEffect.playDynamicSound(SoundEvents.ENTITY_VILLAGER_WORK_LIBRARIAN);
+            UISoundConfig.get().inventoryOpenSoundEffect.playDynamicSound(SoundEvents.ENTITY_VILLAGER_WORK_LIBRARIAN);
         } else if (screen == null && currentScreen instanceof HandledScreen<?> handledScreen)
-            SonanceConfig.get().inventoryCloseSoundEffect.playDynamicSound(handledScreen.getScreenHandler(), false);
+            UISoundConfig.get().inventoryCloseSoundEffect.playDynamicSound(handledScreen.getScreenHandler(), false);
         else if (currentScreen != screen && screen instanceof HandledScreen<?> handledScreen)
-            SonanceConfig.get().inventoryOpenSoundEffect.playDynamicSound(handledScreen.getScreenHandler(), true);
+            UISoundConfig.get().inventoryOpenSoundEffect.playDynamicSound(handledScreen.getScreenHandler(), true);
     }
 }

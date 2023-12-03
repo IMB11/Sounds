@@ -15,6 +15,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
@@ -121,7 +122,7 @@ public class DynamicConfiguredSound extends ConfiguredSound {
 
             return OptionGroup
                     .createBuilder()
-                    .name(Text.translatable("sonance.config." + id + ".name"))
+                    .name(Text.translatable("sonance.config." + id + ".name").formatted(Formatting.UNDERLINE))
                     .description(OptionDescription.createBuilder()
                             .text(Text.translatable("sonance.config." + id + ".description"))
                             .webpImage(new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
@@ -177,7 +178,7 @@ public class DynamicConfiguredSound extends ConfiguredSound {
 
         return OptionGroup
                 .createBuilder()
-                .name(Text.translatable("sonance.config." + id + ".name"))
+                .name(Text.translatable("sonance.config." + id + ".name").formatted(Formatting.UNDERLINE))
                 .description(OptionDescription.createBuilder()
                         .text(Text.translatable("sonance.config." + id + ".description"))
 //                        .webpImage(new Identifier("sonance", "images/" + id + ".webp"))

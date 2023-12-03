@@ -2,6 +2,7 @@ package com.mineblock11.sonance.dynamic;
 
 import com.mineblock11.sonance.api.SoundDefinition;
 import com.mineblock11.sonance.config.SonanceConfig;
+import com.mineblock11.sonance.config.UISoundConfig;
 import com.mojang.serialization.Codec;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
@@ -57,8 +58,8 @@ public class DynamicSoundHelper {
         }
 
         return isOpening ?
-                SonanceConfig.get().inventoryOpenSoundEffect.fetchSoundEvent() :
-                SonanceConfig.get().inventoryCloseSoundEffect.fetchSoundEvent();
+                UISoundConfig.get().inventoryOpenSoundEffect.fetchSoundEvent() :
+                UISoundConfig.get().inventoryCloseSoundEffect.fetchSoundEvent();
     }
 
     @Deprecated

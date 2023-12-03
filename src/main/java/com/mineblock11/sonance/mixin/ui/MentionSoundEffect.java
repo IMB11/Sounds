@@ -1,6 +1,7 @@
 package com.mineblock11.sonance.mixin.ui;
 
 import com.mineblock11.sonance.config.SonanceConfig;
+import com.mineblock11.sonance.config.UISoundConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.MessageIndicator;
@@ -24,10 +25,8 @@ public class MentionSoundEffect {
         String messageString = message.getString();
         String username = client.getSession().getUsername();
 
-        messageString = messageString.replace("<" + username + ">", "");
-
-        if (messageString.toLowerCase().contains(username.toLowerCase()))
-            SonanceConfig.get().mentionSoundEffect.playSound();
-        else SonanceConfig.get().messageSoundEffect.playSound();
+        if (messageString.toLowerCase().contains("@" + username.toLowerCase()))
+            UISoundConfig.get().mentionSoundEffect.playSound();
+        else UISoundConfig.get().messageSoundEffect.playSound();
     }
 }

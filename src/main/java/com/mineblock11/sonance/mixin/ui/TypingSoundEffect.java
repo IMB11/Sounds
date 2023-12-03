@@ -1,6 +1,7 @@
 package com.mineblock11.sonance.mixin.ui;
 
 import com.mineblock11.sonance.config.SonanceConfig;
+import com.mineblock11.sonance.config.UISoundConfig;
 import net.minecraft.client.gui.screen.ChatScreen;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,7 +24,7 @@ public class TypingSoundEffect {
     @Inject(method = "keyPressed", at = @At("HEAD"), cancellable = false)
     public void $typing_sound_effect(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
         if (isNotSpecialKey(keyCode)) {
-            SonanceConfig.get().typingSoundEffect.playSound();
+            UISoundConfig.get().typingSoundEffect.playSound();
         }
     }
 }

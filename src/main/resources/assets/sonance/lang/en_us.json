@@ -1,5 +1,15 @@
 {
   "sonance.config.static": "Sonance",
+  "sonance.config.title": "Sonance Config",
+  "sonance.config.ui": "UI Sounds",
+
+  "sonance.config.ui.chat": "Chat Sounds",
+  "sonance.config.ui.screen": "Screen Sounds",
+  "sonance.config.ui.hotbar": "Hotbar Sounds",
+  "sonance.config.ui.item": "Item Sounds",
+
+  "sonance.config.gameplay": "Gameplay Sounds",
+  "sonance.config.mod": "Mod Sounds",
   "sonance.config.shouldPlay.name": "Enable Sound",
   "sonance.config.shouldPlay.description": "Should this sound be played?",
 
@@ -37,6 +47,9 @@
   "sonance.config.itemDrag.name": "Item Drag",
   "sonance.config.itemDrag.description": "A sound effect that is played when you drag an item across slots in your inventory.",
 
+  "sonance.config.itemPick.name": "Item Click",
+  "sonance.config.itemPick.description": "A sound effect that is played when you click on an item in your inventory.",
+
   "sonance.config.inventoryOpen.name": "Inventory Open",
   "sonance.config.inventoryOpen.description": "A sound effect that is played when you open a screen that has an inventory, such as an enchanting table.",
 
@@ -44,5 +57,9 @@
   "sonance.config.inventoryScroll.description": "A sound effect that is played when you use a scrollbar in any inventory.",
 
   "sonance.config.inventoryClose.name": "Inventory Close",
-  "sonance.config.inventoryClose.description": "A sound effect that is played when you close a screen that has an inventory, such as an enchanting table."
+  "sonance.config.inventoryClose.description": "A sound effect that is played when you close a screen that has an inventory, such as an enchanting table.",
+
+  "sonance.config.inventoryTyping.name": "Inventory Typing",
+  "sonance.config.inventoryTyping.description": "A sound effect that is played when you type into the anvil name bar or creative inventory search bar."
+
 }

@@ -3,17 +3,21 @@
   "minVersion": "0.8",
   "package": "com.mineblock11.sonance.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [],
+  "mixins": [
+    "AnimatedDynamicTextureImageAccessor",
+  ],
   "client": [
+    "SoundsOptionsScreenMixin",
     "ui.CreativeInventorySoundEffects",
     "ui.CreativeInventorySoundEffects$CreativeScreenHandlerMixin",
+    "ui.HotbarSoundEffects",
     "ui.ItemDragSoundEffect",
+    "ui.ItemDropSoundEffect",
+    "ui.ItemTransferSoundEffects",
     "ui.MentionSoundEffect",
     "ui.ScreenSoundEffect",
     "ui.TypingSoundEffect",
-    "ui.HotbarSoundEffects",
-    "ui.ItemDropSoundEffect",
-    "ui.ItemTransferSoundEffects"
+    "ui.AnvilTypingEffect"
   ],
   "injectors": {
     "defaultRequire": 1

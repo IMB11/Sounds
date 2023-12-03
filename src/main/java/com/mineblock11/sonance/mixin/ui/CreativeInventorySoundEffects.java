@@ -2,6 +2,7 @@ package com.mineblock11.sonance.mixin.ui;
 
 import com.mineblock11.sonance.MixinStatics;
 import com.mineblock11.sonance.config.SonanceConfig;
+import com.mineblock11.sonance.config.UISoundConfig;
 import com.mineblock11.sonance.dynamic.DynamicSoundHelper;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
@@ -34,6 +35,11 @@ public abstract class CreativeInventorySoundEffects extends AbstractInventoryScr
         super(screenHandler, playerInventory, text);
     }
 
+    @Inject(method = "search", at = @At("HEAD"), cancellable = false)
+    public void $inventory_typing_sound_effect(CallbackInfo ci) {
+        UISoundConfig.get().inventoryTypingSoundEffect.playSound();
+    }
+
     @Inject(method = "onMouseClick", at = @At("HEAD"), cancellable = false)
     public void $pre_item_delete_sound_effect(Slot slot, int slotId, int button, SlotActionType actionType, CallbackInfo ci) {
         MixinStatics.CURRENT_SLOT = slot;
@@ -48,14 +54,14 @@ public abstract class CreativeInventorySoundEffects extends AbstractInventoryScr
         double currentTime = GLFW.glfwGetTime();
         double timeElapsed = currentTime - prevDeleteAllTime;
         if (this.slots != null && slots.stream().anyMatch(Slot::hasStack) && timeElapsed >= 0.1)
-            SonanceConfig.get().itemDeleteSoundEffect.playSound();
+            UISoundConfig.get().itemDeleteSoundEffect.playSound();
         prevDeleteAllTime = currentTime;
     }
 
     @Inject(method = "onMouseClick", at = @At(value = "INVOKE", target="Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen$CreativeScreenHandler;setCursorStack(Lnet/minecraft/item/ItemStack;)V", shift = At.Shift.AFTER, ordinal = 4))
     public void $choose_item_sound_effect(Slot slot, int slotId, int button, SlotActionType actionType, CallbackInfo ci) {
         ItemStack stack = this.handler.getCursorStack();
-        SonanceConfig.get().itemClickSoundEffect.playDynamicSound(stack, DynamicSoundHelper.BlockSoundType.PLACE);
+        UISoundConfig.get().itemClickSoundEffect.playDynamicSound(stack, DynamicSoundHelper.BlockSoundType.PLACE);
     }
 
     @Mixin(CreativeInventoryScreen.CreativeScreenHandler.class)
@@ -65,7 +71,7 @@ public abstract class CreativeInventorySoundEffects extends AbstractInventoryScr
         @Inject(method = "setCursorStack", at = @At("HEAD"), cancellable = false)
         public void $item_delete_sound_effect(ItemStack stack, CallbackInfo ci) {
             if (MixinStatics.CURRENT_SLOT == MixinStatics.DELETE_ITEM_SLOT && !getCursorStack().isEmpty())
-                SonanceConfig.get().itemDeleteSoundEffect.playDynamicSound(getCursorStack(), DynamicSoundHelper.BlockSoundType.HIT);
+                UISoundConfig.get().itemDeleteSoundEffect.playDynamicSound(getCursorStack(), DynamicSoundHelper.BlockSoundType.HIT);
         }
 
         @Unique private double prevTime = 0L;
@@ -77,7 +83,7 @@ public abstract class CreativeInventorySoundEffects extends AbstractInventoryScr
             double timeElapsed = currentTime - prevTime;
 
             if (timeElapsed >= 0.05 && prevValue != position) {
-                SonanceConfig.get().inventoryScrollSoundEffect.playSound();
+                UISoundConfig.get().inventoryScrollSoundEffect.playSound();
                 prevTime = currentTime;
                 prevValue = position;
             }

@@ -1,14 +1,18 @@
 {
   "sonance.config.static": "Sonance",
   "sonance.config.title": "Sonance Config",
-  "sonance.config.ui": "UI Sounds",
 
+  "sonance.config.ui": "UI Sounds",
   "sonance.config.ui.chat": "Chat Sounds",
   "sonance.config.ui.screen": "Screen Sounds",
   "sonance.config.ui.hotbar": "Hotbar Sounds",
   "sonance.config.ui.item": "Item Sounds",
 
   "sonance.config.gameplay": "Gameplay Sounds",
+  "sonance.config.gameplay.redstone": "Redstone Sounds",
+  "sonance.config.repeaterUse.name": "Use Repeater",
+  "sonance.config.repeaterUse.description": "A sound effect that is played when you interact with a Redstone Repeater.",
+
   "sonance.config.mod": "Mod Sounds",
   "sonance.config.shouldPlay.name": "Enable Sound",
   "sonance.config.shouldPlay.description": "Should this sound be played?",

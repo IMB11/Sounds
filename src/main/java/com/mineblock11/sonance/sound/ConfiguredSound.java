@@ -9,6 +9,7 @@ import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
+import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -132,7 +133,13 @@ public class ConfiguredSound {
     public void playSound() {
         if (this.enabled) {
             final SoundEvent event = Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
-            client.getSoundManager().play(PositionedSoundInstance.master(event, pitch, volume));
+            this.playSound(PositionedSoundInstance.master(event, pitch, volume));
+        }
+    }
+
+    public void playSound(SoundInstance soundInstance) {
+        if (this.enabled) {
+            client.getSoundManager().play(soundInstance);
         }
     }
 
@@ -140,8 +147,8 @@ public class ConfiguredSound {
         return enabled;
     }
 
-    public RegistryEntry.Reference<SoundEvent> getSoundEvent() {
-        return soundEvent;
+    public SoundEvent getSoundEvent() {
+        return Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
     }
 
     public float getPitch() {

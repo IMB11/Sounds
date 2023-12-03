@@ -7,6 +7,7 @@ import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import net.minecraft.client.sound.PositionedSoundInstance;
+import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
@@ -38,30 +39,22 @@ public class DynamicConfiguredSound<T, F extends DynamicSoundContext<T>> extends
         this.enableDynamicSounds = enableDynamicSounds;
     }
 
-    public void playSound(@Nullable SoundEvent event, @Nullable Float _pitch, @Nullable Float _volume) {
-        this.client.getSoundManager().play(PositionedSoundInstance.master(event != null ? event : this.fetchSoundEvent(), _pitch != null ? _pitch : pitch, _volume != null ? _volume : volume));
-    }
-
     public boolean canUseDynamicSounds() {
         return enableDynamicSounds;
     }
 
     public void playDynamicSound(SoundEvent event) {
-        if (enableDynamicSounds) {
-            this.playSound(event, null, null);
-        } else {
-            this.playSound();
-        }
+        playSound(PositionedSoundInstance.master(event, this.pitch, this.volume));
     }
 
     public void playDynamicSound(T context, F contextHandler) {
-        SoundEvent event = contextHandler.handleContext(context);
+        SoundInstance event = contextHandler.handleContext(context, getSoundEvent(), this.pitch, this.volume);
 
         if (event == null || !enableDynamicSounds) {
             this.playSound();
         }
 
-        this.playSound(event, null, null);
+        this.playSound(event);
     }
 
     @Override

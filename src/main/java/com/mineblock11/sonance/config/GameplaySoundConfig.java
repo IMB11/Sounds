@@ -6,8 +6,12 @@ import com.mineblock11.sonance.config.adapters.ConfiguredSoundTypeAdapter;
 import com.mineblock11.sonance.config.adapters.DynamicConfiguredSoundTypeAdapter;
 import com.mineblock11.sonance.sound.ConfiguredSound;
 import com.mineblock11.sonance.sound.DynamicConfiguredSound;
+import com.mineblock11.sonance.sound.context.RepeaterSoundContext;
+import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
+import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 
 import java.util.ArrayList;
@@ -21,6 +25,9 @@ public class GameplaySoundConfig {
             builder -> builder.registerTypeAdapter(DynamicConfiguredSound.class, new DynamicConfiguredSoundTypeAdapter())
     )));
 
+    @SerialEntry
+    public DynamicConfiguredSound<Integer, RepeaterSoundContext> repeaterUseSoundEffect = new DynamicConfiguredSound<>("repeaterUse", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 1.0F, 1.0F, true);
+
     public static void load() {
         GSON.load();
     }
@@ -32,6 +39,12 @@ public class GameplaySoundConfig {
     public static YetAnotherConfigLib getInstance() {
         return YetAnotherConfigLib.create(GSON,
                 (defaults, config, builder) -> builder
+                        .category(ConfigCategory.createBuilder()
+                                .name(Text.translatable("sonance.config.gameplay.redstone"))
+                                .groups(List.of(
+                                        config.repeaterUseSoundEffect.getOptionGroup(defaults.repeaterUseSoundEffect, true)
+                                ))
+                                .build())
                         .title(Text.empty())
         );
     }

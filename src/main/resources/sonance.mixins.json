@@ -4,12 +4,12 @@
   "package": "com.mineblock11.sonance.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "AnimatedDynamicTextureImageAccessor"
+    "AnimatedDynamicTextureImageAccessor",
+    "gameplay.JukeboxBlockEntityMixin"
   ],
   "client": [
     "SoundsOptionsScreenMixin",
     "gameplay.RepeaterBlockMixin",
-    "gameplay.JukeboxBlockMixin",
     "ui.AnvilTypingEffect",
     "ui.CreativeInventorySoundEffects",
     "ui.CreativeInventorySoundEffects$CreativeScreenHandlerMixin",

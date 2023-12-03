@@ -4,6 +4,7 @@ import com.mineblock11.sonance.SonanceClient;
 import com.mineblock11.sonance.config.SonanceConfig;
 import com.mineblock11.sonance.config.UISoundConfig;
 import com.mineblock11.sonance.dynamic.DynamicSoundHelper;
+import com.mineblock11.sonance.sound.context.ItemStackSoundContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
@@ -34,7 +35,7 @@ public abstract class ItemTransferSoundEffects {
         if (timeElapsed >= 0.09D) {
             if (!stack.isEmpty()) {
                 try {
-                    UISoundConfig.get().itemClickSoundEffect.playDynamicSound(stack, DynamicSoundHelper.BlockSoundType.PLACE);
+                    UISoundConfig.get().itemClickSoundEffect.playDynamicSound(stack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
                 } catch (ConcurrentModificationException ignored) {
                     SonanceClient.LOGGER.warn("Captured ConcurrentModificationException in ItemTransferSoundEffects mixin.");
                 }
@@ -48,7 +49,7 @@ public abstract class ItemTransferSoundEffects {
     void $item_click_1_sound_effect(int slotIndex, int button, SlotActionType actionType, PlayerEntity player, CallbackInfo ci)
     {
         if (slotIndex >= 0)
-            UISoundConfig.get().itemClickSoundEffect.playDynamicSound(getSlot(slotIndex).getStack(), DynamicSoundHelper.BlockSoundType.PLACE);
+            UISoundConfig.get().itemClickSoundEffect.playDynamicSound(getSlot(slotIndex).getStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
 
     @Inject(method = "internalOnSlotClick", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/item/ItemStack;increment(I)V"))
@@ -60,7 +61,7 @@ public abstract class ItemTransferSoundEffects {
         if (timeElapsed >= 0.09D) {
             if (slotIndex >= 0) {
                 try {
-                    UISoundConfig.get().itemClickSoundEffect.playDynamicSound(getSlot(slotIndex).getStack(), DynamicSoundHelper.BlockSoundType.PLACE);
+                    UISoundConfig.get().itemClickSoundEffect.playDynamicSound(getSlot(slotIndex).getStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
                 } catch (ConcurrentModificationException ignored) {
                     SonanceClient.LOGGER.warn("Captured ConcurrentModificationException in ItemTransferSoundEffects mixin.");
                 }

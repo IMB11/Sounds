@@ -18,146 +18,75 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConfiguredSound {
     public static final Codec<ConfiguredSound> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    Codec.BOOL.fieldOf("shouldPlay").forGetter(ConfiguredSound::isShouldPlay),
+                    Codec.STRING.fieldOf("id").forGetter(ConfiguredSound::getId),
                     Identifier.CODEC.fieldOf("soundEvent").forGetter(sound -> sound.soundEvent.registryKey().getValue()),
+                    Codec.BOOL.fieldOf("shouldPlay").forGetter(ConfiguredSound::shouldPlay),
                     Codec.FLOAT.fieldOf("pitch").forGetter(ConfiguredSound::getPitch),
-                    Codec.FLOAT.fieldOf("volume").forGetter(ConfiguredSound::getVolume),
-                    Codec.STRING.fieldOf("id").forGetter(ConfiguredSound::getId)
+                    Codec.FLOAT.fieldOf("volume").forGetter(ConfiguredSound::getVolume)
             ).apply(instance, ConfiguredSound::new));
     public final String id;
-    public boolean shouldPlay;
+    public final MinecraftClient client;
+    public boolean enabled;
     public RegistryEntry.Reference<SoundEvent> soundEvent;
     public float pitch = 1f;
     public float volume = 1f;
-    private float defaultPitch;
-    private float defaultVolume;
 
-    public ConfiguredSound(boolean shouldPlay, Identifier soundEvent, float pitch, float volume, String id) {
-        this.defaultPitch = defaultPitch;
-        this.defaultVolume = defaultVolume;
-        this.shouldPlay = shouldPlay;
+    public ConfiguredSound(String id, Identifier soundEvent, boolean enabled, float pitch, float volume) {
+        this.enabled = enabled;
         this.soundEvent = RegistryEntry.Reference.standAlone(Registries.SOUND_EVENT.getEntryOwner(), RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent));
         this.pitch = pitch;
         this.volume = volume;
         this.id = id;
+
+        this.client = MinecraftClient.getInstance();
     }
 
-    public ConfiguredSound(boolean shouldPlay, String id, RegistryEntry.Reference<SoundEvent> soundEvent, float pitch, float volume) {
-        this.shouldPlay = shouldPlay;
-        this.id = id;
-        this.soundEvent = soundEvent;
-        this.pitch = pitch;
-        this.volume = volume;
+    public ConfiguredSound(String id, RegistryEntry.Reference<SoundEvent> soundEvent, boolean enabled, float pitch, float volume) {
+        this(id, soundEvent.registryKey().getValue(), enabled, pitch, volume);
     }
 
-    public ConfiguredSound(boolean shouldPlay, String id, SoundEvent soundEvent, float pitch, float volume) {
-        this.shouldPlay = shouldPlay;
-        this.id = id;
-        this.pitch = pitch;
-        this.volume = volume;
-
-        var key = Registries.SOUND_EVENT.getKey(soundEvent).orElseThrow();
-        this.soundEvent = Registries.SOUND_EVENT.getEntry(key).orElseThrow();
+    public ConfiguredSound(String id, SoundEvent soundEvent, boolean enabled, float pitch, float volume) {
+        this(id, soundEvent.getId(), enabled, pitch, volume);
     }
 
-    public final SoundEvent fetchSoundEvent() {
-        return Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
-    }
-
-    public void playSound() {
-        if (this.shouldPlay) {
-            MinecraftClient client = MinecraftClient.getInstance();
-            final SoundEvent event = Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
-            client.getSoundManager().play(PositionedSoundInstance.master(event, pitch, volume));
+    public OptionDescription.Builder addImageIfPresent(OptionDescription.Builder builder, @Nullable Identifier groupImage) {
+        if (groupImage != null) {
+            return builder.webpImage(groupImage);
         }
+        return builder;
     }
 
-    public void forceSound(@Nullable SoundEvent event, @Nullable Float _pitch, @Nullable Float _volume) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        client.getSoundManager().play(PositionedSoundInstance.master(event != null ? event : this.fetchSoundEvent(), _pitch != null ? _pitch : pitch, _volume != null ? _volume : volume));
-    }
-
-    public OptionGroup getOptionGroup(ConfiguredSound defaults) {
-        return this.getOptionGroup(defaults, false);
-    }
-
-    public OptionGroup getOptionGroup(ConfiguredSound defaults, boolean hasImage) {
-        if(hasImage) {
-            var volumeOpt = Option.<Float>createBuilder()
-                    .name(Text.translatable("sonance.config.volume.name"))
-                    .description(OptionDescription.createBuilder()
-                            .webpImage(new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
-                            .text(Text.translatable("sonance.config.volume.description"))
-                            .build())
-                    .binding(defaults.volume, () -> this.volume, (val) -> this.volume = val)
-                    .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
-                    .build();
-
-            var pitchOpt = Option.<Float>createBuilder()
-                    .name(Text.translatable("sonance.config.pitch.name"))
-                    .description(OptionDescription.createBuilder()
-                            .webpImage(new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
-                            .text(Text.translatable("sonance.config.pitch.description"))
-                            .build())
-                    .binding(defaults.pitch, () -> this.pitch, (val) -> this.pitch = val)
-                    .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
-                    .build();
-
-            var shouldPlay = Option.<Boolean>createBuilder()
-                    .name(Text.translatable("sonance.config.shouldPlay.name"))
-                    .description(OptionDescription.createBuilder()
-                            .webpImage(new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
-                            .text(Text.translatable("sonance.config.shouldPlay.description"))
-                            .build())
-                    .binding(defaults.shouldPlay, () -> this.shouldPlay, (val) -> this.shouldPlay = val)
-                    .listener((opt, val) -> {
-                        pitchOpt.setAvailable(val);
-                        volumeOpt.setAvailable(val);
-                    })
-                    .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
-                    .build();
-
-            return OptionGroup
-                    .createBuilder()
-                    .name(Text.translatable("sonance.config." + id + ".name").formatted(Formatting.UNDERLINE))
-                    .description(OptionDescription.createBuilder()
-                            .webpImage(new Identifier("sonance", "textures/config/" + id.toLowerCase() + ".webp"))
-                            .text(Text.translatable("sonance.config." + id + ".description"))
-                            .build())
-                    .options(List.of(shouldPlay, volumeOpt, pitchOpt))
-                    .collapsed(true)
-                    .build();
-        }
-
+    private <T extends ConfiguredSound> ArrayList<Option<?>> createDefaultOptions(T defaults, @Nullable Identifier groupImage) {
         var volumeOpt = Option.<Float>createBuilder()
                 .name(Text.translatable("sonance.config.volume.name"))
-                .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sonance.config.volume.description"))
-                        .build())
+                .description(addImageIfPresent(OptionDescription.createBuilder()
+                                .text(Text.translatable("sonance.config.volume.description"))
+                        , groupImage).build())
                 .binding(defaults.volume, () -> this.volume, (val) -> this.volume = val)
                 .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
                 .build();
 
         var pitchOpt = Option.<Float>createBuilder()
                 .name(Text.translatable("sonance.config.pitch.name"))
-                .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sonance.config.pitch.description"))
-                        .build())
+                .description(addImageIfPresent(OptionDescription.createBuilder()
+                        .text(Text.translatable("sonance.config.pitch.description")), groupImage
+                ).build())
                 .binding(defaults.pitch, () -> this.pitch, (val) -> this.pitch = val)
                 .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
                 .build();
 
         var shouldPlay = Option.<Boolean>createBuilder()
                 .name(Text.translatable("sonance.config.shouldPlay.name"))
-                .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sonance.config.shouldPlay.description"))
-                        .build())
-                .binding(defaults.shouldPlay, () -> this.shouldPlay, (val) -> this.shouldPlay = val)
+                .description(addImageIfPresent(OptionDescription.createBuilder()
+                                .text(Text.translatable("sonance.config.shouldPlay.description"))
+                        , groupImage).build())
+                .binding(defaults.enabled, () -> this.enabled, (val) -> this.enabled = val)
                 .listener((opt, val) -> {
                     pitchOpt.setAvailable(val);
                     volumeOpt.setAvailable(val);
@@ -165,63 +94,62 @@ public class ConfiguredSound {
                 .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
                 .build();
 
+        return new ArrayList<>(List.of(shouldPlay, volumeOpt, pitchOpt));
+    }
+
+    public <T extends ConfiguredSound> ArrayList<Option<?>> addExtraOptions(T defaults, @Nullable Identifier groupImage) {
+        return new ArrayList<>();
+    }
+
+    public OptionGroup getOptionGroup(ConfiguredSound defaults) {
+        return this.getOptionGroup(defaults, false);
+    }
+
+    public OptionGroup getOptionGroup(ConfiguredSound defaults, boolean hasImage) {
+        Identifier image = hasImage ? new Identifier("sonance", "textures/gui/" + id.toLowerCase() + ".webp") : null;
+
+        ArrayList<Option<?>> defaultOptions = createDefaultOptions(defaults, image);
+        ArrayList<Option<?>> extraOptions = addExtraOptions(defaults, image);
+
+        ArrayList<Option<?>> allOptions = new ArrayList<>(defaultOptions);
+        allOptions.addAll(extraOptions);
+
         return OptionGroup
                 .createBuilder()
                 .name(Text.translatable("sonance.config." + id + ".name").formatted(Formatting.UNDERLINE))
                 .description(OptionDescription.createBuilder()
                         .text(Text.translatable("sonance.config." + id + ".description"))
                         .build())
-                .options(List.of(shouldPlay, volumeOpt, pitchOpt))
+                .options(allOptions)
                 .collapsed(true)
                 .build();
     }
 
-    public float getDefaultPitch() {
-        return defaultPitch;
+    public final SoundEvent fetchSoundEvent() {
+        return Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
     }
 
-    public void setDefaultPitch(float defaultPitch) {
-        this.defaultPitch = defaultPitch;
+    public void playSound() {
+        if (this.enabled) {
+            final SoundEvent event = Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
+            client.getSoundManager().play(PositionedSoundInstance.master(event, pitch, volume));
+        }
     }
 
-    public float getDefaultVolume() {
-        return defaultVolume;
-    }
-
-    public void setDefaultVolume(float defaultVolume) {
-        this.defaultVolume = defaultVolume;
-    }
-
-    public boolean isShouldPlay() {
-        return shouldPlay;
-    }
-
-    public void setShouldPlay(boolean shouldPlay) {
-        this.shouldPlay = shouldPlay;
+    public boolean shouldPlay() {
+        return enabled;
     }
 
     public RegistryEntry.Reference<SoundEvent> getSoundEvent() {
         return soundEvent;
     }
 
-    public void setSoundEvent(RegistryEntry.Reference<SoundEvent> soundEvent) {
-        this.soundEvent = soundEvent;
-    }
-
     public float getPitch() {
         return pitch;
     }
 
-    public void setPitch(float pitch) {
-        this.pitch = pitch;
-    }
-
     public float getVolume() {
         return volume;
-    }
-
-    public void setVolume(float volume) {
-        this.volume = volume;
     }
 
     public String getId() {

@@ -3,6 +3,7 @@ package com.mineblock11.sonance.mixin.ui;
 import com.mineblock11.sonance.config.SonanceConfig;
 import com.mineblock11.sonance.config.UISoundConfig;
 import com.mineblock11.sonance.dynamic.DynamicSoundHelper;
+import com.mineblock11.sonance.sound.context.ItemStackSoundContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -21,7 +22,7 @@ public class HotbarSoundEffects {
 
     @Inject(method = "scrollInHotbar", at = @At("RETURN"), cancellable = false)
     public void $hotbar_scroll_sound_effect(double scrollAmount, CallbackInfo ci) {
-        UISoundConfig.get().hotbarScrollSoundEffect.playDynamicSound(this.player.getMainHandStack(), DynamicSoundHelper.BlockSoundType.PLACE);
+        UISoundConfig.get().hotbarScrollSoundEffect.playDynamicSound(this.player.getMainHandStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
 
 //    @Inject(method = "dropSelectedItem", at = @At("HEAD"))
@@ -31,6 +32,6 @@ public class HotbarSoundEffects {
 
     @Inject(method = "addPickBlock", at = @At("RETURN"), cancellable = false)
     public void $hotbar_pick_sound_effect(ItemStack stack, CallbackInfo ci) {
-        UISoundConfig.get().hotbarPickSoundEffect.playDynamicSound(stack, DynamicSoundHelper.BlockSoundType.STEP);
+        UISoundConfig.get().hotbarPickSoundEffect.playDynamicSound(stack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.STEP));
     }
 }

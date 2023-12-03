@@ -2,6 +2,7 @@ package com.mineblock11.sonance.mixin.ui;
 
 import com.mineblock11.sonance.config.SonanceConfig;
 import com.mineblock11.sonance.config.UISoundConfig;
+import com.mineblock11.sonance.sound.context.ScreenHandlerSoundContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.BookEditScreen;
@@ -28,8 +29,8 @@ public abstract class ScreenSoundEffect {
         } else if (currentScreen != screen && (screen instanceof BookScreen || screen instanceof BookEditScreen)) {
             UISoundConfig.get().inventoryOpenSoundEffect.playDynamicSound(SoundEvents.ENTITY_VILLAGER_WORK_LIBRARIAN);
         } else if (screen == null && currentScreen instanceof HandledScreen<?> handledScreen)
-            UISoundConfig.get().inventoryCloseSoundEffect.playDynamicSound(handledScreen.getScreenHandler(), false);
+            UISoundConfig.get().inventoryCloseSoundEffect.playDynamicSound(handledScreen.getScreenHandler(), ScreenHandlerSoundContext.of(false));
         else if (currentScreen != screen && screen instanceof HandledScreen<?> handledScreen)
-            UISoundConfig.get().inventoryOpenSoundEffect.playDynamicSound(handledScreen.getScreenHandler(), true);
+            UISoundConfig.get().inventoryOpenSoundEffect.playDynamicSound(handledScreen.getScreenHandler(), ScreenHandlerSoundContext.of(true));
     }
 }

@@ -6,7 +6,9 @@ import com.mineblock11.sonance.config.adapters.ConfiguredSoundTypeAdapter;
 import com.mineblock11.sonance.config.adapters.DynamicConfiguredSoundTypeAdapter;
 import com.mineblock11.sonance.sound.ConfiguredSound;
 import com.mineblock11.sonance.sound.DynamicConfiguredSound;
+import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
+import net.minecraft.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,5 +27,12 @@ public class GameplaySoundConfig {
 
     public static GameplaySoundConfig get() {
         return GSON.instance();
+    }
+
+    public static YetAnotherConfigLib getInstance() {
+        return YetAnotherConfigLib.create(GSON,
+                (defaults, config, builder) -> builder
+                        .title(Text.empty())
+        );
     }
 }

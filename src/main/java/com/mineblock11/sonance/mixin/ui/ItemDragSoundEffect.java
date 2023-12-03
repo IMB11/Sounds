@@ -3,6 +3,7 @@ package com.mineblock11.sonance.mixin.ui;
 import com.mineblock11.sonance.config.SonanceConfig;
 import com.mineblock11.sonance.config.UISoundConfig;
 import com.mineblock11.sonance.dynamic.DynamicSoundHelper;
+import com.mineblock11.sonance.sound.context.ItemStackSoundContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
@@ -27,6 +28,6 @@ public class ItemDragSoundEffect<T extends ScreenHandler> {
     @Inject(method = "mouseDragged", at = @At(value = "INVOKE", target = "Ljava/util/Set;add(Ljava/lang/Object;)Z"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void $item_drag_sound_effect(double mouseX, double mouseY, int button, double deltaX, double deltaY, CallbackInfoReturnable<Boolean> cir, Slot slot) {
             if (!cursorDragSlots.contains(slot) && cursorDragSlots.size() > 0)
-                UISoundConfig.get().itemDragSoundEffect.playDynamicSound(this.handler.getCursorStack(), DynamicSoundHelper.BlockSoundType.PLACE);
+                UISoundConfig.get().itemDragSoundEffect.playDynamicSound(this.handler.getCursorStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
 }

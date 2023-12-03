@@ -4,6 +4,7 @@ import com.mineblock11.sonance.MixinStatics;
 import com.mineblock11.sonance.config.SonanceConfig;
 import com.mineblock11.sonance.config.UISoundConfig;
 import com.mineblock11.sonance.dynamic.DynamicSoundHelper;
+import com.mineblock11.sonance.sound.context.ItemStackSoundContext;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
@@ -61,7 +62,7 @@ public abstract class CreativeInventorySoundEffects extends AbstractInventoryScr
     @Inject(method = "onMouseClick", at = @At(value = "INVOKE", target="Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen$CreativeScreenHandler;setCursorStack(Lnet/minecraft/item/ItemStack;)V", shift = At.Shift.AFTER, ordinal = 4))
     public void $choose_item_sound_effect(Slot slot, int slotId, int button, SlotActionType actionType, CallbackInfo ci) {
         ItemStack stack = this.handler.getCursorStack();
-        UISoundConfig.get().itemClickSoundEffect.playDynamicSound(stack, DynamicSoundHelper.BlockSoundType.PLACE);
+        UISoundConfig.get().itemClickSoundEffect.playDynamicSound(stack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
 
     @Mixin(CreativeInventoryScreen.CreativeScreenHandler.class)
@@ -71,7 +72,7 @@ public abstract class CreativeInventorySoundEffects extends AbstractInventoryScr
         @Inject(method = "setCursorStack", at = @At("HEAD"), cancellable = false)
         public void $item_delete_sound_effect(ItemStack stack, CallbackInfo ci) {
             if (MixinStatics.CURRENT_SLOT == MixinStatics.DELETE_ITEM_SLOT && !getCursorStack().isEmpty())
-                UISoundConfig.get().itemDeleteSoundEffect.playDynamicSound(getCursorStack(), DynamicSoundHelper.BlockSoundType.HIT);
+                UISoundConfig.get().itemDeleteSoundEffect.playDynamicSound(getCursorStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.HIT));
         }
 
         @Unique private double prevTime = 0L;

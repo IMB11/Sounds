@@ -1,26 +1,13 @@
 package com.mineblock11.sonance.dynamic;
 
 import com.mineblock11.sonance.api.SoundDefinition;
-import com.mineblock11.sonance.config.SonanceConfig;
-import com.mineblock11.sonance.config.UISoundConfig;
 import com.mojang.serialization.Codec;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.client.gui.screen.ingame.SmithingScreen;
-import net.minecraft.client.gui.screen.ingame.StonecutterScreen;
-import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.screen.*;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Function;
@@ -44,40 +31,8 @@ public class DynamicSoundHelper {
         declareDefinitionsToLoad("screens", SoundDefinition.getCodec(Registries.SCREEN_HANDLER.getKey()));
     }
 
-    @Deprecated
-    public static SoundEvent getScreenSound(ScreenHandler screen, boolean isOpening) {
-        try {
-            var type = screen.getType();
-            for (SoundDefinition<ScreenHandlerType<?>> definition : (ArrayList<SoundDefinition<ScreenHandlerType<?>>>) loadedDefinitions.get("screens")) {
-                if(definition.keys.isValid(type)) {
-                    return definition.soundEvent;
-                }
-            }
-        } catch (Exception ignored) {
-            LOGGER.warn("Screen of type {} has no declared ScreenHandlerType - ignoring.", screen.getClass().getName());
-        }
-
-        return isOpening ?
-                UISoundConfig.get().inventoryOpenSoundEffect.fetchSoundEvent() :
-                UISoundConfig.get().inventoryCloseSoundEffect.fetchSoundEvent();
-    }
-
-    @Deprecated
-    public static SoundEvent getItemSound(ItemStack itemStack, SoundEvent defaultSoundEvent, BlockSoundType type) {
-        var item = itemStack.getItem();
-
-        for (SoundDefinition<Item> definition : (ArrayList<SoundDefinition<Item>>) loadedDefinitions.get("items")) {
-            if(definition.keys.isValid(item)) {
-                return definition.soundEvent;
-            }
-        }
-
-        if (item instanceof BlockItem blockItem) {
-            var block = blockItem.getBlock();
-            return type.getTransformer().apply(block.getSoundGroup(block.getDefaultState()));
-        }
-
-        return defaultSoundEvent;
+    public static <T> ArrayList<SoundDefinition<T>> getDefinitions(String directory) {
+        return (ArrayList<SoundDefinition<T>>) loadedDefinitions.get(directory);
     }
 
     public enum BlockSoundType {

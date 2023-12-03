@@ -1,5 +1,6 @@
 package com.mineblock11.sonance.gui;
 
+import com.mineblock11.sonance.config.GameplaySoundConfig;
 import com.mineblock11.sonance.config.SonanceConfig;
 import com.mineblock11.sonance.config.UISoundConfig;
 import net.minecraft.client.gui.DrawContext;
@@ -46,6 +47,10 @@ public class SonanceConfigScreen extends Screen {
 
         this.openUIButton.setClickEvent((btn) -> {
             this.client.setScreen(UISoundConfig.getInstance().generateScreen(this));
+        });
+
+        this.openGameplayButton.setClickEvent((btn) -> {
+            this.client.setScreen(GameplaySoundConfig.getInstance().generateScreen(this));
         });
 
         grid.addChild(this.openUIButton, 3, 1);

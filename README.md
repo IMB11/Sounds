@@ -1,20 +1,20 @@
-![](https://cdn.mineblock11.dev/requires_fabric_api.png) [![](https://cdn.mineblock11.dev/mineblock%20badge_64h.png)](https://discord.gg/UzHtJKqHny)
+![](https://cdn.mineblock11.dev/requires_fabric_api.png) [![](https://cdn.mineblock11.dev/mineblock%20badge_64h.png)](https://discord.gg/UzHtJKqHny) [![](https://cdn.mineblock11.dev/modding-elite-badge.png)](https://ko-fi.com/mineblock11)
 
-# Sonance
+# Sounds
 
-Sonance is an interactive sound overhaul mod, it is inspired by [Effective](https://modrinth.com/mod/effective) and is partially feature-complete compared to [ExtraSounds](https://modrinth.com/mod/extrasounds).
+Sounds is an interactive sound overhaul mod, it is inspired by [Effective](https://modrinth.com/mod/effective) and is partially feature-complete compared to [ExtraSounds](https://modrinth.com/mod/extrasounds).
 
-The high configurability of Sonance, and it's super intuitive configuration screen is thanks to [Yet Another Config Library](https://modrinth.com/mod/yacl)
+This mod's amazing configuration system and it's super intuitive configuration screen is thanks to [Yet Another Config Library](https://modrinth.com/mod/yacl)
 
-![](https://cdn.modrinth.com/data/ZouiUX7t/images/1d8429cc859a716d2e07b94c8777d00c7a30fbe3.webp)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3bDhhZXhzKA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-## Sounds
+## Sounds (literally)
 
-All sounds in Sonance can be configured to be dynamic, Sonance will use properties such as the item or block type to determine a suitable sound.
+Sounds can be configured to be dynamic, the mod will use properties such as the item or block type to determine a suitable sound.
 
 You can also configure the default pitch and volume of the sound, or whether the sound should be enabled in the first place.
 
-Currently, Sonance has the following sounds available:
+Currently the following sounds are available:
 
 <details>
 <summary>Pick Block</summary>
@@ -24,16 +24,6 @@ When you use the "Pick Block" keybind, a sound effect will play. This sound is d
 ### Example
 
 <img src="https://cdn.modrinth.com/data/ZouiUX7t/images/6465cfb53a00630dda785fa6180e51b22c5ed50b.webp" width="250">
-</details>
-
-<details>
-<summary>Hotbar Scroll</summary>
-
-When scrolling across the hotbar, a sound effect will play for every slot you scroll over. This sound is dynamic by default - so the properties of the block/item you have scrolled over will determine what sound will play.
-
-### Example
-
-<img src="https://cdn.modrinth.com/data/ZouiUX7t/images/3fcf1a6aeef9de96c1f6d37ae256a52f5a847455.webp" width="250">
 </details>
 
 <details>

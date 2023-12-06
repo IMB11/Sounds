@@ -1,0 +1,30 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.imb11.sounds.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AnimatedDynamicTextureImageAccessor"
+  ],
+  "client": [
+    "gameplay.BowPullSoundEffect",
+    "SoundsOptionsScreenMixin",
+    "gameplay.DaylightDetectorBlockMixin",
+    "gameplay.FurnaceMinecartEntityMixin",
+    "gameplay.JukeboxBlockEntityMixin",
+    "gameplay.RepeaterBlockMixin",
+    "ui.AnvilTypingEffect",
+    "ui.CreativeInventorySoundEffects",
+    "ui.CreativeInventorySoundEffects$CreativeScreenHandlerMixin",
+    "ui.HotbarSoundEffects",
+    "ui.ItemDragSoundEffect",
+    "ui.ItemDropSoundEffect",
+    "ui.ItemTransferSoundEffects",
+    "ui.MentionSoundEffect",
+    "ui.ScreenSoundEffect",
+    "ui.TypingSoundEffect"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

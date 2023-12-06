@@ -1,32 +1,32 @@
 {
   "schemaVersion": 1,
-  "id": "sonance",
+  "id": "sounds",
   "version": "${mod_version}",
-  "name": "Sonance",
-  "description": "A highly configurable UI sound overhaul.",
+  "name": "Sounds",
+  "description": "A highly configurable sound overhaul mod that adds new sound effects while improving vanilla sounds too.",
   "authors": [
     "IMB11 (mineblock11)"
   ],
   "contact": {
     "website": "https://imb11.dev/",
-    "repo": "https://github.com/IMB11/Sonance"
+    "repo": "https://github.com/IMB11/Sounds"
   },
   "license": "LGPL-2.1",
-  "icon": "assets/sonance/icon.png",
+  "icon": "assets/sounds/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "com.mineblock11.sonance.SonanceClient"
+      "dev.imb11.sounds.SoundsClient"
     ],
     "modmenu": [
-      "com.mineblock11.sonance.compat.ModMenuCompat"
+      "dev.imb11.sounds.compat.ModMenuCompat"
     ],
     "fabric-datagen": [
-      "com.mineblock11.sonance.datagen.SonanceDatagenEntrypoint"
+      "dev.imb11.sounds.datagen.SoundsDatagenEntrypoint"
     ]
   },
   "mixins": [
-    "sonance.mixins.json"
+    "sounds.mixins.json"
   ],
   "depends": {
     "fabricloader": "*",

@@ -35,14 +35,14 @@ public class GameplaySoundConfig {
     public ConfiguredSound furnaceMinecartFuelSoundEffect = new ConfiguredSound("furnaceMinecartFuel", SoundEvents.ENTITY_CREEPER_HURT, true, 1.9F, 0.2F);
 
     @SerialEntry
-    public ConfiguredSound positiveStatusEffectGainSoundEffect = new ConfiguredSound("positiveStatusEffectGain", SoundEvents.ENTITY_PLAYER_LEVELUP, true, 1.0F, 1.0F);
+    public ConfiguredSound positiveStatusEffectGainSoundEffect = new ConfiguredSound("positiveStatusEffectGain", SoundEvents.BLOCK_NOTE_BLOCK_CHIME, true, 1.4F, 0.5F);
     @SerialEntry
-    public ConfiguredSound negativeStatusEffectGainSoundEffect = new ConfiguredSound("negativeStatusEffectGain", SoundEvents.ENTITY_PLAYER_HURT_SWEET_BERRY_BUSH, true, 1.0F, 1.0F);
+    public ConfiguredSound negativeStatusEffectGainSoundEffect = new ConfiguredSound("negativeStatusEffectGain", SoundEvents.ENTITY_ALLAY_HURT, true, 0.5F, 0.5F);
 
     @SerialEntry
-    public ConfiguredSound positiveStatusEffectLoseSoundEffect = new ConfiguredSound("positiveStatusEffectLose", SoundEvents.ENTITY_PLAYER_LEVELUP, true, 1.0F, 1.0F);
+    public ConfiguredSound positiveStatusEffectLoseSoundEffect = new ConfiguredSound("positiveStatusEffectLose", SoundEvents.ENTITY_ALLAY_ITEM_THROWN, true, 0.5F, 0.5F);
     @SerialEntry
-    public ConfiguredSound negativeStatusEffectLoseSoundEffect = new ConfiguredSound("negativeStatusEffectLose", SoundEvents.ENTITY_PLAYER_HURT_SWEET_BERRY_BUSH, true, 1.0F, 1.0F);
+    public ConfiguredSound negativeStatusEffectLoseSoundEffect = new ConfiguredSound("negativeStatusEffectLose", SoundEvents.ENTITY_ALLAY_ITEM_THROWN, true, 0.5F, 0.5F);
     @SerialEntry
     public ConfiguredSound bowPullSoundEffect = new ConfiguredSound("bowPull", SoundEvents.ITEM_CROSSBOW_LOADING_MIDDLE, true, 1.0F, 0.25F);
 

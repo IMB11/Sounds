@@ -8,8 +8,8 @@ import dev.imb11.sounds.sound.ConfiguredSound;
 import dev.imb11.sounds.sound.DynamicConfiguredSound;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import dev.imb11.sounds.sound.context.ScreenHandlerSoundContext;
-import dev.isxander.yacl3.api.ConfigCategory;
-import dev.isxander.yacl3.api.YetAnotherConfigLib;
+import dev.isxander.yacl3.api.*;
+import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.minecraft.item.ItemStack;
@@ -65,6 +65,15 @@ public class UISoundConfig {
     @SerialEntry
     public final DynamicConfiguredSound<ItemStack, ItemStackSoundContext> itemClickSoundEffect = new DynamicConfiguredSound<>("itemPick", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 1.4f, 0.2f, true);
 
+    @SerialEntry
+    public boolean useAtForChatMentions = true;
+
+    @SerialEntry
+    public boolean ignoreSystemChats = false;
+
+    @SerialEntry
+    public boolean ignoreEmptyHotbarSlots = false;
+
     public static UISoundConfig get() {
         return GSON.instance();
     }
@@ -75,47 +84,76 @@ public class UISoundConfig {
 
     public static YetAnotherConfigLib getInstance() {
         return YetAnotherConfigLib.create(GSON,
-                (defaults, config, builder) -> builder
-                        .title(Text.empty())
-                        .category(
-                                ConfigCategory.createBuilder()
-                                        .name(Text.translatable("sounds.config.ui.chat"))
-                                        .groups(List.of(
-                                                config.typingSoundEffect.getOptionGroup(defaults.typingSoundEffect, true),
-                                                config.messageSoundEffect.getOptionGroup(defaults.messageSoundEffect, true),
-                                                config.mentionSoundEffect.getOptionGroup(defaults.mentionSoundEffect)
-                                        ))
-                                        .build()
-                        ).category(
-                                ConfigCategory.createBuilder()
-                                        .name(Text.translatable("sounds.config.ui.hotbar"))
-                                        .groups(List.of(
-                                                config.hotbarScrollSoundEffect.getOptionGroup(defaults.hotbarScrollSoundEffect, true),
-                                                config.hotbarPickSoundEffect.getOptionGroup(defaults.hotbarPickSoundEffect, true)
-                                        ))
-                                        .build()
-                        ).category(
-                                ConfigCategory.createBuilder()
-                                        .name(Text.translatable("sounds.config.ui.screen"))
-                                        .groups(List.of(
-                                                config.inventoryOpenSoundEffect.getOptionGroup(defaults.inventoryOpenSoundEffect, true),
-                                                config.inventoryCloseSoundEffect.getOptionGroup(defaults.inventoryCloseSoundEffect, true),
-                                                config.inventoryScrollSoundEffect.getOptionGroup(defaults.inventoryScrollSoundEffect, true),
-                                                config.inventoryTypingSoundEffect.getOptionGroup(defaults.inventoryTypingSoundEffect, true)
-                                        ))
-                                        .build()
-                        ).category(
-                                ConfigCategory.createBuilder()
-                                        .name(Text.translatable("sounds.config.ui.item"))
-                                        .groups(List.of(
-                                                config.itemDropSoundEffect.getOptionGroup(defaults.itemDropSoundEffect, true),
-                                                config.itemCopySoundEffect.getOptionGroup(defaults.itemCopySoundEffect, true),
-                                                config.itemDeleteSoundEffect.getOptionGroup(defaults.itemDeleteSoundEffect, true),
-                                                config.itemDragSoundEffect.getOptionGroup(defaults.itemDragSoundEffect, true),
-                                                config.itemClickSoundEffect.getOptionGroup(defaults.itemClickSoundEffect, false)
-                                        ))
-                                        .build()
-                        )
+                (defaults, config, builder) -> {
+                    Option<Boolean> useAtForChatMentionsOption = Option.<Boolean>createBuilder()
+                            .name(Text.translatable("sounds.config.chat_mention_at.name"))
+                            .description(OptionDescription.createBuilder()
+                                    .text(Text.translatable("sounds.config.chat_mention_at.description")).build())
+                            .binding(defaults.useAtForChatMentions, () -> config.useAtForChatMentions, (value) -> config.useAtForChatMentions = value)
+                            .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
+                            .build();
+
+                    Option<Boolean> ignoreSystemChatsOption = Option.<Boolean>createBuilder()
+                            .name(Text.translatable("sounds.config.ignore_system_chats.name"))
+                            .description(OptionDescription.createBuilder()
+                                    .text(Text.translatable("sounds.config.ignore_system_chats.description")).build())
+                            .binding(defaults.ignoreSystemChats, () -> config.ignoreSystemChats, (value) -> config.ignoreSystemChats = value)
+                            .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
+                            .build();
+
+                    Option<Boolean> ignoreEmptyHotbarSlotsOption = Option.<Boolean>createBuilder()
+                            .name(Text.translatable("sounds.config.ignore_empty_hotbar_slots.name"))
+                            .description(OptionDescription.createBuilder()
+                                    .text(Text.translatable("sounds.config.ignore_empty_hotbar_slots.description")).build())
+                            .binding(defaults.ignoreEmptyHotbarSlots, () -> config.ignoreEmptyHotbarSlots, (value) -> config.ignoreEmptyHotbarSlots = value)
+                            .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
+                            .build();
+
+                    return builder
+                            .title(Text.empty())
+                            .category(
+                                    ConfigCategory.createBuilder()
+                                            .name(Text.translatable("sounds.config.ui.chat"))
+                                            .groups(List.of(
+                                                    config.typingSoundEffect.getOptionGroup(defaults.typingSoundEffect, true),
+                                                    config.messageSoundEffect.getOptionGroup(defaults.messageSoundEffect, true),
+                                                    config.mentionSoundEffect.getOptionGroup(defaults.mentionSoundEffect)
+                                                    ))
+                                            .option(useAtForChatMentionsOption)
+                                            .option(ignoreSystemChatsOption)
+                                            .build()
+                            ).category(
+                                    ConfigCategory.createBuilder()
+                                            .name(Text.translatable("sounds.config.ui.hotbar"))
+                                            .groups(List.of(
+                                                    config.hotbarScrollSoundEffect.getOptionGroup(defaults.hotbarScrollSoundEffect, true),
+                                                    config.hotbarPickSoundEffect.getOptionGroup(defaults.hotbarPickSoundEffect, true)
+                                            ))
+                                            .option(ignoreEmptyHotbarSlotsOption)
+                                            .build()
+                            ).category(
+                                    ConfigCategory.createBuilder()
+                                            .name(Text.translatable("sounds.config.ui.screen"))
+                                            .groups(List.of(
+                                                    config.inventoryOpenSoundEffect.getOptionGroup(defaults.inventoryOpenSoundEffect, true),
+                                                    config.inventoryCloseSoundEffect.getOptionGroup(defaults.inventoryCloseSoundEffect, true),
+                                                    config.inventoryScrollSoundEffect.getOptionGroup(defaults.inventoryScrollSoundEffect, true),
+                                                    config.inventoryTypingSoundEffect.getOptionGroup(defaults.inventoryTypingSoundEffect, true)
+                                            ))
+                                            .build()
+                            ).category(
+                                    ConfigCategory.createBuilder()
+                                            .name(Text.translatable("sounds.config.ui.item"))
+                                            .groups(List.of(
+                                                    config.itemDropSoundEffect.getOptionGroup(defaults.itemDropSoundEffect, true),
+                                                    config.itemCopySoundEffect.getOptionGroup(defaults.itemCopySoundEffect, true),
+                                                    config.itemDeleteSoundEffect.getOptionGroup(defaults.itemDeleteSoundEffect, true),
+                                                    config.itemDragSoundEffect.getOptionGroup(defaults.itemDragSoundEffect, true),
+                                                    config.itemClickSoundEffect.getOptionGroup(defaults.itemClickSoundEffect, false)
+                                            ))
+                                            .build()
+                            );
+                }
         );
     }
 }

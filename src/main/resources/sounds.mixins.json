@@ -7,8 +7,8 @@
     "AnimatedDynamicTextureImageAccessor"
   ],
   "client": [
-    "gameplay.BowPullSoundEffect",
     "SoundsOptionsScreenMixin",
+    "gameplay.BowPullSoundEffect",
     "gameplay.DaylightDetectorBlockMixin",
     "gameplay.FurnaceMinecartEntityMixin",
     "gameplay.JukeboxBlockEntityMixin",

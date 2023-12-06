@@ -24,6 +24,8 @@ dependencies {
     modLocalRuntime modCompileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
     modImplementation "com.mineblock11:MRU:${property("deps.mru")}"
 
+    modImplementation "dev.emi:emi-fabric:${property("compile.emi")}"
+
     include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.0")))
 }
 

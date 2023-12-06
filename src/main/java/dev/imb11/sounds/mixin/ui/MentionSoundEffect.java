@@ -24,7 +24,19 @@ public class MentionSoundEffect {
         String messageString = message.getString();
         String username = client.getSession().getUsername();
 
-        if (messageString.toLowerCase().contains("@" + username.toLowerCase()))
+        boolean isMention = messageString.toLowerCase().contains(username.toLowerCase());
+
+        if(UISoundConfig.get().useAtForChatMentions) {
+            isMention =  messageString.toLowerCase().contains("@" + username.toLowerCase());
+        }
+
+        if(UISoundConfig.get().ignoreSystemChats) {
+            if(indicator == MessageIndicator.system() || indicator == MessageIndicator.chatError()) {
+                return;
+            }
+        }
+
+        if (isMention)
             UISoundConfig.get().mentionSoundEffect.playSound();
         else UISoundConfig.get().messageSoundEffect.playSound();
     }

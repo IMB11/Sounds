@@ -87,13 +87,5 @@ public class SoundsReloadListener implements SimpleSynchronousResourceReloadList
                 }
             }
         });
-
-        var nonDynamic = items.stream().filter(item -> {
-            if(item instanceof BlockItem || itemsWithLoadedDefinitions.contains(item))
-                return false;
-            return true;
-        }).toList();
-
-        LOGGER.info("Items without dynamic sound events:\n" + nonDynamic.stream().map(Item::toString).collect(Collectors.joining("\n")));
     }
 }

@@ -57,6 +57,15 @@
   "sounds.config.mention.name": "Chat Mentions",
   "sounds.config.mention.description": "A sound effect that is played when you are mentioned in a new chat message.",
 
+  "sounds.config.chat_mention_at.name": "Enable Mention Prefix",
+  "sounds.config.chat_mention_at.description": "When identifying whether you've been mentioned in a chat message, should the prefix '@' be used?",
+
+  "sounds.config.ignore_system_chats.name": "Ignore System Messages",
+  "sounds.config.ignore_system_chats.description": "Should system messages be ignored in the chat when playing sound effects?",
+
+  "sounds.config.ignore_empty_hotbar_slots.name": "Ignore Empty Hotbar Slots",
+  "sounds.config.ignore_empty_hotbar_slots.description": "Should empty hotbar slots be ignored when playing sound effects?",
+
   "sounds.config.hotbarScroll.name": "Hotbar Scroll",
   "sounds.config.hotbarScroll.description": "A sound effect that is played when you scroll through your hotbar or use the number keys to select a hotbar slot.",
 

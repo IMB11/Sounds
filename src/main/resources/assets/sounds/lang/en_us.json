@@ -63,6 +63,8 @@
   "sounds.config.ignore_system_chats.name": "Ignore System Messages",
   "sounds.config.ignore_system_chats.description": "Should system messages be ignored in the chat when playing sound effects?",
 
+  "sounds.config.mod_not_loaded": "The '%s' mod is not installed, so Sounds will not be able to create, configure and play custom sound effects for it.",
+
   "sounds.config.ignore_empty_hotbar_slots.name": "Ignore Empty Hotbar Slots",
   "sounds.config.ignore_empty_hotbar_slots.description": "Should empty hotbar slots be ignored when playing sound effects?",
 

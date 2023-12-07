@@ -8,12 +8,16 @@ import dev.imb11.sounds.sound.ConfiguredSound;
 import dev.imb11.sounds.sound.DynamicConfiguredSound;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import dev.isxander.yacl3.api.ConfigCategory;
+import dev.isxander.yacl3.api.LabelOption;
+import dev.isxander.yacl3.api.OptionGroup;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,14 +42,21 @@ public class CompatConfig {
 
     public static YetAnotherConfigLib getInstance() {
         return YetAnotherConfigLib.create(GSON,
-                (defaults, config, builder) -> builder
-                        .category(ConfigCategory.createBuilder()
-                                .name(Text.literal("EMI"))
-                                .groups(List.of(
-                                        config.emi_click_item.getOptionGroup(defaults.emi_click_item)
-                                ))
-                                .build()
-                        )
-                        .title(Text.empty()));
+                (defaults, config, builder) -> {
+                    var EMI = ConfigCategory.createBuilder()
+                            .name(Text.literal("EMI"));
+
+                    if(FabricLoader.getInstance().isModLoaded("emi")) {
+                        EMI = EMI.groups(List.of(
+                                config.emi_click_item.getOptionGroup(defaults.emi_click_item)
+                        ));
+                    } else {
+                        EMI = EMI.option(LabelOption.create(Text.translatable("sounds.config.mod_not_loaded", "EMI").formatted(Formatting.ITALIC, Formatting.GRAY, Formatting.BOLD)));
+                    }
+
+                    return builder
+                            .category(EMI.build())
+                            .title(Text.empty());
+                });
     }
 }

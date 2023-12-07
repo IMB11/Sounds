@@ -8,14 +8,20 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.dynamic.Codecs;
+import org.jetbrains.annotations.Nullable;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class SoundDefinition<T> {
     public static <T> Codec<SoundDefinition<T>> getCodec(RegistryKey<? extends Registry<T>> registryKey) {
         return RecordCodecBuilder.create(builder -> builder.group(
                     Identifier.CODEC.xmap(SoundEvent::of, SoundEvent::getId).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
-                    TagList.getCodec(registryKey).fieldOf("keys").forGetter(SoundDefinition<T>::getKeys)
+                    TagList.getCodec(registryKey).fieldOf("keys").forGetter(SoundDefinition<T>::getKeys),
+                    Codecs.POSITIVE_FLOAT.optionalFieldOf("volume").forGetter(SoundDefinition<T>::getVolume),
+                    Codecs.POSITIVE_FLOAT.optionalFieldOf("pitch").forGetter(SoundDefinition<T>::getPitch)
                 ).apply(builder, SoundDefinition<T>::new));
     }
 
@@ -28,19 +34,33 @@ public class SoundDefinition<T> {
         return keys;
     }
 
-    public final SoundEvent soundEvent;
+    public Optional<Float> getPitch() {
+        return pitch;
+    }
 
-    public final TagList<T> keys;
+    public Optional<Float> getVolume() {
+        return volume;
+    }
 
-    public SoundDefinition(SoundEvent soundEvent, TagList<T> keys) {
+    private final SoundEvent soundEvent;
+
+    private final TagList<T> keys;
+    private Optional<Float> volume;
+    private Optional<Float> pitch;
+
+    public SoundDefinition(SoundEvent soundEvent, TagList<T> keys, Optional<Float> volume, Optional<Float> pitch) {
         this.soundEvent = soundEvent;
         this.keys = keys;
+        this.volume = volume;
+        this.pitch = pitch;
     }
 
     public static class Builder<T> {
         private final SoundEvent soundEvent;
         private final TagList<T> keys = new TagList<>(new ArrayList<>());
         private final Registry<T> registry;
+        private Optional<Float> volume = Optional.empty();
+        private Optional<Float> pitch = Optional.empty();
 
         public Builder(SoundEvent soundEvent, Registry<T> registry) {
             this.soundEvent = soundEvent;
@@ -73,8 +93,18 @@ public class SoundDefinition<T> {
             return this;
         }
 
+        public Builder<T> setVolume(float volume) {
+            this.volume = Optional.of(volume);
+            return this;
+        }
+
+        public Builder<T> setPitch(float pitch) {
+            this.pitch = Optional.of(pitch);
+            return this;
+        }
+
         public SoundDefinition<T> build() {
-            return new SoundDefinition<>(soundEvent, keys);
+            return new SoundDefinition<>(soundEvent, keys, volume, pitch);
         }
     }
 }

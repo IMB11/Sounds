@@ -27,8 +27,17 @@ public class ScreenHandlerSoundContext implements DynamicSoundContext<ScreenHand
         try {
             var type = context.getType();
             for (SoundDefinition<ScreenHandlerType<?>> definition : DynamicSoundHelper.<ScreenHandlerType<?>>getDefinitions("screens")) {
-                if (definition.keys.isValid(type)) {
-                    soundEvent = definition.soundEvent;
+                if (definition.getKeys().isValid(type)) {
+                    soundEvent = definition.getSoundEvent();
+
+                    if(definition.getPitch().isPresent()) {
+                        pitch = definition.getPitch().get();
+                    }
+
+                    if(definition.getVolume().isPresent()) {
+                        volume = definition.getVolume().get();
+                    }
+
                     break;
                 }
             }

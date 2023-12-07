@@ -71,7 +71,7 @@ public class SoundsReloadListener implements SimpleSynchronousResourceReloadList
         DynamicSoundHelper.loadedDefinitions.get("items").forEach(definition -> {
             SoundDefinition<Item> definitionCast = (SoundDefinition<Item>) definition;
 
-            for (Either<RegistryKey<Item>, TagKey<Item>> registryKeyTagKeyEither : definitionCast.keys.getInternalList()) {
+            for (Either<RegistryKey<Item>, TagKey<Item>> registryKeyTagKeyEither : definitionCast.getKeys().getInternalList()) {
                 if (registryKeyTagKeyEither.left().isPresent()) {
                     var key = registryKeyTagKeyEither.left().get();
                     var entry = Registries.ITEM.get(key.getValue());

@@ -1,0 +1,8 @@
+{
+  "keys": [
+    "minecraft:enchanted_book"
+  ],
+  "pitch": 0.01,
+  "soundEvent": "minecraft:block.end_portal_frame.fill",
+  "volume": 0.2
+}

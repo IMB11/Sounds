@@ -27,6 +27,7 @@ public class SoundsConfig {
 
         UISoundConfig.load();
         GameplaySoundConfig.load();
+        CompatConfig.load();
     }
 
     public static RegistryEntry.Reference<SoundEvent> getSoundEventReference(SoundEvent soundEvent) {

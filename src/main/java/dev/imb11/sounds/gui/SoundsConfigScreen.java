@@ -1,5 +1,6 @@
 package dev.imb11.sounds.gui;
 
+import dev.imb11.sounds.config.CompatConfig;
 import dev.imb11.sounds.config.GameplaySoundConfig;
 import dev.imb11.sounds.config.UISoundConfig;
 import net.minecraft.client.gui.DrawContext;
@@ -44,13 +45,11 @@ public class SoundsConfigScreen extends Screen {
         this.openGameplayButton = new ImageButtonWidget(0, 0, 0, 0, Text.translatable("sounds.config.gameplay"), new Identifier("sounds", "textures/gui/gameplay_sounds.webp"));
         this.openModButton = new ImageButtonWidget(0, 0, 0, 0, Text.translatable("sounds.config.mod"), new Identifier("sounds", "textures/gui/mod_sounds.webp"));
 
-        this.openUIButton.setClickEvent((btn) -> {
-            this.client.setScreen(UISoundConfig.getInstance().generateScreen(this));
-        });
+        this.openUIButton.setClickEvent((btn) -> this.client.setScreen(UISoundConfig.getInstance().generateScreen(this)));
 
-        this.openGameplayButton.setClickEvent((btn) -> {
-            this.client.setScreen(GameplaySoundConfig.getInstance().generateScreen(this));
-        });
+        this.openGameplayButton.setClickEvent((btn) -> this.client.setScreen(GameplaySoundConfig.getInstance().generateScreen(this)));
+
+        this.openModButton.setClickEvent((btn) -> this.client.setScreen(CompatConfig.getInstance().generateScreen(this)));
 
         grid.addChild(this.openUIButton, 3, 1);
         grid.addChild(this.openGameplayButton, 2, 2);

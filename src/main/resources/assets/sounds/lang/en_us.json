@@ -66,6 +66,9 @@
   "sounds.config.ignore_empty_hotbar_slots.name": "Ignore Empty Hotbar Slots",
   "sounds.config.ignore_empty_hotbar_slots.description": "Should empty hotbar slots be ignored when playing sound effects?",
 
+  "sounds.config.emi_click_item.name": "Click Item",
+  "sounds.config.emi_click_item.description": "A sound effect that is played when you click on an item in an EMI sidebar.",
+
   "sounds.config.hotbarScroll.name": "Hotbar Scroll",
   "sounds.config.hotbarScroll.description": "A sound effect that is played when you scroll through your hotbar or use the number keys to select a hotbar slot.",
 

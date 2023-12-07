@@ -1,4 +1,4 @@
-// 1.20.2	2023-12-06T20:08:59.316063216	Sounds/SoundDefinition[minecraft:item]Provider
+// 1.20.2	2023-12-07T18:29:24.326099548	Sounds/SoundDefinition[minecraft:item]Provider
 30c9f8fa0111443eeeed7e35065f285097fcdf3d assets/minecraft/sounds/items/dyes.json
 6cb492ef2c6029bef457e855f014361135932814 assets/minecraft/sounds/items/leather_equipment.json
 431ba2e9040b95bbe5313e461ec0afa4a66a13b9 assets/minecraft/sounds/items/bows.json
@@ -11,6 +11,7 @@ ebdaa80d344c9a544ec145e406a960a4b6f99ce4 assets/minecraft/sounds/items/wet_mob_d
 a48e8c894decc7b204e333e867df01aa667817b6 assets/minecraft/sounds/items/banner_templates.json
 8842f28f212b34af44b9144919b6d7504c1c0089 assets/minecraft/sounds/items/golden_equipment.json
 2daf29b9c77c38342098f6c9a91d8a5812cb3e7f assets/minecraft/sounds/items/moo.json
+ad798cc8a53b55a7dbbfce4cce162d84cf658281 assets/minecraft/sounds/items/enchanting_books.json
 5a6cc39a98681c871a62718b6a27ceadc1e743a8 assets/minecraft/sounds/items/smithing_templates.json
 d6937e2b73edbb8077b24a6d99f408cad4159743 assets/minecraft/sounds/items/elytra.json
 f9d34daa64d90580fd781598162aeb6afe37d794 assets/minecraft/sounds/items/dirty_metals.json

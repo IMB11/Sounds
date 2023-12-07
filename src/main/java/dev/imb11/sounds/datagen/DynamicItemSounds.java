@@ -105,6 +105,11 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.BRUSH)
                 .addKey(Items.RABBIT_HIDE));
 
+        provider.accept("enchanting_books", create(SoundEvents.BLOCK_END_PORTAL_FRAME_FILL)
+                .addKey(Items.ENCHANTED_BOOK)
+                .setVolume(0.2f)
+                .setPitch(0.01f));
+
         provider.accept("elytra", create(SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA)
                 .addKey(Items.ELYTRA));
 

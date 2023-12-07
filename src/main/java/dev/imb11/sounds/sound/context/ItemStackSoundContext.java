@@ -24,8 +24,17 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
         var item = context.getItem();
 
         for (SoundDefinition<Item> definition : DynamicSoundHelper.<Item>getDefinitions("items")) {
-            if (definition.keys.isValid(item)) {
-                fallback = definition.soundEvent;
+            if (definition.getKeys().isValid(item)) {
+                fallback = definition.getSoundEvent();
+
+                if(definition.getPitch().isPresent()) {
+                    pitch = definition.getPitch().get();
+                }
+
+                if(definition.getVolume().isPresent()) {
+                    volume = definition.getVolume().get();
+                }
+
                 break;
             }
         }

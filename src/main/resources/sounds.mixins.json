@@ -22,7 +22,8 @@
     "ui.ItemTransferSoundEffects",
     "ui.MentionSoundEffect",
     "ui.ScreenSoundEffect",
-    "ui.TypingSoundEffect"
+    "ui.TypingSoundEffect",
+    "compat.EmiSoundEffects"
   ],
   "injectors": {
     "defaultRequire": 1

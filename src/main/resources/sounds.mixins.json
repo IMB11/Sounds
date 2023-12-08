@@ -3,11 +3,10 @@
   "minVersion": "0.8",
   "package": "dev.imb11.sounds.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [
-    "AnimatedDynamicTextureImageAccessor"
-  ],
+  "mixins": [],
   "client": [
     "SoundsOptionsScreenMixin",
+    "compat.EmiSoundEffects",
     "gameplay.BowPullSoundEffect",
     "gameplay.DaylightDetectorBlockMixin",
     "gameplay.FurnaceMinecartEntityMixin",
@@ -23,7 +22,8 @@
     "ui.MentionSoundEffect",
     "ui.ScreenSoundEffect",
     "ui.TypingSoundEffect",
-    "compat.EmiSoundEffects"
+    "accessors.ClickableWidgetAccessor",
+    "accessors.AnimatedDynamicTextureImageAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

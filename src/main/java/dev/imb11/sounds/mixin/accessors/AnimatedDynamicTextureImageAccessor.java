@@ -1,4 +1,4 @@
-package dev.imb11.sounds.mixin;
+package dev.imb11.sounds.mixin.accessors;
 
 import dev.isxander.yacl3.gui.image.impl.AnimatedDynamicTextureImage;
 import org.spongepowered.asm.mixin.Mixin;

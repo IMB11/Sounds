@@ -1,6 +1,6 @@
 package dev.imb11.sounds.gui;
 
-import dev.imb11.sounds.mixin.AnimatedDynamicTextureImageAccessor;
+import dev.imb11.sounds.mixin.accessors.AnimatedDynamicTextureImageAccessor;
 import dev.isxander.yacl3.gui.image.ImageRendererManager;
 import dev.isxander.yacl3.gui.image.impl.AnimatedDynamicTextureImage;
 import net.minecraft.client.MinecraftClient;
@@ -101,7 +101,12 @@ public class ImageButtonWidget extends ClickableWidget {
         context.getMatrices().scale(fontScaling, fontScaling, 1.0f);
 
 //            context.fill(textX, textY, endX, endY, 0xFFFF2F00);
-        drawScrollableText(context, client.textRenderer, getMessage(), textX, textX, textY, endX, endY, 0xFFFFFF);
+
+        /*? >=1.20.2 {*/
+        drawScrollableText(context, client.textRenderer, getMessage(), textX, textY, endX, endY, 0xFFFFFF);
+        /*?} else {*//*
+        drawScrollableText(context, client.textRenderer, getMessage(), textX, textY, endX, endY, 0xFFFFFF);
+        *//*?}*/
 
         context.getMatrices().pop();
 

@@ -1,5 +1,6 @@
 package dev.imb11.sounds.gui;
 
+import dev.imb11.sounds.mixin.accessors.ClickableWidgetAccessor;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.WrapperWidget;
@@ -133,7 +134,13 @@ public class DynamicGridWidget extends WrapperWidget {
             child.widget().setX(currentX);
             child.widget().setY(currentY);
             child.widget().setWidth(thisCellWidth - padding * 2);
+
+            /*? >=1.20.2 {*/
             child.widget().setHeight(thisCellHeight - padding * 2);
+            /*?} else {*//*
+            ((ClickableWidgetAccessor) child.widget()).setHeight_1_20_1(thisCellHeight - padding * 2);
+            *//*?}*/
+
 
             currentX += thisCellWidth;
             if (currentX >= this.width) {

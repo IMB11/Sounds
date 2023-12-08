@@ -31,7 +31,11 @@ public class MentionSoundEffect {
         }
 
         if(UISoundConfig.get().ignoreSystemChats) {
+            /*? >=1.20.2 {*/
             if(indicator == MessageIndicator.system() || indicator == MessageIndicator.chatError()) {
+            /*?} else {*//*
+            if(indicator == MessageIndicator.system()) {
+            *//*?}*/
                 return;
             }
         }

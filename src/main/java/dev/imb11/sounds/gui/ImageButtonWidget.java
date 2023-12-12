@@ -40,8 +40,13 @@ public class ImageButtonWidget extends ClickableWidget {
 
     float durationHovered = 1f;
 
+    /*? <1.20.3 {*//*
     @Override
     protected void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
+    *//*?} else {(*/
+    @Override
+    protected void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
+    /*?}*/
         context.enableScissor(getX(), getY(), getX() + width, getY() + height);
         this.hovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.width && mouseY < this.getY() + this.height;
 

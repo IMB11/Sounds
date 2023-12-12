@@ -13,6 +13,6 @@ public class ImageRenderManagerMixin {
     @Shadow @Final private static ExecutorService SINGLE_THREAD_EXECUTOR;
 
     static {
-       SINGLE_THREAD_EXECUTOR = Executors.newFixedThreadPool(10, task -> new Thread(task, "YACL Image Prep (" + task.hashCode() + ")"));
+       SINGLE_THREAD_EXECUTOR = Executors.newFixedThreadPool(5, task -> new Thread(task, "YACL Image Prep (" + task.hashCode() + ")"));
     }
 }

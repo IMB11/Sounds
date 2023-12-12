@@ -13,7 +13,7 @@ public class JukeboxBlockEntityMixin {
     @Inject(method = "setStack", at = @At(value = "HEAD"))
     /*? <1.20.3 {*//*
     public void $jukebox_use_sound_effect(int slot, ItemStack stack, CallbackInfo ci) {
-    /*?} else {(*/
+    /*?} else {*/
     public void $jukebox_use_sound_effect(ItemStack stack, CallbackInfo ci) {
     /*?}*/
         GameplaySoundConfig.get().jukeboxUseSoundEffect.playSound();

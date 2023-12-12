@@ -43,7 +43,7 @@ public class ImageButtonWidget extends ClickableWidget {
     /*? <1.20.3 {*//*
     @Override
     protected void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
-    *//*?} else {(*/
+    *//*?} else {*/
     @Override
     protected void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
     /*?}*/

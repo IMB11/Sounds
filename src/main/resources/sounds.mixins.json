@@ -3,9 +3,13 @@
   "minVersion": "0.8",
   "package": "dev.imb11.sounds.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [],
+  "mixins": [
+    "ui.ImageRenderManagerMixin"
+  ],
   "client": [
     "SoundsOptionsScreenMixin",
+    "accessors.AnimatedDynamicTextureImageAccessor",
+    "accessors.ClickableWidgetAccessor",
     "compat.EmiSoundEffects",
     "gameplay.BowPullSoundEffect",
     "gameplay.DaylightDetectorBlockMixin",
@@ -21,9 +25,7 @@
     "ui.ItemTransferSoundEffects",
     "ui.MentionSoundEffect",
     "ui.ScreenSoundEffect",
-    "ui.TypingSoundEffect",
-    "accessors.ClickableWidgetAccessor",
-    "accessors.AnimatedDynamicTextureImageAccessor"
+    "ui.TypingSoundEffect"
   ],
   "injectors": {
     "defaultRequire": 1

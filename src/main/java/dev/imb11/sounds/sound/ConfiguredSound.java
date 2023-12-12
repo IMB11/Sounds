@@ -118,9 +118,8 @@ public class ConfiguredSound {
         return OptionGroup
                 .createBuilder()
                 .name(Text.translatable("sounds.config." + id + ".name").formatted(Formatting.UNDERLINE))
-                .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sounds.config." + id + ".description"))
-                        .build())
+                .description(addImageIfPresent(OptionDescription.createBuilder()
+                        .text(Text.translatable("sounds.config." + id + ".description")), image).build())
                 .options(allOptions)
                 .collapsed(true)
                 .build();

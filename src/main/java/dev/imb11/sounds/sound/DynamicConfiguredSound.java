@@ -52,6 +52,7 @@ public class DynamicConfiguredSound<T, F extends DynamicSoundContext<T>> extends
 
         if (event == null || !enableDynamicSounds) {
             this.playSound();
+            return;
         }
 
         this.playSound(event);

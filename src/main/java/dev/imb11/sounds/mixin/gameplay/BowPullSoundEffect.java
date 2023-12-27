@@ -24,12 +24,14 @@ public class BowPullSoundEffect {
 
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setCurrentHand(Lnet/minecraft/util/Hand;)V", shift = At.Shift.AFTER))
     public void $start_bow_pull_sound(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
+        if (!world.isClient) return;
         this.currentBowPullSound = GameplaySoundConfig.get().bowPullSoundEffect.getSoundInstance();
         MinecraftClient.getInstance().getSoundManager().play(this.currentBowPullSound);
     }
 
     @Inject(method = "onStoppedUsing", at = @At(value = "HEAD"))
     public void $stop_bow_pull_sound(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfo ci) {
+        if (!world.isClient) return;
         if(this.currentBowPullSound != null) {
             MinecraftClient.getInstance().getSoundManager().stop(this.currentBowPullSound);
             this.currentBowPullSound = null;

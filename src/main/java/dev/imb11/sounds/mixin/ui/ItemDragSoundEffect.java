@@ -26,7 +26,7 @@ public class ItemDragSoundEffect<T extends ScreenHandler> {
 
     @Inject(method = "mouseDragged", at = @At(value = "INVOKE", target = "Ljava/util/Set;add(Ljava/lang/Object;)Z"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void $item_drag_sound_effect(double mouseX, double mouseY, int button, double deltaX, double deltaY, CallbackInfoReturnable<Boolean> cir, Slot slot) {
-            if (!cursorDragSlots.contains(slot) && cursorDragSlots.size() > 0)
-                UISoundConfig.get().itemDragSoundEffect.playDynamicSound(this.handler.getCursorStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+        if (!cursorDragSlots.contains(slot) && cursorDragSlots.size() > 0)
+            UISoundConfig.get().itemDragSoundEffect.playDynamicSound(this.handler.getCursorStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
 }

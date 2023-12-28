@@ -21,6 +21,7 @@
     "ui.CreativeInventorySoundEffects$CreativeScreenHandlerMixin",
     "ui.HotbarSoundEffects",
     "ui.ItemDragSoundEffect",
+    "ui.PlayerEntityMixin",
     "ui.ItemDropSoundEffect",
     "ui.ItemTransferSoundEffects",
     "ui.MentionSoundEffect",

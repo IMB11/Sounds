@@ -150,6 +150,12 @@ public class ConfiguredSound {
         }
     }
 
+    public void stopSound(SoundInstance soundInstance) {
+        if (this.enabled) {
+            client.getSoundManager().stop(soundInstance);
+        }
+    }
+
     public boolean shouldPlay() {
         return enabled;
     }

@@ -19,8 +19,9 @@ import java.util.function.Function;
 @Pseudo
 @Mixin(value = EmiScreenManager.class, remap = false)
 public abstract class EmiSoundEffects {
-    @Inject(method = "stackInteraction", at = @At("HEAD"), remap = false)
+    @Inject(method = "stackInteraction", at = @At("RETURN"), remap = false)
     private static void $item_picked_up(EmiStackInteraction stack, Function<EmiBind, Boolean> function, CallbackInfoReturnable<Boolean> cir) {
+        if (!cir.getReturnValue()) return;
         ItemStack item = stack.getStack().getEmiStacks().get(0).getItemStack();
         CompatConfig.get().emi_click_item.playDynamicSound(item, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }

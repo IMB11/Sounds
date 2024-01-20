@@ -23,6 +23,11 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
     public  SoundInstance handleContext(ItemStack context, SoundEvent fallback, float pitch, float volume) {
         var item = context.getItem();
 
+        if (item instanceof BlockItem blockItem) {
+            var block = blockItem.getBlock();
+            fallback = this.blockSoundType.getTransformer().apply(block.getSoundGroup(block.getDefaultState()));
+        }
+
         for (SoundDefinition<Item> definition : DynamicSoundHelper.<Item>getDefinitions("items")) {
             if (definition.getKeys().isValid(item)) {
                 fallback = definition.getSoundEvent();
@@ -37,11 +42,6 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
 
                 break;
             }
-        }
-
-        if (item instanceof BlockItem blockItem) {
-            var block = blockItem.getBlock();
-            fallback = this.blockSoundType.getTransformer().apply(block.getSoundGroup(block.getDefaultState()));
         }
 
         return createSoundInstance(fallback, pitch, volume);

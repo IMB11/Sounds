@@ -2,7 +2,7 @@ name: Distribute JARs
 on:
   release:
     types: [published]
-    
+
 jobs:
   build:
     strategy:
@@ -20,14 +20,14 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
-            distribution: temurin
-            cache: gradle
-            java-version: 17
+          distribution: temurin
+          cache: gradle
+          java-version: 17
       - run: chmod +x gradlew
       - name: Set Active Version
         run: ./gradlew "Set active version to ${{ matrix.game_version }}"
       - name: Build Version
-        run: ./gradlew buildActive
+        run: "./gradlew :${{ matrix.game_version }}:build"
       - uses: Kir-Antipov/mc-publish@v3.3
         with:
           files: |

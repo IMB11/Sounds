@@ -1,6 +1,13 @@
-plugins.apply 'fabric-loom'
+plugins {
+    id 'fabric-loom' version '1.5-SNAPSHOT'
+}
 
-version = "${property('mod.version')}+${stonecutter.current().version()}"
+version =  property("mod.version") + "+" + stonecutter.current.version
+group = "dev.imb11"
+
+base {
+    archivesName = property("mod.name")
+}
 
 repositories {
     mavenCentral()
@@ -14,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${stonecutter.current().version()}"
+    minecraft "com.mojang:minecraft:${stonecutter.current.version}"
     mappings "net.fabricmc:yarn:${property('deps.yarn')}:v2"
 
     modImplementation "net.fabricmc:fabric-loader:${property('deps.fabric_loader')}"
@@ -25,36 +32,37 @@ dependencies {
     modImplementation "com.mineblock11:MRU:${property("deps.mru")}"
 
     modCompileOnly "dev.emi:emi-fabric:${property("compile.emi")}"
-
-    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.0")))
 }
+
+if (stonecutter.current.active) { // run configs for non-active version would be invalid
+    loom {
+        runConfigs.all {
+            ideConfigGenerated = true // generate IDE tasks for running client, server and testmod, datagen if those are present
+            runDir "../../run" // use a global run directory for all versions
+        }
+    }
+}
+
 
 loom {
-//    accessWidenerPath = file("../../src/main/resources/sonance.accesswidener")
+    runs {
+        datagenClient {
+            client()
+            name "Data Generation Client"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=" + getRootDir().toPath().resolve("src/main/generated")
+            vmArg "-Dfabric-api.datagen.modid=sounds"
 
-        runs {
-            datagenClient {
-                client()
-                name "Data Generation Client"
-                vmArg "-Dfabric-api.datagen"
-                vmArg "-Dfabric-api.datagen.output-dir=" + getRootDir().toPath().resolve("src/main/generated")
-                vmArg "-Dfabric-api.datagen.modid=sounds"
-
-                ideConfigGenerated = false
-                runDir "build/datagen"
-            }
+            ideConfigGenerated = false
+            runDir "build/datagen"
         }
-
-    runConfigs.server.ideConfigGenerated = false
+    }
 }
-validateAccessWidener.enabled = false
 
 java {
     withSourcesJar()
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
-
-    archivesBaseName = "${property('mod.name')}"
 }
 
 processResources {
@@ -64,9 +72,9 @@ processResources {
 }
 
 jar {
-    archiveClassifier.set 'dev'
-
-    from rootProject.file('LICENSE')
+    from("LICENSE") {
+        rename { "${it}_${project.base.archivesName.get()}"}
+    }
 }
 
 sourceSets {
@@ -76,14 +84,5 @@ sourceSets {
                     rootProject.file('src/main/generated')
             ]
         }
-    }
-}
-
-if (stonecutter.current().isActiveVersion()) {
-
-    rootProject.tasks.register('buildActive') {
-        setGroup 'project'
-
-        dependsOn tasks.getByName('build')
     }
 }

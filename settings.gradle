@@ -5,15 +5,14 @@ pluginManagement {
             url = 'https://maven.fabricmc.net/'
         }
         maven {
-            url = "https://maven.kikugie.dev/third-party"
+            url = "https://maven.kikugie.dev/releases"
         }
         gradlePluginPortal()
     }
 }
 
 plugins {
-    id 'io.shcm.shsupercm.fabric.stonecutter' version '1.5-dev.10'
-    id 'fabric-loom' version '1.4-SNAPSHOT' apply false
+    id "dev.kikugie.stonecutter" version "0.2.3"
 }
 
 stonecutter {

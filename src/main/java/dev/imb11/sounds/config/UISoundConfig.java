@@ -10,6 +10,8 @@ import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import dev.imb11.sounds.sound.context.ScreenHandlerSoundContext;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
+import dev.isxander.yacl3.api.controller.FloatFieldControllerBuilder;
+import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.minecraft.item.ItemStack;
@@ -74,6 +76,12 @@ public class UISoundConfig {
     @SerialEntry
     public boolean ignoreEmptyHotbarSlots = false;
 
+    @SerialEntry
+    public boolean enableChatSoundCooldown = false;
+
+    @SerialEntry
+    public float chatSoundCooldown = 0.5f;
+
     public static UISoundConfig get() {
         return GSON.instance();
     }
@@ -109,6 +117,23 @@ public class UISoundConfig {
                             .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
                             .build();
 
+                    Option<Float> chatSoundCooldownOption = Option.<Float>createBuilder()
+                            .name(Text.translatable("sounds.config.chat_sound_cooldown.name"))
+                            .description(OptionDescription.createBuilder()
+                                    .text(Text.translatable("sounds.config.chat_sound_cooldown.description")).build())
+                            .binding(defaults.chatSoundCooldown, () -> config.chatSoundCooldown, (value) -> config.chatSoundCooldown = value)
+                            .controller(opt -> FloatFieldControllerBuilder.create(opt).formatValue(val -> Text.of(val + "s")))
+                            .build();
+
+                    Option<Boolean> enableChatSoundCooldownOption = Option.<Boolean>createBuilder()
+                            .name(Text.translatable("sounds.config.enable_chat_sound_cooldown.name"))
+                            .description(OptionDescription.createBuilder()
+                                    .text(Text.translatable("sounds.config.enable_chat_sound_cooldown.description")).build())
+                            .binding(defaults.enableChatSoundCooldown, () -> config.enableChatSoundCooldown, (value) -> config.enableChatSoundCooldown = value)
+                            .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
+                            .listener((opt, val) -> chatSoundCooldownOption.setAvailable(val))
+                            .build();
+
                     return builder
                             .title(Text.empty())
                             .category(
@@ -121,6 +146,8 @@ public class UISoundConfig {
                                                     ))
                                             .option(useAtForChatMentionsOption)
                                             .option(ignoreSystemChatsOption)
+                                            .option(enableChatSoundCooldownOption)
+                                            .option(chatSoundCooldownOption)
                                             .build()
                             ).category(
                                     ConfigCategory.createBuilder()

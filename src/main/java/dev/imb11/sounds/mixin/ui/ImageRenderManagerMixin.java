@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Pseudo
-@Mixin(ImageRendererManager.class)
+@Mixin(value = ImageRendererManager.class, remap = false)
 public class ImageRenderManagerMixin {
     @Mutable
     @Shadow @Final private static ExecutorService SINGLE_THREAD_EXECUTOR;

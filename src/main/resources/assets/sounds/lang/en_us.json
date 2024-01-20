@@ -57,6 +57,12 @@
   "sounds.config.mention.name": "Chat Mentions",
   "sounds.config.mention.description": "A sound effect that is played when you are mentioned in a new chat message.",
 
+  "sounds.config.enable_chat_sound_cooldown.name": "Enable Cooldown",
+  "sounds.config.enable_chat_sound_cooldown.description": "Should a cooldown be applied to chat sounds? If enabled, the sound will only be played once within every cooldown period. This does not apply to typing sounds.",
+
+  "sounds.config.chat_sound_cooldown.name": "Cooldown Period",
+  "sounds.config.chat_sound_cooldown.description": "The cooldown period for chat sounds, in seconds. This does not apply to typing sounds.",
+
   "sounds.config.chat_mention_at.name": "Enable Mention Prefix",
   "sounds.config.chat_mention_at.description": "When identifying whether you've been mentioned in a chat message, should the prefix '@' be used?",
 

@@ -11,7 +11,7 @@
     "website": "https://imb11.dev/",
     "repo": "https://github.com/IMB11/Sounds"
   },
-  "license": "LGPL-2.1",
+  "license": "ARR",
   "icon": "assets/sounds/icon.png",
   "environment": "client",
   "entrypoints": {

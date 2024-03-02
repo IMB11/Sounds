@@ -1,6 +1,7 @@
 package dev.imb11.sounds.mixin.gameplay;
 
-import dev.imb11.sounds.config.GameplaySoundConfig;
+import dev.imb11.sounds.config.SoundsConfig;
+import dev.imb11.sounds.config.WorldSoundsConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
@@ -22,7 +23,7 @@ public abstract class FurnaceMinecartEntityMixin extends AbstractMinecartEntity 
     @Inject(method = "interact", at = @At(value = "TAIL"))
     public void $furnace_minecart_fuel_sound_effect(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         if(this.getWorld().isClient) {
-            GameplaySoundConfig.get().furnaceMinecartFuelSoundEffect.playSound();
+            SoundsConfig.get(WorldSoundsConfig.class).furnaceMinecartFuelSoundEffect.playSound();
         }
     }
 }

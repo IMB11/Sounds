@@ -1,6 +1,6 @@
 package dev.imb11.sounds.mixin.ui;
 
-import dev.imb11.sounds.config.UISoundConfig;
+import dev.imb11.sounds.config.old.UISoundConfig;
 import net.minecraft.client.gui.screen.ChatScreen;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;

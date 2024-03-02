@@ -1,6 +1,7 @@
 package dev.imb11.sounds.mixin.gameplay;
 
-import dev.imb11.sounds.config.GameplaySoundConfig;
+import dev.imb11.sounds.config.SoundsConfig;
+import dev.imb11.sounds.config.WorldSoundsConfig;
 import net.minecraft.block.entity.JukeboxBlockEntity;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,6 +17,6 @@ public class JukeboxBlockEntityMixin {
     *//*?} else {*/
     public void $jukebox_use_sound_effect(ItemStack stack, CallbackInfo ci) {
     /*?}*/
-        GameplaySoundConfig.get().jukeboxUseSoundEffect.playSound();
+        SoundsConfig.get(WorldSoundsConfig.class).jukeboxUseSoundEffect.playSound();
     }
 }

@@ -2,7 +2,7 @@ package dev.imb11.sounds.sound.context;
 
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.SoundDefinition;
-import dev.imb11.sounds.config.UISoundConfig;
+import dev.imb11.sounds.config.old.UISoundConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.screen.ScreenHandler;

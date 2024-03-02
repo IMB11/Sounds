@@ -1,6 +1,6 @@
 package dev.imb11.sounds.sound.events;
 
-import dev.imb11.sounds.config.GameplaySoundConfig;
+import dev.imb11.sounds.config.old.GameplaySoundConfig;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.Registries;

@@ -1,10 +1,9 @@
 package dev.imb11.sounds.mixin.compat;
 
-import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.stack.EmiStackInteraction;
 import dev.emi.emi.input.EmiBind;
 import dev.emi.emi.screen.EmiScreenManager;
-import dev.imb11.sounds.config.CompatConfig;
+import dev.imb11.sounds.config.old.CompatConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import net.minecraft.item.ItemStack;

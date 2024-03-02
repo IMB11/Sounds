@@ -1,6 +1,6 @@
 package dev.imb11.sounds.mixin.ui;
 
-import dev.imb11.sounds.config.UISoundConfig;
+import dev.imb11.sounds.config.old.UISoundConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.ChatHud;

@@ -1,8 +1,8 @@
 package dev.imb11.sounds.gui;
 
-import dev.imb11.sounds.config.CompatConfig;
-import dev.imb11.sounds.config.GameplaySoundConfig;
-import dev.imb11.sounds.config.UISoundConfig;
+import dev.imb11.sounds.config.old.CompatConfig;
+import dev.imb11.sounds.config.old.GameplaySoundConfig;
+import dev.imb11.sounds.config.old.UISoundConfig;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -41,7 +41,9 @@ public class SoundsConfigScreen extends Screen {
         int fontHeight = this.client.textRenderer.fontHeight;
         DynamicGridWidget grid = new DynamicGridWidget(10, 10 + fontHeight + 10, width - 20, height - 20 - fontHeight - 10 - 20);
 
-        this.openUIButton = new ImageButtonWidget(0, 0, 0, 0, Text.translatable("sounds.config.ui"), new Identifier("sounds", "textures/gui/ui_sounds.webp"));
+
+
+        this.openUIButton = new ImageButtonWidget(0, 0, 0, 0, , );
         this.openGameplayButton = new ImageButtonWidget(0, 0, 0, 0, Text.translatable("sounds.config.gameplay"), new Identifier("sounds", "textures/gui/gameplay_sounds.webp"));
         this.openModButton = new ImageButtonWidget(0, 0, 0, 0, Text.translatable("sounds.config.mod"), new Identifier("sounds", "textures/gui/mod_sounds.webp"));
 

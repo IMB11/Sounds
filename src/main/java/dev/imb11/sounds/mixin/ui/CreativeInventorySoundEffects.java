@@ -1,7 +1,7 @@
 package dev.imb11.sounds.mixin.ui;
 
 import dev.imb11.sounds.MixinStatics;
-import dev.imb11.sounds.config.UISoundConfig;
+import dev.imb11.sounds.config.old.UISoundConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;

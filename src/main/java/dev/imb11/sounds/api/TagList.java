@@ -11,6 +11,12 @@ import java.util.List;
 
 public class TagList<T> {
 
+    private final List<Either<RegistryKey<T>, TagKey<T>>> _list;
+
+    public TagList(List<Either<RegistryKey<T>, TagKey<T>>> list) {
+        _list = list;
+    }
+
     public static <T> Codec<TagList<T>> getCodec(RegistryKey<? extends Registry<T>> registryKey) {
         return Codec.list(
                 Codec.either(
@@ -28,20 +34,14 @@ public class TagList<T> {
         _list.add(either);
     }
 
-    private final List<Either<RegistryKey<T>, TagKey<T>>> _list;
-
-    public TagList(List<Either<RegistryKey<T>, TagKey<T>>> list) {
-        _list = list;
-    }
-
     public boolean isValid(T value) {
-        for(Either<RegistryKey<T>, TagKey<T>> either : _list) {
-            if(either.left().isPresent()) {
+        for (Either<RegistryKey<T>, TagKey<T>> either : _list) {
+            if (either.left().isPresent()) {
                 var key = either.left().get();
                 Registry<T> registry = (Registry<T>) Registries.REGISTRIES.get(key.getRegistry());
                 assert registry != null;
                 var entry = registry.getId(value);
-                if(either.left().get().getValue().equals(entry)) {
+                if (either.left().get().getValue().equals(entry)) {
                     return true;
                 }
             } else if (either.right().isPresent()) {
@@ -49,7 +49,7 @@ public class TagList<T> {
                 Registry<T> registry = (Registry<T>) Registries.REGISTRIES.get(tagKey.registry().getValue());
                 assert registry != null;
                 var entry = registry.getEntry(value);
-                if(entry.isIn(tagKey)) {
+                if (entry.isIn(tagKey)) {
                     return true;
                 }
             }

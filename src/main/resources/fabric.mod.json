@@ -33,5 +33,8 @@
     "fabric": "*",
     "mru": "*",
     "minecraft": "${target_minecraft}"
+  },
+  "suggests": {
+    "yacl": ">=${target_yacl}"
   }
 }

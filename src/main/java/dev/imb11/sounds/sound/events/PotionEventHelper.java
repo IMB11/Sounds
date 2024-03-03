@@ -1,6 +1,7 @@
 package dev.imb11.sounds.sound.events;
 
-import dev.imb11.sounds.config.old.GameplaySoundConfig;
+import dev.imb11.sounds.config.EventSoundsConfig;
+import dev.imb11.sounds.config.SoundsConfig;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.Registries;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class PotionEventHelper {
-    private static final AtomicReference<List<Identifier>> previousEffects = new AtomicReference<>(null);;
+    private static final AtomicReference<List<Identifier>> previousEffects = new AtomicReference<>(null);
 
     public static void initialize() {
         ClientTickEvents.START_CLIENT_TICK.register(listenForEffectChanges());
@@ -36,9 +37,9 @@ public class PotionEventHelper {
                     if (statusEffect == null) continue;
 
                     if (statusEffect.isBeneficial()) {
-                        GameplaySoundConfig.get().positiveStatusEffectLoseSoundEffect.playSound();
+                        SoundsConfig.get(EventSoundsConfig.class).positiveStatusEffectLoseSoundEffect.playSound();
                     } else {
-                        GameplaySoundConfig.get().negativeStatusEffectLoseSoundEffect.playSound();
+                        SoundsConfig.get(EventSoundsConfig.class).negativeStatusEffectLoseSoundEffect.playSound();
                     }
                 }
 
@@ -52,9 +53,9 @@ public class PotionEventHelper {
                     if (statusEffect == null) continue;
 
                     if (statusEffect.isBeneficial()) {
-                        GameplaySoundConfig.get().positiveStatusEffectGainSoundEffect.playSound();
+                        SoundsConfig.get(EventSoundsConfig.class).positiveStatusEffectGainSoundEffect.playSound();
                     } else {
-                        GameplaySoundConfig.get().negativeStatusEffectGainSoundEffect.playSound();
+                        SoundsConfig.get(EventSoundsConfig.class).negativeStatusEffectGainSoundEffect.playSound();
                     }
                 }
             }

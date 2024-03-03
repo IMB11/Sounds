@@ -19,26 +19,21 @@ import java.util.function.Consumer;
 import static org.lwjgl.opengl.GL20.*;
 
 public class ImageButtonWidget extends ClickableWidget {
-    private CompletableFuture<AnimatedDynamicTextureImage> image;
+    float durationHovered = 1f;
+    private final CompletableFuture<AnimatedDynamicTextureImage> image;
     private Consumer<ClickableWidget> onPress;
 
-    public ImageButtonWidget(int x, int y, int width, int height, Text message, Identifier image) {
+    public ImageButtonWidget(int x, int y, int width, int height, Text message, Identifier image, Consumer<ClickableWidget> clickEvent) {
         super(x, y, width, height, message);
         this.image = ImageRendererManager.registerImage(image, AnimatedDynamicTextureImage.createWEBPFromTexture(image));
     }
 
-    public void setClickEvent(Consumer<ClickableWidget> clickEvent) {
-        this.onPress = clickEvent;
-    }
-
     @Override
     public void onClick(double mouseX, double mouseY) {
-        if(this.onPress != null) {
+        if (this.onPress != null) {
             this.onPress.accept(this);
         }
     }
-
-    float durationHovered = 1f;
 
     /*? <1.20.3 {*//*
     @Override
@@ -46,14 +41,14 @@ public class ImageButtonWidget extends ClickableWidget {
     *//*?} else {*/
     @Override
     protected void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
-    /*?}*/
+        /*?}*/
         context.enableScissor(getX(), getY(), getX() + width, getY() + height);
         this.hovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.width && mouseY < this.getY() + this.height;
 
-        if(this.hovered) {
+        if (this.hovered) {
             durationHovered += delta / 2f;
         } else {
-            if(durationHovered < 0) {
+            if (durationHovered < 0) {
                 durationHovered = 0;
             } else {
                 durationHovered -= durationHovered / 4f;
@@ -63,10 +58,10 @@ public class ImageButtonWidget extends ClickableWidget {
         // Ease in out lerp.
         float alphaScale = MathHelper.clampedLerp(0.9f, 0.2f, MathHelper.clamp(durationHovered - 1f, 0.0f, 1.0f));
 
-        if(image.isDone()) {
+        if (image.isDone()) {
             try {
                 var contentImage = image.get();
-                if(contentImage != null) {
+                if (contentImage != null) {
 
                     // Scale the image so that the image height is the same as the button height.
                     float neededWidth = ((AnimatedDynamicTextureImageAccessor) contentImage).getFrameWidth() * ((float) this.height / ((AnimatedDynamicTextureImageAccessor) contentImage).getFrameHeight());
@@ -121,5 +116,6 @@ public class ImageButtonWidget extends ClickableWidget {
     }
 
     @Override
-    protected void appendClickableNarrations(NarrationMessageBuilder builder) {}
+    protected void appendClickableNarrations(NarrationMessageBuilder builder) {
+    }
 }

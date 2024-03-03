@@ -1,6 +1,7 @@
 package dev.imb11.sounds.mixin.ui;
 
-import dev.imb11.sounds.config.old.UISoundConfig;
+import dev.imb11.sounds.config.SoundsConfig;
+import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.sound.context.ScreenHandlerSoundContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -24,12 +25,12 @@ public abstract class ScreenSoundEffect {
     @Inject(method = "setScreen", at = @At("HEAD"), cancellable = false)
     public void $open_close_inventory_sound_effect(Screen screen, CallbackInfo ci) {
         if (screen == null && (currentScreen instanceof BookScreen || currentScreen instanceof BookEditScreen)) {
-            UISoundConfig.get().inventoryCloseSoundEffect.playDynamicSound(SoundEvents.ENTITY_VILLAGER_WORK_LIBRARIAN);
+            SoundsConfig.get(UISoundsConfig.class).inventoryCloseSoundEffect.playDynamicSound(SoundEvents.ENTITY_VILLAGER_WORK_LIBRARIAN);
         } else if (currentScreen != screen && (screen instanceof BookScreen || screen instanceof BookEditScreen)) {
-            UISoundConfig.get().inventoryOpenSoundEffect.playDynamicSound(SoundEvents.ENTITY_VILLAGER_WORK_LIBRARIAN);
+            SoundsConfig.get(UISoundsConfig.class).inventoryOpenSoundEffect.playDynamicSound(SoundEvents.ENTITY_VILLAGER_WORK_LIBRARIAN);
         } else if (screen == null && currentScreen instanceof HandledScreen<?> handledScreen)
-            UISoundConfig.get().inventoryCloseSoundEffect.playDynamicSound(handledScreen.getScreenHandler(), ScreenHandlerSoundContext.of(false));
+            SoundsConfig.get(UISoundsConfig.class).inventoryCloseSoundEffect.playDynamicSound(handledScreen.getScreenHandler(), ScreenHandlerSoundContext.of(false));
         else if (currentScreen != screen && screen instanceof HandledScreen<?> handledScreen)
-            UISoundConfig.get().inventoryOpenSoundEffect.playDynamicSound(handledScreen.getScreenHandler(), ScreenHandlerSoundContext.of(true));
+            SoundsConfig.get(UISoundsConfig.class).inventoryOpenSoundEffect.playDynamicSound(handledScreen.getScreenHandler(), ScreenHandlerSoundContext.of(true));
     }
 }

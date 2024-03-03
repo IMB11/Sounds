@@ -1,6 +1,7 @@
 package dev.imb11.sounds.mixin.ui;
 
-import dev.imb11.sounds.config.old.UISoundConfig;
+import dev.imb11.sounds.config.SoundsConfig;
+import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -17,9 +18,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ScreenHandler.class)
 public abstract class ItemTransferSoundEffects {
-    @Shadow public abstract ItemStack getCursorStack();
+    @Shadow
+    public abstract ItemStack getCursorStack();
 
-    @Shadow public abstract Slot getSlot(int index);
+    @Shadow
+    public abstract Slot getSlot(int index);
 
     @Inject(method = "internalOnSlotClick", at = @At("HEAD"))
     void $item_transfer_sound_effects(int slotIndex, int button, SlotActionType actionType, PlayerEntity player, CallbackInfo ci) {
@@ -30,23 +33,23 @@ public abstract class ItemTransferSoundEffects {
         if (actionType == SlotActionType.PICKUP) {
             if (itemStack.isEmpty()) {
                 ItemStack cursorStack = this.getCursorStack();
-                UISoundConfig.get().itemClickSoundEffect.playDynamicSound(cursorStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+                SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(cursorStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
             } else {
-                UISoundConfig.get().itemClickSoundEffect.playDynamicSound(itemStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+                SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(itemStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
             }
         } else if (actionType == SlotActionType.PICKUP_ALL) {
-            UISoundConfig.get().itemClickSoundEffect.playSound();
+            SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playSound();
         } else if (actionType == SlotActionType.SWAP) {
             if (itemStack.isEmpty()) {
                 ItemStack buttonStack = player.getInventory().getStack(button);
-                UISoundConfig.get().itemClickSoundEffect.playDynamicSound(buttonStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+                SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(buttonStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
             } else {
-                UISoundConfig.get().itemClickSoundEffect.playDynamicSound(itemStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+                SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(itemStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
             }
         } else if (actionType == SlotActionType.QUICK_MOVE) {
-            UISoundConfig.get().itemClickSoundEffect.playDynamicSound(itemStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+            SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(itemStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
         } else if (actionType == SlotActionType.CLONE) {
-            UISoundConfig.get().itemCopySoundEffect.playDynamicSound(itemStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+            SoundsConfig.get(UISoundsConfig.class).itemCopySoundEffect.playDynamicSound(itemStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
         }
     }
 }

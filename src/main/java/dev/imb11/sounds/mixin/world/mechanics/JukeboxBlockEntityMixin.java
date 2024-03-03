@@ -16,7 +16,7 @@ public class JukeboxBlockEntityMixin {
     public void $jukebox_use_sound_effect(int slot, ItemStack stack, CallbackInfo ci) {
     *//*?} else {*/
     public void $jukebox_use_sound_effect(ItemStack stack, CallbackInfo ci) {
-    /*?}*/
+        /*?}*/
         SoundsConfig.get(WorldSoundsConfig.class).jukeboxUseSoundEffect.playSound();
     }
 }

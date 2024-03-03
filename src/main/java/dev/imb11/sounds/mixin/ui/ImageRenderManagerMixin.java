@@ -10,9 +10,11 @@ import java.util.concurrent.Executors;
 @Mixin(value = ImageRendererManager.class, remap = false)
 public class ImageRenderManagerMixin {
     @Mutable
-    @Shadow @Final private static ExecutorService SINGLE_THREAD_EXECUTOR;
+    @Shadow
+    @Final
+    private static ExecutorService SINGLE_THREAD_EXECUTOR;
 
     static {
-       SINGLE_THREAD_EXECUTOR = Executors.newFixedThreadPool(5, task -> new Thread(task, "YACL Image Prep (" + task.hashCode() + ")"));
+        SINGLE_THREAD_EXECUTOR = Executors.newFixedThreadPool(5, task -> new Thread(task, "YACL Image Prep (" + task.hashCode() + ")"));
     }
 }

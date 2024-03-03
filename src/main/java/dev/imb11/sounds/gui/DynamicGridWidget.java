@@ -1,6 +1,5 @@
 package dev.imb11.sounds.gui;
 
-import dev.imb11.sounds.mixin.accessors.ClickableWidgetAccessor;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.WrapperWidget;
@@ -25,12 +24,12 @@ public class DynamicGridWidget extends WrapperWidget {
         this.children.add(new GridItem(-1, -1, widget));
     }
 
-    public void setPadding(int padding) {
-        this.padding = padding;
-    }
-
     public int getPadding() {
         return padding;
+    }
+
+    public void setPadding(int padding) {
+        this.padding = padding;
     }
 
     private boolean canFit(int gridX, int gridY, int cellWidth, int cellHeight, int optimalCells, boolean[][] grid) {
@@ -77,7 +76,7 @@ public class DynamicGridWidget extends WrapperWidget {
             int gridX = currentX / cellWidth;
             int gridY = currentY / cellHeight;
 
-            while (!canFit(gridX, gridY, Math.abs(child.cellWidth()) , Math.abs(child.cellHeight()), optimalCells, grid)) {
+            while (!canFit(gridX, gridY, Math.abs(child.cellWidth()), Math.abs(child.cellHeight()), optimalCells, grid)) {
                 currentX += cellWidth;
                 if (currentX >= this.width) {
                     currentX = getX();
@@ -92,7 +91,7 @@ public class DynamicGridWidget extends WrapperWidget {
                 throw new RuntimeException("Impossible to fit widget in grid!");
             }
 
-            if(grid[gridX][gridY]) {
+            if (grid[gridX][gridY]) {
                 currentX += cellWidth;
                 if (currentX >= this.width) {
                     currentX = getX();
@@ -115,15 +114,15 @@ public class DynamicGridWidget extends WrapperWidget {
                 thisCellHeight = child.cellHeight() * cellHeight;
             }
 
-            if(isMultiCell) {
+            if (isMultiCell) {
                 // Mark all cells this widget uses as taken.
                 int minX = gridX;
                 int minY = gridY;
                 int maxX = gridX + child.cellWidth();
                 int maxY = gridY + child.cellHeight();
 
-                for(int x = minX; x < maxX; x++) {
-                    for(int y = minY; y < maxY; y++) {
+                for (int x = minX; x < maxX; x++) {
+                    for (int y = minY; y < maxY; y++) {
                         grid[x][y] = true;
                     }
                 }
@@ -156,5 +155,6 @@ public class DynamicGridWidget extends WrapperWidget {
         this.children.stream().map(GridItem::widget).forEach(consumer);
     }
 
-    public record GridItem(int cellHeight, int cellWidth, ClickableWidget widget) { }
+    public record GridItem(int cellHeight, int cellWidth, ClickableWidget widget) {
+    }
 }

@@ -1,7 +1,7 @@
 package dev.imb11.sounds.dynamic;
 
-import dev.imb11.sounds.api.SoundDefinition;
 import com.mojang.serialization.Codec;
+import dev.imb11.sounds.api.SoundDefinition;
 import net.minecraft.registry.Registries;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;

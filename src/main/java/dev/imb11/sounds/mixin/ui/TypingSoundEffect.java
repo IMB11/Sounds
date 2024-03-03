@@ -1,6 +1,7 @@
 package dev.imb11.sounds.mixin.ui;
 
-import dev.imb11.sounds.config.old.UISoundConfig;
+import dev.imb11.sounds.config.ChatSoundsConfig;
+import dev.imb11.sounds.config.SoundsConfig;
 import net.minecraft.client.gui.screen.ChatScreen;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,7 +24,7 @@ public class TypingSoundEffect {
     @Inject(method = "keyPressed", at = @At("HEAD"), cancellable = false)
     public void $typing_sound_effect(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
         if (isNotSpecialKey(keyCode)) {
-            UISoundConfig.get().typingSoundEffect.playSound();
+            SoundsConfig.get(ChatSoundsConfig.class).typingSoundEffect.playSound();
         }
     }
 }

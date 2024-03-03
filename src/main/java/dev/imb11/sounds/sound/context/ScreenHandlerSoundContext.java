@@ -2,7 +2,8 @@ package dev.imb11.sounds.sound.context;
 
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.SoundDefinition;
-import dev.imb11.sounds.config.old.UISoundConfig;
+import dev.imb11.sounds.config.SoundsConfig;
+import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.screen.ScreenHandler;
@@ -30,11 +31,11 @@ public class ScreenHandlerSoundContext implements DynamicSoundContext<ScreenHand
                 if (definition.getKeys().isValid(type)) {
                     soundEvent = definition.getSoundEvent();
 
-                    if(definition.getPitch().isPresent()) {
+                    if (definition.getPitch().isPresent()) {
                         pitch = definition.getPitch().get();
                     }
 
-                    if(definition.getVolume().isPresent()) {
+                    if (definition.getVolume().isPresent()) {
                         volume = definition.getVolume().get();
                     }
 
@@ -45,13 +46,13 @@ public class ScreenHandlerSoundContext implements DynamicSoundContext<ScreenHand
             SoundsClient.LOGGER.warn("Screen of type {} has no declared ScreenHandlerType - ignoring.", context.getClass().getName());
         }
 
-        if(isOpening) {
-            fallback = UISoundConfig.get().inventoryOpenSoundEffect.fetchSoundEvent();
+        if (isOpening) {
+            fallback = SoundsConfig.get(UISoundsConfig.class).inventoryOpenSoundEffect.fetchSoundEvent();
         } else {
-            fallback = UISoundConfig.get().inventoryCloseSoundEffect.fetchSoundEvent();
+            fallback = SoundsConfig.get(UISoundsConfig.class).inventoryCloseSoundEffect.fetchSoundEvent();
         }
 
-        if(soundEvent == null) {
+        if (soundEvent == null) {
             soundEvent = fallback;
         }
 

@@ -3,6 +3,8 @@ package dev.imb11.sounds.mixin.compat;
 import dev.emi.emi.api.stack.EmiStackInteraction;
 import dev.emi.emi.input.EmiBind;
 import dev.emi.emi.screen.EmiScreenManager;
+import dev.imb11.sounds.config.SoundsConfig;
+import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import net.minecraft.item.ItemStack;
@@ -21,6 +23,6 @@ public abstract class EmiSoundEffects {
     private static void $item_picked_up(EmiStackInteraction stack, Function<EmiBind, Boolean> function, CallbackInfoReturnable<Boolean> cir) {
         if (!cir.getReturnValue()) return;
         ItemStack item = stack.getStack().getEmiStacks().get(0).getItemStack();
-        CompatConfig.get().emi_click_item.playDynamicSound(item, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+        SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(item, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
 }

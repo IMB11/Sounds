@@ -22,7 +22,7 @@ public abstract class FurnaceMinecartEntityMixin extends AbstractMinecartEntity 
 
     @Inject(method = "interact", at = @At(value = "TAIL"))
     public void $furnace_minecart_fuel_sound_effect(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        if(this.getWorld().isClient) {
+        if (this.getWorld().isClient) {
             SoundsConfig.get(WorldSoundsConfig.class).furnaceMinecartFuelSoundEffect.playSound();
         }
     }

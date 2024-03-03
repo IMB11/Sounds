@@ -1,21 +1,18 @@
 package dev.imb11.sounds.gui;
 
-import dev.imb11.sounds.config.old.CompatConfig;
-import dev.imb11.sounds.config.old.GameplaySoundConfig;
-import dev.imb11.sounds.config.old.UISoundConfig;
+import dev.imb11.sounds.config.SoundsConfig;
+import dev.imb11.sounds.config.utils.ConfigGroup;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import org.jetbrains.annotations.Nullable;
 
 public class SoundsConfigScreen extends Screen {
     private final Screen parent;
-    private ImageButtonWidget openUIButton;
-    private ImageButtonWidget openGameplayButton;
-    private ImageButtonWidget openModButton;
 
     public SoundsConfigScreen(@Nullable Screen parent) {
         super(Text.translatable("sounds.config.title"));
@@ -41,29 +38,25 @@ public class SoundsConfigScreen extends Screen {
         int fontHeight = this.client.textRenderer.fontHeight;
         DynamicGridWidget grid = new DynamicGridWidget(10, 10 + fontHeight + 10, width - 20, height - 20 - fontHeight - 10 - 20);
 
-
-
-        this.openUIButton = new ImageButtonWidget(0, 0, 0, 0, , );
-        this.openGameplayButton = new ImageButtonWidget(0, 0, 0, 0, Text.translatable("sounds.config.gameplay"), new Identifier("sounds", "textures/gui/gameplay_sounds.webp"));
-        this.openModButton = new ImageButtonWidget(0, 0, 0, 0, Text.translatable("sounds.config.mod"), new Identifier("sounds", "textures/gui/mod_sounds.webp"));
-
-        this.openUIButton.setClickEvent((btn) -> this.client.setScreen(UISoundConfig.getInstance().generateScreen(this)));
-
-        this.openGameplayButton.setClickEvent((btn) -> this.client.setScreen(GameplaySoundConfig.getInstance().generateScreen(this)));
-
-        this.openModButton.setClickEvent((btn) -> this.client.setScreen(CompatConfig.getInstance().generateScreen(this)));
-
-        grid.addChild(this.openUIButton, 3, 1);
-        grid.addChild(this.openGameplayButton, 2, 2);
-        grid.addChild(this.openModButton, 1, 2);
+        ImageButtonWidget koFiWidget = new ImageButtonWidget(0, 0, 0, 0, Text.empty(), new Identifier("sounds", "textures/gui/kofi.webp"), btn -> {
+            Util.getOperatingSystem().open("https://ko-fi.com/mineblock11");
+        });
 
         grid.setPadding(3);
+
+        for (ConfigGroup configGroup : SoundsConfig.getAll()) {
+            grid.addChild(new ImageButtonWidget(0, 0, 0, 0, configGroup.getName(), configGroup.getImage(), btn -> {
+                this.client.setScreen(configGroup.getYACL().generateScreen(this));
+            }));
+        }
+
+        grid.addChild(koFiWidget, 2, 1);
+
 
         grid.calculateLayout();
 
         grid.forEachChild(this::addDrawableChild);
 
-        // new ButtonWidget(, Text.of("Close"), (btn) -> this.client.setScreen(this.parent));
         ButtonWidget buttonWidget = ButtonWidget.builder(ScreenTexts.DONE, (btn) -> this.client.setScreen(this.parent)).dimensions(this.width / 2 - 100, this.height - 30, 200, 20).build();
 
         this.addDrawableChild(buttonWidget);

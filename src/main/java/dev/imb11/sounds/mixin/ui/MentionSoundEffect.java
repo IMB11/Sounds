@@ -1,6 +1,7 @@
 package dev.imb11.sounds.mixin.ui;
 
-import dev.imb11.sounds.config.old.UISoundConfig;
+import dev.imb11.sounds.config.ChatSoundsConfig;
+import dev.imb11.sounds.config.SoundsConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.ChatHud;
@@ -26,32 +27,32 @@ public class MentionSoundEffect {
 
     @Inject(method = "render", at = @At("HEAD"))
     public void $cooldown_period(DrawContext context, int currentTick, int mouseX, int mouseY, CallbackInfo ci) {
-        if(cooldownPeriod > 0) {
+        if (cooldownPeriod > 0) {
             cooldownPeriod -= this.client.getTickDelta() / 2f;
         }
     }
 
     @Inject(method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V", at = @At("HEAD"), cancellable = false)
     public void $mention_recieve_sound_effect(Text message, MessageSignatureData signature, int ticks, MessageIndicator indicator, boolean refresh, CallbackInfo ci) {
-        if(cooldownPeriod > 0 && UISoundConfig.get().enableChatSoundCooldown) {
+        if (cooldownPeriod > 0 && SoundsConfig.get(ChatSoundsConfig.class).enableChatSoundCooldown) {
             return;
         }
 
-        cooldownPeriod = UISoundConfig.get().chatSoundCooldown * 20f;
+        cooldownPeriod = SoundsConfig.get(ChatSoundsConfig.class).chatSoundCooldown * 20f;
 
         String messageString = message.getString();
         String username = client.getSession().getUsername();
 
         boolean isMention = messageString.toLowerCase().contains(username.toLowerCase());
 
-        if(UISoundConfig.get().useAtForChatMentions) {
-            isMention =  messageString.toLowerCase().contains("@" + username.toLowerCase());
+        if (SoundsConfig.get(ChatSoundsConfig.class).useAtForChatMentions) {
+            isMention = messageString.toLowerCase().contains("@" + username.toLowerCase());
         }
 
-        if(UISoundConfig.get().ignoreSystemChats) {
+        if (SoundsConfig.get(ChatSoundsConfig.class).ignoreSystemChats) {
             /*? >=1.20.2 {*/
-            if(indicator == MessageIndicator.system() || indicator == MessageIndicator.chatError()) {
-            /*?} else {*//*
+            if (indicator == MessageIndicator.system() || indicator == MessageIndicator.chatError()) {
+                /*?} else {*//*
             if(indicator == MessageIndicator.system()) {
             *//*?}*/
                 return;
@@ -59,7 +60,7 @@ public class MentionSoundEffect {
         }
 
         if (isMention)
-            UISoundConfig.get().mentionSoundEffect.playSound();
-        else UISoundConfig.get().messageSoundEffect.playSound();
+            SoundsConfig.get(ChatSoundsConfig.class).mentionSoundEffect.playSound();
+        else SoundsConfig.get(ChatSoundsConfig.class).messageSoundEffect.playSound();
     }
 }

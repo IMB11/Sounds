@@ -20,7 +20,7 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
     }
 
     @Override
-    public  SoundInstance handleContext(ItemStack context, SoundEvent fallback, float pitch, float volume) {
+    public SoundInstance handleContext(ItemStack context, SoundEvent fallback, float pitch, float volume) {
         var item = context.getItem();
 
         if (item instanceof BlockItem blockItem) {
@@ -32,11 +32,11 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
             if (definition.getKeys().isValid(item)) {
                 fallback = definition.getSoundEvent();
 
-                if(definition.getPitch().isPresent()) {
+                if (definition.getPitch().isPresent()) {
                     pitch = definition.getPitch().get();
                 }
 
-                if(definition.getVolume().isPresent()) {
+                if (definition.getVolume().isPresent()) {
                     volume = definition.getVolume().get();
                 }
 

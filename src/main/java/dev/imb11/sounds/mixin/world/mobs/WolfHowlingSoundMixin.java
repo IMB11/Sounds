@@ -14,11 +14,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WolfEntity.class)
 public abstract class WolfHowlingSoundMixin extends TameableEntity {
+    @Unique
+    private boolean hasHowledDuringPhase = false;
+
     protected WolfHowlingSoundMixin(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
     }
-
-    @Unique private boolean hasHowledDuringPhase = false;
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = false)
     public void $wolf_howling_sound_effect(CallbackInfo ci) {
@@ -30,7 +31,7 @@ public abstract class WolfHowlingSoundMixin extends TameableEntity {
             this.hasHowledDuringPhase = true;
         }
 
-        if(moonPhase != 0) {
+        if (moonPhase != 0) {
             this.hasHowledDuringPhase = false;
         }
     }

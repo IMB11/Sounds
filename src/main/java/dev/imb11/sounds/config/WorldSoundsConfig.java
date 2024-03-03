@@ -1,5 +1,6 @@
 package dev.imb11.sounds.config;
 
+import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.sound.ConfiguredSound;
 import dev.imb11.sounds.sound.DynamicConfiguredSound;
 import dev.imb11.sounds.sound.context.RepeaterSoundContext;
@@ -9,12 +10,11 @@ import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import dev.isxander.yacl3.impl.controller.BooleanControllerBuilderImpl;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class WorldSoundsConfig extends ConfigGroup implements YetAnotherConfigLib.ConfigBackedBuilder<WorldSoundsConfig> {
+public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<WorldSoundsConfig> {
     /// == MECHANICS == ///
     public DynamicConfiguredSound<Integer, RepeaterSoundContext> repeaterUseSoundEffect = new DynamicConfiguredSound<>("repeaterUse", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 1.0F, 0.45F, true);
     @SerialEntry
@@ -45,13 +45,8 @@ public class WorldSoundsConfig extends ConfigGroup implements YetAnotherConfigLi
     }
 
     @Override
-    public WorldSoundsConfig get() {
-        return super.get();
-    }
-
-    @Override
     public YetAnotherConfigLib getYACL() {
-        return YetAnotherConfigLib.create(getHandler(), this::build);
+        return YetAnotherConfigLib.create(getHandler(), this);
     }
 
     @Override
@@ -73,30 +68,30 @@ public class WorldSoundsConfig extends ConfigGroup implements YetAnotherConfigLi
     public YetAnotherConfigLib.Builder build(WorldSoundsConfig defaults, WorldSoundsConfig config, YetAnotherConfigLib.Builder builder) {
         builder.title(Text.of("World Sounds"));
         builder.category(ConfigCategory.createBuilder()
-                        .name(Text.translatable("sounds.config.world.mechanics"))
-                        .group(config.repeaterUseSoundEffect.getOptionGroup(defaults.repeaterUseSoundEffect))
-                        .group(config.jukeboxUseSoundEffect.getOptionGroup(defaults.jukeboxUseSoundEffect))
-                        .group(config.daylightDetectorUseSoundEffect.getOptionGroup(defaults.daylightDetectorUseSoundEffect))
-                        .group(config.furnaceMinecartFuelSoundEffect.getOptionGroup(defaults.furnaceMinecartFuelSoundEffect))
+                .name(Text.translatable("sounds.config.world.mechanics"))
+                .group(config.repeaterUseSoundEffect.getOptionGroup(defaults.repeaterUseSoundEffect))
+                .group(config.jukeboxUseSoundEffect.getOptionGroup(defaults.jukeboxUseSoundEffect))
+                .group(config.daylightDetectorUseSoundEffect.getOptionGroup(defaults.daylightDetectorUseSoundEffect))
+                .group(config.furnaceMinecartFuelSoundEffect.getOptionGroup(defaults.furnaceMinecartFuelSoundEffect))
                 .build());
 
         builder.category(ConfigCategory.createBuilder()
-                        .name(Text.translatable("sounds.config.world.actions"))
-                        .option(Option.<Boolean>createBuilder()
-                                .name(Text.translatable("sounds.config.enableDynamicEatingSounds.name"))
-                                .description(OptionDescription.of(Text.translatable("sounds.config.enableDynamicEatingSounds.description")))
-                                .binding(defaults.enableDynamicEatingSounds, () -> config.enableDynamicEatingSounds, (v) -> config.enableDynamicEatingSounds = v)
-                                .controller((opt) -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
-                                .build())
-                        .group(config.frostWalkerSoundEffect.getOptionGroup(defaults.frostWalkerSoundEffect))
-                        .group(config.leadSnappingSoundEffect.getOptionGroup(defaults.leadSnappingSoundEffect))
-                        .group(config.bowPullSoundEffect.getOptionGroup(defaults.bowPullSoundEffect))
+                .name(Text.translatable("sounds.config.world.actions"))
+                .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("sounds.config.enableDynamicEatingSounds.name"))
+                        .description(OptionDescription.of(Text.translatable("sounds.config.enableDynamicEatingSounds.description")))
+                        .binding(defaults.enableDynamicEatingSounds, () -> config.enableDynamicEatingSounds, (v) -> config.enableDynamicEatingSounds = v)
+                        .controller((opt) -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
+                        .build())
+                .group(config.frostWalkerSoundEffect.getOptionGroup(defaults.frostWalkerSoundEffect))
+                .group(config.leadSnappingSoundEffect.getOptionGroup(defaults.leadSnappingSoundEffect))
+                .group(config.bowPullSoundEffect.getOptionGroup(defaults.bowPullSoundEffect))
                 .build());
 
         builder.category(ConfigCategory.createBuilder()
-                        .name(Text.translatable("sounds.config.world.mobs"))
-                        .group(config.babyChickenChirpSoundEffect.getOptionGroup(defaults.babyChickenChirpSoundEffect))
-                        .group(config.wolfHowlingSoundEffect.getOptionGroup(defaults.wolfHowlingSoundEffect))
+                .name(Text.translatable("sounds.config.world.mobs"))
+                .group(config.babyChickenChirpSoundEffect.getOptionGroup(defaults.babyChickenChirpSoundEffect))
+                .group(config.wolfHowlingSoundEffect.getOptionGroup(defaults.wolfHowlingSoundEffect))
                 .build());
 
         return builder;

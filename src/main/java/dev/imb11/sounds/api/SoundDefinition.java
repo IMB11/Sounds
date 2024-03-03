@@ -9,22 +9,31 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.Codecs;
-import org.jetbrains.annotations.Nullable;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.Optional;
 
 public class SoundDefinition<T> {
-    public static <T> Codec<SoundDefinition<T>> getCodec(RegistryKey<? extends Registry<T>> registryKey) {
-        return RecordCodecBuilder.create(builder -> builder.group(
-                    Identifier.CODEC.xmap(SoundEvent::of, SoundEvent::getId).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
-                    TagList.getCodec(registryKey).fieldOf("keys").forGetter(SoundDefinition<T>::getKeys),
-                    Codecs.POSITIVE_FLOAT.optionalFieldOf("volume").forGetter(SoundDefinition<T>::getVolume),
-                    Codecs.POSITIVE_FLOAT.optionalFieldOf("pitch").forGetter(SoundDefinition<T>::getPitch)
-                ).apply(builder, SoundDefinition<T>::new));
+    private final SoundEvent soundEvent;
+    private final TagList<T> keys;
+    private final Optional<Float> volume;
+    private final Optional<Float> pitch;
+
+    public SoundDefinition(SoundEvent soundEvent, TagList<T> keys, Optional<Float> volume, Optional<Float> pitch) {
+        this.soundEvent = soundEvent;
+        this.keys = keys;
+        this.volume = volume;
+        this.pitch = pitch;
     }
 
+    public static <T> Codec<SoundDefinition<T>> getCodec(RegistryKey<? extends Registry<T>> registryKey) {
+        return RecordCodecBuilder.create(builder -> builder.group(
+                Identifier.CODEC.xmap(SoundEvent::of, SoundEvent::getId).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
+                TagList.getCodec(registryKey).fieldOf("keys").forGetter(SoundDefinition<T>::getKeys),
+                Codecs.POSITIVE_FLOAT.optionalFieldOf("volume").forGetter(SoundDefinition<T>::getVolume),
+                Codecs.POSITIVE_FLOAT.optionalFieldOf("pitch").forGetter(SoundDefinition<T>::getPitch)
+        ).apply(builder, SoundDefinition<T>::new));
+    }
 
     public SoundEvent getSoundEvent() {
         return soundEvent;
@@ -40,19 +49,6 @@ public class SoundDefinition<T> {
 
     public Optional<Float> getVolume() {
         return volume;
-    }
-
-    private final SoundEvent soundEvent;
-
-    private final TagList<T> keys;
-    private Optional<Float> volume;
-    private Optional<Float> pitch;
-
-    public SoundDefinition(SoundEvent soundEvent, TagList<T> keys, Optional<Float> volume, Optional<Float> pitch) {
-        this.soundEvent = soundEvent;
-        this.keys = keys;
-        this.volume = volume;
-        this.pitch = pitch;
     }
 
     public static class Builder<T> {
@@ -74,7 +70,7 @@ public class SoundDefinition<T> {
 
         @SafeVarargs
         public final Builder<T> addMultipleKeys(T... keys) {
-            for(T key : keys) {
+            for (T key : keys) {
                 addKey(key);
             }
             return this;
@@ -82,7 +78,7 @@ public class SoundDefinition<T> {
 
         @SafeVarargs
         public final Builder<T> addMultipleKeys(TagKey<T>... keys) {
-            for(TagKey<T> key : keys) {
+            for (TagKey<T> key : keys) {
                 addKey(key);
             }
             return this;

@@ -1,8 +1,8 @@
 package dev.imb11.sounds.config.adapters;
 
 import com.google.gson.*;
-import dev.imb11.sounds.sound.DynamicConfiguredSound;
 import com.mojang.serialization.JsonOps;
+import dev.imb11.sounds.sound.DynamicConfiguredSound;
 
 import java.lang.reflect.Type;
 

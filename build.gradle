@@ -67,7 +67,9 @@ java {
 
 processResources {
     filesMatching('fabric.mod.json') {
-        expand 'mod_version': version, 'target_minecraft': project.property('mod.target')
+        expand 'mod_version': version,
+                'target_minecraft': project.property('mod.target'),
+                'target_yacl': project.property('deps.yacl')
     }
 }
 

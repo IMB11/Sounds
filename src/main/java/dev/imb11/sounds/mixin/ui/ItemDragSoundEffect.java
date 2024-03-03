@@ -1,6 +1,7 @@
 package dev.imb11.sounds.mixin.ui;
 
-import dev.imb11.sounds.config.old.UISoundConfig;
+import dev.imb11.sounds.config.SoundsConfig;
+import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
@@ -22,11 +23,13 @@ public class ItemDragSoundEffect<T extends ScreenHandler> {
     @Final
     protected Set<Slot> cursorDragSlots;
 
-    @Shadow @Final protected T handler;
+    @Shadow
+    @Final
+    protected T handler;
 
     @Inject(method = "mouseDragged", at = @At(value = "INVOKE", target = "Ljava/util/Set;add(Ljava/lang/Object;)Z"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void $item_drag_sound_effect(double mouseX, double mouseY, int button, double deltaX, double deltaY, CallbackInfoReturnable<Boolean> cir, Slot slot) {
         if (!cursorDragSlots.contains(slot) && cursorDragSlots.size() > 0)
-            UISoundConfig.get().itemDragSoundEffect.playDynamicSound(this.handler.getCursorStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+            SoundsConfig.get(UISoundsConfig.class).itemDragSoundEffect.playDynamicSound(this.handler.getCursorStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
 }

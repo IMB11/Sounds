@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class RepeaterBlockMixin {
     @Inject(method = "onUse", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z", shift = At.Shift.AFTER))
     public void $repeater_use_sound_effect(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-        if(world.isClient) {
+        if (world.isClient) {
             int delayLevel = state.get(RepeaterBlock.DELAY);
             SoundsConfig.get(WorldSoundsConfig.class).repeaterUseSoundEffect.playDynamicSound(delayLevel, RepeaterSoundContext.of());
         }

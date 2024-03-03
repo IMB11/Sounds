@@ -2,6 +2,15 @@
 	"sounds.config.static": "Sounds",
 	"sounds.config.title": "Sounds Config",
 
+	"sounds.config.shouldPlay.name": "Enable Sound",
+	"sounds.config.shouldPlay.description": "Should this sound be played?",
+	"sounds.config.dynamic.name": "Dynamic Sounds",
+	"sounds.config.dynamic.description": "Should the sound event that is played be dependent on the item, block, or action that is currently happening?\n\nFor items and blocks, the sound event will be determined by what type of item/block it is.",
+	"sounds.config.volume.name": "Sound Volume",
+	"sounds.config.volume.description": "The volume of the sound.",
+	"sounds.config.pitch.name": "Sound Pitch",
+	"sounds.config.pitch.description": "The pitch of the sound.\n\nA lower pitch gives a deeper sound, whilst a higher pitch gives a more squeakier sound.",
+
 	"sounds.config.world": "World Sounds",
 
 	"sounds.config.world.mechanics": "Mechanics",
@@ -11,6 +20,8 @@
 	"sounds.config.jukeboxUse.description": "A sound effect that is played when you insert or remove a music disc from a Jukebox.",
 	"sounds.config.daylightDetectorUse.name": "Change Daylight Detector Mode",
 	"sounds.config.daylightDetectorUse.description": "A sound effect that is played when you interact with a Daylight Detector to change it's detection mode.",
+	"sounds.config.furnaceMinecartFuel.name": "Furnace Minecart Fuel",
+	"sounds.config.furnaceMinecartFuel.description": "A sound effect that is played when you fuel a Furnace Minecart.",
 
     "sounds.config.world.actions": "Actions",
 	"sounds.config.enableDynamicEatingSounds.name": "Dynamic Eating Sounds",
@@ -26,5 +37,67 @@
 	"sounds.config.babyChickenChirp.name": "Baby Chicken Chirp",
 	"sounds.config.babyChickenChirp.description": "A sound effect that is played when a baby chicken chirps.",
 	"sounds.config.wolfHowling.name": "Wolf Howling",
-	"sounds.config.wolfHowling.description": "A sound effect that is played by wolves when a full moon is out... beware !"
+	"sounds.config.wolfHowling.description": "A sound effect that is played by wolves when a full moon is out... beware !",
+
+	"sounds.config.ui": "UI Sounds",
+
+	"sounds.config.ui.interface": "Interface (General)",
+	"sounds.config.ignoreEmptyHotbarSlots.name": "Ignore Empty Hotbar Slots",
+	"sounds.config.ignoreEmptyHotbarSlots.description": "Should empty hotbar slots be ignored when playing sound effects?",
+	"sounds.config.inventoryOpen.name": "Inventory Open",
+	"sounds.config.inventoryOpen.description": "A sound effect that is played when you open a screen that has an inventory, such as an enchanting table.",
+	"sounds.config.inventoryScroll.name": "Inventory Scroll",
+	"sounds.config.inventoryScroll.description": "A sound effect that is played when you use a scrollbar in any inventory.",
+	"sounds.config.inventoryClose.name": "Inventory Close",
+	"sounds.config.inventoryClose.description": "A sound effect that is played when you close a screen that has an inventory, such as an enchanting table.",
+	"sounds.config.inventoryTyping.name": "Inventory Typing",
+	"sounds.config.inventoryTyping.description": "A sound effect that is played when you type into the anvil name bar or creative inventory search bar.",
+	"sounds.config.hotbarScroll.name": "Hotbar Scroll",
+	"sounds.config.hotbarScroll.description": "A sound effect that is played when you scroll through your hotbar or use the number keys to select a hotbar slot.",
+	"sounds.config.hotbarPick.name": "Pick Block",
+	"sounds.config.hotbarPick.description": "A sound effect that is played when you use the 'Pick Block' action.",
+
+	"sounds.config.ui.item_management": "Item Management",
+	"sounds.config.itemCopy.name": "Item Clone",
+	"sounds.config.itemCopy.description": "A sound effect that is played when you clone an item in your inventory.",
+	"sounds.config.itemDelete.name": "Item Delete",
+	"sounds.config.itemDelete.description": "A sound effect that is played when you delete an item using the bin/garbage can in the creative inventory.",
+	"sounds.config.itemDrop.name": "Item Drop",
+	"sounds.config.itemDrop.description": "A sound effect that is played when you drop an item from your inventory.",
+	"sounds.config.itemDrag.name": "Item Drag",
+	"sounds.config.itemDrag.description": "A sound effect that is played when you drag an item across slots in your inventory.",
+	"sounds.config.itemPick.name": "Item Click",
+	"sounds.config.itemPick.description": "A sound effect that is played when you click on an item in your inventory.",
+
+	"sounds.config.chat": "Chat Sounds",
+
+	"sounds.config.chat.messaging": "Messaging",
+	"sounds.config.useAtForChatMentions.name": "Enable Mention Prefix",
+	"sounds.config.useAtForChatMentions.description": "When identifying whether you've been mentioned in a chat message, should the prefix '@' be used?",
+	"sounds.config.ignoreSystemChats.name": "Ignore System Messages",
+	"sounds.config.ignoreSystemChats.description": "Should system messages be ignored in the chat when playing sound effects?",
+	"sounds.config.typing.name": "Chat Typing",
+	"sounds.config.typing.description": "A sound effect that is played when you type or remove characters from the chat input bar.",
+	"sounds.config.message.name": "Chat Messages",
+	"sounds.config.message.description": "A sound effect that is played when you receive a message in the chat.",
+	"sounds.config.mention.name": "Chat Mentions",
+	"sounds.config.mention.description": "A sound effect that is played when you are mentioned in a new chat message.",
+
+	"sounds.config.chat.cooldown": "Cooldowns",
+	"sounds.config.enableChatSoundCooldown.name": "Enable Cooldown",
+	"sounds.config.enableChatSoundCooldown.description": "Should a cooldown be applied to chat sounds? If enabled, the sound will only be played once within every cooldown period. This does not apply to typing sounds.",
+	"sounds.config.chatSoundCooldown.name": "Cooldown Period",
+	"sounds.config.chatSoundCooldown.description": "The cooldown period for chat sounds, in seconds. This does not apply to typing sounds.",
+
+	"sounds.config.events": "Event Sounds",
+
+	"sounds.config.events.statusEffects": "Status Effects",
+	"sounds.config.positiveStatusEffectGain.name": "Positive Status Effect Gain",
+	"sounds.config.positiveStatusEffectGain.description": "A sound effect that is played when you gain a positive status effect.",
+	"sounds.config.positiveStatusEffectLose.name": "Positive Status Effect Lose",
+	"sounds.config.positiveStatusEffectLose.description": "A sound effect that is played when you lose a positive status effect.",
+	"sounds.config.negativeStatusEffectGain.name": "Negative Status Effect Gain",
+	"sounds.config.negativeStatusEffectGain.description": "A sound effect that is played when you gain a negative status effect.",
+	"sounds.config.negativeStatusEffectLose.name": "Negative Status Effect Lose",
+	"sounds.config.negativeStatusEffectLose.description": "A sound effect that is played when you lose a negative status effect."
 }

@@ -3,12 +3,11 @@ package dev.imb11.sounds.dynamic;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
-import dev.imb11.sounds.SoundsClient;
-import dev.imb11.sounds.api.SoundDefinition;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.JsonOps;
+import dev.imb11.sounds.SoundsClient;
+import dev.imb11.sounds.api.SoundDefinition;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
@@ -21,7 +20,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class SoundsReloadListener implements SimpleSynchronousResourceReloadListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(SoundsReloadListener.class);
@@ -39,7 +37,7 @@ public class SoundsReloadListener implements SimpleSynchronousResourceReloadList
         DynamicSoundHelper.loadDirectories.forEach((directory, codec) -> {
             ArrayList<SoundDefinition<?>> resultList = (ArrayList<SoundDefinition<?>>) DynamicSoundHelper.loadedDefinitions.get(directory);
 
-            for(Identifier id : manager.findResources("sounds/" + directory, path -> path.getPath().endsWith(".json")).keySet()) {
+            for (Identifier id : manager.findResources("sounds/" + directory, path -> path.getPath().endsWith(".json")).keySet()) {
                 try {
                     var resource = manager.getResource(id).orElseThrow();
                     var inputStream = resource.getInputStream();
@@ -52,7 +50,7 @@ public class SoundsReloadListener implements SimpleSynchronousResourceReloadList
                     resultList.add(result);
 
                     inputStream.close();
-                } catch(Exception e) {
+                } catch (Exception e) {
                     LOGGER.error("Error occurred while loading resource json: " + id.toString(), e);
                 }
             }

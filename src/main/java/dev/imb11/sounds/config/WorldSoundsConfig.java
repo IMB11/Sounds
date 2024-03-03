@@ -3,13 +3,18 @@ package dev.imb11.sounds.config;
 import dev.imb11.sounds.sound.ConfiguredSound;
 import dev.imb11.sounds.sound.DynamicConfiguredSound;
 import dev.imb11.sounds.sound.context.RepeaterSoundContext;
+import dev.isxander.yacl3.api.ConfigCategory;
+import dev.isxander.yacl3.api.Option;
+import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
+import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import dev.isxander.yacl3.impl.controller.BooleanControllerBuilderImpl;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class WorldSoundsConfig extends ConfigGroup {
+public class WorldSoundsConfig extends ConfigGroup implements YetAnotherConfigLib.ConfigBackedBuilder<WorldSoundsConfig> {
     /// == MECHANICS == ///
     public DynamicConfiguredSound<Integer, RepeaterSoundContext> repeaterUseSoundEffect = new DynamicConfiguredSound<>("repeaterUse", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 1.0F, 0.45F, true);
     @SerialEntry
@@ -18,8 +23,6 @@ public class WorldSoundsConfig extends ConfigGroup {
     public ConfiguredSound daylightDetectorUseSoundEffect = new ConfiguredSound("daylightDetectorUse", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 0.8F, 0.45F);
     @SerialEntry
     public ConfiguredSound furnaceMinecartFuelSoundEffect = new ConfiguredSound("furnaceMinecartFuel", SoundEvents.ENTITY_CREEPER_HURT, true, 1.9F, 0.2F);
-    @SerialEntry
-    public ConfiguredSound stickyPistonSoundEffect = new ConfiguredSound("stickyPistonSoundEffect", SoundEvents.BLOCK_SLIME_BLOCK_PLACE, true, 0.5F, 0.5F);
 
     /// == ACTIONS == ///
     @SerialEntry
@@ -33,13 +36,9 @@ public class WorldSoundsConfig extends ConfigGroup {
 
     /// == MOBS == ///
     @SerialEntry
-    public ConfiguredSound babyChickenChirpSoundEffect = new ConfiguredSound("babyChickenChirp", SoundEvents.ENTITY_PARROT_AMBIENT, true, 2.0F, 0.3F);
+    public ConfiguredSound babyChickenChirpSoundEffect = new ConfiguredSound("babyChickenChirp", SoundEvents.ENTITY_PARROT_AMBIENT, true, 2.0F, 0.5F);
     @SerialEntry
-    public ConfiguredSound wolfHowlingSoundEffect = new ConfiguredSound("wolfHowling", SoundEvents.ENTITY_WOLF_HOWL, true, 1.0F, 0.5F);
-    @SerialEntry
-    public ConfiguredSound chargedCreeperAmbienceSoundEffect = new ConfiguredSound("chargedCreeperAmbience", SoundEvents.BLOCK_BEACON_AMBIENT, true, 0.4F, 0.5F);
-    @SerialEntry
-    public ConfiguredSound huskCoughSoundEffect = new ConfiguredSound("huskCough", SoundEvents.ENTITY_HORSE_BREATHE, true, 0.2F, 0.5F);
+    public ConfiguredSound wolfHowlingSoundEffect = new ConfiguredSound("wolfHowling", SoundEvents.ENTITY_WOLF_HOWL, true, 1.0F, 0.2F);
 
     public WorldSoundsConfig() {
         super(WorldSoundsConfig.class);
@@ -52,12 +51,12 @@ public class WorldSoundsConfig extends ConfigGroup {
 
     @Override
     public YetAnotherConfigLib getYACL() {
-        return null;
+        return YetAnotherConfigLib.create(getHandler(), this::build);
     }
 
     @Override
     public Identifier getImage() {
-        return new Identifier("sounds", "textures/gui/gameplay_sounds.webp");
+        return new Identifier("sounds", "textures/gui/world_sounds.webp");
     }
 
     @Override
@@ -68,5 +67,38 @@ public class WorldSoundsConfig extends ConfigGroup {
     @Override
     public String getID() {
         return "world";
+    }
+
+    @Override
+    public YetAnotherConfigLib.Builder build(WorldSoundsConfig defaults, WorldSoundsConfig config, YetAnotherConfigLib.Builder builder) {
+        builder.title(Text.of("World Sounds"));
+        builder.category(ConfigCategory.createBuilder()
+                        .name(Text.translatable("sounds.config.world.mechanics"))
+                        .group(config.repeaterUseSoundEffect.getOptionGroup(defaults.repeaterUseSoundEffect))
+                        .group(config.jukeboxUseSoundEffect.getOptionGroup(defaults.jukeboxUseSoundEffect))
+                        .group(config.daylightDetectorUseSoundEffect.getOptionGroup(defaults.daylightDetectorUseSoundEffect))
+                        .group(config.furnaceMinecartFuelSoundEffect.getOptionGroup(defaults.furnaceMinecartFuelSoundEffect))
+                .build());
+
+        builder.category(ConfigCategory.createBuilder()
+                        .name(Text.translatable("sounds.config.world.actions"))
+                        .option(Option.<Boolean>createBuilder()
+                                .name(Text.translatable("sounds.config.enableDynamicEatingSounds.name"))
+                                .description(OptionDescription.of(Text.translatable("sounds.config.enableDynamicEatingSounds.description")))
+                                .binding(defaults.enableDynamicEatingSounds, () -> config.enableDynamicEatingSounds, (v) -> config.enableDynamicEatingSounds = v)
+                                .controller((opt) -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
+                                .build())
+                        .group(config.frostWalkerSoundEffect.getOptionGroup(defaults.frostWalkerSoundEffect))
+                        .group(config.leadSnappingSoundEffect.getOptionGroup(defaults.leadSnappingSoundEffect))
+                        .group(config.bowPullSoundEffect.getOptionGroup(defaults.bowPullSoundEffect))
+                .build());
+
+        builder.category(ConfigCategory.createBuilder()
+                        .name(Text.translatable("sounds.config.world.mobs"))
+                        .group(config.babyChickenChirpSoundEffect.getOptionGroup(defaults.babyChickenChirpSoundEffect))
+                        .group(config.wolfHowlingSoundEffect.getOptionGroup(defaults.wolfHowlingSoundEffect))
+                .build());
+
+        return builder;
     }
 }

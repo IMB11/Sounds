@@ -1,4 +1,4 @@
-package dev.imb11.sounds.mixin.gameplay;
+package dev.imb11.sounds.mixin.world.mechanics;
 
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.WorldSoundsConfig;

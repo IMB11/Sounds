@@ -34,8 +34,8 @@ public abstract class ConfigGroup {
     public <T extends ConfigGroup> T get() {
         return (T) handler.instance();
     }
-    private <T extends ConfigGroup> T getHandler() {
-        return (T) handler;
+    public <T extends ConfigGroup> ConfigClassHandler<T> getHandler() {
+        return (ConfigClassHandler<T>) handler;
     }
 
     private YACLHelper.NamespacedHelper getNamespacedHelper() {

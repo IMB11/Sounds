@@ -11,8 +11,6 @@
 	"sounds.config.jukeboxUse.description": "A sound effect that is played when you insert or remove a music disc from a Jukebox.",
 	"sounds.config.daylightDetectorUse.name": "Change Daylight Detector Mode",
 	"sounds.config.daylightDetectorUse.description": "A sound effect that is played when you interact with a Daylight Detector to change it's detection mode.",
-	"sounds.config.stickyPistonSoundEffect.name": "Sticky Piston Attach Sound",
-	"sounds.config.stickyPistonSoundEffect.description": "A sound effect that is played when a Sticky Piston attaches to a block.",
 
     "sounds.config.world.actions": "Actions",
 	"sounds.config.enableDynamicEatingSounds.name": "Dynamic Eating Sounds",
@@ -28,9 +26,5 @@
 	"sounds.config.babyChickenChirp.name": "Baby Chicken Chirp",
 	"sounds.config.babyChickenChirp.description": "A sound effect that is played when a baby chicken chirps.",
 	"sounds.config.wolfHowling.name": "Wolf Howling",
-	"sounds.config.wolfHowling.description": "A sound effect that is played by wolves when a full moon is out... beware of the werewolves!",
-	"sounds.config.chargedCreeperAmbience.name": "Charged Creeper Ambience",
-	"sounds.config.chargedCreeperAmbience.description": "A sound effect that is continuously played when a charged creeper is nearby.",
-	"sounds.config.huskCough.name": "Husk Cough",
-	"sounds.config.huskCough.description": "A sound effect that is played when a zombie husk coughs."
+	"sounds.config.wolfHowling.description": "A sound effect that is played by wolves when a full moon is out... beware !"
 }

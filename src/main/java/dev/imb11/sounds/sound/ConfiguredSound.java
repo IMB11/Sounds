@@ -56,37 +56,27 @@ public class ConfiguredSound {
         this(id, soundEvent.getId(), enabled, pitch, volume);
     }
 
-    public OptionDescription.Builder addImageIfPresent(OptionDescription.Builder builder, @Nullable Identifier groupImage) {
-        if (groupImage != null) {
-            return builder.webpImage(groupImage);
-        }
-        return builder;
-    }
-
-    private <T extends ConfiguredSound> ArrayList<Option<?>> createDefaultOptions(T defaults, @Nullable Identifier groupImage) {
+    private <T extends ConfiguredSound> ArrayList<Option<?>> createDefaultOptions(T defaults) {
         var volumeOpt = Option.<Float>createBuilder()
                 .name(Text.translatable("sounds.config.volume.name"))
-                .description(addImageIfPresent(OptionDescription.createBuilder()
-                                .text(Text.translatable("sounds.config.volume.description"))
-                        , groupImage).build())
+                .description(OptionDescription.createBuilder()
+                                .text(Text.translatable("sounds.config.volume.description")).build())
                 .binding(defaults.volume, () -> this.volume, (val) -> this.volume = val)
                 .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
                 .build();
 
         var pitchOpt = Option.<Float>createBuilder()
                 .name(Text.translatable("sounds.config.pitch.name"))
-                .description(addImageIfPresent(OptionDescription.createBuilder()
-                        .text(Text.translatable("sounds.config.pitch.description")), groupImage
-                ).build())
+                .description(OptionDescription.createBuilder()
+                        .text(Text.translatable("sounds.config.pitch.description")).build())
                 .binding(defaults.pitch, () -> this.pitch, (val) -> this.pitch = val)
                 .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
                 .build();
 
         var shouldPlay = Option.<Boolean>createBuilder()
                 .name(Text.translatable("sounds.config.shouldPlay.name"))
-                .description(addImageIfPresent(OptionDescription.createBuilder()
-                                .text(Text.translatable("sounds.config.shouldPlay.description"))
-                        , groupImage).build())
+                .description(OptionDescription.createBuilder()
+                                .text(Text.translatable("sounds.config.shouldPlay.description")).build())
                 .binding(defaults.enabled, () -> this.enabled, (val) -> this.enabled = val)
                 .listener((opt, val) -> {
                     pitchOpt.setAvailable(val);
@@ -98,19 +88,14 @@ public class ConfiguredSound {
         return new ArrayList<>(List.of(shouldPlay, volumeOpt, pitchOpt));
     }
 
-    public <T extends ConfiguredSound> ArrayList<Option<?>> addExtraOptions(T defaults, @Nullable Identifier groupImage) {
+    public <T extends ConfiguredSound> ArrayList<Option<?>> addExtraOptions(T defaults) {
         return new ArrayList<>();
     }
 
     public OptionGroup getOptionGroup(ConfiguredSound defaults) {
-        return this.getOptionGroup(defaults, false);
-    }
 
-    public OptionGroup getOptionGroup(ConfiguredSound defaults, boolean hasImage) {
-        Identifier image = hasImage ? new Identifier("sounds", "textures/config/" + id.toLowerCase() + ".webp") : null;
-
-        ArrayList<Option<?>> defaultOptions = createDefaultOptions(defaults, image);
-        ArrayList<Option<?>> extraOptions = addExtraOptions(defaults, image);
+        ArrayList<Option<?>> defaultOptions = createDefaultOptions(defaults);
+        ArrayList<Option<?>> extraOptions = addExtraOptions(defaults);
 
         ArrayList<Option<?>> allOptions = new ArrayList<>(defaultOptions);
         allOptions.addAll(extraOptions);
@@ -118,8 +103,8 @@ public class ConfiguredSound {
         return OptionGroup
                 .createBuilder()
                 .name(Text.translatable("sounds.config." + id + ".name").formatted(Formatting.UNDERLINE))
-                .description(addImageIfPresent(OptionDescription.createBuilder()
-                        .text(Text.translatable("sounds.config." + id + ".description")), image).build())
+                .description(OptionDescription.createBuilder()
+                        .text(Text.translatable("sounds.config." + id + ".description")).build())
                 .options(allOptions)
                 .collapsed(true)
                 .build();

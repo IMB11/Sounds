@@ -43,14 +43,13 @@ public class SoundsConfigScreen extends Screen {
         });
 
         grid.setPadding(3);
+        grid.addChild(koFiWidget, 3, 1);
 
         for (ConfigGroup configGroup : SoundsConfig.getAll()) {
             grid.addChild(new ImageButtonWidget(0, 0, 0, 0, configGroup.getName(), configGroup.getImage(), btn -> {
                 this.client.setScreen(configGroup.getYACL().generateScreen(this));
             }));
         }
-
-        grid.addChild(koFiWidget, 2, 1);
 
 
         grid.calculateLayout();

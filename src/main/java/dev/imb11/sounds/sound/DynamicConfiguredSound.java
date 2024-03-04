@@ -59,15 +59,14 @@ public class DynamicConfiguredSound<T, F extends DynamicSoundContext<T>> extends
     }
 
     @Override
-    public <E extends ConfiguredSound> ArrayList<Option<?>> addExtraOptions(E defaults, @Nullable Identifier groupImage) {
+    public <E extends ConfiguredSound> ArrayList<Option<?>> addExtraOptions(E defaults) {
         DynamicConfiguredSound<?, ?> dynamicDefaults = (DynamicConfiguredSound<?, ?>) defaults;
-        ArrayList<Option<?>> options = super.addExtraOptions(defaults, groupImage);
+        ArrayList<Option<?>> options = super.addExtraOptions(defaults);
 
         var shouldDynamic = Option.<Boolean>createBuilder()
                 .name(Text.translatable("sounds.config.dynamic.name"))
-                .description(addImageIfPresent(OptionDescription.createBuilder()
-                                .text(Text.translatable("sounds.config.dynamic.description"))
-                        , groupImage).build())
+                .description(OptionDescription.createBuilder()
+                                .text(Text.translatable("sounds.config.dynamic.description")).build())
                 .binding(dynamicDefaults.enableDynamicSounds, () -> this.enableDynamicSounds, (val) -> this.enableDynamicSounds = val)
                 .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).onOffFormatter())
                 .build();

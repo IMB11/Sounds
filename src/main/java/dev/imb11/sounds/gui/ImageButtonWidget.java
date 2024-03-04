@@ -26,6 +26,7 @@ public class ImageButtonWidget extends ClickableWidget {
     public ImageButtonWidget(int x, int y, int width, int height, Text message, Identifier image, Consumer<ClickableWidget> clickEvent) {
         super(x, y, width, height, message);
         this.image = ImageRendererManager.registerImage(image, AnimatedDynamicTextureImage.createWEBPFromTexture(image));
+        this.onPress = clickEvent;
     }
 
     @Override
@@ -56,7 +57,7 @@ public class ImageButtonWidget extends ClickableWidget {
         }
 
         // Ease in out lerp.
-        float alphaScale = MathHelper.clampedLerp(0.9f, 0.2f, MathHelper.clamp(durationHovered - 1f, 0.0f, 1.0f));
+        float alphaScale = MathHelper.clampedLerp(0.7f, 0.2f, MathHelper.clamp(durationHovered - 1f, 0.0f, 1.0f));
 
         if (image.isDone()) {
             try {

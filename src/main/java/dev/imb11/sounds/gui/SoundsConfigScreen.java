@@ -38,7 +38,7 @@ public class SoundsConfigScreen extends Screen {
         int fontHeight = this.client.textRenderer.fontHeight;
         DynamicGridWidget grid = new DynamicGridWidget(10, 10 + fontHeight + 10, width - 20, height - 20 - fontHeight - 10 - 20);
 
-        ImageButtonWidget koFiWidget = new ImageButtonWidget(0, 0, 0, 0, Text.empty(), new Identifier("sounds", "textures/gui/kofi.webp"), btn -> {
+        ImageButtonWidget koFiWidget = new ImageButtonWidget(0, 0, 0, 0, Text.of("Support Me"), new Identifier("sounds", "textures/gui/kofi.webp"), btn -> {
             Util.getOperatingSystem().open("https://ko-fi.com/mineblock11");
         });
 
@@ -50,6 +50,13 @@ public class SoundsConfigScreen extends Screen {
                 this.client.setScreen(configGroup.getYACL().generateScreen(this));
             }));
         }
+
+        grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Text.of("Discord Server"), new Identifier("sounds", "textures/gui/discord.webp"), btn -> {
+            Util.getOperatingSystem().open("https://discord.imb11.dev/"); // Rick roll lol.
+        }));
+        grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Text.of("Modrinth Page"), new Identifier("sounds", "textures/gui/modrinth.webp"), btn -> {
+            Util.getOperatingSystem().open("https://modrinth.com/mod/sound"); // Rick roll lol.
+        }));
 
 
         grid.calculateLayout();

@@ -34,12 +34,6 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
     @SerialEntry
     public ConfiguredSound bowPullSoundEffect = new ConfiguredSound("bowPull", SoundEvents.ITEM_CROSSBOW_LOADING_MIDDLE, true, 1.0F, 0.25F);
 
-    /// == MOBS == ///
-    @SerialEntry
-    public ConfiguredSound babyChickenChirpSoundEffect = new ConfiguredSound("babyChickenChirp", SoundEvents.ENTITY_PARROT_AMBIENT, true, 2.0F, 0.5F);
-    @SerialEntry
-    public ConfiguredSound wolfHowlingSoundEffect = new ConfiguredSound("wolfHowling", SoundEvents.ENTITY_WOLF_HOWL, true, 1.0F, 0.2F);
-
     public WorldSoundsConfig() {
         super(WorldSoundsConfig.class);
     }
@@ -86,12 +80,6 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
                 .group(config.frostWalkerSoundEffect.getOptionGroup(defaults.frostWalkerSoundEffect))
                 .group(config.leadSnappingSoundEffect.getOptionGroup(defaults.leadSnappingSoundEffect))
                 .group(config.bowPullSoundEffect.getOptionGroup(defaults.bowPullSoundEffect))
-                .build());
-
-        builder.category(ConfigCategory.createBuilder()
-                .name(Text.translatable("sounds.config.world.mobs"))
-                .group(config.babyChickenChirpSoundEffect.getOptionGroup(defaults.babyChickenChirpSoundEffect))
-                .group(config.wolfHowlingSoundEffect.getOptionGroup(defaults.wolfHowlingSoundEffect))
                 .build());
 
         return builder;

@@ -14,14 +14,13 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<ChatSoundsConfig> {
-
+    // == MESSAGING SOUNDS == //
     @SerialEntry
     public final ConfiguredSound typingSoundEffect = new ConfiguredSound("typing", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 1.6f, 0.4f);
     @SerialEntry
     public final ConfiguredSound messageSoundEffect = new ConfiguredSound("message", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 2.0f, 0.8f);
     @SerialEntry
     public final ConfiguredSound mentionSoundEffect = new ConfiguredSound("mention", SoundEvents.BLOCK_NOTE_BLOCK_CHIME, true, 1.8f, 0.9f);
-    // == MESSAGING SOUNDS == //
     @SerialEntry
     public boolean useAtForChatMentions = true;
     @SerialEntry

@@ -7,9 +7,7 @@
         "ui.ImageRenderManagerMixin",
         "world.actions.DynamicEatingSoundsMixin",
         "world.actions.FrostWalkerSoundsMixin",
-        "world.actions.LeadSnappingSoundMixin",
-        "world.mobs.BabyChickenChirpSoundMixin",
-        "world.mobs.WolfHowlingSoundMixin"
+        "world.actions.LeadSnappingSoundMixin"
     ],
     "client": [
         "SoundsOptionsScreenMixin",

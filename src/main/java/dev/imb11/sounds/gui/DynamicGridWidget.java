@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+/*? <1.20.2 {*//*
+import dev.imb11.sounds.mixin.accessors.ClickableWidgetAccessor;
+*//*?} */
+
 public class DynamicGridWidget extends WrapperWidget {
     private final List<GridItem> children = new ArrayList<>();
     private int padding = 0;

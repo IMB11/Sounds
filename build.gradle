@@ -27,7 +27,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${property('deps.fabric_loader')}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fabric_api')}"
 
-    include modImplementation("dev.isxander.yacl:yet-another-config-lib-fabric:${property("deps.yacl")}")
+    modImplementation("dev.isxander.yacl:yet-another-config-lib-fabric:${property("deps.yacl")}")
     modLocalRuntime modCompileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
     modImplementation "com.mineblock11:MRU:${property("deps.mru")}"
 
@@ -39,6 +39,16 @@ if (stonecutter.current.active) { // run configs for non-active version would be
         runConfigs.all {
             ideConfigGenerated = true // generate IDE tasks for running client, server and testmod, datagen if those are present
             runDir "../../run" // use a global run directory for all versions
+        }
+    }
+
+    sourceSets {
+        main {
+            resources {
+                srcDirs += [
+                        rootProject.file('src/main/generated')
+                ]
+            }
         }
     }
 }
@@ -76,15 +86,5 @@ processResources {
 jar {
     from("LICENSE") {
         rename { "${it}_${project.base.archivesName.get()}"}
-    }
-}
-
-sourceSets {
-    main {
-        resources {
-            srcDirs += [
-                    rootProject.file('src/main/generated')
-            ]
-        }
     }
 }

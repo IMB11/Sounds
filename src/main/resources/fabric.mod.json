@@ -32,9 +32,7 @@
     "fabricloader": "*",
     "fabric": "*",
     "mru": "*",
+    "yacl": ">=${target_yacl}",
     "minecraft": "${target_minecraft}"
-  },
-  "suggests": {
-    "yacl": ">=${target_yacl}"
   }
 }

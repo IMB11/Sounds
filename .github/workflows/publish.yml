@@ -27,7 +27,7 @@ jobs:
       - name: Set Active Version
         run: ./gradlew "Set active version to ${{ matrix.game_version }}"
       - name: Build Version
-        run: "./gradlew :${{ matrix.game_version }}:build"
+        run: "./gradlew chiseledBuild"
       - uses: Kir-Antipov/mc-publish@v3.3
         with:
           files: |

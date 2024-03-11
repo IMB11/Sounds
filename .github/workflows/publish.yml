@@ -1,5 +1,7 @@
 name: Distribute JARs
-on: [push]
+on:
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -38,15 +40,13 @@ jobs:
         with:
           name: built-jars
           path: ./publish-versions
-      - name: List JARs for Publishing (Simulation)
-        run: echo "Jars that would be published for version ${{ matrix.game_version }}:" && ls ./publish-versions/${{ matrix.game_version }}/build/libs/*.jar
-#      - name: Publish to Modrinth, CurseForge, etc.
-#        uses: Kir-Antipov/mc-publish@v3.3
-#        with:
-#          files: ./publish-versions/${{ matrix.game_version }}/build/libs/*.jar
-#          version: ${{ github.ref_name }}+${{ matrix.game_version }}
-#          modrinth-id: ${{ vars.MODRINTH_ID }}
-#          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-#          curseforge-id: ${{ vars.CURSEFORGE_ID }}
-#          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-#          github-token: ${{ secrets.CLASSIC_GITHUB_TOKEN }}
+      - name: Publish to Modrinth, CurseForge, etc.
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          files: ./publish-versions/${{ matrix.game_version }}/build/libs/*.jar
+          version: ${{ github.ref_name }}+${{ matrix.game_version }}
+          modrinth-id: ${{ vars.MODRINTH_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          curseforge-id: ${{ vars.CURSEFORGE_ID }}
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          github-token: ${{ secrets.CLASSIC_GITHUB_TOKEN }}

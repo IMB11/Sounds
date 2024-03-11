@@ -1,7 +1,5 @@
 name: Distribute JARs
-on:
-  release:
-    types: [push]
+on: [push]
 
 jobs:
   build:

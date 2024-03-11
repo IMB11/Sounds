@@ -1,7 +1,7 @@
 name: Distribute JARs
 on:
   release:
-    types: [published]
+    types: [push]
 
 jobs:
   build:
@@ -22,16 +22,37 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: "wrapper"
-      - name: Build JARs
-        run: "gradle :${{ matrix.game_version }}:build"
-      - uses: Kir-Antipov/mc-publish@v3.3
+      - name: Build All Versions with chiseledBuild
+        run: "gradle chiseledBuild"
+      - name: Upload Built JARs
+        uses: actions/upload-artifact@v3
         with:
-          files: |
-            versions/${{ matrix.game_version }}/build/libs/!(*-@(dev|sources|javadoc)).jar
-            versions/${{ matrix.game_version }}/build/libs/*-@(dev|sources|javadoc).jar
-          version: ${{ github.ref_name }}+${{ matrix.game_version }}
-          modrinth-id: ${{ vars.MODRINTH_ID }}
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          curseforge-id: ${{ vars.CURSEFORGE_ID }}
-          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          github-token: ${{ secrets.CLASSIC_GITHUB_TOKEN }}
+          name: built-jars-${{ github.sha }}
+          path: |
+            versions/**/build/libs/!(*-@(dev|sources|javadoc)).jar
+            versions/**/build/libs/*-@(dev|sources|javadoc).jar
+
+  distribute:
+    needs: build
+    runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        game_version: [ "1.20.1", "1.20.2", "1.20.4" ]
+    steps:
+      - name: Download Built JARs
+        uses: actions/download-artifact@v3
+        with:
+          name: built-jars-${{ github.sha }}
+          path: ./publish-versions
+      - name: List JARs for Publishing (Simulation)
+        run: echo "Jars that would be published for version ${{ matrix.game_version }}:" && ls ./publish-versions/${{ matrix.game_version }}/build/libs/*.jar
+#      - name: Publish to Modrinth, CurseForge, etc.
+#        uses: Kir-Antipov/mc-publish@v3.3
+#        with:
+#          files: ./publish-versions/${{ matrix.game_version }}/build/libs/*.jar
+#          version: ${{ github.ref_name }}+${{ matrix.game_version }}
+#          modrinth-id: ${{ vars.MODRINTH_ID }}
+#          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+#          curseforge-id: ${{ vars.CURSEFORGE_ID }}
+#          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+#          github-token: ${{ secrets.CLASSIC_GITHUB_TOKEN }}

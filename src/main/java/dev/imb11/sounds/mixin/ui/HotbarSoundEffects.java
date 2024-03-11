@@ -22,6 +22,7 @@ public class HotbarSoundEffects {
 
     @Inject(method = "scrollInHotbar", at = @At("RETURN"), cancellable = false)
     public void $hotbar_scroll_sound_effect(double scrollAmount, CallbackInfo ci) {
+        if(this.player.getMainHandStack().isEmpty() && SoundsConfig.get(UISoundsConfig.class).ignoreEmptyHotbarSlots) return;
         SoundsConfig.get(UISoundsConfig.class).hotbarScrollSoundEffect.playDynamicSound(this.player.getMainHandStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
 

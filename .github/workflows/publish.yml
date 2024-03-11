@@ -12,22 +12,18 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1
-      - uses: burrunan/gradle-cache-action@v1
-        with:
-          gradle-distribution-sha-256-sum-warning: false
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           cache: gradle
           java-version: 17
-      - run: chmod +x gradlew
-      - name: Set Active Version
-        run: ./gradlew "Set active project to ${{ matrix.game_version }}"
-      - name: Build Version
-        run: "./gradlew chiseledBuild"
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: "wrapper"
+      - name: Build JARs
+        run: "gradle :${{ matrix.game_version }}:build"
       - uses: Kir-Antipov/mc-publish@v3.3
         with:
           files: |

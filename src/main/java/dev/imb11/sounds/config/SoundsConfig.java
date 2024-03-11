@@ -38,7 +38,7 @@ public class SoundsConfig {
 
     public static <T extends ConfigGroup> T get(Class<T> clazz) {
         if (CONFIG_GROUPS.containsKey(clazz)) {
-            return (T) CONFIG_GROUPS.get(clazz);
+            return (T) CONFIG_GROUPS.get(clazz).getHandler().instance();
         }
 
         throw new IllegalArgumentException("No config group found for class " + clazz.getName());

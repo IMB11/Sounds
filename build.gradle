@@ -27,7 +27,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${property('deps.fabric_loader')}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fabric_api')}"
 
-    modImplementation("dev.isxander.yacl:yet-another-config-lib-fabric:${property("deps.yacl")}")
+    modImplementation include("dev.isxander.yacl:yet-another-config-lib-fabric:${property("deps.yacl")}")
     modLocalRuntime modCompileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
     modImplementation "com.mineblock11:MRU:${property("deps.mru")}"
 

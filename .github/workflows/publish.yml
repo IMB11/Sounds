@@ -45,7 +45,9 @@ jobs:
       - name: Publish to Modrinth, CurseForge, etc.
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          files: ./versions/${{ matrix.game_version }}/build/libs/*.jar
+          files: |
+            versions/${{ matrix.game_version }}/build/libs/!(*-@(dev|sources|javadoc)).jar
+            versions/${{ matrix.game_version }}/build/libs/*-@(dev|sources|javadoc).jar
           version: ${{ github.ref_name }}+${{ matrix.game_version }}
           modrinth-id: ${{ vars.MODRINTH_ID }}
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}

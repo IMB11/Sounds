@@ -27,7 +27,7 @@ jobs:
       - name: Upload Built JARs
         uses: actions/upload-artifact@v3
         with:
-          name: built-jars-${{ github.sha }}
+          name: built-jars
           path: |
             versions/**/build/libs/!(*-@(dev|sources|javadoc)).jar
             versions/**/build/libs/*-@(dev|sources|javadoc).jar
@@ -42,7 +42,7 @@ jobs:
       - name: Download Built JARs
         uses: actions/download-artifact@v3
         with:
-          name: built-jars-${{ github.sha }}
+          name: built-jars
           path: ./publish-versions
       - name: List JARs for Publishing (Simulation)
         run: echo "Jars that would be published for version ${{ matrix.game_version }}:" && ls ./publish-versions/${{ matrix.game_version }}/build/libs/*.jar

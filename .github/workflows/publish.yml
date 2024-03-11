@@ -24,8 +24,7 @@ jobs:
         with:
           name: built-jars
           path: |
-            versions/**/build/libs/!(*-@(dev|sources|javadoc)).jar
-            versions/**/build/libs/*-@(dev|sources|javadoc).jar
+            ./versions/**/build/libs/*.jar
 
   distribute:
     needs: build

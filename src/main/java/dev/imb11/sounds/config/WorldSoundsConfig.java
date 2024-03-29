@@ -16,7 +16,7 @@ import net.minecraft.util.Identifier;
 
 public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<WorldSoundsConfig> {
     /// == MECHANICS == ///
-    public DynamicConfiguredSound<Integer, RepeaterSoundContext> repeaterUseSoundEffect = new DynamicConfiguredSound<>("repeaterUse", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 1.0F, 0.45F, true);
+    public DynamicConfiguredSound<Integer, RepeaterSoundContext> repeaterUseSoundEffect = new DynamicConfiguredSound<>("repeaterUse", SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON, true, 0.95F, 0.3F, true);
     @SerialEntry
     public ConfiguredSound jukeboxUseSoundEffect = new ConfiguredSound("jukeboxUse", SoundEvents.BLOCK_NOTE_BLOCK_BASEDRUM, true, 0.8F, 0.75F);
     @SerialEntry
@@ -28,11 +28,13 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
     @SerialEntry
     public boolean enableDynamicEatingSounds = true;
     @SerialEntry
-    public ConfiguredSound frostWalkerSoundEffect = new ConfiguredSound("frostWalker", SoundEvents.BLOCK_GLASS_HIT, true, 1.0F, 0.5F);
+    public ConfiguredSound frostWalkerSoundEffect = new ConfiguredSound("frostWalker", SoundEvents.BLOCK_POWDER_SNOW_FALL, true, 2.0F, 0.5F);
     @SerialEntry
     public ConfiguredSound leadSnappingSoundEffect = new ConfiguredSound("leadSnapping", SoundEvents.ENTITY_LEASH_KNOT_BREAK, true, 1.0F, 0.5F);
     @SerialEntry
     public ConfiguredSound bowPullSoundEffect = new ConfiguredSound("bowPull", SoundEvents.ITEM_CROSSBOW_LOADING_MIDDLE, true, 1.0F, 0.25F);
+    @SerialEntry
+    public ConfiguredSound plantPotFillSoundEffect = new ConfiguredSound("plantPotFill", SoundEvents.BLOCK_GRASS_PLACE, true, 0.5F, 0.4F);
 
     public WorldSoundsConfig() {
         super(WorldSoundsConfig.class);
@@ -80,6 +82,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
                 .group(config.frostWalkerSoundEffect.getOptionGroup(defaults.frostWalkerSoundEffect))
                 .group(config.leadSnappingSoundEffect.getOptionGroup(defaults.leadSnappingSoundEffect))
                 .group(config.bowPullSoundEffect.getOptionGroup(defaults.bowPullSoundEffect))
+                .group(config.plantPotFillSoundEffect.getOptionGroup(defaults.plantPotFillSoundEffect))
                 .build());
 
         return builder;

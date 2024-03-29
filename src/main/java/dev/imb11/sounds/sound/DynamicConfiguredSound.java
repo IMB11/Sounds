@@ -34,6 +34,11 @@ public class DynamicConfiguredSound<T, F extends DynamicSoundContext<T>> extends
         this.enableDynamicSounds = enableDynamicSounds;
     }
 
+    public DynamicConfiguredSound(String id, SoundEvent soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
+        super(id, soundEvent, enabled, pitch, volume);
+        this.enableDynamicSounds = enableDynamicSounds;
+    }
+
     public DynamicConfiguredSound(String id, RegistryEntry.Reference<SoundEvent> soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
         super(id, soundEvent, enabled, pitch, volume);
         this.enableDynamicSounds = enableDynamicSounds;

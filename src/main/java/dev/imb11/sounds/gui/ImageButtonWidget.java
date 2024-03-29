@@ -6,7 +6,9 @@ import dev.isxander.yacl3.gui.image.impl.AnimatedDynamicTextureImage;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
+import net.minecraft.client.gui.screen.narration.NarrationPart;
 import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -46,7 +48,7 @@ public class ImageButtonWidget extends ClickableWidget {
         context.enableScissor(getX(), getY(), getX() + width, getY() + height);
         this.hovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.width && mouseY < this.getY() + this.height;
 
-        if (this.hovered) {
+        if (this.hovered || this.isFocused()) {
             durationHovered += delta / 2f;
         } else {
             if (durationHovered < 0) {
@@ -118,5 +120,6 @@ public class ImageButtonWidget extends ClickableWidget {
 
     @Override
     protected void appendClickableNarrations(NarrationMessageBuilder builder) {
+        builder.put(NarrationPart.HINT, this.getMessage());
     }
 }

@@ -32,6 +32,8 @@
 	"sounds.config.leadSnapping.description": "The sound effect that plays when a lead is snapped off of a mob.",
 	"sounds.config.bowPull.name": "Bow Pull",
 	"sounds.config.bowPull.description": "A sound effect that is played when you pull back a bow.",
+	"sounds.config.plantPotFill.name": "Plant Pot Fill",
+	"sounds.config.plantPotFill.description": "A sound effect that is played when you fill a flower pot with a plant.",
 
 	"sounds.config.world.mobs": "Mobs",
 	"sounds.config.babyChickenChirp.name": "Baby Chicken Chirp",

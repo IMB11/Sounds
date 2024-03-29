@@ -4,10 +4,7 @@
     "package": "dev.imb11.sounds.mixin",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
-        "ui.ImageRenderManagerMixin",
-        "world.actions.DynamicEatingSoundsMixin",
-        "world.actions.FrostWalkerSoundsMixin",
-        "world.actions.LeadSnappingSoundMixin"
+        "ui.ImageRenderManagerMixin"
     ],
     "client": [
         "SoundsOptionsScreenMixin",
@@ -29,7 +26,11 @@
         "world.mechanics.DaylightDetectorBlockMixin",
         "world.mechanics.FurnaceMinecartEntityMixin",
         "world.mechanics.JukeboxBlockEntityMixin",
-        "world.mechanics.RepeaterBlockMixin"
+        "world.mechanics.RepeaterBlockMixin",
+        "world.actions.DynamicEatingSoundsMixin",
+        "world.actions.FrostWalkerSoundsMixin",
+        "world.actions.LeadSnappingSoundMixin",
+        "world.actions.PlantPotFillSoundMixin"
     ],
     "injectors": {
         "defaultRequire": 1

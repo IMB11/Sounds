@@ -12,14 +12,14 @@ import net.minecraft.util.Identifier;
 public class EventSoundsConfig extends ConfigGroup<EventSoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<EventSoundsConfig> {
     // == STATUS EFFECTS == //
     @SerialEntry
-    public ConfiguredSound positiveStatusEffectGainSoundEffect = new ConfiguredSound("positiveStatusEffectGain", SoundEvents.BLOCK_NOTE_BLOCK_CHIME, true, 1.4F, 0.5F);
+    public ConfiguredSound positiveStatusEffectGainSoundEffect = new ConfiguredSound("positiveStatusEffectGain", SoundEvents.ITEM_TRIDENT_THUNDER, true, 2F, 0.1F);
     @SerialEntry
-    public ConfiguredSound negativeStatusEffectGainSoundEffect = new ConfiguredSound("negativeStatusEffectGain", SoundEvents.ENTITY_ALLAY_HURT, true, 0.5F, 0.5F);
+    public ConfiguredSound negativeStatusEffectGainSoundEffect = new ConfiguredSound("negativeStatusEffectGain", SoundEvents.ENTITY_ILLUSIONER_MIRROR_MOVE, true, 0.3F, 0.2F);
 
     @SerialEntry
-    public ConfiguredSound positiveStatusEffectLoseSoundEffect = new ConfiguredSound("positiveStatusEffectLose", SoundEvents.ENTITY_ALLAY_ITEM_THROWN, true, 0.5F, 0.5F);
+    public ConfiguredSound positiveStatusEffectLoseSoundEffect = new ConfiguredSound("positiveStatusEffectLose", SoundEvents.ITEM_TRIDENT_RIPTIDE_1, true, 0.5F, 0.1F);
     @SerialEntry
-    public ConfiguredSound negativeStatusEffectLoseSoundEffect = new ConfiguredSound("negativeStatusEffectLose", SoundEvents.ENTITY_ALLAY_ITEM_THROWN, true, 0.5F, 0.5F);
+    public ConfiguredSound negativeStatusEffectLoseSoundEffect = new ConfiguredSound("negativeStatusEffectLose", SoundEvents.ITEM_TRIDENT_RIPTIDE_1, true, 0.5F, 0.1F);
 
     public EventSoundsConfig() {
         super(EventSoundsConfig.class);

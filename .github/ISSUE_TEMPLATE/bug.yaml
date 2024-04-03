@@ -1,0 +1,69 @@
+name: Bug report
+description: Found an issue with the mod or encountered an incompatibility?
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        ***
+
+
+        # Using Quilt?
+
+
+        This mod is built exclusively for *Fabric*. 
+
+
+        This means it's **not compatible** with *Quilt*, as the underlying code
+        structures (APIs) differ between the two systems. Trying to force it to
+        work with Quilt will lead to mixin conflicts and likely cause crashes or
+        unexpected issues.
+
+
+        This is a *Fabric* mod, therefore you should use the *Fabric Loader* to
+        use it. It's as simple as that!
+
+
+        I understand some users might prefer Quilt, and there's nothing wrong
+        with that. However, please be aware that **I cannot troubleshoot or fix
+        problems** that happen specifically because you're trying to run a
+        *Fabric* mod on *Quilt*. 
+
+
+        **My time and resources are focused on ensuring the mod works smoothly
+        within its intended environment.**
+
+        ***
+  - type: checkboxes
+    id: read
+    attributes:
+      label: Have you read the information above?
+      options:
+        - label: 'Yes'
+          required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Provide your logs.
+      description: You can use [mclo.gs](https://mclo.gs/) to upload your logs.
+      value: >-
+        Please upload your logs to https://mclo.gs/ and paste the link to them
+        here.
+
+
+        Do not put raw log files into this box, they may contain sensitive
+        information.
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: Describe your issue.
+      description: >-
+        You can upload images and videos into this area - please describe your
+        issue in full.
+      placeholder: The mod crashes when I ...
+      render: markdown
+    validations:
+      required: true

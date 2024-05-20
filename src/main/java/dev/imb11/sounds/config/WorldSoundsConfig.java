@@ -26,8 +26,6 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
 
     /// == ACTIONS == ///
     @SerialEntry
-    public boolean enableDynamicEatingSounds = true;
-    @SerialEntry
     public ConfiguredSound frostWalkerSoundEffect = new ConfiguredSound("frostWalker", SoundEvents.BLOCK_POWDER_SNOW_FALL, true, 2.0F, 0.5F);
     @SerialEntry
     public ConfiguredSound leadSnappingSoundEffect = new ConfiguredSound("leadSnapping", SoundEvents.ENTITY_LEASH_KNOT_BREAK, true, 1.0F, 0.5F);
@@ -73,12 +71,6 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
 
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.world.actions"))
-                .option(Option.<Boolean>createBuilder()
-                        .name(Text.translatable("sounds.config.enableDynamicEatingSounds.name"))
-                        .description(OptionDescription.of(Text.translatable("sounds.config.enableDynamicEatingSounds.description")))
-                        .binding(defaults.enableDynamicEatingSounds, () -> config.enableDynamicEatingSounds, (v) -> config.enableDynamicEatingSounds = v)
-                        .controller((opt) -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
-                        .build())
                 .group(config.frostWalkerSoundEffect.getOptionGroup(defaults.frostWalkerSoundEffect))
                 .group(config.leadSnappingSoundEffect.getOptionGroup(defaults.leadSnappingSoundEffect))
                 .group(config.bowPullSoundEffect.getOptionGroup(defaults.bowPullSoundEffect))

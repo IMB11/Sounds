@@ -105,7 +105,7 @@ public class ImageButtonWidget extends ClickableWidget {
 
 //            context.fill(textX, textY, endX, endY, 0xFFFF2F00);
 
-        /*? >=1.20.2 {*/
+        /*? >1.20.1 {*/
         drawScrollableText(context, client.textRenderer, getMessage(), textX, textY, endX, endY, 0xFFFFFF);
         /*?} else {*//*
         drawScrollableText(context, client.textRenderer, getMessage(), textX, textY, endX, endY, 0xFFFFFF);

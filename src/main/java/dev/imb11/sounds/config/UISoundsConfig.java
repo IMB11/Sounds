@@ -3,6 +3,7 @@ package dev.imb11.sounds.config;
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.sound.ConfiguredSound;
 import dev.imb11.sounds.sound.DynamicConfiguredSound;
+import dev.imb11.sounds.sound.InventoryDynamicConfiguredSound;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import dev.imb11.sounds.sound.context.ScreenHandlerSoundContext;
 import dev.isxander.yacl3.api.ConfigCategory;
@@ -32,15 +33,17 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
     public final ConfiguredSound inventoryTypingSoundEffect = new ConfiguredSound("inventoryTyping", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 1.6f, 0.4f);
     /// == ITEM MANAGEMENT == ///
     @SerialEntry
-    public final DynamicConfiguredSound<ItemStack, ItemStackSoundContext> itemDropSoundEffect = new DynamicConfiguredSound<>("itemDrop", SoundEvents.BLOCK_DISPENSER_LAUNCH, true, 1.5f, 0.4f, true);
+    public boolean ignoreEmptyInventorySlots = false;
     @SerialEntry
-    public final DynamicConfiguredSound<ItemStack, ItemStackSoundContext> itemCopySoundEffect = new DynamicConfiguredSound<>("itemCopy", SoundEvents.BLOCK_FIRE_EXTINGUISH, true, 2f, 0.2f, true);
+    public final InventoryDynamicConfiguredSound itemDropSoundEffect = new InventoryDynamicConfiguredSound("itemDrop", SoundEvents.BLOCK_DISPENSER_LAUNCH, true, 1.5f, 0.4f, true);
     @SerialEntry
-    public final DynamicConfiguredSound<ItemStack, ItemStackSoundContext> itemDeleteSoundEffect = new DynamicConfiguredSound<>("itemDelete", SoundEvents.BLOCK_FIRE_EXTINGUISH, true, 1.6f, 0.2f, true);
+    public final InventoryDynamicConfiguredSound itemCopySoundEffect = new InventoryDynamicConfiguredSound("itemCopy", SoundEvents.BLOCK_FIRE_EXTINGUISH, true, 2f, 0.2f, true);
     @SerialEntry
-    public final DynamicConfiguredSound<ItemStack, ItemStackSoundContext> itemDragSoundEffect = new DynamicConfiguredSound<>("itemDrag", SoundEvents.BLOCK_STONE_HIT, true, 1.6f, 0.4f, true);
+    public final InventoryDynamicConfiguredSound itemDeleteSoundEffect = new InventoryDynamicConfiguredSound("itemDelete", SoundEvents.BLOCK_FIRE_EXTINGUISH, true, 1.6f, 0.2f, true);
     @SerialEntry
-    public final DynamicConfiguredSound<ItemStack, ItemStackSoundContext> itemClickSoundEffect = new DynamicConfiguredSound<>("itemPick", SoundEvents.BLOCK_STONE_HIT, true, 2f, 0.4f, true);
+    public final InventoryDynamicConfiguredSound itemDragSoundEffect = new InventoryDynamicConfiguredSound("itemDrag", SoundEvents.BLOCK_STONE_HIT, true, 1.6f, 0.4f, true);
+    @SerialEntry
+    public final InventoryDynamicConfiguredSound itemClickSoundEffect = new InventoryDynamicConfiguredSound("itemPick", SoundEvents.BLOCK_STONE_HIT, true, 2f, 0.4f, true);
     /// == INTERFACE (GENERAL) == ///
     @SerialEntry
     public boolean ignoreEmptyHotbarSlots = false;
@@ -89,6 +92,12 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
                 .build());
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.ui.item_management"))
+                .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("sounds.config.ignoreEmptyInventorySlots.name"))
+                        .description(OptionDescription.of(Text.translatable("sounds.config.ignoreEmptyInventorySlots.description")))
+                        .binding(defaults.ignoreEmptyInventorySlots, () -> config.ignoreEmptyInventorySlots, (v) -> config.ignoreEmptyInventorySlots = v)
+                        .controller((opt) -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
+                        .build())
                 .group(config.itemDropSoundEffect.getOptionGroup(defaults.itemDropSoundEffect))
                 .group(config.itemCopySoundEffect.getOptionGroup(defaults.itemCopySoundEffect))
                 .group(config.itemDeleteSoundEffect.getOptionGroup(defaults.itemDeleteSoundEffect))

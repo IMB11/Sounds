@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/*? <1.20.2 {*//*
+/*? <1.20.4 {*//*
 import dev.imb11.sounds.mixin.accessors.ClickableWidgetAccessor;
 *//*?} */
 
@@ -138,7 +138,7 @@ public class DynamicGridWidget extends WrapperWidget {
             child.widget().setY(currentY);
             child.widget().setWidth(thisCellWidth - padding * 2);
 
-            /*? >=1.20.2 {*/
+            /*? >1.20.1 {*/
             child.widget().setHeight(thisCellHeight - padding * 2);
             /*?} else {*//*
             ((ClickableWidgetAccessor) child.widget()).setHeight_1_20_1(thisCellHeight - padding * 2);

@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.5-SNAPSHOT'
+    id 'fabric-loom' version '1.6-SNAPSHOT'
 }
 
 version =  property("mod.version") + "+" + stonecutter.current.version
@@ -14,7 +14,7 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url "https://maven.terraformersmc.com/releases" }
-    maven { url "https://maven.isxander.dev/releases" }
+    maven { url 'https://maven.isxander.dev/releases' }
     maven { url "https://jitpack.io" }
     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     maven { url "https://maven.imb11.dev/releases" }
@@ -27,7 +27,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${property('deps.fabric_loader')}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fabric_api')}"
 
-    modImplementation include("dev.isxander.yacl:yet-another-config-lib-fabric:${property("deps.yacl")}")
+    modImplementation include("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")
     modLocalRuntime modCompileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
     modImplementation "com.mineblock11:MRU:${property("deps.mru")}"
 
@@ -71,8 +71,10 @@ loom {
 
 java {
     withSourcesJar()
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    var version = (stonecutter.current.version > "1.20.4") ? JavaVersion.VERSION_21 : JavaVersion.VERSION_17
+
+    sourceCompatibility = version
+    targetCompatibility = version
 }
 
 processResources {

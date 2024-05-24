@@ -60,6 +60,8 @@
 	"sounds.config.hotbarPick.description": "A sound effect that is played when you use the 'Pick Block' action.",
 
 	"sounds.config.ui.item_management": "Item Management",
+	"sounds.config.ignoreEmptyInventorySlots.name": "Ignore Empty Inventory Slots",
+	"sounds.config.ignoreEmptyInventorySlots.description": "Should empty inventory slots be ignored when playing sound effects?",
 	"sounds.config.itemCopy.name": "Item Clone",
 	"sounds.config.itemCopy.description": "A sound effect that is played when you clone an item in your inventory.",
 	"sounds.config.itemDelete.name": "Item Delete",

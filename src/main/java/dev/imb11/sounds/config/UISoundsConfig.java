@@ -40,11 +40,11 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
     @SerialEntry
     public final InventoryDynamicConfiguredSound itemCopySoundEffect = new InventoryDynamicConfiguredSound("itemCopy", SoundEvents.BLOCK_FIRE_EXTINGUISH, true, 2f, 0.2f, true);
     @SerialEntry
-    public final InventoryDynamicConfiguredSound itemDeleteSoundEffect = new InventoryDynamicConfiguredSound("itemDelete", SoundEvents.BLOCK_FIRE_EXTINGUISH, true, 1.6f, 0.2f, true);
+    public final DynamicConfiguredSound<ItemStack, ItemStackSoundContext> itemDeleteSoundEffect = new InventoryDynamicConfiguredSound("itemDelete", SoundEvents.BLOCK_FIRE_EXTINGUISH, true, 1.6f, 0.2f, true);
     @SerialEntry
-    public final InventoryDynamicConfiguredSound itemDragSoundEffect = new InventoryDynamicConfiguredSound("itemDrag", SoundEvents.BLOCK_STONE_HIT, true, 1.6f, 0.4f, true);
+    public final DynamicConfiguredSound<ItemStack, ItemStackSoundContext> itemDragSoundEffect = new InventoryDynamicConfiguredSound("itemDrag", SoundEvents.BLOCK_STONE_HIT, true, 1.6f, 0.4f, true);
     @SerialEntry
-    public final InventoryDynamicConfiguredSound itemClickSoundEffect = new InventoryDynamicConfiguredSound("itemPick", SoundEvents.BLOCK_STONE_HIT, true, 2f, 0.4f, true);
+    public final DynamicConfiguredSound<ItemStack, ItemStackSoundContext> itemClickSoundEffect = new InventoryDynamicConfiguredSound("itemPick", SoundEvents.BLOCK_STONE_HIT, true, 2f, 0.4f, true);
     /// == INTERFACE (GENERAL) == ///
     @SerialEntry
     public boolean ignoreEmptyHotbarSlots = false;

@@ -4,8 +4,12 @@ import com.google.gson.GsonBuilder;
 import com.mineblock11.mru.config.YACLHelper;
 import dev.imb11.sounds.config.adapters.ConfiguredSoundTypeAdapter;
 import dev.imb11.sounds.config.adapters.DynamicConfiguredSoundTypeAdapter;
+import dev.imb11.sounds.config.adapters.HotbarConfiguredSoundTypeAdapter;
+import dev.imb11.sounds.config.adapters.InventoryConfiguredSoundTypeAdapter;
 import dev.imb11.sounds.sound.ConfiguredSound;
 import dev.imb11.sounds.sound.DynamicConfiguredSound;
+import dev.imb11.sounds.sound.HotbarDynamicConfiguredSound;
+import dev.imb11.sounds.sound.InventoryDynamicConfiguredSound;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.ConfigSerializer;
@@ -41,6 +45,8 @@ public abstract class ConfigGroup<T extends ConfigGroup> {
                         builder = builder.appendGsonBuilder(gson -> {
                             gson.registerTypeAdapter(ConfiguredSound.class, new ConfiguredSoundTypeAdapter());
                             gson.registerTypeAdapter(DynamicConfiguredSound.class, new DynamicConfiguredSoundTypeAdapter());
+                            gson.registerTypeAdapter(HotbarDynamicConfiguredSound.class, new HotbarConfiguredSoundTypeAdapter());
+                            gson.registerTypeAdapter(InventoryDynamicConfiguredSound.class, new InventoryConfiguredSoundTypeAdapter());
                             return gson;
                         });
 

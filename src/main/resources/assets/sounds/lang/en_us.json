@@ -45,7 +45,7 @@
 
 	"sounds.config.ui.interface": "Interface (General)",
 	"sounds.config.ignoreEmptyHotbarSlots.name": "Ignore Empty Hotbar Slots",
-	"sounds.config.ignoreEmptyHotbarSlots.description": "Should empty hotbar slots be ignored when playing sound effects?",
+	"sounds.config.ignoreEmptyHotbarSlots.description": "Should empty hotbar slots be ignored when playing sound effects?\n\nNote: This does NOT include the hotbar drop sound effect due to the weird mojank implementation of item dropping mechanics. You should toggle the 'Ignore Empty Inventory Slots' option for that.",
 	"sounds.config.inventoryOpen.name": "Inventory Open",
 	"sounds.config.inventoryOpen.description": "A sound effect that is played when you open a screen that has an inventory, such as an enchanting table.",
 	"sounds.config.inventoryScroll.name": "Inventory Scroll",
@@ -61,7 +61,7 @@
 
 	"sounds.config.ui.item_management": "Item Management",
 	"sounds.config.ignoreEmptyInventorySlots.name": "Ignore Empty Inventory Slots",
-	"sounds.config.ignoreEmptyInventorySlots.description": "Should empty inventory slots be ignored when playing sound effects?",
+	"sounds.config.ignoreEmptyInventorySlots.description": "Should empty inventory slots be ignored when playing sound effects?\n\nNote: This includes the hotbar drop sound effect due to the weird mojank implementation of item dropping mechanics.",
 	"sounds.config.itemCopy.name": "Item Clone",
 	"sounds.config.itemCopy.description": "A sound effect that is played when you clone an item in your inventory.",
 	"sounds.config.itemDelete.name": "Item Delete",

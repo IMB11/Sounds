@@ -38,7 +38,8 @@ public abstract class ItemTransferSoundEffects {
                 SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(itemStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
             }
         } else if (actionType == SlotActionType.PICKUP_ALL) {
-            SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playSound();
+            ItemStack cursorStack = this.getCursorStack();
+            SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(cursorStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
         } else if (actionType == SlotActionType.SWAP) {
             if (itemStack.isEmpty()) {
                 ItemStack buttonStack = player.getInventory().getStack(button);

@@ -27,7 +27,6 @@
         "world.mechanics.FurnaceMinecartEntityMixin",
         "world.mechanics.JukeboxBlockEntityMixin",
         "world.mechanics.RepeaterBlockMixin",
-        "world.actions.DynamicEatingSoundsMixin",
         "world.actions.FrostWalkerSoundsMixin",
         "world.actions.LeadSnappingSoundMixin",
         "world.actions.PlantPotFillSoundMixin"

@@ -24,10 +24,12 @@ dependencies {
     minecraft "com.mojang:minecraft:${stonecutter.current.version}"
     mappings "net.fabricmc:yarn:${property('deps.yarn')}:v2"
 
-    modImplementation "net.fabricmc:fabric-loader:${property('deps.fabric_loader')}"
+    modImplementation "net.fabricmc:fabric-loader:+"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fabric_api')}"
 
-    modImplementation include("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")
+    modImplementation include("dev.isxander:yet-another-config-lib:${property("deps.yacl")}") {
+        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+    }
     modLocalRuntime modCompileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
     modImplementation "com.mineblock11:MRU:${property("deps.mru")}"
 

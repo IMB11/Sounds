@@ -98,6 +98,8 @@
 	"sounds.config.events": "Event Sounds",
 
 	"sounds.config.events.statusEffects": "Status Effects",
+	"sounds.config.events.ignoreSilencedStatusEffects.name": "Ignore Silenced Status Effects",
+	"sounds.config.events.ignoreSilencedStatusEffects.description": "Should status effects that have been silenced (no HUD icon) be ignored when playing sound effects?",
 	"sounds.config.positiveStatusEffectGain.name": "Positive Status Effect Gain",
 	"sounds.config.positiveStatusEffectGain.description": "A sound effect that is played when you gain a positive status effect.",
 	"sounds.config.positiveStatusEffectLose.name": "Positive Status Effect Lose",

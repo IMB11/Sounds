@@ -4,17 +4,17 @@ import dev.imb11.sounds.config.EventSoundsConfig;
 import dev.imb11.sounds.config.SoundsConfig;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class PotionEventHelper {
-    private static final AtomicReference<List<Identifier>> previousEffects = new AtomicReference<>(null);
+    private static final AtomicReference<Map<Identifier, StatusEffectInstance>> previousEffects = new AtomicReference<>(null);
 
     public static void initialize() {
         ClientTickEvents.START_CLIENT_TICK.register(listenForEffectChanges());
@@ -25,23 +25,25 @@ public class PotionEventHelper {
         return client -> {
             if (client.player == null) return;
 
-            List<Identifier> currentEffects = client.player.getStatusEffects().stream().map(instance -> {
-                /*? if <1.20.5 { *//*
-                return Registries.STATUS_EFFECT.getId(instance.getEffectType())
+            Map<Identifier, StatusEffectInstance> currentEffects = new HashMap<>();
+            client.player.getStatusEffects().forEach(effectInstance -> {
+                /*? if <1.20.5 { */
+                StatusEffect effect = effectInstance.getEffectType();
                 /*? } else { *//*
-                return Registries.STATUS_EFFECT.getId(instance.getEffectType().value());
+                StatusEffect effect = effectInstance.getEffectType().value();
                 *//*? } */
-            }).toList();
+                currentEffects.put(Registries.STATUS_EFFECT.getId(effect), effectInstance);
+            });
 
             if (previousEffects.get() != null) {
-                Collection<Identifier> removedEffects = new ArrayList<>(previousEffects.get());
-                removedEffects.removeAll(currentEffects);
+                Map<Identifier, StatusEffectInstance> removedEffects = new HashMap<>(previousEffects.get());
+                removedEffects.keySet().removeAll(currentEffects.keySet());
 
-                for (Identifier effect : removedEffects) {
-                    StatusEffect statusEffect = Registries.STATUS_EFFECT.get(effect);
+                for (Identifier effectId : removedEffects.keySet()) {
+                    StatusEffect statusEffect = Registries.STATUS_EFFECT.get(effectId);
 
                     if (statusEffect == null) continue;
-
+                    if(SoundsConfig.get(EventSoundsConfig.class).ignoreSilencedStatusEffects && !removedEffects.get(effectId).shouldShowIcon()) continue;
                     if (statusEffect.isBeneficial()) {
                         SoundsConfig.get(EventSoundsConfig.class).positiveStatusEffectLoseSoundEffect.playSound();
                     } else {
@@ -49,15 +51,14 @@ public class PotionEventHelper {
                     }
                 }
 
-                // Find out what was added
-                List<Identifier> addedEffects = new ArrayList<>(currentEffects);
-                addedEffects.removeAll(previousEffects.get());
+                Map<Identifier, StatusEffectInstance> addedEffects = new HashMap<>(currentEffects);
+                addedEffects.keySet().removeAll(previousEffects.get().keySet());
 
-                for (Identifier effect : addedEffects) {
-                    StatusEffect statusEffect = Registries.STATUS_EFFECT.get(effect);
+                for (Identifier effectId : addedEffects.keySet()) {
+                    StatusEffect statusEffect = Registries.STATUS_EFFECT.get(effectId);
 
                     if (statusEffect == null) continue;
-
+                    if(SoundsConfig.get(EventSoundsConfig.class).ignoreSilencedStatusEffects && !addedEffects.get(effectId).shouldShowIcon()) continue;
                     if (statusEffect.isBeneficial()) {
                         SoundsConfig.get(EventSoundsConfig.class).positiveStatusEffectGainSoundEffect.playSound();
                     } else {

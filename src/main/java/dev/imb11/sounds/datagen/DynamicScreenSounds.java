@@ -1,4 +1,4 @@
-/*? if >1.20.4 {*//*
+/*? if <=1.20.4 {*/
 package dev.imb11.sounds.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;
@@ -62,4 +62,4 @@ public class DynamicScreenSounds extends SoundDefinitionProvider<ScreenHandlerTy
                 .addKey(ScreenHandlerType.HOPPER));
     }
 }
-*//*?}*/
+/*?}*/

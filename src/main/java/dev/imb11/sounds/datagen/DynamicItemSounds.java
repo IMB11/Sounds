@@ -1,4 +1,4 @@
-/*? if >1.20.4 {*//*
+/*? if <=1.20.4 {*/
 package dev.imb11.sounds.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;
@@ -236,4 +236,4 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
 //        return new Identifier("entity." + entityType.getUntranslatedName() + ".ambient");
 //    }
 }
-*//*?}*/
+/*?}*/

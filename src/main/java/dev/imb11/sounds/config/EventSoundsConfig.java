@@ -12,6 +12,8 @@ import net.minecraft.util.Identifier;
 public class EventSoundsConfig extends ConfigGroup<EventSoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<EventSoundsConfig> {
     // == STATUS EFFECTS == //
     @SerialEntry
+    public boolean ignoreSilencedStatusEffects = true;
+    @SerialEntry
     public ConfiguredSound positiveStatusEffectGainSoundEffect = new ConfiguredSound("positiveStatusEffectGain", SoundEvents.ITEM_TRIDENT_THUNDER, true, 2F, 0.1F);
     @SerialEntry
     public ConfiguredSound negativeStatusEffectGainSoundEffect = new ConfiguredSound("negativeStatusEffectGain", SoundEvents.ENTITY_ILLUSIONER_MIRROR_MOVE, true, 0.3F, 0.2F);
@@ -51,6 +53,7 @@ public class EventSoundsConfig extends ConfigGroup<EventSoundsConfig> implements
 
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.events.statusEffects"))
+                .option(ConfigUtil.create(defaults.ignoreSilencedStatusEffects, v -> config.ignoreSilencedStatusEffects = v, () -> config.ignoreSilencedStatusEffects, "sounds.config.events.ignoreSilencedStatusEffects"))
                 .group(config.positiveStatusEffectGainSoundEffect.getOptionGroup(defaults.positiveStatusEffectGainSoundEffect))
                 .group(config.positiveStatusEffectLoseSoundEffect.getOptionGroup(defaults.positiveStatusEffectLoseSoundEffect))
                 .group(config.negativeStatusEffectGainSoundEffect.getOptionGroup(defaults.negativeStatusEffectGainSoundEffect))

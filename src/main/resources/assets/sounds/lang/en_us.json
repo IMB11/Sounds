@@ -24,8 +24,8 @@
 	"sounds.config.furnaceMinecartFuel.description": "A sound effect that is played when you fuel a Furnace Minecart.",
 
     "sounds.config.world.actions": "Actions",
-	"sounds.config.enableDynamicEatingSounds.name": "Dynamic Eating Sounds",
-	"sounds.config.enableDynamicEatingSounds.description": "When enabled, eating sounds will be played at different pitches depending on the player's hunger level.",
+	"sounds.config.enableEnderpearlVariety.name": "Enable Enderpearl Variety",
+	"sounds.config.enableEnderpearlVariety.description": "Should the sound effect that is played when you throw an Ender Pearl be randomized and more consistent with the chorus fruit teleport sound?",
     "sounds.config.frostWalker.name": "Frost Walker Freeze",
     "sounds.config.frostWalker.description": "The sound effect that plays when frost walker boots freeze water.",
 	"sounds.config.leadSnapping.name": "Lead Snapping",
@@ -34,6 +34,8 @@
 	"sounds.config.bowPull.description": "A sound effect that is played when you pull back a bow.",
 	"sounds.config.plantPotFill.name": "Plant Pot Fill",
 	"sounds.config.plantPotFill.description": "A sound effect that is played when you fill a flower pot with a plant.",
+	"sounds.config.cakeEat.name": "Cake Eat",
+	"sounds.config.cakeEat.description": "A sound effect that is played when you eat a slice of cake. The cake may be a lie, but the sound isn't!",
 
 	"sounds.config.world.mobs": "Mobs",
 	"sounds.config.babyChickenChirp.name": "Baby Chicken Chirp",

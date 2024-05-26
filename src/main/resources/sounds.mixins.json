@@ -22,6 +22,7 @@
         "ui.PlayerEntityMixin",
         "ui.ScreenSoundEffect",
         "ui.TypingSoundEffect",
+        "world.actions.EnderpearlVarietyMixin",
         "world.actions.FrostWalkerSoundsMixin",
         "world.actions.LeadSnappingSoundMixin",
         "world.actions.PlantPotFillSoundMixin",
@@ -29,7 +30,8 @@
         "world.mechanics.DaylightDetectorBlockMixin",
         "world.mechanics.FurnaceMinecartEntityMixin",
         "world.mechanics.JukeboxBlockEntityMixin",
-        "world.mechanics.RepeaterBlockMixin"
+        "world.mechanics.RepeaterBlockMixin",
+        "world.actions.CakeEatSoundMixin"
     ],
     "injectors": {
         "defaultRequire": 1

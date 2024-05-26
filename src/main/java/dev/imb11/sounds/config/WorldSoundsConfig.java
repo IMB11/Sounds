@@ -5,10 +5,7 @@ import dev.imb11.sounds.sound.ConfiguredSound;
 import dev.imb11.sounds.sound.DynamicConfiguredSound;
 import dev.imb11.sounds.sound.context.RepeaterSoundContext;
 import dev.isxander.yacl3.api.ConfigCategory;
-import dev.isxander.yacl3.api.Option;
-import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
-import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -33,6 +30,10 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
     public ConfiguredSound bowPullSoundEffect = new ConfiguredSound("bowPull", SoundEvents.ITEM_CROSSBOW_LOADING_MIDDLE, true, 1.0F, 0.25F);
     @SerialEntry
     public ConfiguredSound plantPotFillSoundEffect = new ConfiguredSound("plantPotFill", SoundEvents.BLOCK_GRASS_PLACE, true, 0.5F, 0.4F);
+    @SerialEntry
+    public ConfiguredSound cakeEatSoundEffect = new ConfiguredSound("cakeEat", SoundEvents.ENTITY_GENERIC_EAT, true, 1.2F, 0.7F);
+    @SerialEntry
+    public boolean enableEnderpearlVariety = true;
 
     public WorldSoundsConfig() {
         super(WorldSoundsConfig.class);
@@ -71,10 +72,12 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
 
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.world.actions"))
+                .option(ConfigUtil.create(defaults.enableEnderpearlVariety, v -> config.enableEnderpearlVariety = v, () -> config.enableEnderpearlVariety, "sounds.config.enableEnderpearlVariety"))
                 .group(config.frostWalkerSoundEffect.getOptionGroup(defaults.frostWalkerSoundEffect))
                 .group(config.leadSnappingSoundEffect.getOptionGroup(defaults.leadSnappingSoundEffect))
                 .group(config.bowPullSoundEffect.getOptionGroup(defaults.bowPullSoundEffect))
                 .group(config.plantPotFillSoundEffect.getOptionGroup(defaults.plantPotFillSoundEffect))
+                .group(config.cakeEatSoundEffect.getOptionGroup(defaults.cakeEatSoundEffect))
                 .build());
 
         return builder;

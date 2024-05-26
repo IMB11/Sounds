@@ -19,8 +19,11 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: "wrapper"
-      - name: Build All Versions with chiseledBuild
-        run: "gradle chiseledBuild"
+      - name: Build JARs
+        uses: Wandalen/wretry.action@master
+        with:
+          command: "gradle chiseledBuild"
+          attempt_limit: 3
       - name: Upload Built JARs
         uses: actions/upload-artifact@v4
         with:

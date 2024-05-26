@@ -19,7 +19,7 @@ public class SoundDefinition<T> {
     private final Optional<Float> volume;
     private final Optional<Float> pitch;
 
-    public SoundDefinition(SoundEvent soundEvent, TagList<T> keys, Optional<Float> volume, Optional<Float> pitch) {
+    protected SoundDefinition(SoundEvent soundEvent, TagList<T> keys, Optional<Float> volume, Optional<Float> pitch) {
         this.soundEvent = soundEvent;
         this.keys = keys;
         this.volume = volume;

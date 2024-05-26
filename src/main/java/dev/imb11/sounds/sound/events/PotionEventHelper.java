@@ -25,7 +25,13 @@ public class PotionEventHelper {
         return client -> {
             if (client.player == null) return;
 
-            List<Identifier> currentEffects = client.player.getStatusEffects().stream().map(instance -> Registries.STATUS_EFFECT.getId(instance.getEffectType())).toList();
+            List<Identifier> currentEffects = client.player.getStatusEffects().stream().map(instance -> {
+                /*? if <1.20.5 { *//*
+                return Registries.STATUS_EFFECT.getId(instance.getEffectType())
+                /*? } else { */
+                return Registries.STATUS_EFFECT.getId(instance.getEffectType().value());
+                /*? } */
+            }).toList();
 
             if (previousEffects.get() != null) {
                 Collection<Identifier> removedEffects = new ArrayList<>(previousEffects.get());

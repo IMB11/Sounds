@@ -28,11 +28,13 @@ public class SoundsConfigScreen extends Screen {
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
 
+        assert this.client != null;
         context.drawCenteredTextWithShadow(this.client.textRenderer, Text.translatable("sounds.config.title"), this.width / 2, 10, 0xFFFFFF);
     }
 
     @Override
     public void close() {
+        assert this.client != null;
         this.client.setScreen(this.parent);
     }
 
@@ -40,6 +42,7 @@ public class SoundsConfigScreen extends Screen {
     protected void init() {
         super.init();
 
+        assert this.client != null;
         int fontHeight = this.client.textRenderer.fontHeight;
         DynamicGridWidget grid = new DynamicGridWidget(10, 10 + fontHeight + 10, width - 20, height - 20 - fontHeight - 10 - 20);
 

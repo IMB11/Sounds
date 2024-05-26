@@ -26,14 +26,22 @@ public class MentionSoundEffect {
     private float cooldownPeriod = 0f;
 
     @Inject(method = "render", at = @At("HEAD"))
+    /*? if <1.20.5 {*//*
     public void $cooldown_period(DrawContext context, int currentTick, int mouseX, int mouseY, CallbackInfo ci) {
+    *//*? } else {*/
+    public void $cooldown_period(DrawContext context, int currentTick, int mouseX, int mouseY, boolean focused, CallbackInfo ci) {
+    /*? }*/
         if (cooldownPeriod > 0) {
             cooldownPeriod -= this.client.getTickDelta() / 2f;
         }
     }
-
+    /*? if <1.20.5 {*//*
     @Inject(method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V", at = @At("HEAD"), cancellable = false)
     public void $mention_recieve_sound_effect(Text message, MessageSignatureData signature, int ticks, MessageIndicator indicator, boolean refresh, CallbackInfo ci) {
+    *//*? } else {*/
+    @Inject(method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;Lnet/minecraft/client/gui/hud/MessageIndicator;)V", at = @At("HEAD"), cancellable = false)
+    public void $mention_recieve_sound_effect(Text message, MessageSignatureData signatureData, MessageIndicator indicator, CallbackInfo ci) {
+    /*? }*/
         if (cooldownPeriod > 0 && SoundsConfig.get(ChatSoundsConfig.class).enableChatSoundCooldown) {
             return;
         }

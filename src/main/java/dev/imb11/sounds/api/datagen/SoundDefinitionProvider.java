@@ -1,3 +1,4 @@
+/*? if >1.20.4 {*//*
 package dev.imb11.sounds.api.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;
@@ -34,3 +35,4 @@ public abstract class SoundDefinitionProvider<T> extends FabricCodecDataProvider
         return "SoundDefinition[" + this.registry.getKey().getValue() + "]Provider";
     }
 }
+*//*? } */

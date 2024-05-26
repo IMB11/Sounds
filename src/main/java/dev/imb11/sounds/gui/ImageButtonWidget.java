@@ -8,7 +8,6 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.screen.narration.NarrationPart;
 import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -23,7 +22,7 @@ import static org.lwjgl.opengl.GL20.*;
 public class ImageButtonWidget extends ClickableWidget {
     float durationHovered = 1f;
     private final CompletableFuture<AnimatedDynamicTextureImage> image;
-    private Consumer<ClickableWidget> onPress;
+    private final Consumer<ClickableWidget> onPress;
 
     public ImageButtonWidget(int x, int y, int width, int height, Text message, Identifier image, Consumer<ClickableWidget> clickEvent) {
         super(x, y, width, height, message);

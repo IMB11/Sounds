@@ -69,6 +69,10 @@ loom {
             runDir "build/datagen"
         }
     }
+
+    if (project.file("aw.accesswidener").exists()) {
+        accessWidenerPath = project.file("aw.accesswidener")
+    }
 }
 
 java {

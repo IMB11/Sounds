@@ -1,6 +1,7 @@
 package dev.imb11.sounds.mixin;
 
 import dev.imb11.sounds.gui.SoundsConfigScreen;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.SoundOptionsScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -18,8 +19,8 @@ public class SoundsOptionsScreenMixin extends Screen {
 
     @Inject(method = "init", at = @At("TAIL"), cancellable = false)
     public void $add_sounds_button(CallbackInfo ci) {
+        assert this.client != null;
         int textWidth = this.client.textRenderer.getWidth("Sounds");
-
         this.addDrawableChild(
                 ButtonWidget
                         .builder(Text.translatable("sounds.config.static"), (btn) -> this.client.setScreen(new SoundsConfigScreen(this)))

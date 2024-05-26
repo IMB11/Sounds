@@ -43,7 +43,7 @@
 
 	"sounds.config.ui": "UI Sounds",
 
-	"sounds.config.ui.interface": "Interface (General)",
+	"sounds.config.ui.interface": "Interface",
 	"sounds.config.ignoreEmptyHotbarSlots.name": "Ignore Empty Hotbar Slots",
 	"sounds.config.ignoreEmptyHotbarSlots.description": "Should empty hotbar slots be ignored when playing sound effects?\n\nNote: This does NOT include the hotbar drop sound effect due to the weird mojank implementation of item dropping mechanics. You should toggle the 'Ignore Empty Inventory Slots' option for that.",
 	"sounds.config.inventoryOpen.name": "Inventory Open",

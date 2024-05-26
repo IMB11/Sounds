@@ -22,14 +22,14 @@
         "ui.PlayerEntityMixin",
         "ui.ScreenSoundEffect",
         "ui.TypingSoundEffect",
+        "world.actions.FrostWalkerSoundsMixin",
+        "world.actions.LeadSnappingSoundMixin",
+        "world.actions.PlantPotFillSoundMixin",
         "world.mechanics.BowPullSoundEffect",
         "world.mechanics.DaylightDetectorBlockMixin",
         "world.mechanics.FurnaceMinecartEntityMixin",
         "world.mechanics.JukeboxBlockEntityMixin",
-        "world.mechanics.RepeaterBlockMixin",
-        "world.actions.FrostWalkerSoundsMixin",
-        "world.actions.LeadSnappingSoundMixin",
-        "world.actions.PlantPotFillSoundMixin"
+        "world.mechanics.RepeaterBlockMixin"
     ],
     "injectors": {
         "defaultRequire": 1

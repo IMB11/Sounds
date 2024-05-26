@@ -1,6 +1,8 @@
 package dev.imb11.sounds.gui;
 
+import dev.imb11.sounds.config.ChatSoundsConfig;
 import dev.imb11.sounds.config.SoundsConfig;
+import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -10,6 +12,9 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class SoundsConfigScreen extends Screen {
     private final Screen parent;
@@ -43,21 +48,31 @@ public class SoundsConfigScreen extends Screen {
         });
 
         grid.setPadding(3);
-        grid.addChild(koFiWidget, 3, 1);
+        grid.addChild(koFiWidget);
 
-        for (ConfigGroup configGroup : SoundsConfig.getAll()) {
-            grid.addChild(new ImageButtonWidget(0, 0, 0, 0, configGroup.getName(), configGroup.getImage(), btn -> {
-                this.client.setScreen(configGroup.getYACL().generateScreen(this));
-            }));
+        ConfigGroup<?>[] configGroups = SoundsConfig.getAll();
+        // Sort by class name.
+        configGroups = Arrays.stream(configGroups).sorted(Comparator.comparing(o -> o.getClass().getSimpleName())).toArray(ConfigGroup[]::new);
+
+        for (ConfigGroup<?> configGroup : configGroups) {
+            if(configGroup instanceof ChatSoundsConfig) {
+                grid.addChild(new ImageButtonWidget(0, 0, 0, 0, configGroup.getName(), configGroup.getImage(), btn -> {
+                    this.client.setScreen(configGroup.getYACL().generateScreen(this));
+                }), 3, 1);
+            } else if (configGroup instanceof UISoundsConfig) {
+                grid.addChild(new ImageButtonWidget(0, 0, 0, 0, configGroup.getName(), configGroup.getImage(), btn -> {
+                    this.client.setScreen(configGroup.getYACL().generateScreen(this));
+                }), 2, 1);
+            } else {
+                grid.addChild(new ImageButtonWidget(0, 0, 0, 0, configGroup.getName(), configGroup.getImage(), btn -> {
+                    this.client.setScreen(configGroup.getYACL().generateScreen(this));
+                }));
+            }
         }
 
         grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Text.of("Discord Server"), new Identifier("sounds", "textures/gui/discord.webp"), btn -> {
             Util.getOperatingSystem().open("https://discord.imb11.dev/"); // Rick roll lol.
         }));
-        grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Text.of("Modrinth Page"), new Identifier("sounds", "textures/gui/modrinth.webp"), btn -> {
-            Util.getOperatingSystem().open("https://modrinth.com/mod/sound"); // Rick roll lol.
-        }));
-
 
         grid.calculateLayout();
 

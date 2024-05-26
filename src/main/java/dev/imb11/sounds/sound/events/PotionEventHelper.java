@@ -28,9 +28,9 @@ public class PotionEventHelper {
             List<Identifier> currentEffects = client.player.getStatusEffects().stream().map(instance -> {
                 /*? if <1.20.5 { *//*
                 return Registries.STATUS_EFFECT.getId(instance.getEffectType())
-                /*? } else { */
+                /*? } else { *//*
                 return Registries.STATUS_EFFECT.getId(instance.getEffectType().value());
-                /*? } */
+                *//*? } */
             }).toList();
 
             if (previousEffects.get() != null) {

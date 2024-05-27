@@ -13,6 +13,7 @@ import net.minecraft.util.Identifier;
 
 public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<WorldSoundsConfig> {
     /// == MECHANICS == ///
+    @SerialEntry
     public DynamicConfiguredSound<Integer, RepeaterSoundContext> repeaterUseSoundEffect = new DynamicConfiguredSound<>("repeaterUse", SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON, true, 0.95F, 0.3F, true);
     @SerialEntry
     public ConfiguredSound jukeboxUseSoundEffect = new ConfiguredSound("jukeboxUse", SoundEvents.BLOCK_NOTE_BLOCK_BASEDRUM, true, 0.8F, 0.75F);

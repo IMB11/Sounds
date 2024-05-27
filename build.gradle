@@ -70,9 +70,7 @@ loom {
         }
     }
 
-    if (project.file("aw.accesswidener").exists()) {
-        accessWidenerPath = project.file("aw.accesswidener")
-    }
+    accessWidenerPath = getRootProject().file("src/main/resources/aw/" + stonecutter.current.version + ".accesswidener")
 }
 
 java {
@@ -87,7 +85,8 @@ processResources {
     filesMatching('fabric.mod.json') {
         expand 'mod_version': version,
                 'target_minecraft': project.property('mod.target'),
-                'target_yacl': project.property('deps.yacl')
+                'target_yacl': project.property('deps.yacl'),
+                'minecraft_version': stonecutter.current.version
     }
 }
 

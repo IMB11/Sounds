@@ -49,11 +49,12 @@ sourceSets {
     main {
         resources {
             srcDirs += [
-                    getRootProject().file('src/main/generated')
+                    file('src/main/generated')
             ]
         }
     }
 }
+
 
 loom {
     runs {
@@ -73,7 +74,7 @@ loom {
 }
 
 java {
-    withSourcesJar()
+//    withSourcesJar()
     var version = (stonecutter.current.version > "1.20.4") ? JavaVersion.VERSION_21 : JavaVersion.VERSION_17
 
     sourceCompatibility = version
@@ -87,6 +88,8 @@ processResources {
                 'target_yacl': project.property('deps.yacl'),
                 'minecraft_version': stonecutter.current.version
     }
+
+//    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
 jar {

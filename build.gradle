@@ -48,13 +48,12 @@ if (stonecutter.current.active) { // run configs for non-active version would be
         main {
             resources {
                 srcDirs += [
-                        rootProject.file('src/main/generated')
+                        getRootProject().file('src/main/generated')
                 ]
             }
         }
     }
 }
-
 
 loom {
     runs {

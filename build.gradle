@@ -43,14 +43,14 @@ if (stonecutter.current.active) { // run configs for non-active version would be
             runDir "../../run" // use a global run directory for all versions
         }
     }
+}
 
-    sourceSets {
-        main {
-            resources {
-                srcDirs += [
-                        getRootProject().file('src/main/generated')
-                ]
-            }
+sourceSets {
+    main {
+        resources {
+            srcDirs += [
+                    getRootProject().file('src/main/generated')
+            ]
         }
     }
 }

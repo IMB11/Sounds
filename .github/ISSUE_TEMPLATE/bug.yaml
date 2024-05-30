@@ -64,6 +64,5 @@ body:
         You can upload images and videos into this area - please describe your
         issue in full.
       placeholder: The mod crashes when I ...
-      render: markdown
     validations:
       required: true

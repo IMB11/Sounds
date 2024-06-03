@@ -1,8 +1,8 @@
 package dev.imb11.sounds.config;
 
 import dev.imb11.sounds.config.utils.ConfigGroup;
-import dev.imb11.sounds.sound.ConfiguredSound;
-import dev.imb11.sounds.sound.DynamicConfiguredSound;
+import dev.imb11.sounds.api.config.ConfiguredSound;
+import dev.imb11.sounds.api.config.DynamicConfiguredSound;
 import dev.imb11.sounds.sound.context.RepeaterSoundContext;
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;

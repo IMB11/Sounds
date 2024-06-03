@@ -18,11 +18,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(FlowerPotBlock.class)
 public class PlantPotFillSoundMixin {
     @Inject(method = "onUse", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/ActionResult;success(Z)Lnet/minecraft/util/ActionResult;"))
-    /*? if <1.20.5 {*/
+    /*? if <1.20.5 {*//*
     public void playPlantPotFillSound(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-    /*?} else {*//*
+    *//*?} else {*/
     public void playPlantPotFillSound(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-    *//*?}*/
+    /*?}*/
         if(world.isClient) {
             SoundsConfig.get(WorldSoundsConfig.class).plantPotFillSoundEffect.playSound();
         }

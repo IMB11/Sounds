@@ -1,4 +1,4 @@
-package dev.imb11.sounds.sound.context;
+package dev.imb11.sounds.api.context;
 
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundInstance;

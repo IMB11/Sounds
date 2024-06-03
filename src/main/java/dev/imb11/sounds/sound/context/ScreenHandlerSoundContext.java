@@ -2,6 +2,7 @@ package dev.imb11.sounds.sound.context;
 
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.SoundDefinition;
+import dev.imb11.sounds.api.context.DynamicSoundContext;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;

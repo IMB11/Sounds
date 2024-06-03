@@ -1,8 +1,8 @@
 package dev.imb11.sounds.sound;
 
+import dev.imb11.sounds.api.config.DynamicConfiguredSound;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
-import dev.imb11.sounds.sound.context.DynamicSoundContext;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;

@@ -1,8 +1,8 @@
-package dev.imb11.sounds.sound;
+package dev.imb11.sounds.api.config;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.imb11.sounds.sound.context.DynamicSoundContext;
+import dev.imb11.sounds.api.context.DynamicSoundContext;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
@@ -12,7 +12,6 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 

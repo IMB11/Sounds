@@ -1,6 +1,7 @@
 package dev.imb11.sounds.sound.context;
 
 import dev.imb11.sounds.api.SoundDefinition;
+import dev.imb11.sounds.api.context.DynamicSoundContext;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.item.BlockItem;

@@ -1,12 +1,11 @@
 package dev.imb11.sounds.config;
 
 import dev.imb11.sounds.config.utils.ConfigGroup;
-import dev.imb11.sounds.sound.ConfiguredSound;
+import dev.imb11.sounds.api.config.ConfiguredSound;
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
-import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatFieldControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.minecraft.sound.SoundEvents;

@@ -1,4 +1,4 @@
-package dev.imb11.sounds.sound;
+package dev.imb11.sounds.api.config;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -73,19 +73,7 @@ public class ConfiguredSound {
                 .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
                 .build();
 
-        var shouldPlay = Option.<Boolean>createBuilder()
-                .name(Text.translatable("sounds.config.shouldPlay.name"))
-                .description(OptionDescription.createBuilder()
-                                .text(Text.translatable("sounds.config.shouldPlay.description")).build())
-                .binding(defaults.enabled, () -> this.enabled, (val) -> this.enabled = val)
-                .listener((opt, val) -> {
-                    pitchOpt.setAvailable(val);
-                    volumeOpt.setAvailable(val);
-                })
-                .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
-                .build();
-
-        return new ArrayList<>(List.of(shouldPlay, volumeOpt, pitchOpt));
+        return new ArrayList<>(List.of(volumeOpt, pitchOpt));
     }
 
     public <T extends ConfiguredSound> ArrayList<Option<?>> addExtraOptions(T defaults) {
@@ -93,18 +81,29 @@ public class ConfiguredSound {
     }
 
     public OptionGroup getOptionGroup(ConfiguredSound defaults) {
-
         ArrayList<Option<?>> defaultOptions = createDefaultOptions(defaults);
         ArrayList<Option<?>> extraOptions = addExtraOptions(defaults);
-
         ArrayList<Option<?>> allOptions = new ArrayList<>(defaultOptions);
         allOptions.addAll(extraOptions);
+
+        var shouldPlay = Option.<Boolean>createBuilder()
+                .name(Text.translatable("sounds.config.shouldPlay.name"))
+                .description(OptionDescription.createBuilder()
+                        .text(Text.translatable("sounds.config.shouldPlay.description")).build())
+                .binding(defaults.enabled, () -> this.enabled, (val) -> this.enabled = val)
+                .listener((opt, val) -> {
+                    // Disable/Enable all options when toggled.
+                    allOptions.forEach(option -> option.setAvailable(val));
+                })
+                .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
+                .build();
 
         return OptionGroup
                 .createBuilder()
                 .name(Text.translatable("sounds.config." + id + ".name").formatted(Formatting.UNDERLINE))
                 .description(OptionDescription.createBuilder()
                         .text(Text.translatable("sounds.config." + id + ".description")).build())
+                .option(shouldPlay)
                 .options(allOptions)
                 .collapsed(true)
                 .build();

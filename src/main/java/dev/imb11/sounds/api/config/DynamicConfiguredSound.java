@@ -3,6 +3,7 @@ package dev.imb11.sounds.api.config;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.imb11.sounds.api.context.DynamicSoundContext;
+import dev.isxander.yacl3.api.ButtonOption;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
@@ -13,6 +14,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 
 public class DynamicConfiguredSound<T, F extends DynamicSoundContext<T>> extends ConfiguredSound {

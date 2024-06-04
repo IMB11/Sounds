@@ -14,4 +14,13 @@ public class RepeaterSoundContext implements DynamicSoundContext<Integer> {
         pitch = 0.2f + (context - 1) * 0.4f;
         return createSoundInstance(fallback, pitch, volume);
     }
+
+    private static int num = 1;
+
+    @Override
+    public SoundInstance getExample(SoundEvent fallback, float pitch, float volume) {
+        num++;
+        if(num > 4) num = 1;
+        return handleContext(num, fallback, pitch, volume);
+    }
 }

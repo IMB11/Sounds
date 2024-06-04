@@ -7,13 +7,21 @@ import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import net.minecraft.client.sound.SoundInstance;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.registry.Registries;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.math.random.Random;
 
 public class ScreenHandlerSoundContext implements DynamicSoundContext<ScreenHandler> {
 
     private final boolean isOpening;
+
+    public ScreenHandlerSoundContext() {
+        this(true);
+    }
 
     public ScreenHandlerSoundContext(boolean isOpening) {
         this.isOpening = isOpening;
@@ -58,5 +66,10 @@ public class ScreenHandlerSoundContext implements DynamicSoundContext<ScreenHand
         }
 
         return createSoundInstance(soundEvent, pitch, volume);
+    }
+
+    @Override
+    public SoundInstance getExample(SoundEvent fallback, float pitch, float volume) {
+        return createSoundInstance(fallback, pitch, volume);
     }
 }

@@ -33,6 +33,8 @@ dependencies {
     modLocalRuntime modCompileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
     modImplementation "com.mineblock11:MRU:${property("deps.mru")}"
 
+    include implementation("org.chenliang.oggus:oggus:1.2.0")
+
     modCompileOnly "dev.emi:emi-fabric:${property("compile.emi")}"
 }
 

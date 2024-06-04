@@ -2,10 +2,12 @@ package dev.imb11.sounds.api.config;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.isxander.yacl3.api.ButtonOption;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.OptionGroup;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
+import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
@@ -37,14 +39,21 @@ public class ConfiguredSound {
     public RegistryEntry.Reference<SoundEvent> soundEvent;
     public float pitch = 1f;
     public float volume = 1f;
+    private float _pendingPitch = 1f;
+    private float _pendingVolume = 1f;
+    private RegistryEntry.Reference<SoundEvent> _pendingSoundEvent;
 
     public ConfiguredSound(String id, Identifier soundEvent, boolean enabled, float pitch, float volume) {
         this.enabled = enabled;
         this.soundEvent = RegistryEntry.Reference.standAlone(Registries.SOUND_EVENT.getEntryOwner(), RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent));
         this.pitch = pitch;
         this.volume = volume;
-        this.id = id;
 
+        _pendingPitch = pitch;
+        _pendingVolume = volume;
+        _pendingSoundEvent = this.soundEvent;
+
+        this.id = id;
         this.client = MinecraftClient.getInstance();
     }
 
@@ -62,6 +71,9 @@ public class ConfiguredSound {
                 .description(OptionDescription.createBuilder()
                                 .text(Text.translatable("sounds.config.volume.description")).build())
                 .binding(defaults.volume, () -> this.volume, (val) -> this.volume = val)
+                .listener((opt, val) -> {
+                    this._pendingVolume = val;
+                })
                 .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
                 .build();
 
@@ -70,14 +82,42 @@ public class ConfiguredSound {
                 .description(OptionDescription.createBuilder()
                         .text(Text.translatable("sounds.config.pitch.description")).build())
                 .binding(defaults.pitch, () -> this.pitch, (val) -> this.pitch = val)
+                .listener((opt, val) -> {
+                    this._pendingPitch = val;
+                })
                 .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
                 .build();
 
-        return new ArrayList<>(List.of(volumeOpt, pitchOpt));
+        var soundEventOpt = Option.<String>createBuilder()
+                .name(Text.translatable("sounds.config.event.name"))
+                .description(OptionDescription.createBuilder()
+                        .text(Text.translatable("sounds.config.event.description")).build())
+                .binding(defaults.soundEvent.registryKey().getValue().toString(), () -> this.soundEvent.registryKey().getValue().toString(), (val) ->
+                        this.soundEvent = RegistryEntry.Reference.standAlone(
+                                Registries.SOUND_EVENT.getEntryOwner(),
+                                RegistryKey.of(Registries.SOUND_EVENT.getKey(), Identifier.tryParse(val))))
+                .listener((opt, val) -> this._pendingSoundEvent = RegistryEntry.Reference.standAlone(
+                        Registries.SOUND_EVENT.getEntryOwner(),
+                        RegistryKey.of(Registries.SOUND_EVENT.getKey(), Identifier.tryParse(val))))
+                .controller(opt -> DropdownStringControllerBuilder.create(opt)
+                        .allowAnyValue(false)
+                        .allowEmptyValue(false)
+                        .values(Registries.SOUND_EVENT.getKeys().stream().map(RegistryKey::getValue).map(Identifier::toString).toList()))
+                .build();
+
+        return new ArrayList<>(List.of(volumeOpt, pitchOpt, soundEventOpt));
     }
 
     public <T extends ConfiguredSound> ArrayList<Option<?>> addExtraOptions(T defaults) {
         return new ArrayList<>();
+    }
+
+    public ButtonOption getPreviewButton() {
+        return ButtonOption.createBuilder()
+                .name(Text.translatable("sounds.config.preview.name"))
+                .description(OptionDescription.of(Text.translatable("sounds.config.preview.description")))
+                .action((a, b) -> playPreviewSound())
+                .build();
     }
 
     public OptionGroup getOptionGroup(ConfiguredSound defaults) {
@@ -103,6 +143,7 @@ public class ConfiguredSound {
                 .name(Text.translatable("sounds.config." + id + ".name").formatted(Formatting.UNDERLINE))
                 .description(OptionDescription.createBuilder()
                         .text(Text.translatable("sounds.config." + id + ".description")).build())
+                .option(getPreviewButton())
                 .option(shouldPlay)
                 .options(allOptions)
                 .collapsed(true)
@@ -116,8 +157,17 @@ public class ConfiguredSound {
     public void playSound() {
         if (this.enabled) {
             final SoundEvent event = Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
-            this.playSound(PositionedSoundInstance.master(event, pitch, volume));
+            this.playSound(event, this.pitch, this.volume);
         }
+    }
+
+    private void playPreviewSound() {
+        final SoundEvent event = Registries.SOUND_EVENT.get(this._pendingSoundEvent.registryKey());
+        this.playSound(event, _pendingPitch, _pendingVolume);
+    }
+
+    private void playSound(SoundEvent event, float pitch, float volume) {
+        this.playSound(PositionedSoundInstance.master(event, pitch, volume));
     }
 
     public @Nullable PositionedSoundInstance getSoundInstance() {

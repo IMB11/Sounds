@@ -7,10 +7,18 @@ import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.math.random.Random;
+
+import java.lang.reflect.Field;
 
 public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
     private final DynamicSoundHelper.BlockSoundType blockSoundType;
+    public ItemStackSoundContext() {
+        this(DynamicSoundHelper.BlockSoundType.FALL);
+    }
 
     public ItemStackSoundContext(DynamicSoundHelper.BlockSoundType blockSoundType) {
         this.blockSoundType = blockSoundType;
@@ -46,5 +54,10 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
         }
 
         return createSoundInstance(fallback, pitch, volume);
+    }
+
+    @Override
+    public SoundInstance getExample(SoundEvent fallback, float pitch, float volume) {
+        return handleContext(Registries.ITEM.getRandom(Random.create()).get().value().getDefaultStack(), fallback, pitch, volume);
     }
 }

@@ -2,6 +2,8 @@
 	"sounds.config.static": "Sounds",
 	"sounds.config.title": "Sounds Config",
 
+	"sounds.config.preview.name": "Preview Sound",
+	"sounds.config.preview.description": "Preview the sound effect.",
 	"sounds.config.shouldPlay.name": "Enable Sound",
 	"sounds.config.shouldPlay.description": "Should this sound be played?",
 	"sounds.config.dynamic.name": "Dynamic Sounds",
@@ -10,6 +12,8 @@
 	"sounds.config.volume.description": "The volume of the sound.",
 	"sounds.config.pitch.name": "Sound Pitch",
 	"sounds.config.pitch.description": "The pitch of the sound.\n\nA lower pitch gives a deeper sound, whilst a higher pitch gives a more squeakier sound.",
+	"sounds.config.event.name": "Sound Event ID",
+	"sounds.config.event.description": "The sound event ID that is played when the sound is triggered.\n\nThis is a unique identifier for the sound event, and is used to play the sound in the game.",
 
 	"sounds.config.world": "World Sounds",
 

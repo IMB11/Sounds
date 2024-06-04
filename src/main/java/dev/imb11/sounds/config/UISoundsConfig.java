@@ -5,6 +5,7 @@ import dev.imb11.sounds.api.config.ConfiguredSound;
 import dev.imb11.sounds.api.config.DynamicConfiguredSound;
 import dev.imb11.sounds.sound.HotbarDynamicConfiguredSound;
 import dev.imb11.sounds.sound.InventoryDynamicConfiguredSound;
+import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import dev.imb11.sounds.sound.context.ScreenHandlerSoundContext;
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
@@ -70,6 +71,7 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
 
     @Override
     public YetAnotherConfigLib.Builder build(UISoundsConfig defaults, UISoundsConfig config, YetAnotherConfigLib.Builder builder) {
+
         builder.title(Text.of("UI Sounds"));
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.ui.interface"))

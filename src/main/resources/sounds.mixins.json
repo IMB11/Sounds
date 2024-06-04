@@ -7,6 +7,7 @@
         "ui.ImageRenderManagerMixin"
     ],
     "client": [
+        "ActionControllerElementMixin",
         "SoundsOptionsScreenMixin",
         "accessors.AnimatedDynamicTextureImageAccessor",
         "accessors.ClickableWidgetAccessor",
@@ -22,6 +23,7 @@
         "ui.PlayerEntityMixin",
         "ui.ScreenSoundEffect",
         "ui.TypingSoundEffect",
+        "world.actions.CakeEatSoundMixin",
         "world.actions.EnderpearlVarietyMixin",
         "world.actions.FrostWalkerSoundsMixin",
         "world.actions.LeadSnappingSoundMixin",
@@ -30,8 +32,7 @@
         "world.mechanics.DaylightDetectorBlockMixin",
         "world.mechanics.FurnaceMinecartEntityMixin",
         "world.mechanics.JukeboxBlockEntityMixin",
-        "world.mechanics.RepeaterBlockMixin",
-        "world.actions.CakeEatSoundMixin"
+        "world.mechanics.RepeaterBlockMixin"
     ],
     "injectors": {
         "defaultRequire": 1

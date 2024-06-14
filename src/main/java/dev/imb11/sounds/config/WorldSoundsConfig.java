@@ -1,8 +1,8 @@
 package dev.imb11.sounds.config;
 
-import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.api.config.ConfiguredSound;
 import dev.imb11.sounds.api.config.DynamicConfiguredSound;
+import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.sound.context.RepeaterSoundContext;
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
@@ -23,6 +23,8 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
     public ConfiguredSound furnaceMinecartFuelSoundEffect = new ConfiguredSound("furnaceMinecartFuel", SoundEvents.ENTITY_CREEPER_HURT, true, 1.9F, 0.2F);
 
     /// == ACTIONS == ///
+//    @SerialEntry
+//    public ConfiguredSound swordSwoopSoundEffect = new ConfiguredSound("swordSwoop", CustomSounds.SWORD_SWOOP, true, 1.0F, 1.0F);
     @SerialEntry
     public ConfiguredSound frostWalkerSoundEffect = new ConfiguredSound("frostWalker", SoundEvents.BLOCK_POWDER_SNOW_FALL, true, 2.0F, 0.5F);
     @SerialEntry
@@ -74,6 +76,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.world.actions"))
                 .option(ConfigUtil.create(defaults.enableEnderpearlVariety, v -> config.enableEnderpearlVariety = v, () -> config.enableEnderpearlVariety, "sounds.config.enableEnderpearlVariety"))
+//                .group(config.swordSwoopSoundEffect.getOptionGroup(defaults.swordSwoopSoundEffect))
                 .group(config.frostWalkerSoundEffect.getOptionGroup(defaults.frostWalkerSoundEffect))
                 .group(config.leadSnappingSoundEffect.getOptionGroup(defaults.leadSnappingSoundEffect))
                 .group(config.bowPullSoundEffect.getOptionGroup(defaults.bowPullSoundEffect))

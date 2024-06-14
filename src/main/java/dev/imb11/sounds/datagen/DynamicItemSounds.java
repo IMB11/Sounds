@@ -22,6 +22,11 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
 
     @Override
     public void accept(BiConsumer<String, SoundDefinition.Builder<Item>> provider) {
+        provider.accept("anvils", create(SoundEvents.BLOCK_ANVIL_FALL)
+                .addKey(Items.ANVIL)
+                .addKey(Items.CHIPPED_ANVIL)
+                .addKey(Items.DAMAGED_ANVIL));
+
         provider.accept("wooden_equipment", create(SoundEvents.ITEM_AXE_STRIP)
                 .addKey(Items.WOODEN_AXE)
                 .addKey(Items.WOODEN_HOE)
@@ -121,7 +126,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.BOW)
                 .addKey(Items.CROSSBOW));
 
-        provider.accept("fishing_rods", create(SoundEvents.ENTITY_FISHING_BOBBER_SPLASH)
+        provider.accept("fishing_rods", create(SoundEvents.BLOCK_POINTED_DRIPSTONE_DRIP_WATER_INTO_CAULDRON)
                 .addKey(Items.FISHING_ROD));
 
         provider.accept("flint_and_steel", create(SoundEvents.ITEM_FLINTANDSTEEL_USE)

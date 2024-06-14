@@ -1,0 +1,28 @@
+{
+    "item.sword.swoosh": {
+        "subtitle": "sounds.subtitle.sword_swoosh",
+        "sounds": [
+            "sounds:sword_swoosh_0",
+            "sounds:sword_swoosh_1",
+            "sounds:sword_swoosh_2"
+        ]
+    },
+    "item.hard_metal.hold": {
+        "subtitle": "sounds.subtitle.metal_hold",
+        "sounds": [
+            "sounds:metal/hard_01",
+            "sounds:metal/hard_02",
+            "sounds:metal/hard_03",
+            "sounds:metal/hard_04"
+        ]
+    },
+    "item.shiny_metal.hold": {
+        "subtitle": "sounds.subtitle.metal_hold",
+        "sounds": [
+            "sounds:metal/shiny_01",
+            "sounds:metal/shiny_02",
+            "sounds:metal/shiny_03",
+            "sounds:metal/shiny_04"
+        ]
+    }
+}

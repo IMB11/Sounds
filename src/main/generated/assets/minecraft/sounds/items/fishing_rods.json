@@ -2,5 +2,5 @@
   "keys": [
     "minecraft:fishing_rod"
   ],
-  "soundEvent": "minecraft:entity.fishing_bobber.splash"
+  "soundEvent": "minecraft:block.pointed_dripstone.drip_water_into_cauldron"
 }

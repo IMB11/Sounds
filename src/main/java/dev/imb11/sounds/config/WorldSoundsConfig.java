@@ -225,7 +225,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
                 .option(ButtonOption.createBuilder()
                         .name(Text.of("Open GitHub Repository"))
                         .description(OptionDescription.EMPTY)
-                        .action((screen, option) -> Util.getOperatingSystem().open("")).build())
+                        .action((screen, option) -> Util.getOperatingSystem().open("https://github.com/IMB11/Sounds/tree/main/src/main/resources/data/sounds/tags/blocks")).build())
                 .groups(tagOptionGroups);
 
         builder.category(blocksCategory.build());

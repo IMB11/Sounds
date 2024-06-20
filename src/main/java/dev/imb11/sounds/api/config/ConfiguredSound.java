@@ -114,7 +114,7 @@ public class ConfiguredSound {
 
     public ButtonOption getPreviewButton() {
         return ButtonOption.createBuilder()
-                .name(Text.translatable("sounds.config.preview.name"))
+                .name(Text.translatable("sounds.config.preview.name", ""))
                 .description(OptionDescription.of(Text.translatable("sounds.config.preview.description")))
                 .action((a, b) -> playPreviewSound())
                 .build();

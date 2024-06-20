@@ -3,6 +3,13 @@
 	"sounds.config.title": "Sounds Config",
 
 	"sounds.config.preview.name": "Preview Sound",
+	"sounds.config.preview.name.brackets": "Preview %s Sound",
+	"sounds.config.preview.break": "Break",
+	"sounds.config.preview.place": "Place",
+	"sounds.config.preview.step": "Step",
+	"sounds.config.preview.hit": "Hit",
+	"sounds.config.preview.fall": "Fall",
+	"sounds.config.tag.description": "Any blocks within this tag will have the following sound settings applied to their block sound group.",
 	"sounds.config.preview.description": "Preview the sound effect.",
 	"sounds.config.shouldPlay.name": "Enable Sound",
 	"sounds.config.shouldPlay.description": "Should this sound be played?",
@@ -13,6 +20,7 @@
 	"sounds.config.pitch.name": "Sound Pitch",
 	"sounds.config.pitch.description": "The pitch of the sound.\n\nA lower pitch gives a deeper sound, whilst a higher pitch gives a more squeakier sound.",
 	"sounds.config.event.name": "Sound Event ID",
+	"sounds.config.event.name.brackets": "Sound Event ID (%s)",
 	"sounds.config.event.description": "The sound event ID that is played when the sound is triggered.\n\nThis is a unique identifier for the sound event, and is used to play the sound in the game.",
 
 	"sounds.config.world": "World Sounds",
@@ -46,6 +54,9 @@
 	"sounds.config.babyChickenChirp.description": "A sound effect that is played when a baby chicken chirps.",
 	"sounds.config.wolfHowling.name": "Wolf Howling",
 	"sounds.config.wolfHowling.description": "A sound effect that is played by wolves when a full moon is out... beware !",
+
+	"sounds.config.world.blocks": "Blocks",
+	"sounds.config.world.blocks.description": "These sounds are categorized and applied based on tags, offering a flexible and customizable experience.\nIt is recommended to use the search bar when locating sounds.\nFor a full list of what blocks are in which tags, you should click the following button:",
 
 	"sounds.config.ui": "UI Sounds",
 

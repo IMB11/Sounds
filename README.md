@@ -1,136 +1,43 @@
-![](https://cdn.mineblock11.dev/requires_fabric_api.png) [![](https://cdn.mineblock11.dev/mineblock%20badge_64h.png)](https://discord.gg/UzHtJKqHny) [![](https://cdn.mineblock11.dev/modding-elite-badge.png)](https://ko-fi.com/mineblock11)
+[![](https://cdn.mineblock11.dev/requires_fabric_api.png)](https://modrinth.com/mod/fabric-api) [![](https://cdn.mineblock11.dev/mineblock%20badge_64h.png)](https://discord.gg/UzHtJKqHny)  [![](https://cdn.mineblock11.dev/modding-elite-badge.png)](https://ko-fi.com/mineblock11) [![](https://github.com/intergrav/devins-badges/blob/v3/assets/cozy-minimal/available/curseforge_64h.png?raw=true)](https://www.curseforge.com/minecraft/mc-mods/sound-overhaul)
 
-# Sounds
+# Information
 
-Sounds is an interactive sound overhaul mod, it is inspired by [Effective](https://modrinth.com/mod/effective) and is partially feature-complete compared to [ExtraSounds](https://modrinth.com/mod/extrasounds).
+Sounds is a Minecraft mod that adds a variety of new sound effects and improves existing ones that don't quite fit. It's a game-changer for all players, making the vanilla experience feel incomplete by comparison!
 
-This mod's amazing configuration system and it's super intuitive configuration screen is thanks to [Yet Another Config Library](https://modrinth.com/mod/yacl)
+It's also a spiritual continuation of both ExtraSounds and Auditory. It reimplements some popular features from Auditory and includes all the sound effects from ExtraSounds, providing a rich and immersive soundscape for your game.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3bDhhZXhzKA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+# Features
 
-## Sounds (literally)
+- **Over 35 Configurable Sound Effects:** Customize sound effects for various game events, including UI interactions, chat messages, and in-game actions.
 
-Sounds can be configured to be dynamic, the mod will use properties such as the item or block type to determine a suitable sound.
+- **Dynamic Block and Item Sounds:** Enjoy unique sounds for all block items, with over 25 different sound categories handcrafted for more than 100 items, ensuring a well-crafted auditory experience.
 
-You can also configure the default pitch and volume of the sound, or whether the sound should be enabled in the first place.
+- **Resource Pack Compatibility:** Easily add dynamic sounds using resource packs, allowing for seamless compatibility with other mods.
 
-Currently the following sounds are available:
+- **Data Generation APIs:** Utilize Sounds' data generation providers to add dynamic sounds within your own mods, enhancing customizability and flexibility.
 
-<details>
-<summary>Pick Block</summary>
+- **Sound Additions and Tweaks:** Sounds adds missing sound effects and tweaks existing ones that do not fit well in-game, creating a more cohesive audio environment.
 
-When you use the "Pick Block" keybind, a sound effect will play. This sound is dynamic by default - so the properties of the block you have selected will determine what sound will play.
+# Configuration
 
-### Example
+Sounds offers a robust configuration system powered by YACL, providing an easy-to-use and navigable interface.
 
-<img src="https://cdn.modrinth.com/data/ZouiUX7t/images/6465cfb53a00630dda785fa6180e51b22c5ed50b.webp" width="250">
-</details>
+Adjust settings to customize the mod's sound effects to your preferences. The intuitive configuration screen makes it simple to personalize and optimize your audio experience.
 
-<details>
-<summary>Hotbar Scroll</summary>
+<img src="https://cdn.modrinth.com/data/ZouiUX7t/images/f8baac9caa4a83d4f3a57347c3619c91e8915c53.png" /> <img src="https://cdn.modrinth.com/data/ZouiUX7t/images/95795a834c7d080e1274e9adf9b0e69ce277f6f2.png" />
 
-When scrolling across the hotbar, a sound effect will play for every slot you scroll over. This sound is dynamic by default - so the properties of the block/item you have scrolled over will determine what sound will play.
+# Dynamic Sounds
 
-### Example
+Sounds enhances your Minecraft experience with dynamic sounds for all block items, covering over 25 unique sound categories and more than 100 items.
 
-<img src="https://cdn.modrinth.com/data/ZouiUX7t/images/3fcf1a6aeef9de96c1f6d37ae256a52f5a847455.webp" width="250">
-</details>
+Each sound is meticulously hand-picked to provide an enjoyable gameplay experience.
 
-<details>
-<summary>Inventory Open</summary>
+As a modpack developer or mod developer, you can add your own dynamic sound categories. Checkout the dynamic sound categories Sounds includes within it's mod jar here: [Dynamic Sound Categories - Items](https://github.com/IMB11/Sounds/tree/master/src/main/generated/assets/minecraft/sonance/items)
 
-When opening an interactible in-game screen, such as an enchanting table, or book, a sound effect will play. This sound is dynamic by default.
+<small>
 
-### Example
+Custom sound effects obtained from [Zapsplat](https://www.zapsplat.com) under ZapSplat Standard License for Gold Members.
 
-<img src="https://cdn.modrinth.com/data/ZouiUX7t/images/b41c028dc5344a59b9427f98ec6248f8ea8023f0.webp" width="250" />
-</details>
+By using my mods, you agree to the [Modpack Distribution Guidelines](https://imb11.dev/legal/modpacks) and the [End User License Agreement](https://imb11.dev/legal/eula)
 
-<details>
-<summary>Inventory Close</summary>
-
-When close an interactible in-game screen, such as an enchanting table, or book, a sound effect will play. This sound **is not** dynamic by default.
-
-### Example
-
-<img src="https://cdn.modrinth.com/data/ZouiUX7t/images/27b1299f7a3ec1e761995894fcdc197a837a79dc.webp" width="250" />
-</details>
-
-<details>
-<summary>Inventory Scroll</summary>
-
-When scrolling in the creative inventory, a sound effect will play. This sound effect **cannot be** dynamic.
-
-### Example
-
-<img src="https://cdn.modrinth.com/data/ZouiUX7t/images/0c72861bf8dd1a74ba936ed97a38d8e83d333093.webp" width="250" />
-</details>
-
-<details>
-<summary>Item Copy</summary>
-
-When cloning an item in the creative inventory, a sound effect will play. This sound effect can be dynamic.
-
-### Example
-
-<img src="https://cdn.modrinth.com/data/ZouiUX7t/images/c4b76d7b8324c2312ff18aaa43d4812174b754f4.webp" width="250" />
-</details>
-
-<details>
-<summary>Item Delete</summary>
-
-When deleting an item in the creative inventory, a sound effect will play. This sound effect can be dynamic.
-
-### Example
-
-<img src="https://cdn.modrinth.com/data/ZouiUX7t/images/44e54cd52cb8f82bf99d3f5fbe15f0f084dee981.webp" width="250" />
-</details>
-
-<details>
-<summary>Item Drag/Place</summary>
-
-When dragging or placing an item in an inventory, a sound effect will play. This sound effect can be dynamic.
-
-Note: This isn't just in the creative inventory, the image is an example of an inventory. This can be a chest, barrel, etc.
-
-### Example
-
-<img src="https://cdn.modrinth.com/data/ZouiUX7t/images/9f51bfd410e567e0551c41c7015964d1c51ba74f.webp" width="250" />
-</details>
-
-<details>
-<summary>Item Drop</summary>
-
-When removing an item from your inventory, a sound effect will play. This sound effect can be dynamic.
-
-Note: This isn't just in the creative inventory, the image is an example of an inventory. This can be a chest, barrel, etc.
-
-### Example
-
-<img src="https://cdn.modrinth.com/data/ZouiUX7t/images/04da83a33f946863c15a0543999865c2d98f25b9.webp" width="250" />
-</details>
-
-<details>
-<summary>Chat Message</summary>
-
-When you recieve a chat message, a sound effect will play. This sound effect **cannot** be dynamic.
-
-### Example
-
-<img src="https://cdn.modrinth.com/data/ZouiUX7t/images/ac6ff837479a23685f319d444cccffc7bdb81b1c.webp" width="250" />
-</details>
-
-<details>
-<summary>Chat Mention</summary>
-
-When your username is mentioned in a chat message (excluding your messages), you will be pinged. This sound effect **cannot** be dynamic.
-</details>
-
-<details>
-<summary>Chat Typing</summary>
-When typing into the chat, a sound effect will be played for every keyboard press. This is super satisfying and you're very sad if you turn it off.
-
-### Example
-
-<img src="https://cdn.modrinth.com/data/ZouiUX7t/images/56de6cb7e86c084fc24041b8133852443ae3eaa4.webp" width="250" />
-</details>
+</small>

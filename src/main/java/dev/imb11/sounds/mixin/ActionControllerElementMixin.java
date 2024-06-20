@@ -22,7 +22,7 @@ public abstract class ActionControllerElementMixin extends ControllerWidget<Acti
 
     @Inject(method = "executeAction", at = @At("HEAD"), cancellable = true)
     public void $dontClickSound(CallbackInfo ci) {
-        if(this.control.option().name().contains(Text.translatable("sounds.config.preview.name"))) {
+        if(this.control.option().name().getString().contains(Text.translatable("sounds.config.preview.name").getString().split(" ")[0])) {
             ci.cancel();
             control.option().action().accept(screen, control.option());
         }
@@ -30,7 +30,7 @@ public abstract class ActionControllerElementMixin extends ControllerWidget<Acti
 
     @Override
     public void render(DrawContext graphics, int mouseX, int mouseY, float delta) {
-        if(this.control.option().name().contains(Text.translatable("sounds.config.preview.name"))) {
+        if(this.control.option().name().getString().contains(Text.translatable("sounds.config.preview.name").getString().split(" ")[0])) {
             hovered = isMouseOver(mouseX, mouseY);
 
             Text name = control.option().changed() ? modifiedOptionName : control.option().name();

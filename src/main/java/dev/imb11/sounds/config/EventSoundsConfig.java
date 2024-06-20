@@ -2,6 +2,7 @@ package dev.imb11.sounds.config;
 
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.api.config.ConfiguredSound;
+import dev.imb11.sounds.config.utils.ConfigUtil;
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;

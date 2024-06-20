@@ -1,8 +1,10 @@
 package dev.imb11.sounds.config.utils;
 
 import com.google.gson.GsonBuilder;
+import dev.imb11.sounds.api.config.TagPair;
 import dev.imb11.sounds.api.config.adapters.ConfiguredSoundTypeAdapter;
 import dev.imb11.sounds.api.config.adapters.DynamicConfiguredSoundTypeAdapter;
+import dev.imb11.sounds.api.config.adapters.TagPairTypeAdapter;
 import dev.imb11.sounds.config.adapters.HotbarConfiguredSoundTypeAdapter;
 import dev.imb11.sounds.config.adapters.InventoryConfiguredSoundTypeAdapter;
 import dev.imb11.sounds.api.config.ConfiguredSound;
@@ -40,6 +42,7 @@ public abstract class ConfigGroup<T extends ConfigGroup> {
                             gson.registerTypeAdapter(DynamicConfiguredSound.class, new DynamicConfiguredSoundTypeAdapter());
                             gson.registerTypeAdapter(HotbarDynamicConfiguredSound.class, new HotbarConfiguredSoundTypeAdapter());
                             gson.registerTypeAdapter(InventoryDynamicConfiguredSound.class, new InventoryConfiguredSoundTypeAdapter());
+                            gson.registerTypeAdapter(TagPair.class, new TagPairTypeAdapter());
                             return gson;
                         });
 

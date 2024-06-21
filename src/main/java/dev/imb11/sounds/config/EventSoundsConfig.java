@@ -3,6 +3,7 @@ package dev.imb11.sounds.config;
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.api.config.ConfiguredSound;
 import dev.imb11.sounds.config.utils.ConfigUtil;
+import dev.imb11.sounds.sound.CustomSounds;
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
@@ -15,14 +16,14 @@ public class EventSoundsConfig extends ConfigGroup<EventSoundsConfig> implements
     @SerialEntry
     public boolean ignoreSilencedStatusEffects = true;
     @SerialEntry
-    public ConfiguredSound positiveStatusEffectGainSoundEffect = new ConfiguredSound("positiveStatusEffectGain", SoundEvents.ITEM_TRIDENT_THUNDER, true, 2F, 0.1F);
+    public ConfiguredSound positiveStatusEffectGainSoundEffect = new ConfiguredSound("positiveStatusEffectGain", CustomSounds.LEGACY_ITEM_TRIDENT_THUNDER, true, 2F, 0.1F);
     @SerialEntry
     public ConfiguredSound negativeStatusEffectGainSoundEffect = new ConfiguredSound("negativeStatusEffectGain", SoundEvents.ENTITY_ILLUSIONER_MIRROR_MOVE, true, 0.3F, 0.2F);
 
     @SerialEntry
-    public ConfiguredSound positiveStatusEffectLoseSoundEffect = new ConfiguredSound("positiveStatusEffectLose", SoundEvents.ITEM_TRIDENT_RIPTIDE_1, true, 0.5F, 0.1F);
+    public ConfiguredSound positiveStatusEffectLoseSoundEffect = new ConfiguredSound("positiveStatusEffectLose", CustomSounds.LEGACY_ITEM_TRIDENT_RIPTIDE, true, 0.5F, 0.1F);
     @SerialEntry
-    public ConfiguredSound negativeStatusEffectLoseSoundEffect = new ConfiguredSound("negativeStatusEffectLose", SoundEvents.ITEM_TRIDENT_RIPTIDE_1, true, 0.5F, 0.1F);
+    public ConfiguredSound negativeStatusEffectLoseSoundEffect = new ConfiguredSound("negativeStatusEffectLose", CustomSounds.LEGACY_ITEM_TRIDENT_RIPTIDE, true, 0.5F, 0.1F);
 
     public EventSoundsConfig() {
         super(EventSoundsConfig.class);
@@ -35,7 +36,7 @@ public class EventSoundsConfig extends ConfigGroup<EventSoundsConfig> implements
 
     @Override
     public Identifier getImage() {
-        return new Identifier("sounds", "textures/gui/event_sounds.webp");
+        return Identifier.of("sounds", "textures/gui/event_sounds.webp");
     }
 
     @Override

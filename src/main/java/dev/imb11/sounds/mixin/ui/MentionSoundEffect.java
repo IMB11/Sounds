@@ -32,7 +32,11 @@ public class MentionSoundEffect {
     public void $cooldown_period(DrawContext context, int currentTick, int mouseX, int mouseY, boolean focused, CallbackInfo ci) {
     /*? }*/
         if (cooldownPeriod > 0) {
+            /*? if <1.21 {*//*
             cooldownPeriod -= this.client.getTickDelta() / 2f;
+            *//*? } else {*/
+            cooldownPeriod -= this.client.getRenderTickCounter().getTickDelta(true);
+            /*? }*/
         }
     }
     /*? if <1.20.5 {*//*

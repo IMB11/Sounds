@@ -42,7 +42,7 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
 
     @Override
     public Identifier getImage() {
-        return new Identifier("sounds", "textures/gui/chat_sounds.webp");
+        return Identifier.of("sounds", "textures/gui/chat_sounds.webp");
     }
 
     @Override

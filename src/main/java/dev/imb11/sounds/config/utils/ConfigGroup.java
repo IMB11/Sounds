@@ -30,7 +30,7 @@ public abstract class ConfigGroup<T extends ConfigGroup> {
         if(handler == null) {
             handler = ConfigClassHandler
                     .createBuilder(clazz)
-                    .id(new Identifier("sounds", getID()))
+                    .id(Identifier.of("sounds", getID()))
                     .serializer(config -> {
                         var builder = GsonConfigSerializerBuilder
                                 .create(config)

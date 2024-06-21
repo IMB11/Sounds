@@ -1,0 +1,11 @@
+{
+  "values": [
+    "minecraft:mangrove_pressure_plate",
+    "minecraft:mangrove_fence_gate",
+    "minecraft:mangrove_fence",
+    "minecraft:mangrove_sign",
+    "minecraft:mangrove_button",
+    "minecraft:mangrove_door",
+    "minecraft:mangrove_trapdoor"
+  ]
+}

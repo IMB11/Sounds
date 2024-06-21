@@ -56,7 +56,7 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
 
     @Override
     public Identifier getImage() {
-        return new Identifier("sounds", "textures/gui/ui_sounds.webp");
+        return Identifier.of("sounds", "textures/gui/ui_sounds.webp");
     }
 
     @Override

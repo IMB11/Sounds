@@ -19,7 +19,7 @@ public class SoundsClient implements ClientModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("Sounds");
 
     public static Identifier id(String id) {
-        return new Identifier("sounds", id);
+        return Identifier.of("sounds", id);
     }
 
     @Override

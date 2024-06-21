@@ -1,4 +1,25 @@
 {
+    "legacy.item.crossbow.load.middle": {
+        "sounds": [
+            "sounds:legacy/loading_middle1",
+            "sounds:legacy/loading_middle2",
+            "sounds:legacy/loading_middle3",
+            "sounds:legacy/loading_middle4"
+        ]
+    },
+    "legacy.item.trident.thunder": {
+        "sounds": [
+            "sounds:legacy/trident_thunder1",
+            "sounds:legacy/trident_thunder2"
+        ],
+        "subtitle": "subtitles.item.trident.thunder"
+    },
+    "legacy.item.trident.riptide": {
+        "sounds": [
+            "sounds:legacy/trident_riptide1"
+        ],
+        "subtitle": "subtitles.item.trident.riptide"
+    },
     "item.sword.swoosh": {
         "subtitle": "sounds.subtitle.sword_swoosh",
         "sounds": [

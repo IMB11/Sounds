@@ -1,0 +1,11 @@
+{
+  "values": [
+    "minecraft:spruce_pressure_plate",
+    "minecraft:spruce_fence_gate",
+    "minecraft:spruce_fence",
+    "minecraft:spruce_sign",
+    "minecraft:spruce_button",
+    "minecraft:spruce_door",
+    "minecraft:spruce_trapdoor"
+  ]
+}

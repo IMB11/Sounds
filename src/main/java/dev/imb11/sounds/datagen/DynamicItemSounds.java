@@ -238,7 +238,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
     }
 
 //    private Identifier getAmbientSoundForEntity(EntityType<?> entityType) {
-//        return new Identifier("entity." + entityType.getUntranslatedName() + ".ambient");
+//        return Identifier.of("entity." + entityType.getUntranslatedName() + ".ambient");
 //    }
 }
 *//*?}*/

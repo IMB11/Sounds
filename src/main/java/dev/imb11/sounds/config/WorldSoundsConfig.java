@@ -41,7 +41,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
     @SerialEntry
     public ConfiguredSound leadSnappingSoundEffect = new ConfiguredSound("leadSnapping", SoundEvents.ENTITY_LEASH_KNOT_BREAK, true, 1.0F, 0.5F);
     @SerialEntry
-    public ConfiguredSound bowPullSoundEffect = new ConfiguredSound("bowPull", SoundEvents.ITEM_CROSSBOW_LOADING_MIDDLE, true, 1.0F, 0.25F);
+    public ConfiguredSound bowPullSoundEffect = new ConfiguredSound("bowPull", CustomSounds.LEGACY_ITEM_CROSSBOW_LOAD_MIDDLE, true, 1.0F, 0.25F);
     @SerialEntry
     public ConfiguredSound plantPotFillSoundEffect = new ConfiguredSound("plantPotFill", SoundEvents.BLOCK_GRASS_PLACE, true, 0.5F, 0.4F);
     @SerialEntry
@@ -119,7 +119,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
 
     @Override
     public Identifier getImage() {
-        return new Identifier("sounds", "textures/gui/world_sounds.webp");
+        return Identifier.of("sounds", "textures/gui/world_sounds.webp");
     }
 
     @Override
@@ -207,7 +207,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
         List<OptionGroup> tagOptionGroups = new ArrayList<>();
 
         Supplier<TagPair>[] defaultSuppliers = defaults.getAllTagPairs().toArray(Supplier[]::new);
-        Supplier<TagPair>[] nonDefaultSuppliers = this.getAllTagPairs().toArray(Supplier[]::new);
+        Supplier<TagPair>[] nonDefaultSuppliers = config.getAllTagPairs().toArray(Supplier[]::new);
 
         for (int i = 0; i < nonDefaultSuppliers.length; i++) {
             Supplier<TagPair> nonDefaultSupplier = nonDefaultSuppliers[i];
@@ -245,6 +245,6 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
     }
 
     public static TagPair registerTagPair(String id, float pitch, float volume, SoundEvent breakSound, SoundEvent stepSound, SoundEvent placeSound, SoundEvent hitSound, SoundEvent fallSound) {
-        return new TagPair(TagKey.of(RegistryKeys.BLOCK, new Identifier("sounds", id)), new BlockSoundGroup(pitch, volume, breakSound, stepSound, placeSound, hitSound, fallSound));
+        return new TagPair(TagKey.of(RegistryKeys.BLOCK, Identifier.of("sounds", id)), new BlockSoundGroup(pitch, volume, breakSound, stepSound, placeSound, hitSound, fallSound));
     }
 }

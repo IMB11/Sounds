@@ -30,6 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -55,7 +56,7 @@ public class TagPair {
     private final TagKey<Block> blockTag;
     private BlockSoundGroup group;
     private BlockSoundGroup pendingGroup;
-    private boolean enabled = true;
+    private boolean enabled;
 
     /**
      * Outside the mixin for debugging reasons.
@@ -73,7 +74,7 @@ public class TagPair {
                 return;
             }
 
-            if (ClientTags.isInLocal(allTagPair.get().getBlockTag(), entry.getKey().get())) {
+            if (ClientTags.isInWithLocalFallback(allTagPair.get().getBlockTag(), entry)) {
                 result.set(allTagPair);
             }
         });
@@ -108,6 +109,7 @@ public class TagPair {
         this.blockTag = blockTag;
         this.group = group;
         this.pendingGroup = group;
+        this.enabled = true;
     }
 
     public TagPair(Identifier blockTag, BlockSoundGroup group, boolean enabled) {
@@ -250,7 +252,7 @@ public class TagPair {
                 .name(Text.translatable("sounds.config.shouldPlay.name"))
                 .description(OptionDescription.createBuilder()
                         .text(Text.translatable("sounds.config.shouldPlay.description")).build())
-                .binding(enabled, () -> this.enabled, (val) -> this.enabled = val)
+                .binding(defaults.enabled, () -> this.enabled, (val) -> this.enabled = val)
                 .listener((opt, val) -> {
                     breakSound.setAvailable(val);
                     stepSound.setAvailable(val);

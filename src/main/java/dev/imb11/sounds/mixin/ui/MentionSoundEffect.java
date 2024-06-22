@@ -55,11 +55,16 @@ public class MentionSoundEffect {
         String messageString = message.getString();
         String username = client.getSession().getUsername();
 
-        boolean isMention = messageString.toLowerCase().contains(username.toLowerCase());
-
-        if (SoundsConfig.get(ChatSoundsConfig.class).useAtForChatMentions) {
-            isMention = messageString.toLowerCase().contains("@" + username.toLowerCase());
+        // Generate regex from mentionKeywords
+        StringBuilder regex = new StringBuilder();
+        regex.append("(?i).*(");
+        for (String keyword : SoundsConfig.get(ChatSoundsConfig.class).mentionKeywords) {
+            regex.append(keyword).append("|");
         }
+        regex.deleteCharAt(regex.length() - 1);
+        regex.append(").*");
+
+        boolean isMention = messageString.matches(regex.toString());
 
         if (SoundsConfig.get(ChatSoundsConfig.class).ignoreSystemChats) {
             /*? >1.20.1 {*/

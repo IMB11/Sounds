@@ -93,8 +93,8 @@
 	"sounds.config.chat": "Chat Sounds",
 
 	"sounds.config.chat.messaging": "Messaging",
-	"sounds.config.useAtForChatMentions.name": "Enable Mention Prefix",
-	"sounds.config.useAtForChatMentions.description": "When identifying whether you've been mentioned in a chat message, should the prefix '@' be used?",
+	"sounds.config.mentionKeywords.name": "Mention Keywords",
+	"sounds.config.mentionKeywords.description": "A list of keywords that will trigger a mention sound effect when mentioned in chat.",
 	"sounds.config.ignoreSystemChats.name": "Ignore System Messages",
 	"sounds.config.ignoreSystemChats.description": "Should system messages be ignored in the chat when playing sound effects?",
 	"sounds.config.typing.name": "Chat Typing",

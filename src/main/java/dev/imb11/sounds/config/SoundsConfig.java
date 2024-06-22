@@ -3,6 +3,7 @@ package dev.imb11.sounds.config;
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;

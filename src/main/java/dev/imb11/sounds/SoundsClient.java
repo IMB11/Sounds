@@ -1,5 +1,6 @@
 package dev.imb11.sounds;
 
+import dev.imb11.sounds.config.ChatSoundsConfig;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.dynamic.SoundsReloadListener;
@@ -10,6 +11,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.impl.client.keybinding.KeyBindingRegistryImpl;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -32,5 +34,14 @@ public class SoundsClient implements ClientModInitializer {
         CustomSounds.initialize();
         PotionEventHelper.initialize();
 
+        ChatSoundsConfig chatSoundsConfig = SoundsConfig.getRaw(ChatSoundsConfig.class);
+        ChatSoundsConfig instanceChatSoundsConfig = (ChatSoundsConfig) chatSoundsConfig.getHandler().instance();
+
+        // Add username to mentionKeywords if it's not already there
+        if (!instanceChatSoundsConfig.mentionKeywords.contains("@" + MinecraftClient.getInstance().getSession().getUsername())) {
+            instanceChatSoundsConfig.mentionKeywords.add("@" + MinecraftClient.getInstance().getSession().getUsername());
+        }
+
+        chatSoundsConfig.save();
     }
 }

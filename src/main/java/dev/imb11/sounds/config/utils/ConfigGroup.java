@@ -26,6 +26,10 @@ public abstract class ConfigGroup<T extends ConfigGroup> {
         this.clazz = clazz;
     }
 
+    public void save() {
+        handler.save();
+    }
+
     public void load() {
         if(handler == null) {
             handler = ConfigClassHandler

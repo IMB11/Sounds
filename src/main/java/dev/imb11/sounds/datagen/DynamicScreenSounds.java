@@ -1,18 +1,23 @@
-/*? if <=1.20.4 {*/
-/*package dev.imb11.sounds.datagen;
+/*? if >1.20.6 {*/
+package dev.imb11.sounds.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.datagen.SoundDefinitionProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class DynamicScreenSounds extends SoundDefinitionProvider<ScreenHandlerType<?>> {
-    protected DynamicScreenSounds(FabricDataOutput dataOutput) {
-        super(dataOutput, "screens", Registries.SCREEN_HANDLER);
+
+    protected DynamicScreenSounds(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        super(dataOutput, registriesFuture, "screens", Registries.SCREEN_HANDLER);
     }
 
     @Override
@@ -62,4 +67,4 @@ public class DynamicScreenSounds extends SoundDefinitionProvider<ScreenHandlerTy
                 .addKey(ScreenHandlerType.HOPPER));
     }
 }
-*//*?}*/
+/*?}*/

@@ -1,5 +1,5 @@
-/*? if <=1.20.4 {*/
-/*package dev.imb11.sounds.datagen;
+/*? if >1.20.6 {*/
+package dev.imb11.sounds.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.datagen.SoundDefinitionProvider;
@@ -9,15 +9,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundEvents;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
-    protected DynamicItemSounds(FabricDataOutput dataOutput) {
-        super(dataOutput, "items", Registries.ITEM);
+    protected DynamicItemSounds(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        super(dataOutput, registriesFuture, "items", Registries.ITEM);
     }
 
     @Override
@@ -26,6 +28,22 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.ANVIL)
                 .addKey(Items.CHIPPED_ANVIL)
                 .addKey(Items.DAMAGED_ANVIL));
+
+        provider.accept("arrows", create(SoundEvents.ENTITY_ARROW_HIT)
+                .addKey(ItemTags.ARROWS)
+                .setPitch(0.7f)
+                .setVolume(0.3f));
+
+        provider.accept("trial_keys", create(SoundEvents.BLOCK_TRIAL_SPAWNER_SPAWN_ITEM_BEGIN)
+                .addKey(Items.TRIAL_KEY)
+                .addKey(Items.OMINOUS_TRIAL_KEY)
+                .setPitch(1f)
+                .setVolume(0.4f));
+
+        provider.accept("wind_charge", create(SoundEvents.ENTITY_BREEZE_WIND_BURST)
+                .addKey(Items.WIND_CHARGE)
+                .setPitch(2f)
+                .setVolume(0.1f));
 
         provider.accept("wooden_equipment", create(SoundEvents.ITEM_AXE_STRIP)
                 .addKey(Items.WOODEN_AXE)
@@ -241,4 +259,4 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
 //        return Identifier.of("entity." + entityType.getUntranslatedName() + ".ambient");
 //    }
 }
-*//*?}*/
+/*?}*/

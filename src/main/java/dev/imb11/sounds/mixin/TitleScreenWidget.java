@@ -30,7 +30,7 @@ public abstract class TitleScreenWidget extends Screen {
 //            this.client.setScreen(new TestScreen());
 //        })).dimensions(10, 10, 100, 20).build());
 
-        if(FabricLoader.getInstance().isModLoaded("qualitysounds") || true) {
+        if(FabricLoader.getInstance().isModLoaded("qualitysounds")) {
             this.client.setScreen(new IncompatabilityScreen());
         }
     }

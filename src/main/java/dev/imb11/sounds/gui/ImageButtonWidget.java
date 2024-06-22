@@ -37,8 +37,8 @@ public class ImageButtonWidget extends ClickableWidget {
         }
     }
 
-    /*? <1.20.3 {*//*
-    @Override
+    /*? <1.20.3 {*/
+    /*@Override
     protected void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
     *//*?} else {*/
     @Override
@@ -106,8 +106,8 @@ public class ImageButtonWidget extends ClickableWidget {
 
         /*? >1.20.1 {*/
         drawScrollableText(context, client.textRenderer, getMessage(), textX, textY, endX, endY, 0xFFFFFF);
-        /*?} else {*//*
-        drawScrollableText(context, client.textRenderer, getMessage(), textX, textY, endX, endY, 0xFFFFFF);
+        /*?} else {*/
+        /*drawScrollableText(context, client.textRenderer, getMessage(), textX, textY, endX, endY, 0xFFFFFF);
         *//*?}*/
 
         context.getMatrices().pop();

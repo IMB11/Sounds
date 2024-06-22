@@ -69,8 +69,8 @@ public class MentionSoundEffect {
         if (SoundsConfig.get(ChatSoundsConfig.class).ignoreSystemChats) {
             /*? >1.20.1 {*/
             if (indicator == MessageIndicator.system() || indicator == MessageIndicator.chatError()) {
-                /*?} else {*//*
-            if(indicator == MessageIndicator.system()) {
+                /*?} else {*/
+            /*if(indicator == MessageIndicator.system()) {
             *//*?}*/
                 return;
             }

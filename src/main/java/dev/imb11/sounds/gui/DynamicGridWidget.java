@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/*? <1.20.4 {*//*
-import dev.imb11.sounds.mixin.accessors.ClickableWidgetAccessor;
+/*? <1.20.4 {*/
+/*import dev.imb11.sounds.mixin.accessors.ClickableWidgetAccessor;
 *//*?}*/
 
 public class DynamicGridWidget extends WrapperWidget {
@@ -140,8 +140,8 @@ public class DynamicGridWidget extends WrapperWidget {
 
             /*? >1.20.1 {*/
             child.widget().setHeight(thisCellHeight - padding * 2);
-            /*?} else {*//*
-            ((ClickableWidgetAccessor) child.widget()).setHeight_1_20_1(thisCellHeight - padding * 2);
+            /*?} else {*/
+            /*((ClickableWidgetAccessor) child.widget()).setHeight_1_20_1(thisCellHeight - padding * 2);
             *//*?}*/
 
 

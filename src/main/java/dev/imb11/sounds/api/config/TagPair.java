@@ -81,8 +81,6 @@ public class TagPair {
 
         if (result.get() != null) {
             TagPair pair = result.get().get();
-            System.out.println("Using custom sound for " + pair.getBlockTagID().toString());
-            System.out.println("Enabled: " + pair.isEnabled());
             if(pair.isEnabled()) {
                 cir.setReturnValue(pair.getGroup());
             }

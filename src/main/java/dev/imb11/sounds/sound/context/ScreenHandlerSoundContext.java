@@ -52,7 +52,7 @@ public class ScreenHandlerSoundContext implements DynamicSoundContext<ScreenHand
                 }
             }
         } catch (Exception ignored) {
-            SoundsClient.LOGGER.warn("Screen of type {} has no declared ScreenHandlerType - ignoring.", context.getClass().getName());
+            SoundsClient.LOGGER.debug("Screen of type {} has no declared ScreenHandlerType - ignoring.", context.getClass().getName());
         }
 
         if (isOpening) {

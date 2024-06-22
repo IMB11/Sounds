@@ -31,5 +31,6 @@ public class SoundsClient implements ClientModInitializer {
 
         CustomSounds.initialize();
         PotionEventHelper.initialize();
+
     }
 }

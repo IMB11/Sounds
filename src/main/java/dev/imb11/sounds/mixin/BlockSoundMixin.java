@@ -12,9 +12,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /*? if >1.20.4 {*/
 @Mixin(AbstractBlock.class)
-/*?} else {*//*
-@Mixin(Block.class)
-*//*? } */
+/*?} else {*/
+/*@Mixin(Block.class)
+*//*?}*/
 public abstract class BlockSoundMixin {
     @Inject(method = "getSoundGroup", at = @At("HEAD"), cancellable = true)
     public void $manageCustomSounds(BlockState state, CallbackInfoReturnable<BlockSoundGroup> cir) {

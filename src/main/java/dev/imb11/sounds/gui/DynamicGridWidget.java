@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 
 /*? <1.20.4 {*//*
 import dev.imb11.sounds.mixin.accessors.ClickableWidgetAccessor;
-*//*?} */
+*//*?}*/
 
 public class DynamicGridWidget extends WrapperWidget {
     private final List<GridItem> children = new ArrayList<>();

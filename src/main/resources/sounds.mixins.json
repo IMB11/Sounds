@@ -3,16 +3,16 @@
     "minVersion": "0.8",
     "package": "dev.imb11.sounds.mixin",
     "compatibilityLevel": "JAVA_17",
-    "mixins": [
-        "ui.ImageRenderManagerMixin"
-    ],
+    "mixins": [],
     "client": [
-        "BlockSoundMixin",
         "ActionControllerElementMixin",
+        "BlockSoundMixin",
         "SoundsOptionsScreenMixin",
         "accessors.AnimatedDynamicTextureImageAccessor",
         "accessors.ClickableWidgetAccessor",
         "compat.EmiSoundEffects",
+        "compat.InventorioCompatMixin",
+        "ui.ImageRenderManagerMixin",
         "ui.AnvilTypingEffect",
         "ui.CreativeInventorySoundEffects",
         "ui.CreativeInventorySoundEffects$CreativeScreenHandlerMixin",

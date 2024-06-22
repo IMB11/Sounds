@@ -8,6 +8,7 @@
         "ActionControllerElementMixin",
         "BlockSoundMixin",
         "SoundsOptionsScreenMixin",
+        "TitleScreenWidget",
         "accessors.AnimatedDynamicTextureImageAccessor",
         "accessors.ClickableWidgetAccessor",
         "compat.EmiSoundEffects",

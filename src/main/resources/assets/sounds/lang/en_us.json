@@ -1,4 +1,6 @@
 {
+	"sounds.incompatability.title": "Incompatability Detected",
+	"sounds.incompatability.message": "It appears that both the §lQualitySounds§r and §lSounds§r mods are installed.\n\n§lPlease uninstall the QualitySounds mod, as the Sounds mod already includes all of its sound effects and functionalities.\n\nKeeping both mods installed will cause conflicts with Sounds' mixins, leading to sound duplications and other potential issues and crashes.§r\n\n§lSounds§r is fully feature-complete with everything offered by QualitySounds and even more customizable.§r\n\nWith §lSounds§r, you can modify place, fall, break, and step sounds for blocks that have been given custom sound effects, including modifying their pitch and volume, features which QualitySounds lacks.\n",
 	"sounds.config.static": "Sounds",
 	"sounds.config.title": "Sounds Config",
 

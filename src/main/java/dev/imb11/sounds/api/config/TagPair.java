@@ -222,9 +222,9 @@ public class TagPair {
                 .name(Text.translatable("sounds.config.volume.name"))
                 .description(OptionDescription.createBuilder()
                         .text(Text.translatable("sounds.config.volume.description")).build())
-                .binding(defaults.group.getVolume(), () -> this.group.getVolume(), (val) -> this.group = new BlockSoundGroup(this.group.pitch, val, this.group.getBreakSound(), this.group.getStepSound(), this.group.getPlaceSound(), this.group.getHitSound(), this.group.getFallSound()))
+                .binding(defaults.group.getVolume(), () -> this.group.getVolume(), (val) -> this.group = new BlockSoundGroup(val, this.group.pitch, this.group.getBreakSound(), this.group.getStepSound(), this.group.getPlaceSound(), this.group.getHitSound(), this.group.getFallSound()))
                 .listener((opt, val) -> {
-                    this.pendingGroup = new BlockSoundGroup(this.pendingGroup.pitch, val, this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
+                    this.pendingGroup = new BlockSoundGroup(val, this.pendingGroup.pitch, this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
                 })
                 .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
                 .build();
@@ -233,9 +233,9 @@ public class TagPair {
                 .name(Text.translatable("sounds.config.pitch.name"))
                 .description(OptionDescription.createBuilder()
                         .text(Text.translatable("sounds.config.pitch.description")).build())
-                .binding(defaults.group.getPitch(), () -> this.group.getPitch(), (val) -> this.group = new BlockSoundGroup(val, this.group.volume, this.group.getBreakSound(), this.group.getStepSound(), this.group.getPlaceSound(), this.group.getHitSound(), this.group.getFallSound()))
+                .binding(defaults.group.getPitch(), () -> this.group.getPitch(), (val) -> this.group = new BlockSoundGroup(this.group.volume, val, this.group.getBreakSound(), this.group.getStepSound(), this.group.getPlaceSound(), this.group.getHitSound(), this.group.getFallSound()))
                 .listener((opt, val) -> {
-                    this.pendingGroup = new BlockSoundGroup(val, this.pendingGroup.volume, this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
+                    this.pendingGroup = new BlockSoundGroup(this.pendingGroup.volume, val, this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
                 })
                 .controller(opt -> FloatSliderControllerBuilder.create(opt).step(0.1f).range(0f, 2f))
                 .build();

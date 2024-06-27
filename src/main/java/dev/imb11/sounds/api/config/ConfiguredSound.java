@@ -65,6 +65,10 @@ public class ConfiguredSound {
         this(id, soundEvent.getId(), enabled, pitch, volume);
     }
 
+    public ConfiguredSound(String id, RegistryEntry<SoundEvent> soundEvent, boolean enabled, float pitch, float volume) {
+        this(id, soundEvent.value(), enabled, pitch, volume);
+    }
+
     private <T extends ConfiguredSound> ArrayList<Option<?>> createDefaultOptions(T defaults) {
         var volumeOpt = Option.<Float>createBuilder()
                 .name(Text.translatable("sounds.config.volume.name"))

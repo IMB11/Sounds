@@ -41,7 +41,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
     @SerialEntry
     public ConfiguredSound leadSnappingSoundEffect = new ConfiguredSound("leadSnapping", SoundEvents.ENTITY_LEASH_KNOT_BREAK, true, 1.0F, 0.5F);
     @SerialEntry
-    public ConfiguredSound bowPullSoundEffect = new ConfiguredSound("bowPull", CustomSounds.LEGACY_ITEM_CROSSBOW_LOAD_MIDDLE, true, 1.0F, 0.25F);
+    public ConfiguredSound bowPullSoundEffect = new ConfiguredSound("bowPull", SoundEvents.ITEM_CROSSBOW_LOADING_MIDDLE, true, 1.0F, 0.25F);
     @SerialEntry
     public ConfiguredSound plantPotFillSoundEffect = new ConfiguredSound("plantPotFill", SoundEvents.BLOCK_GRASS_PLACE, true, 0.5F, 0.4F);
     @SerialEntry

@@ -10,9 +10,6 @@ import java.util.HashMap;
 @SuppressWarnings("unused")
 public class CustomSounds {
     public static final SoundEvent ITEM_SWORD_SWOOSH = register("item.sword.swoosh");
-    public static final SoundEvent LEGACY_ITEM_CROSSBOW_LOAD_MIDDLE = register("legacy.item.crossbow.load.middle");
-    public static final SoundEvent LEGACY_ITEM_TRIDENT_THUNDER = register("legacy.item.trident.thunder");
-    public static final SoundEvent LEGACY_ITEM_TRIDENT_RIPTIDE = register("legacy.item.trident.riptide");
     public static final SoundEvent ITEM_HARD_METAL_HOLD = register("item.hard_metal.hold");
 
     public static final SoundEvent ITEM_SHINY_METAL_HOLD = register("item.shiny_metal.hold");

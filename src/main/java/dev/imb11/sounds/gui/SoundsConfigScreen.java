@@ -69,7 +69,7 @@ public class SoundsConfigScreen extends Screen {
         int color = (alpha << 24) | (0xFFFFFF);
         Text text = Text.literal(supporter).formatted(Formatting.GOLD).append(Text.literal(" supports me on Ko-Fi!").formatted(Formatting.WHITE));
         int textX = (int) 10;
-        int spaceBetween = (int) (this.width / 2 - 30);
+        int spaceBetween = (this.width / 2 - 40);
         int textTotalHeight = textRenderer.getWrappedLinesHeight(text, spaceBetween - 20);
         int targetY = 10 + textRenderer.fontHeight / 2;
         int textY = targetY - (textTotalHeight / 2);

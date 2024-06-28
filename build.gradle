@@ -99,6 +99,7 @@ processResources {
         expand 'mod_version': version,
                 'target_minecraft': project.property('mod.target'),
                 'target_yacl': project.property('deps.yacl'),
+                'target_mru': project.property('deps.mru'),
                 'minecraft_version': stonecutter.current.version
     }
 

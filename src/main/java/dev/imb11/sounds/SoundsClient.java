@@ -1,5 +1,6 @@
 package dev.imb11.sounds;
 
+import com.mineblock11.mru.Utilities;
 import dev.imb11.sounds.config.ChatSoundsConfig;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
@@ -19,6 +20,10 @@ import org.slf4j.LoggerFactory;
 
 public class SoundsClient implements ClientModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("Sounds");
+    public static String[] SUPPORTERS = new String[] {
+            "You have no internet.",
+            "Unable to gather supporters."
+    };
 
     public static Identifier id(String id) {
         return Identifier.of("sounds", id);
@@ -43,5 +48,9 @@ public class SoundsClient implements ClientModInitializer {
         }
 
         chatSoundsConfig.save();
+
+        try {
+            SUPPORTERS = Utilities.getKofiSupporters();
+        } catch (Exception ignored) {}
     }
 }

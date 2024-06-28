@@ -47,6 +47,7 @@ public class SoundsClient implements ClientModInitializer {
             instanceChatSoundsConfig.mentionKeywords.add("@" + MinecraftClient.getInstance().getSession().getUsername());
         }
 
+        System.out.println();
         chatSoundsConfig.save();
 
         try {

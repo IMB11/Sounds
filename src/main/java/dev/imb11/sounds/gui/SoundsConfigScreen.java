@@ -117,19 +117,10 @@ public class SoundsConfigScreen extends Screen {
 
         grid.forEachChild(this::addDrawableChild);
 
-        // Calculate the total width of the "Discord" and "Ko-Fi" buttons (including their margins).
-// Calculate the total width of the "Discord" and "Ko-Fi" buttons (including their margins).
         int discordAndKoFiButtonsWidth = 100 + 100 + 30; // button widths + left margin of Ko-Fi button + right margin of Discord button
-
-        // Calculate the remaining width for the "Done" button.
         int doneButtonWidth = this.width - discordAndKoFiButtonsWidth;
-
-        // Create the "Done" button with the calculated width.
         ButtonWidget buttonWidget = ButtonWidget.builder(ScreenTexts.DONE, (btn) -> this.client.setScreen(this.parent)).dimensions(this.width / 2 - doneButtonWidth / 2, this.height - 30, doneButtonWidth, 20).build();
-
-        // Add a Discord and Ko-Fi button next to the "Done" button.
         ButtonWidget koFiButton = ButtonWidget.builder(Text.literal("Donate").formatted(Formatting.GOLD).formatted(Formatting.BOLD), (btn) -> Util.getOperatingSystem().open("https://ko-fi.com/mineblock11")).dimensions(10, this.height - 30, 100, 20).build();
-        // Discord button on right
         ButtonWidget discordButton = ButtonWidget.builder(Text.literal("Discord").formatted(Formatting.AQUA).formatted(Formatting.BOLD), (btn) -> Util.getOperatingSystem().open("https://discord.gg/4Qhj6Yf")).dimensions(this.width - 110, this.height - 30, 100, 20).build();
         this.addDrawableChild(buttonWidget);
         this.addDrawableChild(koFiButton);

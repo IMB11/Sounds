@@ -12,6 +12,7 @@ import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundInstance;
+import net.minecraft.client.toast.SystemToast;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -158,16 +159,40 @@ public class ConfiguredSound {
         return Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
     }
 
+    protected static long lastShownToast = -1L;
     public void playSound() {
         if (this.enabled) {
-            final SoundEvent event = Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
-            this.playSound(event, this.pitch, this.volume);
+            try {
+                final SoundEvent event = Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
+                this.playSound(event, this.pitch, this.volume);
+            } catch (Exception ignored) {
+                // Prevent toast spam:
+                if (System.currentTimeMillis() > lastShownToast + 5000) {
+                    lastShownToast = System.currentTimeMillis();
+                    MinecraftClient client = MinecraftClient.getInstance();
+                    client.getToastManager().add(SystemToast.create(client,
+                            SystemToast.Type.WORLD_ACCESS_FAILURE,
+                            Text.translatable("sounds.config.play.error.title"),
+                            Text.translatable("sounds.config.play.error.description", this.getId())));
+                }
+            }
         }
     }
 
     private void playPreviewSound() {
-        final SoundEvent event = Registries.SOUND_EVENT.get(this._pendingSoundEvent.registryKey());
-        this.playSound(event, _pendingPitch, _pendingVolume);
+        try {
+            final SoundEvent event = Registries.SOUND_EVENT.get(this._pendingSoundEvent.registryKey());
+            this.playSound(event, _pendingPitch, _pendingVolume);
+        } catch (Exception ignored) {
+            if (System.currentTimeMillis() > lastShownToast + 5000) {
+                lastShownToast = System.currentTimeMillis();
+                MinecraftClient client = MinecraftClient.getInstance();
+                client.getToastManager().add(SystemToast.create(client,
+                        SystemToast.Type.WORLD_ACCESS_FAILURE,
+                        Text.translatable("sounds.config.preview.error.title"),
+                        Text.translatable("sounds.config.preview.error.description")));
+            }
+        }
     }
 
     private void playSound(SoundEvent event, float pitch, float volume) {
@@ -176,8 +201,12 @@ public class ConfiguredSound {
 
     public @Nullable PositionedSoundInstance getSoundInstance() {
         if (this.enabled) {
-            final SoundEvent event = Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
-            return PositionedSoundInstance.master(event, pitch, volume);
+            try {
+                final SoundEvent event = Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
+                return PositionedSoundInstance.master(event, pitch, volume);
+            } catch (Exception ignored) {
+                return null;
+            }
         }
         return null;
     }

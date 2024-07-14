@@ -39,8 +39,8 @@ public class SoundsConfigScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        /*? if <1.20.2 {*//*
-        super.renderBackground(context);
+        /*? if <1.20.2 {*/
+        /*super.renderBackground(context);
         *//*?} else {*/
         super.renderBackground(context, mouseX, mouseY, delta);
         /*?}*/

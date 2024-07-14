@@ -1,0 +1,37 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.quartz.break"
+    },
+    "fall": {
+      "sound_id": "minecraft:block.deepslate.fall"
+    },
+    "hit": {
+      "sound_id": "minecraft:block.stone.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "minecraft:block.deepslate.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.quartz.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:quartz_block",
+    "minecraft:quartz_stairs",
+    "minecraft:quartz_slab",
+    "minecraft:chiseled_quartz_block",
+    "minecraft:quartz_pillar",
+    "minecraft:smooth_quartz",
+    "minecraft:smooth_quartz_stairs",
+    "minecraft:smooth_quartz_slab",
+    "minecraft:quartz_bricks",
+    "minecraft:redstone_block",
+    "minecraft:diamond_block",
+    "minecraft:obsidian",
+    "minecraft:crying_obsidian"
+  ]
+}

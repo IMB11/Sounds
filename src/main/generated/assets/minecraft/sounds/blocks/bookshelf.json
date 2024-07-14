@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.bookshelf.break"
+    },
+    "fall": {
+      "sound_id": "minecraft:block.wood.fall"
+    },
+    "hit": {
+      "sound_id": "sounds:block.bookshelf.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "sounds:block.bookshelf.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.bookshelf.step"
+    },
+    "volume": 1.5
+  },
+  "keys": [
+    "minecraft:bookshelf"
+  ]
+}

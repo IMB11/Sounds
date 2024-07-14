@@ -1,12 +1,14 @@
 package dev.imb11.sounds.dynamic;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.JsonOps;
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.SoundDefinition;
+import dev.imb11.sounds.api.config.TagPair;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -32,8 +34,30 @@ public class SoundsReloadListener implements SimpleSynchronousResourceReloadList
 
     @Override
     public void reload(ResourceManager manager) {
-        DynamicSoundHelper.clearDefinitions();
+        handleDynamicSounds(manager);
 
+        // Load tag pairs
+        TagPairHelper.LOADED_TAG_PAIRS.clear();
+
+        for (Identifier id : manager.findResources("sounds/blocks", path -> path.getPath().endsWith(".json")).keySet()) {
+            try {
+                var resource = manager.getResource(id).orElseThrow();
+                var inputStream = resource.getInputStream();
+                var reader = new JsonReader(new InputStreamReader(inputStream));
+
+                TagPair.CODEC.decode(JsonOps.INSTANCE, GSON.fromJson(reader, JsonObject.class))
+                        .result()
+                        .ifPresent(tagPair -> TagPairHelper.LOADED_TAG_PAIRS.put(id, tagPair.getFirst()));
+
+                inputStream.close();
+            } catch (Exception e) {
+                LOGGER.error("Error occurred while loading resource json: " + id.toString(), e);
+            }
+        }
+    }
+
+    private static void handleDynamicSounds(ResourceManager manager) {
+        DynamicSoundHelper.clearDefinitions();
         DynamicSoundHelper.loadDirectories.forEach((directory, codec) -> {
             ArrayList<SoundDefinition<?>> resultList = (ArrayList<SoundDefinition<?>>) DynamicSoundHelper.loadedDefinitions.get(directory);
 

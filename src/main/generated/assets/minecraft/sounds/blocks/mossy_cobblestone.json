@@ -1,0 +1,28 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.mossy_cobblestone.break"
+    },
+    "fall": {
+      "sound_id": "sounds:block.cobblestone.fall"
+    },
+    "hit": {
+      "sound_id": "sounds:block.mossy_cobblestone.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "sounds:block.cobblestone.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.mossy_cobblestone.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:mossy_cobblestone",
+    "minecraft:mossy_cobblestone_slab",
+    "minecraft:mossy_cobblestone_stairs",
+    "minecraft:mossy_cobblestone_wall"
+  ]
+}

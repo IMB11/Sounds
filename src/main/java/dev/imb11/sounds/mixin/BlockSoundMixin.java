@@ -2,6 +2,8 @@ package dev.imb11.sounds.mixin;
 
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.config.TagPair;
+import dev.imb11.sounds.config.SoundsConfig;
+import dev.imb11.sounds.config.WorldSoundsConfig;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -19,8 +21,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BlockSoundMixin {
     @Inject(method = "getSoundGroup", at = @At("HEAD"), cancellable = true)
     public void $manageCustomSounds(BlockState state, CallbackInfoReturnable<BlockSoundGroup> cir) {
+        if(SoundsConfig.get(WorldSoundsConfig.class).disableBlocksEntirely)
+            return;
+
         try {
-            TagPair.handleTagPair(state, cir);
+            TagPair.handleTagPair(state.getBlock(), cir);
         } catch (Exception ignored) {
             SoundsClient.LOGGER.warn("Early-load attempt at getting custom sound block group failed. Ignoring for now.");
         }

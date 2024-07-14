@@ -11,6 +11,7 @@ public class SoundsDatagenEntrypoint implements DataGeneratorEntrypoint {
         /*? if >1.20.6 {*/
         pack.addProvider(DynamicItemSounds::new);
         pack.addProvider(DynamicScreenSounds::new);
+        pack.addProvider(DynamicTagPairs::new);
         /*?}*/
     }
 }

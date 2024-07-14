@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.copper_ore.break"
+    },
+    "fall": {
+      "sound_id": "sounds:block.deepslate_copper_ore.fall"
+    },
+    "hit": {
+      "sound_id": "sounds:block.deepslate_copper_ore.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "sounds:block.deepslate_copper_ore.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.deepslate_copper_ore.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:deepslate_copper_ore"
+  ]
+}

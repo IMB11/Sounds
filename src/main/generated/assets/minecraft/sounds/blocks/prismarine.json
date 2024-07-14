@@ -1,0 +1,29 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "minecraft:block.deepslate.break"
+    },
+    "fall": {
+      "sound_id": "minecraft:block.deepslate.fall"
+    },
+    "hit": {
+      "sound_id": "minecraft:block.deepslate.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "minecraft:block.deepslate.place"
+    },
+    "step": {
+      "sound_id": "minecraft:block.deepslate.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:prismarine",
+    "minecraft:prismarine_stairs",
+    "minecraft:prismarine_slab",
+    "minecraft:prismarine_wall",
+    "minecraft:end_stone"
+  ]
+}

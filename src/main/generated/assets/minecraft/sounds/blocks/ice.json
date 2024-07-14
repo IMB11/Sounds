@@ -1,0 +1,26 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.ice.break"
+    },
+    "fall": {
+      "sound_id": "sounds:block.ice.fall"
+    },
+    "hit": {
+      "sound_id": "sounds:block.ice.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "sounds:block.ice.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.ice.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:ice",
+    "minecraft:frosted_ice"
+  ]
+}

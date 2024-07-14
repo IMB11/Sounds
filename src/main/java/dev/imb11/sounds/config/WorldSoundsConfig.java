@@ -91,7 +91,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
                 .option(ConfigUtil.create(defaults.disableBlocksEntirely, v -> config.disableBlocksEntirely = v, () -> config.disableBlocksEntirely, "sounds.config.disableBlocksEntirely"))
                 .option(LabelOption.create(Text.translatable("sounds.config.world.blocks.description")))
                 .option(ButtonOption.createBuilder()
-                        .name(Text.of("Open GitHub Repository"))
+                        .name(Text.of("Open Wiki"))
                         .description(OptionDescription.EMPTY)
                         .action((screen, option) -> Util.getOperatingSystem().open("https://docs.imb11.dev/sounds/data/custom-block-sounds")).build());
 

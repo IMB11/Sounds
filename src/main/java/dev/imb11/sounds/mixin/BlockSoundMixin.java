@@ -25,13 +25,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BlockSoundMixin {
     @Inject(method = "getSoundGroup", at = @At("HEAD"), cancellable = true)
     public void $manageCustomSounds(BlockState state, CallbackInfoReturnable<BlockSoundGroup> cir) {
-        if(MinecraftClient.getInstance().world == null) return;
-        if(state.getBlock() instanceof FluidBlock) return;
-
-        if(SoundsConfig.get(WorldSoundsConfig.class).disableBlocksEntirely)
-            return;
+//        if(MinecraftClient.getInstance().world == null) return;
 
         try {
+            if(state.getBlock() instanceof FluidBlock) return;
+            if(SoundsConfig.get(WorldSoundsConfig.class).disableBlocksEntirely)
+                return;
+
             TagPair.handleTagPair(state.getBlock(), cir);
         } catch (Exception ignored) {
             SoundsClient.LOGGER.warn("Early-load attempt at getting custom sound block group failed. Ignoring for now.");

@@ -46,7 +46,7 @@ body:
     id: logs
     attributes:
       label: Provide your logs.
-      description: You can use [mclo.gs](https://mclo.gs/) to upload your logs.
+      description: You can use [mclo.gs](https://mclo.gs/) to upload your logs. (EVEN IF THERE ARE NO CRASHES, LOGS LET ME SEE WHAT VERSION YOU ARE USING, ALONGSIDE VERBOSE MESSAGES. PLEASE UPLOAD THEM.)
       value: >-
         Please upload your logs to https://mclo.gs/ and paste the link to them
         here.

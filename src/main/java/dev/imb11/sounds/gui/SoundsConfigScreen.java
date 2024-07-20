@@ -39,8 +39,8 @@ public class SoundsConfigScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        /*? if <1.20.2 {*//*
-        super.renderBackground(context);
+        /*? if <1.20.2 {*/
+        /*super.renderBackground(context);
         *//*?} else {*/
         super.renderBackground(context, mouseX, mouseY, delta);
         /*?}*/
@@ -126,7 +126,7 @@ public class SoundsConfigScreen extends Screen {
         int doneButtonWidth = this.width - discordAndKoFiButtonsWidth;
         ButtonWidget buttonWidget = ButtonWidget.builder(ScreenTexts.DONE, (btn) -> this.client.setScreen(this.parent)).dimensions(this.width / 2 - doneButtonWidth / 2, this.height - 30, doneButtonWidth, 20).build();
         ButtonWidget koFiButton = ButtonWidget.builder(Text.literal("Donate").formatted(Formatting.GOLD).formatted(Formatting.BOLD), (btn) -> Util.getOperatingSystem().open("https://ko-fi.com/mineblock11")).dimensions(10, this.height - 30, 100, 20).build();
-        ButtonWidget discordButton = ButtonWidget.builder(Text.literal("Discord").formatted(Formatting.AQUA).formatted(Formatting.BOLD), (btn) -> Util.getOperatingSystem().open("https://discord.gg/4Qhj6Yf")).dimensions(this.width - 110, this.height - 30, 100, 20).build();
+        ButtonWidget discordButton = ButtonWidget.builder(Text.literal("Discord").formatted(Formatting.AQUA).formatted(Formatting.BOLD), (btn) -> Util.getOperatingSystem().open("https://discord.imb11.dev/")).dimensions(this.width - 110, this.height - 30, 100, 20).build();
         this.addDrawableChild(buttonWidget);
         this.addDrawableChild(koFiButton);
         this.addDrawableChild(discordButton);

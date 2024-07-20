@@ -1,0 +1,31 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.spruce_object.break"
+    },
+    "fall": {
+      "sound_id": "sounds:block.spruce_planks.fall"
+    },
+    "hit": {
+      "sound_id": "sounds:block.spruce_planks.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "sounds:block.spruce_object.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.spruce_planks.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:spruce_pressure_plate",
+    "minecraft:spruce_fence_gate",
+    "minecraft:spruce_fence",
+    "minecraft:spruce_sign",
+    "minecraft:spruce_button",
+    "minecraft:spruce_door",
+    "minecraft:spruce_trapdoor"
+  ]
+}

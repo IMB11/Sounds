@@ -1,0 +1,28 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "minecraft:block.nether_bricks.break"
+    },
+    "fall": {
+      "sound_id": "minecraft:block.nether_bricks.fall"
+    },
+    "hit": {
+      "sound_id": "minecraft:block.nether_bricks.hit"
+    },
+    "pitch": 1.3,
+    "place": {
+      "sound_id": "minecraft:block.nether_bricks.place"
+    },
+    "step": {
+      "sound_id": "minecraft:block.nether_bricks.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:bricks",
+    "minecraft:brick_slab",
+    "minecraft:brick_stairs",
+    "minecraft:brick_wall"
+  ]
+}

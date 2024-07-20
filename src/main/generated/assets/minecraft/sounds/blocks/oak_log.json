@@ -1,0 +1,28 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.oak_log.break"
+    },
+    "fall": {
+      "sound_id": "sounds:block.oak_log.fall"
+    },
+    "hit": {
+      "sound_id": "sounds:block.oak_log.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "sounds:block.oak_log.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.oak_log.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:oak_log",
+    "minecraft:oak_wood",
+    "minecraft:dark_oak_log",
+    "minecraft:dark_oak_wood"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.quartz.break"
+    },
+    "fall": {
+      "sound_id": "minecraft:block.stone.fall"
+    },
+    "hit": {
+      "sound_id": "minecraft:block.stone.hit"
+    },
+    "pitch": 0.8,
+    "place": {
+      "sound_id": "sounds:block.quartz.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.quartz.step"
+    },
+    "volume": 0.9
+  },
+  "keys": [
+    "minecraft:end_stone"
+  ]
+}

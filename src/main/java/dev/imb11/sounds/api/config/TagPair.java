@@ -1,25 +1,19 @@
 package dev.imb11.sounds.api.config;
 
+import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.imb11.sounds.config.SoundsConfig;
-import dev.imb11.sounds.config.WorldSoundsConfig;
+import dev.imb11.sounds.api.TagList;
+import dev.imb11.sounds.dynamic.TagPairHelper;
 import dev.isxander.yacl3.api.ButtonOption;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
-import dev.isxander.yacl3.api.OptionGroup;
-import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
-import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
-import net.fabricmc.fabric.api.tag.client.v1.ClientTags;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
@@ -28,9 +22,7 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -49,11 +41,11 @@ public class TagPair {
             ).apply(instance, BlockSoundGroup::new));
     public static final Codec<TagPair> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    Identifier.CODEC.fieldOf("blockTag").forGetter(TagPair::getBlockTagID),
+                    TagList.getCodec(Registries.BLOCK.getKey()).fieldOf("keys").forGetter(TagPair::getKeys),
                     BLOCK_GROUP_CODEC.fieldOf("group").forGetter(TagPair::getGroup),
                     Codec.BOOL.fieldOf("enabled").forGetter(TagPair::isEnabled)
             ).apply(instance, TagPair::new));
-    private final TagKey<Block> blockTag;
+    private final TagList<Block> keys;
     private BlockSoundGroup group;
     private BlockSoundGroup pendingGroup;
     private boolean enabled;
@@ -62,19 +54,17 @@ public class TagPair {
      * Outside the mixin for debugging reasons.
      */
     @ApiStatus.Internal
-    public static void handleTagPair(BlockState state, CallbackInfoReturnable<BlockSoundGroup> cir) {
-        var entry = state.getRegistryEntry();
+    public static void handleTagPair(Block state, CallbackInfoReturnable<BlockSoundGroup> cir) {
         AtomicReference<Supplier<TagPair>> result = new AtomicReference<>(null);
 
-        Stream<Supplier<TagPair>> tagPairStream = SoundsConfig.get(WorldSoundsConfig.class)
-                .getAllTagPairs().stream();
+        Stream<Supplier<TagPair>> tagPairStream = TagPairHelper.getAllTagPairs().stream().map(pair -> () -> pair);
 
         tagPairStream.parallel().forEach(allTagPair -> {
             if(result.get() != null) {
                 return;
             }
 
-            if (ClientTags.isInWithLocalFallback(allTagPair.get().getBlockTag(), entry)) {
+            if(allTagPair.get().keys.isValid(state)) {
                 result.set(allTagPair);
             }
         });
@@ -87,12 +77,8 @@ public class TagPair {
         }
     }
 
-    public Identifier getBlockTagID() {
-        return blockTag.id();
-    }
-
-    public TagKey<Block> getBlockTag() {
-        return blockTag;
+    public TagList<Block> getKeys() {
+        return keys;
     }
 
     public BlockSoundGroup getGroup() {
@@ -103,15 +89,15 @@ public class TagPair {
         return enabled;
     }
 
-    public TagPair(TagKey<Block> blockTag, BlockSoundGroup group) {
-        this.blockTag = blockTag;
+    public TagPair(TagList<Block> keys, BlockSoundGroup group) {
+        this.keys = keys;
         this.group = group;
         this.pendingGroup = group;
         this.enabled = true;
     }
 
-    public TagPair(Identifier blockTag, BlockSoundGroup group, boolean enabled) {
-        this(TagKey.of(RegistryKeys.BLOCK, blockTag), group);
+    public TagPair(TagList<Block> keys, BlockSoundGroup group, boolean enabled) {
+        this(keys, group);
         this.enabled = enabled;
     }
 
@@ -211,6 +197,7 @@ public class TagPair {
                 .build();
     }
 
+    /**
     public OptionGroup createYACL(TagPair defaults) {
         var breakOpt = createAction("break");
         var stepOpt = createAction("step");
@@ -282,5 +269,60 @@ public class TagPair {
                         fallOpt
                 ))
                 .build();
+    }*/
+
+    public static class Builder {
+        private final TagList<Block> keys = new TagList<>(new ArrayList<>());;
+        private BlockSoundGroup group;
+        private boolean enabled;
+
+        private Builder() {
+            this.group = BlockSoundGroup.STONE;
+            this.enabled = true;
+        }
+
+        public static Builder create() {
+            return new Builder();
+        }
+
+        public Builder group(float pitch, float volume, SoundEvent breakSound, SoundEvent stepSound, SoundEvent placeSound, SoundEvent hitSound, SoundEvent fallSound) {
+            this.group = new BlockSoundGroup(pitch, volume, breakSound, stepSound, placeSound, hitSound, fallSound);
+            return this;
+        }
+
+        @SafeVarargs
+        public final Builder addMultipleKeys(Block... keys) {
+            for (Block key : keys) {
+                addKey(key);
+            }
+            return this;
+        }
+
+        public Builder addKey(Block key) {
+            keys.add(Either.left(Registries.BLOCK.getKey(key).orElseThrow(() -> new RuntimeException("TagPair.Builder: Could not find RegistryKey for " + key.toString()))));
+            return this;
+        }
+
+        @SafeVarargs
+        public final Builder addMultipleKeys(TagKey<Block>... keys) {
+            for (TagKey<Block> key : keys) {
+                addKey(key);
+            }
+            return this;
+        }
+
+        public Builder addKey(TagKey<Block> key) {
+            keys.add(Either.right(key));
+            return this;
+        }
+
+        public Builder enabled(boolean enabled) {
+            this.enabled = enabled;
+            return this;
+        }
+
+        public TagPair build() {
+            return new TagPair(keys, group, enabled);
+        }
     }
 }

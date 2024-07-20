@@ -54,7 +54,7 @@
             "sounds:block/acacia_leaves/step4",
             "sounds:block/acacia_leaves/step5"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.acacia_log.break": {
         "sounds": [
@@ -64,7 +64,7 @@
             "sounds:block/acacia_log/break4",
             "sounds:block/acacia_log/break5"
         ],
-        "subtitle": "Acacia Log broken"
+        "subtitle": "subtitles.block.generic.break"
     },
     "block.acacia_log.fall": {
         "sounds": [
@@ -109,7 +109,7 @@
             "sounds:block/acacia_log/break5",
             "sounds:block/acacia_planks/break5"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.acacia_planks.break": {
         "sounds": [
@@ -163,7 +163,7 @@
             "sounds:block/acacia_planks/step5",
             "sounds:block/acacia_planks/step6"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.barrel.hit": {
         "sounds": [
@@ -194,7 +194,7 @@
             "sounds:block/barrel/step6",
             "sounds:block/barrel/step7"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.beehive.break": {
         "sounds": [
@@ -283,7 +283,7 @@
             "sounds:block/birch_leaves/step4",
             "sounds:block/birch_leaves/step5"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.birch_log.break": {
         "sounds": [
@@ -331,7 +331,7 @@
             "sounds:block/birch_log/step5",
             "sounds:block/birch_log/step6"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.birch_object.break": {
         "sounds": [
@@ -380,7 +380,7 @@
             "sounds:block/birch_object/step5",
             "sounds:block/birch_object/step6"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.birch_planks.break": {
         "sounds": [
@@ -434,7 +434,7 @@
             "sounds:block/birch_planks/step5",
             "sounds:block/birch_planks/step6"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.bookshelf.break": {
         "sounds": [
@@ -475,7 +475,7 @@
             "sounds:block/bookshelf/step7",
             "sounds:block/bookshelf/step8"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.chest.hit": {
         "sounds": [
@@ -505,7 +505,7 @@
             "sounds:block/chest/step6",
             "sounds:block/chest/step7"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.clay.break": {
         "sounds": [
@@ -549,7 +549,7 @@
             "sounds:block/clay/step5",
             "sounds:block/clay/step6"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.cobblestone.break": {
         "sounds": [
@@ -599,7 +599,7 @@
             "sounds:block/cobblestone/step4",
             "sounds:block/cobblestone/step5"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.copper_ore.break": {
         "sounds": [
@@ -654,7 +654,7 @@
             "sounds:block/copper_ore/step5",
             "sounds:block/copper_ore/step6"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.deepslate_copper_ore.break": {
         "sounds": [
@@ -709,7 +709,7 @@
             "sounds:block/deepslate_copper_ore/step5",
             "sounds:block/deepslate_copper_ore/step6"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.deepslate_gold_ore.break": {
         "sounds": [
@@ -760,7 +760,7 @@
             "sounds:block/deepslate_gold_ore/step5",
             "sounds:block/deepslate_gold_ore/step6"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.deepslate_iron_ore.break": {
         "sounds": [
@@ -809,7 +809,7 @@
             "sounds:block/deepslate_iron_ore/step4",
             "sounds:block/deepslate_iron_ore/step5"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.glass.break": {
         "sounds": [
@@ -849,7 +849,7 @@
             "sounds:block/glass/step10",
             "sounds:block/glass/step11"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.gold_block.step": {
         "sounds": [
@@ -862,7 +862,7 @@
             "sounds:block/gold_block/step7",
             "sounds:block/gold_block/step8"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.gold_ore.break": {
         "sounds": [
@@ -912,7 +912,7 @@
             "sounds:block/gold_ore/step4",
             "sounds:block/gold_ore/step5"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.gravel.break": {
         "sounds": [
@@ -960,7 +960,7 @@
             "sounds:block/gravel/step6",
             "sounds:block/gravel/step7"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.hay_block.break": {
         "sounds": [
@@ -995,7 +995,7 @@
             "sounds:block/hay_block/step6",
             "sounds:block/hay_block/step7"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.ice.break": {
         "sounds": [
@@ -1069,7 +1069,7 @@
             "sounds:block/iron_block/step6",
             "sounds:block/iron_block/step7"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.iron_ore.break": {
         "sounds": [
@@ -1119,7 +1119,7 @@
             "sounds:block/iron_ore/step4",
             "sounds:block/iron_ore/step5"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.jungle_leaves.break": {
         "sounds": [
@@ -1169,7 +1169,7 @@
             "sounds:block/jungle_leaves/step4",
             "sounds:block/jungle_leaves/step5"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.jungle_object.break": {
         "sounds": [
@@ -1199,7 +1199,7 @@
         "sounds": [
             "sounds:block/jungle_object/step1"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.jungle_planks.break": {
         "sounds": [
@@ -1252,7 +1252,7 @@
             "sounds:block/jungle_planks/step5",
             "sounds:block/jungle_planks/step6"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.loom.break": {
         "sounds": [
@@ -1301,7 +1301,7 @@
             "sounds:block/loom/step8",
             "sounds:block/loom/step9"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.magma_block.break": {
         "sounds": [
@@ -1356,7 +1356,7 @@
             "sounds:block/magma_block/break5",
             "sounds:block/magma_block/break6"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.mangrove_leaves.break": {
         "sounds": [
@@ -1409,7 +1409,7 @@
             "sounds:block/mangrove_leaves/step5",
             "sounds:block/mangrove_leaves/step6"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.mangrove_log.break": {
         "sounds": [
@@ -1467,7 +1467,7 @@
             "sounds:block/mangrove_planks/break10",
             "sounds:block/mangrove_log/step6"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.mangrove_object.break": {
         "sounds": [
@@ -1497,7 +1497,7 @@
         "sounds": [
             "sounds:block/mangrove_object/break1"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.mangrove_planks.break": {
         "sounds": [
@@ -1566,7 +1566,7 @@
             "sounds:block/mangrove_planks/break10",
             "sounds:block/mangrove_planks/break11"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.mossy_cobblestone.break": {
         "sounds": [
@@ -1596,7 +1596,7 @@
             "sounds:block/mossy_cobblestone/step4",
             "sounds:block/mossy_cobblestone/step5"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.mossy_stone_bricks.break": {
         "sounds": [
@@ -1636,7 +1636,7 @@
             "sounds:block/mossy_stone_bricks/step4",
             "sounds:block/mossy_stone_bricks/step5"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.oak_log.break": {
         "sounds": [
@@ -1695,7 +1695,7 @@
             "sounds:block/oak_log/step6",
             "minecraft:step/wood6"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.packed_ice.break": {
         "sounds": [
@@ -1790,7 +1790,7 @@
             "sounds:block/quartz/step9",
             "sounds:block/quartz/step10"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.raw_gold_block.break": {
         "sounds": [
@@ -1839,7 +1839,7 @@
             "sounds:block/raw_gold_block/step3",
             "sounds:block/raw_gold_block/step5"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.sandstone.step": {
         "sounds": [
@@ -1851,7 +1851,7 @@
             "sounds:block/sandstone/step6",
             "sounds:block/sandstone/step7"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.sheet_metal.break": {
         "sounds": [
@@ -1872,7 +1872,7 @@
             "sounds:block/sheet_metal/step5",
             "sounds:block/sheet_metal/step6"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.spruce_leaves.break": {
         "sounds": [
@@ -1921,7 +1921,7 @@
             "sounds:block/spruce_leaves/step4",
             "sounds:block/spruce_leaves/step5"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.spruce_log.break": {
         "sounds": [
@@ -1986,7 +1986,7 @@
             "sounds:block/spruce_planks/step6",
             "sounds:block/spruce_planks/step8"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.spruce_object.break": {
         "sounds": [
@@ -2026,7 +2026,7 @@
         "sounds": [
             "sounds:block/spruce_object/step1"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.spruce_planks.break": {
         "sounds": [
@@ -2085,7 +2085,7 @@
             "sounds:block/spruce_planks/step11",
             "sounds:block/spruce_planks/step12"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     },
     "block.stone_bricks.break": {
         "sounds": [
@@ -2135,6 +2135,6 @@
             "sounds:block/stone_bricks/step4",
             "sounds:block/stone_bricks/step5"
         ],
-        "subtitle": "subtitles.block.generic.step"
+        "subtitle": "subtitles.block.generic.footsteps"
     }
 }

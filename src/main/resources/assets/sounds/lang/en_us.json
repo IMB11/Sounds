@@ -62,7 +62,9 @@
 	"sounds.config.wolfHowling.description": "A sound effect that is played by wolves when a full moon is out... beware !",
 
 	"sounds.config.world.blocks": "Blocks",
-	"sounds.config.world.blocks.description": "These sounds are categorized and applied based on tags, offering a flexible and customizable experience.\nIt is recommended to use the search bar when locating sounds.\nFor a full list of what blocks are in which tags, you should click the following button:",
+	"sounds.config.world.blocks.description": "As of 1.1.0, block sounds are now managed through resource packs. For more information, consider checking out the Sounds wiki by clicking the following link below:",
+	"sounds.config.disableBlocksEntirely.name": "Disable All Modified Block Sounds",
+	"sounds.config.disableBlocksEntirely.description": "This will disable all block sounds that have been modified via resource packs. This is useful if you want to use the default block sounds that come with the game.",
 
 	"sounds.config.ui": "UI Sounds",
 

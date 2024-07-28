@@ -4,6 +4,7 @@ import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.config.TagPair;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.WorldSoundsConfig;
+import dev.imb11.sounds.dynamic.TagPairHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -12,6 +13,7 @@ import net.minecraft.block.FluidBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.fluid.WaterFluid;
 import net.minecraft.sound.BlockSoundGroup;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,7 +34,10 @@ public abstract class BlockSoundMixin {
             if(SoundsConfig.get(WorldSoundsConfig.class).disableBlocksEntirely)
                 return;
 
-            TagPair.handleTagPair(state.getBlock(), cir);
+            @Nullable TagPair pair = TagPairHelper.get(state.getRegistryEntry().getKey().get().getValue());
+            if(pair != null) {
+                cir.setReturnValue(pair.getGroup());
+            }
         } catch (Exception ignored) {
             SoundsClient.LOGGER.warn("Early-load attempt at getting custom sound block group failed. Ignoring for now.");
         }

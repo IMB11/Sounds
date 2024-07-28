@@ -50,33 +50,6 @@ public class TagPair {
     private BlockSoundGroup pendingGroup;
     private boolean enabled;
 
-    /**
-     * Outside the mixin for debugging reasons.
-     */
-    @ApiStatus.Internal
-    public static void handleTagPair(Block state, CallbackInfoReturnable<BlockSoundGroup> cir) {
-        AtomicReference<Supplier<TagPair>> result = new AtomicReference<>(null);
-
-        Stream<Supplier<TagPair>> tagPairStream = TagPairHelper.getAllTagPairs().stream().map(pair -> () -> pair);
-
-        tagPairStream.parallel().forEach(allTagPair -> {
-            if(result.get() != null) {
-                return;
-            }
-
-            if(allTagPair.get().keys.isValid(state)) {
-                result.set(allTagPair);
-            }
-        });
-
-        if (result.get() != null) {
-            TagPair pair = result.get().get();
-            if(pair.isEnabled()) {
-                cir.setReturnValue(pair.getGroup());
-            }
-        }
-    }
-
     public TagList<Block> getKeys() {
         return keys;
     }

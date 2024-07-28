@@ -54,6 +54,8 @@ public class SoundsReloadListener implements SimpleSynchronousResourceReloadList
                 LOGGER.error("Error occurred while loading resource json: " + id.toString(), e);
             }
         }
+
+        TagPairHelper.buildCache();
     }
 
     private static void handleDynamicSounds(ResourceManager manager) {

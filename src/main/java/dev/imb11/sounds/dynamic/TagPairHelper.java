@@ -44,6 +44,8 @@ public class TagPairHelper {
     }
 
     public static TagPair get(Identifier id) {
-        return LOADED_TAG_PAIRS.get(BLOCK_CACHE.get(id));
+        var cacheVal = BLOCK_CACHE.get(id);
+        if(cacheVal == null) return null;
+        return LOADED_TAG_PAIRS.get(cacheVal);
     }
 }

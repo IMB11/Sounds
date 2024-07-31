@@ -1,6 +1,6 @@
 {
 	"sounds.incompatability.title": "检测到不兼容模组",
-	"sounds.incompatability.message": "检测到 §lQualitySounds§r 与 §lSounds§r 均被安装。\n\n§l请删除 QualitySounds，因为 Sounds 已涵盖该模组所有的声音与功能。\n\n同时安装这两个模组将造成 Mixin 冲突，将导致声音重复及其他潜在的问题及崩溃。§r\n\n§lSounds§r 拥有 QualitySounds 所提供的全部功能，且支持更多的自定义选项。§r\n\n使用 §lSounds§r，您将可以修改即使有特殊方块声音的放置、摔落、破坏和行走声音，包括 QualitySounds 并不拥有的修改音调与音量功能。\n",
+	"sounds.incompatability.message": "检测到 §lQualitySounds§r 与 §lSounds§r 均被安装。\n\n§l请删除 QualitySounds，因为 Sounds 已涵盖该模组所有的声音与功能。\n\n同时安装这两个模组将造成 Mixin 冲突，将导致声音重复及其他潜在的问题及崩溃。§r\n\n§lSounds§r 拥有 QualitySounds 所提供的全部功能，且支持更多的自定义选项。§r\n\n使用 §lSounds§r，您将可以修改即使有特殊方块声音的放置、摔落、破坏和行走声音，包括 QualitySounds 并不拥有的修改音调与音量功能。",
 	"sounds.config.static": "Sounds",
 	"sounds.config.title": "Sounds 配置",
 	"sounds.config.preview.name": "预览声音",

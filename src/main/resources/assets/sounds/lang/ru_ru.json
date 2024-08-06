@@ -1,7 +1,9 @@
 {
-  "sounds.config.static": "Sounds",
-  "sounds.config.title": "Конфигурация Sounds",
-
+  "sounds.incompatability.title": "Обнаружена несовместимость",
+  "sounds.incompatability.message": "Похоже, что установлены оба мода §lQualitySounds§r и §lSounds§r.\n\n§lПожалуйста, удалите мод QualitySounds, так как мод Sounds уже включает в себя все его звуковые эффекты и функциональные возможности.\n\nСохранение обоих установленных модов приведет к конфликтам с миксинами мода Sounds, что приведёт к дублированию звука и другим потенциальным проблемам и сбоям.§r\n\n§lSounds§r обладает полным набором функций, включая все, что предлагает QualitySounds, и ещё более настраиваемый интерфейс.§r\n\nС §lSounds§r, вы можете изменять звуки перемещения, падения, разрушения и шагов для блоков, которым были присвоены пользовательские звуковые эффекты, в том числе изменять их высоту и громкость — функции, которых нет в QualitySounds.\n",
+  "sounds.config.static": "Звуки",
+  "sounds.config.title": "Конфигурация звуков",
+  
   "sounds.config.preview.name": "Прослушать",
   "sounds.config.preview.name.brackets": "Прослушать %s звук",
   "sounds.config.preview.break": "Разрушить",
@@ -9,6 +11,10 @@
   "sounds.config.preview.step": "Наступить",
   "sounds.config.preview.hit": "Ударить",
   "sounds.config.preview.fall": "Упасть",
+  "sounds.config.play.error.title": "Не удалось воспроизвести звук.",
+  "sounds.config.play.error.description": "Произошла ошибка при попытке воспроизвести звук «%s». Вы уверены, что это правильный идентификатор звукового события?",
+  "sounds.config.preview.error.title": "Не удалось выполнить предпросмотр",
+  "sounds.config.preview.error.description": "Произошла ошибка при попытке предпросмотра звукового эффекта. Вы уверены, что это правильный идентификатор звукового события?",
   "sounds.config.tag.description": "Все блоки с этим тегом будут иметь следующие настройки для их звуков",
   "sounds.config.preview.description": "Прослушать звук",
   "sounds.config.shouldPlay.name": "Включить звук",
@@ -18,13 +24,13 @@
   "sounds.config.volume.name": "Громкость звука",
   "sounds.config.volume.description": "Определяет громкость звука.",
   "sounds.config.pitch.name": "Высота звука",
-  "sounds.config.pitch.description": "Определяет высоту звука.\n\nНизкая высота дает более глубокий звук, а высокая - более писклявый.",
-  "sounds.config.event.name": "ID звукового события",
-  "sounds.config.event.name.brackets": "ID звукового события (%s)",
-  "sounds.config.event.description": "ID звукового события, при котором воспроизводится звук.\n\nЭто уникальный идентификатор звукового события, который используется для воспроизведения звука в игре.",
-
+  "sounds.config.pitch.description": "Определяет высоту звука.\n\nНизкая высота дает более глубокий звук, а высокая — более писклявый.",
+  "sounds.config.event.name": "Код звукового события",
+  "sounds.config.event.name.brackets": "Код звукового события (%s)",
+  "sounds.config.event.description": "Идентификатор звукового события, при котором воспроизводится звук.\n\nЭто уникальный идентификатор звукового события, который используется для воспроизведения звука в игре.",
+  
   "sounds.config.world": "Звуки мира",
-
+  
   "sounds.config.world.mechanics": "Механики",
   "sounds.config.repeaterUse.name": "Изменение задержки повторителя",
   "sounds.config.repeaterUse.description": "Звук, воспроизводимый при взаимодействии с повторителем.",
@@ -34,7 +40,7 @@
   "sounds.config.daylightDetectorUse.description": "Звук, воспроизводимый при взаимодействии с датчиком дневного света для изменения его режима.",
   "sounds.config.furnaceMinecartFuel.name": "Загрузка топлива в самоходную вагонетку",
   "sounds.config.furnaceMinecartFuel.description": "Звук, воспроизводимый при загрузке топлива в самоходную вагонетку.",
-
+  
   "sounds.config.world.actions": "Действия",
   "sounds.config.enableEnderpearlVariety.name": "Разнообразие звуков эндер-жемчуга",
   "sounds.config.enableEnderpearlVariety.description": "Должен ли звук, воспроизводимый при броске эндер-жемчуга, быть случайным и более похожим на телепортацию плодами хоруса?",
@@ -47,22 +53,24 @@
   "sounds.config.plantPotFill.name": "Посадка растения в цветочный горшок",
   "sounds.config.plantPotFill.description": "Звук, воспроизводимый, когда вы садите растение в цветочный горшок.",
   "sounds.config.cakeEat.name": "Поедание торта",
-  "sounds.config.cakeEat.description": "Звук, воспроизводимый, когда вы съедаете кусочек торта. Торт может быть ложью, но звук - нет!",
-
+  "sounds.config.cakeEat.description": "Звук, воспроизводимый, когда вы съедаете кусочек торта. Торт может быть ложью, но звук — нет!",
+  
   "sounds.config.world.mobs": "Мобы",
   "sounds.config.babyChickenChirp.name": "Щебетание цыплят",
   "sounds.config.babyChickenChirp.description": "Звук, воспроизводимый, когда цыплята щебечут.",
   "sounds.config.wolfHowling.name": "Волчий вой",
   "sounds.config.wolfHowling.description": "Звук, воспроизводимый, волками во время полной луны... будьте осторожнее!",
-
+  
   "sounds.config.world.blocks": "Блоки",
   "sounds.config.world.blocks.description": "Эти звуки распределяются по категориям и применяются на основе тегов, обеспечивая гибкость и настраиваемость.\nПри поиске звуков рекомендуется использовать строку поиска.\nЧтобы получить полный список блоков, относящихся к тем или иным тегам, нажмите на следующую кнопку:",
+  "sounds.config.disableBlocksEntirely.name": "Отключить все изменённые звуки блоков",
+  "sounds.config.disableBlocksEntirely.description": "Отключает все звуки блоков, которые были изменены с помощью наборов ресурсов. Это полезно, если вы хотите использовать звуки блоков по умолчанию в игре.",
 
   "sounds.config.ui": "Звуки инвентаря игрока",
-
+  
   "sounds.config.ui.interface": "Интерфейс",
   "sounds.config.ignoreEmptyHotbarSlots.name": "Игнорировать пустые слоты в хотбаре",
-  "sounds.config.ignoreEmptyHotbarSlots.description": "Следует ли игнорировать пустые слоты хотбара при воспроизведении звуков?\n\nПримечание: Эта настройка НЕ включает в себя звук выбрасывания предметов из хотбара из-за «гениальной» реализации этой механики Моджангами. Для этого следует включить настройку «Игнорировать пустые слоты инвентаря».",
+  "sounds.config.ignoreEmptyHotbarSlots.description": "Следует ли игнорировать пустые слоты в панели быстрого доступа при воспроизведении звуков?\n\nПримечание: Эта настройка НЕ включает в себя звук выбрасывания предметов из панели быстрого доступа из-за «гениальной» реализации этой механики от Mojang. Для этого следует включить настройку «Игнорировать пустые слоты инвентаря».",
   "sounds.config.inventoryOpen.name": "Открытие инвентаря",
   "sounds.config.inventoryOpen.description": "Звук, воспроизводимый при открытии любого инвентаря, например, стола зачарования.",
   "sounds.config.inventoryScroll.name": "Прокрутка инвентаря",
@@ -72,13 +80,13 @@
   "sounds.config.inventoryTyping.name": "Набор текста в инвентаре",
   "sounds.config.inventoryTyping.description": "Звук, воспроизводимый при вводе текста в строке названия наковальни или в строке поиска творческого инвентаря.",
   "sounds.config.hotbarScroll.name": "Прокрутка хотбара",
-  "sounds.config.hotbarScroll.description": "Звук, воспроизводимый при прокрутке хотбара или использовании цифровых клавиш для выбора её слотов.",
+  "sounds.config.hotbarScroll.description": "Звук, воспроизводимый при прокрутке панели быстрого доступа или использовании цифровых клавиш для выбора её слотов.",
   "sounds.config.hotbarPick.name": "Выбор блока",
   "sounds.config.hotbarPick.description": "Звук, воспроизводимый при использовании функции «Выбор блока».",
-
+  
   "sounds.config.ui.item_management": "Управление предметами",
   "sounds.config.ignoreEmptyInventorySlots.name": "Игнорировать пустые слоты инвентаря",
-  "sounds.config.ignoreEmptyInventorySlots.description": "Следует ли игнорировать пустые слоты инвентаря при воспроизведении звуков?\n\nПримечание: Эта настройка включает в себя звук выбрасывания предметов из хотбара из-за «гениальной» реализации этой механики Моджангами.",
+  "sounds.config.ignoreEmptyInventorySlots.description": "Следует ли игнорировать пустые слоты инвентаря при воспроизведении звуков?\n\nПримечание: Эта настройка включает в себя звук выбрасывания предметов из панели быстрого доступа из-за «гениальной» реализации этой механики от Mojang.",
   "sounds.config.itemCopy.name": "Клонирование предмета",
   "sounds.config.itemCopy.description": "Звук, воспроизводимый при клонировании предмета в инвентаре.",
   "sounds.config.itemDelete.name": "Удаление предмета",
@@ -89,9 +97,9 @@
   "sounds.config.itemDrag.description": "Звук, воспроизводимый при перетаскивании предмета по слотам в инвентаре.",
   "sounds.config.itemPick.name": "Нажатие по предмету",
   "sounds.config.itemPick.description": "Звук, воспроизводимый при нажатии на предмет в инвентаре.",
-
+  
   "sounds.config.chat": "Звуки чата",
-
+  
   "sounds.config.chat.messaging": "Обмен сообщениями",
   "sounds.config.useAtForChatMentions.name": "Включить префикс упоминания",
   "sounds.config.useAtForChatMentions.description": "Должен ли использоваться префикс '@' для определения того, упомянуты ли вы в сообщении чата?",
@@ -103,18 +111,18 @@
   "sounds.config.message.description": "Звук, воспроизводимый при получении сообщения в чате.",
   "sounds.config.mention.name": "Упоминания в чате",
   "sounds.config.mention.description": "Звук, воспроизводимый при упоминании вас в новом сообщении в чате.",
-
+  
   "sounds.config.chat.cooldown": "Перезарядка звуков",
   "sounds.config.enableChatSoundCooldown.name": "Включить перезарядку звуков",
   "sounds.config.enableChatSoundCooldown.description": "Следует ли применять перезарядку для звуков чата? Если включено, звук будет воспроизведен один раз за каждый периоде восстановления. Это не относится к печати звуков.",
   "sounds.config.chatSoundCooldown.name": "Период перезарядки звуков",
   "sounds.config.chatSoundCooldown.description": "Период перезарядки звуков чата в секундах (Не относится к печати звуков).",
-
+  
   "sounds.config.events": "Звуки событий",
-
+  
   "sounds.config.events.statusEffects": "Эффекты",
   "sounds.config.events.ignoreSilencedStatusEffects.name": "Игнорировать скрытые эффекты",
-  "sounds.config.events.ignoreSilencedStatusEffects.description": "Следует ли игнорировать скрытые эффекты (нет иконки в HUD) при воспроизведении звуков?",
+  "sounds.config.events.ignoreSilencedStatusEffects.description": "Следует ли игнорировать скрытые эффекты (нет иконки в интерфейсе) при воспроизведении звуков?",
   "sounds.config.positiveStatusEffectGain.name": "Получение положительного эффекта",
   "sounds.config.positiveStatusEffectGain.description": "Звук, воспроизводимый при получении положительного эффекта.",
   "sounds.config.positiveStatusEffectLose.name": "Утрата положительного эффекта",

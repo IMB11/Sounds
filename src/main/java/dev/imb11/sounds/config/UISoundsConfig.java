@@ -8,7 +8,10 @@ import dev.imb11.sounds.sound.HotbarDynamicConfiguredSound;
 import dev.imb11.sounds.sound.InventoryDynamicConfiguredSound;
 import dev.imb11.sounds.sound.context.ScreenHandlerSoundContext;
 import dev.isxander.yacl3.api.ConfigCategory;
+import dev.isxander.yacl3.api.Option;
+import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
+import dev.isxander.yacl3.api.controller.FloatFieldControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.SoundEvents;
@@ -44,6 +47,10 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
     /// == INTERFACE (GENERAL) == ///
     @SerialEntry
     public boolean ignoreEmptyHotbarSlots = false;
+    @SerialEntry
+    public float itemSoundCooldown = 0.05f;
+    @SerialEntry
+    public boolean enableItemSoundCooldown = true;
 
     public UISoundsConfig() {
         super(UISoundsConfig.class);
@@ -86,6 +93,12 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.ui.item_management"))
                 .option(ConfigUtil.create(defaults.ignoreEmptyInventorySlots, v -> config.ignoreEmptyInventorySlots = v, () -> config.ignoreEmptyInventorySlots, "sounds.config.ignoreEmptyInventorySlots"))
+                .option(ConfigUtil.create(defaults.enableItemSoundCooldown, v -> config.enableItemSoundCooldown = v, () -> config.enableItemSoundCooldown, "sounds.config.enableItemSoundCooldown"))
+                .option(Option.<Float>createBuilder()
+                        .name(Text.translatable("sounds.config.itemSoundCooldown.name"))
+                        .description(OptionDescription.of(Text.translatable("sounds.config.itemSoundCooldown.description")))
+                        .binding(defaults.itemSoundCooldown, () -> config.itemSoundCooldown, (value) -> config.itemSoundCooldown = value)
+                        .controller(opt -> FloatFieldControllerBuilder.create(opt).min(0.0f)).build())
                 .group(config.itemDropSoundEffect.getOptionGroup(defaults.itemDropSoundEffect))
                 .group(config.itemCopySoundEffect.getOptionGroup(defaults.itemCopySoundEffect))
                 .group(config.itemDeleteSoundEffect.getOptionGroup(defaults.itemDeleteSoundEffect))

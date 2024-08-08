@@ -46,6 +46,7 @@ dependencies {
 
     modCompileOnly "dev.emi:emi-fabric:${property("compile.emi")}"
     modCompileOnly ("maven.modrinth:inventorio:${property("compile.inventorio")}")
+    modImplementation "maven.modrinth:inventiveinventory:rBcLkVoh"
 }
 
 if (stonecutter.current.active) { // run configs for non-active version would be invalid

@@ -12,6 +12,7 @@
         "accessors.AnimatedDynamicTextureImageAccessor",
         "accessors.ClickableWidgetAccessor",
         "compat.EmiSoundEffects",
+        "compat.InventiveInventoryCompatMixin",
         "compat.InventorioCompatMixin",
         "ui.AnvilTypingEffect",
         "ui.CreativeInventorySoundEffects",

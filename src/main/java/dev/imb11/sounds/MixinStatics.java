@@ -6,6 +6,7 @@ import org.lwjgl.glfw.GLFW;
 public class MixinStatics {
     public static Slot CURRENT_SLOT;
     public static Slot DELETE_ITEM_SLOT;
+    public static boolean temporarilyDisableInventorySounds = false;
     public static boolean hasOpenedInventorioScreen = false;
 
     public static boolean isNotSpecialKey(int keycode) {

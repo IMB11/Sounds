@@ -1,5 +1,6 @@
 package dev.imb11.sounds.sound;
 
+import dev.imb11.sounds.MixinStatics;
 import dev.imb11.sounds.api.config.DynamicConfiguredSound;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
@@ -25,7 +26,8 @@ public class InventoryDynamicConfiguredSound extends DynamicConfiguredSound<Item
     @Override
     public void playDynamicSound(ItemStack context, ItemStackSoundContext contextHandler) {
         // If item stack is empty and UISounds.ignoreEmptyInventorySlots is true, don't play any sound, else, normal behavior
-        if (context.isEmpty() && SoundsConfig.get(UISoundsConfig.class).ignoreEmptyInventorySlots) return;
+        if ((context.isEmpty() && SoundsConfig.get(UISoundsConfig.class).ignoreEmptyInventorySlots)
+                || MixinStatics.temporarilyDisableInventorySounds) return;
 
         super.playDynamicSound(context, contextHandler);
     }

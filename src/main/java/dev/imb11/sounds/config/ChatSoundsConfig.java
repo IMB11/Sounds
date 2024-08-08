@@ -4,15 +4,16 @@ import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.api.config.ConfiguredSound;
 import dev.imb11.sounds.config.utils.ConfigUtil;
 import dev.isxander.yacl3.api.*;
+import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatFieldControllerBuilder;
 import dev.isxander.yacl3.api.controller.StringControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<ChatSoundsConfig> {
@@ -89,7 +90,13 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
 
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.chat.cooldown"))
-                .option(ConfigUtil.create(defaults.enableChatSoundCooldown, v -> config.enableChatSoundCooldown = v, () -> config.enableChatSoundCooldown, "sounds.config.enableChatSoundCooldown"))
+                .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("sounds.config.enableChatSoundCooldown" + ".name"))
+                        .description(OptionDescription.of(Text.translatable("sounds.config.enableChatSoundCooldown" + ".description")))
+                        .binding(defaults.enableChatSoundCooldown, () -> config.enableChatSoundCooldown, v -> config.enableChatSoundCooldown = v)
+                        .controller((opt) -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
+                        .available(!(FabricLoader.getInstance().isModLoaded("chatpatches")))
+                        .build())
                 .option(chatSoundCooldownOption)
                 .build());
 

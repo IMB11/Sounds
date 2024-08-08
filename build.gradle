@@ -45,7 +45,6 @@ dependencies {
     modImplementation "com.mineblock11:MRU:${property("deps.mru")}"
 
     modCompileOnly "dev.emi:emi-fabric:${property("compile.emi")}"
-
     modCompileOnly ("maven.modrinth:inventorio:${property("compile.inventorio")}")
 }
 

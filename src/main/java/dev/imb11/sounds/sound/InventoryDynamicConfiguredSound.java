@@ -34,7 +34,7 @@ public class InventoryDynamicConfiguredSound extends DynamicConfiguredSound<Item
                 || MixinStatics.temporarilyDisableInventorySounds) return;
 
         if(!context.isEmpty()) {
-            String itemId = context.getItem().getRegistryEntry().getIdAsString();
+            String itemId = context.getTranslationKey();
             float cooldownDuration = SoundsConfig.get(UISoundsConfig.class).itemSoundCooldown * 1000f;
             long currentTime = System.currentTimeMillis();
 

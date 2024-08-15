@@ -1,10 +1,10 @@
 package dev.imb11.sounds.mixin;
 
+import dev.imb11.mru.LoaderUtils;
 import dev.imb11.sounds.config.ChatSoundsConfig;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.gui.IncompatabilityScreen;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
@@ -30,7 +30,7 @@ public abstract class TitleScreenWidget extends Screen {
 //            this.client.setScreen(new TestScreen());
 //        })).dimensions(10, 10, 100, 20).build());
 
-        if(FabricLoader.getInstance().isModLoaded("qualitysounds")) {
+        if(LoaderUtils.isModInstalled("qualitysounds")) {
             this.client.setScreen(new IncompatabilityScreen());
         }
     }

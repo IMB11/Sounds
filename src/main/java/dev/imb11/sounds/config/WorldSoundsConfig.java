@@ -1,26 +1,18 @@
 package dev.imb11.sounds.config;
 
+import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.config.ConfiguredSound;
 import dev.imb11.sounds.api.config.DynamicConfiguredSound;
 import dev.imb11.sounds.config.utils.ConfigGroup;
-import dev.imb11.sounds.config.utils.ConfigUtil;
-import dev.imb11.sounds.api.config.TagPair;
-import dev.imb11.sounds.sound.CustomSounds;
 import dev.imb11.sounds.sound.context.RepeaterSoundContext;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
+import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 
 public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<WorldSoundsConfig> {
     /// == MECHANICS == ///
@@ -85,21 +77,23 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
                 .group(config.daylightDetectorUseSoundEffect.getOptionGroup(defaults.daylightDetectorUseSoundEffect))
                 .group(config.furnaceMinecartFuelSoundEffect.getOptionGroup(defaults.furnaceMinecartFuelSoundEffect))
                 .build());
-
-        ConfigCategory.Builder blocksCategory = ConfigCategory.createBuilder()
+        builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.world.blocks"))
-                .option(ConfigUtil.create(defaults.disableBlocksEntirely, v -> config.disableBlocksEntirely = v, () -> config.disableBlocksEntirely, "sounds.config.disableBlocksEntirely"))
+                .option(HELPER.get("disableBlocksEntirely", defaults.disableBlocksEntirely, () -> config.disableBlocksEntirely, v1 -> config.disableBlocksEntirely = v1))
                 .option(LabelOption.create(Text.translatable("sounds.config.world.blocks.description")))
                 .option(ButtonOption.createBuilder()
                         .name(Text.of("Open Wiki"))
                         .description(OptionDescription.EMPTY)
-                        .action((screen, option) -> Util.getOperatingSystem().open("https://docs.imb11.dev/sounds/data/custom-block-sounds")).build());
-
-        builder.category(blocksCategory.build());
-
+                        .action((screen, option) -> Util.getOperatingSystem().open("https://docs.imb11.dev/sounds/data/custom-block-sounds"))
+                        .build())
+                .option(ButtonOption.createBuilder()
+                        .name(Text.of("Open Default Resource Pack Location"))
+                        .description(OptionDescription.EMPTY)
+                        .action((screen, option) -> Util.getOperatingSystem().open(SoundsClient.DEFAULT_PACK_PATH))
+                        .build()).build());
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.world.actions"))
-                .option(ConfigUtil.create(defaults.enableEnderpearlVariety, v -> config.enableEnderpearlVariety = v, () -> config.enableEnderpearlVariety, "sounds.config.enableEnderpearlVariety"))
+                .option(HELPER.get("enableEnderpearlVariety", defaults.enableEnderpearlVariety, () -> config.enableEnderpearlVariety, v -> config.enableEnderpearlVariety = v))
 //                .group(config.swordSwoopSoundEffect.getOptionGroup(defaults.swordSwoopSoundEffect))
                 .group(config.frostWalkerSoundEffect.getOptionGroup(defaults.frostWalkerSoundEffect))
                 .group(config.leadSnappingSoundEffect.getOptionGroup(defaults.leadSnappingSoundEffect))

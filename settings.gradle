@@ -1,13 +1,12 @@
 pluginManagement {
     repositories {
-        maven {
-            name = 'Fabric'
-            url = 'https://maven.fabricmc.net/'
-        }
-        maven {
-            url = "https://maven.kikugie.dev/snapshots"
-        }
+        maven { url "https://maven.fabricmc.net/" }
+        maven { url "https://maven.architectury.dev" }
+        maven { url "https://maven.minecraftforge.net" }
+        maven { url "https://maven.neoforged.net/releases/" }
+        maven { url "https://maven.kikugie.dev/snapshots" }
         gradlePluginPortal()
+        mavenCentral()
     }
 }
 
@@ -17,8 +16,13 @@ plugins {
 
 stonecutter {
     shared {
-        versions '1.21', '1.20.1'
-        vcsVersion '1.21'
+        vers("1.20.1-fabric", "1.20.1")
+        vers("1.20.1-forge", "1.20.1")
+
+        vers("1.21-fabric", "1.21")
+        vers("1.21-neoforge", "1.21")
+
+        vcsVersion = "1.21-fabric"
     }
 
     create rootProject

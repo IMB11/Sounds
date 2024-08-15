@@ -1,21 +1,16 @@
 package dev.imb11.sounds.config;
 
-import dev.imb11.sounds.SoundsClient;
+import dev.imb11.mru.yacl.ConfigHelper;
 import dev.imb11.sounds.config.utils.ConfigGroup;
-import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 
 public class SoundsConfig {
+    public static final ConfigHelper HELPER = new ConfigHelper("sounds", "config");
     private static final HashMap<Class<?>, ConfigGroup> CONFIG_GROUPS = new HashMap<>();
 
     static {

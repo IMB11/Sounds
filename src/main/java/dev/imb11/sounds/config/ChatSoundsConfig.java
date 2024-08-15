@@ -1,20 +1,21 @@
 package dev.imb11.sounds.config;
 
+import dev.imb11.mru.LoaderUtils;
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.api.config.ConfiguredSound;
-import dev.imb11.sounds.config.utils.ConfigUtil;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatFieldControllerBuilder;
 import dev.isxander.yacl3.api.controller.StringControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
+
+import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 
 public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<ChatSoundsConfig> {
     // == MESSAGING SOUNDS == //
@@ -81,7 +82,7 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
         builder.title(Text.of("Chat Sounds"));
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.chat.messaging"))
-                .option(ConfigUtil.create(defaults.ignoreSystemChats, v -> config.ignoreSystemChats = v, () -> config.ignoreSystemChats, "sounds.config.ignoreSystemChats"))
+                .option(HELPER.get("sounds.config.ignoreSystemChats", defaults.ignoreSystemChats, () -> config.ignoreSystemChats, v -> config.ignoreSystemChats = v))
                 .group(config.typingSoundEffect.getOptionGroup(defaults.typingSoundEffect))
                 .group(config.messageSoundEffect.getOptionGroup(defaults.messageSoundEffect))
                 .group(config.mentionSoundEffect.getOptionGroup(defaults.mentionSoundEffect))
@@ -95,7 +96,7 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
                         .description(OptionDescription.of(Text.translatable("sounds.config.enableChatSoundCooldown" + ".description")))
                         .binding(defaults.enableChatSoundCooldown, () -> config.enableChatSoundCooldown, v -> config.enableChatSoundCooldown = v)
                         .controller((opt) -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
-                        .available(!(FabricLoader.getInstance().isModLoaded("chatpatches")))
+                        .available(!(LoaderUtils.isModInstalled("chatpatches")))
                         .build())
                 .option(chatSoundCooldownOption)
                 .build());

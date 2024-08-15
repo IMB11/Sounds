@@ -1,7 +1,6 @@
 package dev.imb11.sounds.mixin;
 
 import dev.imb11.sounds.gui.SoundsConfigScreen;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.SoundOptionsScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;

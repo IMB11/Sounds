@@ -1,4 +1,4 @@
-/*? if >1.20.6 {*/
+/*? if >=1.21 {*/
 package dev.imb11.sounds.api.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;

@@ -27,7 +27,7 @@ public class MentionSoundEffect {
     private float cooldownPeriod = 0f;
 
     @Inject(method = "render", at = @At("HEAD"))
-    /*? if <1.20.5 {*/
+    /*? if =1.20.1 {*/
     /*public void $cooldown_period(DrawContext context, int currentTick, int mouseX, int mouseY, CallbackInfo ci) {
     *//*?} else {*/
     public void $cooldown_period(DrawContext context, int currentTick, int mouseX, int mouseY, boolean focused, CallbackInfo ci) {
@@ -40,7 +40,7 @@ public class MentionSoundEffect {
             /*?}*/
         }
     }
-    /*? if <1.20.5 {*/
+    /*? if =1.20.1 {*/
     /*@Inject(method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V", at = @At("HEAD"), cancellable = false)
     public void $mention_recieve_sound_effect(Text message, MessageSignatureData signature, int ticks, MessageIndicator indicator, boolean refresh, CallbackInfo ci) {
     *//*?} else {*/

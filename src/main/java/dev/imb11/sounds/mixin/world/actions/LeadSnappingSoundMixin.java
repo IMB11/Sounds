@@ -14,7 +14,7 @@ public interface LeadSnappingSoundMixin {
 /*@Mixin(net.minecraft.entity.mob.MobEntity.class)
 public class LeadSnappingSoundMixin {
 *//*?}*/
-    /*? if <=1.20.6 {*/
+    /*? if =1.20.1 {*/
     /*@Inject(method = "detachLeash", at = @At("TAIL"), cancellable = false)
     public void $lead_snapping_sound_effect(boolean sendPacket, boolean dropItem, CallbackInfo ci) {
         if(dropItem) {

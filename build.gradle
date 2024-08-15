@@ -42,7 +42,7 @@ dependencies {
         exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
     }
     modLocalRuntime modCompileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
-    modImplementation "com.mineblock11:MRU:${property("deps.mru")}"
+    modImplementation "dev.imb11:mru:${property("deps.mru")}+${stonecutter.current.version}+fabric"
 
     modCompileOnly "dev.emi:emi-fabric:${property("compile.emi")}"
     modCompileOnly ("maven.modrinth:inventorio:${property("compile.inventorio")}")

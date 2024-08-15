@@ -27,7 +27,7 @@ public class PotionEventHelper {
 
             Map<Identifier, StatusEffectInstance> currentEffects = new HashMap<>();
             client.player.getStatusEffects().forEach(effectInstance -> {
-                /*? if <1.20.5 {*/
+                /*? if =1.20.1 {*/
                 /*StatusEffect effect = effectInstance.getEffectType();
                 *//*?} else {*/
                 StatusEffect effect = effectInstance.getEffectType().value();

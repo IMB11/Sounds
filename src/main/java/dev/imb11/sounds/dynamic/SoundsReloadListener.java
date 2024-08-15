@@ -69,7 +69,7 @@ public class SoundsReloadListener implements SimpleSynchronousResourceReloadList
                     var inputStream = resource.getInputStream();
                     var reader = new JsonReader(new InputStreamReader(inputStream));
 
-                    /*? if <1.20.5 {*/
+                    /*? if =1.20.1 {*/
                     /*SoundDefinition<?> result = (SoundDefinition<?>) codec.parse(JsonOps.INSTANCE, GSON.fromJson(reader, JsonObject.class)).getOrThrow(false, s -> {
                         throw new RuntimeException(s);
                     });

@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/*? if >1.20.4 {*/
+/*? if >=1.21 {*/
 @Mixin(AbstractBlock.class)
 /*?} else {*/
 /*@Mixin(Block.class)

@@ -9,13 +9,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/*? if >1.20.6 {*/
+/*? if >=1.21 {*/
 @Mixin(net.minecraft.block.FrostedIceBlock.class)
 /*?} else {*/
 /*@Mixin(net.minecraft.enchantment.FrostWalkerEnchantment.class)
 *//*?}*/
 public class FrostWalkerSoundsMixin {
-    /*? if >1.20.6 {*/
+    /*? if >=1.21 {*/
     @Inject(method = "onBlockAdded", at = @At("TAIL"))
     private void $frost_walker_freeze_sound_effect(net.minecraft.block.BlockState state, World world, BlockPos pos, net.minecraft.block.BlockState oldState, boolean notify, CallbackInfo ci) {
     /*?} else {*/

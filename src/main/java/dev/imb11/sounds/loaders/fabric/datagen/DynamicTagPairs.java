@@ -1,5 +1,5 @@
-/*? if >1.20.6 {*/
-package dev.imb11.sounds.datagen;
+/*? if >=1.21 {*/
+package dev.imb11.sounds.loaders.fabric.datagen;
 
 import dev.imb11.sounds.api.config.TagPair;
 import dev.imb11.sounds.api.datagen.TagPairProvider;

@@ -5,19 +5,19 @@ pluginManagement {
             url = 'https://maven.fabricmc.net/'
         }
         maven {
-            url = "https://maven.kikugie.dev/releases"
+            url = "https://maven.kikugie.dev/snapshots"
         }
         gradlePluginPortal()
     }
 }
 
 plugins {
-    id "dev.kikugie.stonecutter" version "0.4.1"
+    id "dev.kikugie.stonecutter" version "0.5-alpha.4"
 }
 
 stonecutter {
     shared {
-        versions '1.21', '1.20.6', '1.20.4', '1.20.1'
+        versions '1.21', '1.20.1'
         vcsVersion '1.21'
     }
 

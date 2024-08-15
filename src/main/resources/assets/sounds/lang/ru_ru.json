@@ -21,13 +21,13 @@
   "sounds.config.shouldPlay.option.description": "Следует ли воспроизводить этот звук?",
   "sounds.config.dynamic.option": "Динамическое звучание",
   "sounds.config.dynamic.option.description": "Должен ли воспроизводимый звук зависеть от предмета, блока или действия, которое происходит в настоящее время?\n\nДля предметов и блоков звук будет определен в зависимости от их типа.",
-  "sounds.config.volume.option": "Громкость звука",
-  "sounds.config.volume.option.description": "Определяет громкость звука.",
-  "sounds.config.pitch.option": "Высота звука",
-  "sounds.config.pitch.option.description": "Определяет высоту звука.\n\nНизкая высота дает более глубокий звук, а высокая — более писклявый.",
-  "sounds.config.event.option": "Код звукового события",
-  "sounds.config.event.option.brackets": "Код звукового события (%s)",
-  "sounds.config.event.option.description": "Идентификатор звукового события, при котором воспроизводится звук.\n\nЭто уникальный идентификатор звукового события, который используется для воспроизведения звука в игре.",
+  "sounds.config.volume.name": "Громкость звука",
+  "sounds.config.volume.description": "Определяет громкость звука.",
+  "sounds.config.pitch.name": "Высота звука",
+  "sounds.config.pitch.description": "Определяет высоту звука.\n\nНизкая высота дает более глубокий звук, а высокая — более писклявый.",
+  "sounds.config.event.name": "Код звукового события",
+  "sounds.config.event.name.brackets": "Код звукового события (%s)",
+  "sounds.config.event.description": "Идентификатор звукового события, при котором воспроизводится звук.\n\nЭто уникальный идентификатор звукового события, который используется для воспроизведения звука в игре.",
   
   "sounds.config.world": "Звуки мира",
   
@@ -42,8 +42,8 @@
   "sounds.config.furnaceMinecartFuel.option.description": "Звук, воспроизводимый при загрузке топлива в самоходную вагонетку.",
   
   "sounds.config.world.actions": "Действия",
-  "sounds.config.enableEnderpearlVariety.option": "Разнообразие звуков эндер-жемчуга",
-  "sounds.config.enableEnderpearlVariety.option.description": "Должен ли звук, воспроизводимый при броске эндер-жемчуга, быть случайным и более похожим на телепортацию плодами хоруса?",
+  "sounds.config.option.enableEnderpearlVariety": "Разнообразие звуков эндер-жемчуга",
+  "sounds.config.option.description.enableEnderpearlVariety": "Должен ли звук, воспроизводимый при броске эндер-жемчуга, быть случайным и более похожим на телепортацию плодами хоруса?",
   "sounds.config.frostWalker.option": "Заморозка «Ледоходом»",
   "sounds.config.frostWalker.option.description": "Звук, воспроизводимый, когда ботинки с зачарованием «Ледоход» замораживают воду.",
   "sounds.config.leadSnapping.option": "Отвязывание мобов",
@@ -62,8 +62,8 @@
   "sounds.config.wolfHowling.option.description": "Звук, воспроизводимый, волками во время полной луны... будьте осторожнее!",
   
   "sounds.config.world.blocks": "Блоки",
-  "sounds.config.disableBlocksEntirely.option": "Отключить все изменённые звуки блоков",
-  "sounds.config.disableBlocksEntirely.option.description": "Отключает все звуки блоков, которые были изменены с помощью наборов ресурсов. Это полезно, если вы хотите использовать звуки блоков по умолчанию в игре.",
+  "sounds.config.option.disableBlocksEntirely": "Отключить все изменённые звуки блоков",
+  "sounds.config.option.description.disableBlocksEntirely": "Отключает все звуки блоков, которые были изменены с помощью наборов ресурсов. Это полезно, если вы хотите использовать звуки блоков по умолчанию в игре.",
 
   "sounds.config.ui": "Звуки инвентаря игрока",
   
@@ -100,8 +100,6 @@
   "sounds.config.chat": "Звуки чата",
   
   "sounds.config.chat.messaging": "Обмен сообщениями",
-  "sounds.config.useAtForChatMentions.option": "Включить префикс упоминания",
-  "sounds.config.useAtForChatMentions.option.description": "Должен ли использоваться префикс '@' для определения того, упомянуты ли вы в сообщении чата?",
   "sounds.config.ignoreSystemChats.option": "Игнорировать системные сообщения",
   "sounds.config.ignoreSystemChats.option.description": "Следует ли игнорировать системные сообщения в чате при воспроизведении звуков?",
   "sounds.config.typing.option": "Набор текста в чате",

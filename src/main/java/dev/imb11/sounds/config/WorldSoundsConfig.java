@@ -89,7 +89,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
                 .option(ButtonOption.createBuilder()
                         .name(Text.of("Open Default Resource Pack Location"))
                         .description(OptionDescription.EMPTY)
-                        .action((screen, option) -> Util.getOperatingSystem().open(SoundsClient.DEFAULT_PACK_PATH))
+                        .action((screen, option) -> Util.getOperatingSystem().open(SoundsClient.DEFAULT_PACK_PATH.toFile()))
                         .build()).build());
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.world.actions"))

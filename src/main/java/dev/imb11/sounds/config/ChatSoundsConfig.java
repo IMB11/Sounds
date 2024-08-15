@@ -63,16 +63,11 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
 
     @Override
     public YetAnotherConfigLib.Builder build(ChatSoundsConfig defaults, ChatSoundsConfig config, YetAnotherConfigLib.Builder builder) {
-        Option<Float> chatSoundCooldownOption = Option.<Float>createBuilder()
-                .name(Text.translatable("sounds.config.chatSoundCooldown.name"))
-                .description(OptionDescription.of(Text.translatable("sounds.config.chatSoundCooldown.description")))
-                .binding(defaults.chatSoundCooldown, () -> config.chatSoundCooldown, (value) -> config.chatSoundCooldown = value)
-                .controller(opt -> FloatFieldControllerBuilder.create(opt).min(0.0f))
-                .build();
+        Option<Float> chatSoundCooldownOption = HELPER.getField("chatSoundCooldown", defaults.chatSoundCooldown, () -> config.chatSoundCooldown, v -> config.chatSoundCooldown = v);
 
         ListOption<String> mentionKeywordsOption = ListOption.<String>createBuilder()
-                .name(Text.translatable("sounds.config.mentionKeywords.name"))
-                .description(OptionDescription.of(Text.translatable("sounds.config.mentionKeywords.description")))
+                .name(Text.translatable("sounds.config.mentionKeywords.option"))
+                .description(OptionDescription.of(Text.translatable("sounds.config.mentionKeywords.option.description")))
                 .binding(defaults.mentionKeywords, () -> config.mentionKeywords, (value) -> config.mentionKeywords = value)
                 .controller(StringControllerBuilder::create)
                 .initial("@" + MinecraftClient.getInstance().getSession().getUsername())
@@ -82,7 +77,7 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
         builder.title(Text.of("Chat Sounds"));
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.chat.messaging"))
-                .option(HELPER.get("sounds.config.ignoreSystemChats", defaults.ignoreSystemChats, () -> config.ignoreSystemChats, v -> config.ignoreSystemChats = v))
+                .option(HELPER.get("ignoreSystemChats", defaults.ignoreSystemChats, () -> config.ignoreSystemChats, v -> config.ignoreSystemChats = v))
                 .group(config.typingSoundEffect.getOptionGroup(defaults.typingSoundEffect))
                 .group(config.messageSoundEffect.getOptionGroup(defaults.messageSoundEffect))
                 .group(config.mentionSoundEffect.getOptionGroup(defaults.mentionSoundEffect))
@@ -92,8 +87,8 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.chat.cooldown"))
                 .option(Option.<Boolean>createBuilder()
-                        .name(Text.translatable("sounds.config.enableChatSoundCooldown" + ".name"))
-                        .description(OptionDescription.of(Text.translatable("sounds.config.enableChatSoundCooldown" + ".description")))
+                        .name(Text.translatable("sounds.config.option.enableChatSoundCooldown"))
+                        .description(OptionDescription.of(Text.translatable("sounds.config.option.description.enableChatSoundCooldown")))
                         .binding(defaults.enableChatSoundCooldown, () -> config.enableChatSoundCooldown, v -> config.enableChatSoundCooldown = v)
                         .controller((opt) -> BooleanControllerBuilder.create(opt).coloured(true).yesNoFormatter())
                         .available(!(LoaderUtils.isModInstalled("chatpatches")))

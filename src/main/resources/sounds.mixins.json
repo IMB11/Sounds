@@ -11,6 +11,7 @@
         "TitleScreenWidget",
         "accessors.AnimatedDynamicTextureImageAccessor",
         "accessors.ClickableWidgetAccessor",
+        "accessors.BlockAccessor",
         "compat.EmiSoundEffects",
         "compat.InventiveInventoryCompatMixin",
         "compat.InventorioCompatMixin",

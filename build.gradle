@@ -138,8 +138,6 @@ loom {
             mixinConfig "mru.mixins.json"
         }
     }
-
-    accessWidenerPath = getRootProject().file("src/main/resources/aw/" + mcVersion + ".accesswidener")
 }
 
 java {
@@ -148,6 +146,14 @@ java {
     sourceCompatibility = version
     targetCompatibility = version
 }
+
+tasks.register('buildAndCollect', Copy) {
+    group = "build"
+    from(tasks.remapJar.archiveFile)
+    into(rootProject.layout.buildDirectory.file("libs"))
+    dependsOn("build")
+}
+
 
 processResources {
     def props = [
@@ -162,10 +168,9 @@ processResources {
         props.mandatory_inclusion_field = (loader == "forge") ? "mandatory = true" : "type = \"required\""
     }
 
-    if (loader == "fabric") {
-        props.target_architectury = project.property("deps.arch_api")
-        props.minecraft_version = mcVersion
-    }
+//    if (loader == "fabric") {
+//        props.target_architectury = project.property("deps.arch_api")
+//    }
 
     props.each { key, value -> inputs.property(key, value) }
 

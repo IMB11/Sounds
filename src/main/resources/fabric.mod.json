@@ -14,7 +14,6 @@
   "license": "ARR",
   "icon": "assets/sounds/icon.png",
   "environment": "client",
-  "accessWidener": "aw/${minecraft_version}.accesswidener",
   "entrypoints": {
     "client": [
       "dev.imb11.sounds.loaders.fabric.SoundsFabric"

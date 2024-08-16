@@ -27,3 +27,5 @@ stonecutter {
 
     create rootProject
 }
+
+rootProject.name = "Sounds"

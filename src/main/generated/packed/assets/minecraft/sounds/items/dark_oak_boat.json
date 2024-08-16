@@ -1,0 +1,9 @@
+{
+  "keys": [
+    "minecraft:dark_oak_boat",
+    "minecraft:dark_oak_chest_boat"
+  ],
+  "pitch": 1.75,
+  "soundEvent": "minecraft:block.wood.hit",
+  "volume": 0.75
+}

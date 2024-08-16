@@ -1,4 +1,4 @@
-// 1.21	2024-08-16T14:09:00.473910607	Sounds/TagPairProvider
+// 1.21	2024-08-16T22:11:52.296251146	Sounds/TagPairProvider
 f39f5ac9430929b3907327c99529a602ecf57b6e assets/minecraft/sounds/blocks/jungle_leaves.json
 60910c1d7ea210a063248107908fd6e10b4378c6 assets/minecraft/sounds/blocks/prismarine.json
 0736781ecd2e2f62b2864a730e6cf27e5d4ecb8e assets/minecraft/sounds/blocks/packed_ice.json
@@ -8,8 +8,8 @@ f39f5ac9430929b3907327c99529a602ecf57b6e assets/minecraft/sounds/blocks/jungle_l
 c52d3fae6b017f507c112b79a00936ec1d15a089 assets/minecraft/sounds/blocks/mangrove_leaves.json
 f266572d32b295c2ca2d336fa253e7de1e53e322 assets/minecraft/sounds/blocks/loom.json
 35ed60c8212226809105b7c4bc77cf20ecaebc9f assets/minecraft/sounds/blocks/jungle_object.json
-f5c294aaf07d348233a25e4c024253daba9fa91d assets/minecraft/sounds/blocks/terracotta.json
 3705e33cfec1d12770f00d0950f5ee16021e398a assets/minecraft/sounds/blocks/lapis_block.json
+f5c294aaf07d348233a25e4c024253daba9fa91d assets/minecraft/sounds/blocks/terracotta.json
 483dce1afa1896fb3b52bc72b69ec9073d6d1784 assets/minecraft/sounds/blocks/gold.json
 8b8e906af11da2396068d0b8bf8985e03895e078 assets/minecraft/sounds/blocks/birch_leaves.json
 2bf3b63210e504e74a02d8676767f445b93facd3 assets/minecraft/sounds/blocks/mossy_cobblestone.json
@@ -34,13 +34,13 @@ f7e3d853f6c4b6d9bf2a1d92819998c712b7e50f assets/minecraft/sounds/blocks/clay.jso
 7e52009fa246811eb190ade762d96c9a13fa197a assets/minecraft/sounds/blocks/ice.json
 a1f97033cfff055a68d75379ad6df0980aa5cfd9 assets/minecraft/sounds/blocks/iron.json
 4fa83ef9d87662935ffc60f516aae9f21b8b8d83 assets/minecraft/sounds/blocks/acacia_object.json
-cbbb9a718009e81464596fb2d3c5e8c8eb95df24 assets/minecraft/sounds/blocks/clay_bricks.json
 8b92e23ae3a555913715522ba6c411543cb66b91 assets/minecraft/sounds/blocks/beehive.json
+cbbb9a718009e81464596fb2d3c5e8c8eb95df24 assets/minecraft/sounds/blocks/clay_bricks.json
 f1dcc98b16616620fcee28ffeea4da7f9a5080e2 assets/minecraft/sounds/blocks/deepslate_iron_ore.json
 74081a77f4c86c2901d4b3f0fdb72866f5b4a0b9 assets/minecraft/sounds/blocks/mangrove_log.json
 0fd9d15355d33812d11057a8035fec15f611a852 assets/minecraft/sounds/blocks/spruce_planks.json
-dea219ef6dd5e6fd0cc2f784b26e0288fc988b5d assets/minecraft/sounds/blocks/spruce_object.json
 6cf6557b876493b90f565f50c3050a14744acd8f assets/minecraft/sounds/blocks/oak_log.json
+dea219ef6dd5e6fd0cc2f784b26e0288fc988b5d assets/minecraft/sounds/blocks/spruce_object.json
 3924b59ce10799c0ca1c007fe3a80fd47e292310 assets/minecraft/sounds/blocks/emerald_block.json
 13d08d773759e6cb712af48e32589fa5dc49aa7a assets/minecraft/sounds/blocks/raw_gold_block.json
 f2418b0008fdb27befb1e457dbc36d9601c85196 assets/minecraft/sounds/blocks/copper_ore.json

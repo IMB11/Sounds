@@ -1,0 +1,8 @@
+{
+  "keys": [
+    "minecraft:bowl"
+  ],
+  "pitch": 1.85,
+  "soundEvent": "minecraft:block.bamboo_sapling.hit",
+  "volume": 0.25
+}

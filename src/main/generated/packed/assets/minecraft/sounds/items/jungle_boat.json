@@ -1,0 +1,9 @@
+{
+  "keys": [
+    "minecraft:jungle_boat",
+    "minecraft:jungle_chest_boat"
+  ],
+  "pitch": 1.75,
+  "soundEvent": "sounds:block.jungle_planks.hit",
+  "volume": 0.75
+}

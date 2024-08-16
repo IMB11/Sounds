@@ -1,0 +1,9 @@
+{
+  "keys": [
+    "minecraft:spruce_boat",
+    "minecraft:spruce_chest_boat"
+  ],
+  "pitch": 1.75,
+  "soundEvent": "sounds:block.spruce_planks.hit",
+  "volume": 0.75
+}

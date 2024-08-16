@@ -1,0 +1,9 @@
+{
+  "keys": [
+    "minecraft:acacia_boat",
+    "minecraft:acacia_chest_boat"
+  ],
+  "pitch": 1.75,
+  "soundEvent": "sounds:block.acacia_planks.hit",
+  "volume": 0.75
+}

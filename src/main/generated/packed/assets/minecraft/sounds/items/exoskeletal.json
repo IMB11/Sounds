@@ -1,0 +1,10 @@
+{
+  "keys": [
+    "minecraft:armadillo_scute",
+    "minecraft:turtle_scute",
+    "minecraft:turtle_egg"
+  ],
+  "pitch": 1.8,
+  "soundEvent": "minecraft:item.armor.equip_turtle",
+  "volume": 0.5
+}

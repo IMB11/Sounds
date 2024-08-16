@@ -12,6 +12,7 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
@@ -55,6 +56,12 @@ public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
         }
         if(dropSoundCooldownTime > System.currentTimeMillis()) return;
         dropSoundCooldownTime = System.currentTimeMillis() + 500L;
+
+        if (MixinStatics.previousAction == SlotActionType.QUICK_MOVE) {
+            MixinStatics.previousAction = null;
+            return;
+        }
+
         SoundsConfig.get(UISoundsConfig.class).itemDropSoundEffect.playDynamicSound(stack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.FALL));
     }
 

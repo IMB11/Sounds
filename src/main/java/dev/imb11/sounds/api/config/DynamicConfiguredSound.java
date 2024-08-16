@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class DynamicConfiguredSound<T, F extends DynamicSoundContext<T>> extends ConfiguredSound {
     public static final Codec<DynamicConfiguredSound> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-
                     Codec.STRING.fieldOf("id").forGetter(ConfiguredSound::getId),
                     Identifier.CODEC.fieldOf("soundEvent").forGetter(sound -> sound.soundEvent.registryKey().getValue()),
                     Codec.BOOL.fieldOf("shouldPlay").forGetter(ConfiguredSound::shouldPlay),
@@ -70,9 +69,9 @@ public class DynamicConfiguredSound<T, F extends DynamicSoundContext<T>> extends
         ArrayList<Option<?>> options = super.addExtraOptions(defaults);
 
         var shouldDynamic = Option.<Boolean>createBuilder()
-                .name(Text.translatable("sounds.config.dynamic.name"))
+                .name(Text.translatable("sounds.config.dynamic.option"))
                 .description(OptionDescription.createBuilder()
-                                .text(Text.translatable("sounds.config.dynamic.description")).build())
+                                .text(Text.translatable("sounds.config.dynamic.option.description")).build())
                 .binding(dynamicDefaults.enableDynamicSounds, () -> this.enableDynamicSounds, (val) -> this.enableDynamicSounds = val)
                 .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).onOffFormatter())
                 .build();

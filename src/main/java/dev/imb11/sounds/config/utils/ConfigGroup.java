@@ -1,6 +1,7 @@
 package dev.imb11.sounds.config.utils;
 
 import com.google.gson.GsonBuilder;
+import dev.imb11.mru.LoaderUtils;
 import dev.imb11.sounds.api.config.TagPair;
 import dev.imb11.sounds.api.config.adapters.ConfiguredSoundTypeAdapter;
 import dev.imb11.sounds.api.config.adapters.DynamicConfiguredSoundTypeAdapter;
@@ -14,7 +15,6 @@ import dev.imb11.sounds.sound.InventoryDynamicConfiguredSound;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -38,7 +38,7 @@ public abstract class ConfigGroup<T extends ConfigGroup> {
                     .serializer(config -> {
                         var builder = GsonConfigSerializerBuilder
                                 .create(config)
-                                .setPath(FabricLoader.getInstance().getConfigDir().resolve("sounds/" + getID() + ".json"))
+                                .setPath(LoaderUtils.getGameDir().resolve("config/").resolve("sounds/" + getID() + ".json"))
                                 .appendGsonBuilder(GsonBuilder::setPrettyPrinting);
 
                         builder = builder.appendGsonBuilder(gson -> {

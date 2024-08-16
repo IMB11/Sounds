@@ -3,6 +3,7 @@ package dev.imb11.sounds.sound.context;
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.context.DynamicSoundContext;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
+import dev.imb11.sounds.mixin.accessors.BlockAccessor;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -16,6 +17,7 @@ import java.lang.reflect.Field;
 
 public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
     private final DynamicSoundHelper.BlockSoundType blockSoundType;
+
     public ItemStackSoundContext() {
         this(DynamicSoundHelper.BlockSoundType.FALL);
     }
@@ -34,7 +36,7 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
 
         if (item instanceof BlockItem blockItem) {
             var block = blockItem.getBlock();
-            fallback = this.blockSoundType.getTransformer().apply(block.getSoundGroup(block.getDefaultState()));
+            fallback = this.blockSoundType.getTransformer().apply(((BlockAccessor)block).invokeGetSoundGroup(block.getDefaultState()));
         }
 
         for (SoundDefinition<Item> definition : DynamicSoundHelper.<Item>getDefinitions("items")) {

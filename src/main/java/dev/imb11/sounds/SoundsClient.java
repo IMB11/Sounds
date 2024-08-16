@@ -1,24 +1,26 @@
 package dev.imb11.sounds;
 
-import com.mineblock11.mru.Utilities;
+import dev.architectury.registry.ReloadListenerRegistry;
+import dev.imb11.mru.API;
+import dev.imb11.mru.LoaderUtils;
+import dev.imb11.mru.packing.Unpacker;
+import dev.imb11.mru.packing.resource.UnpackedResourcePack;
 import dev.imb11.sounds.config.ChatSoundsConfig;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.dynamic.SoundsReloadListener;
 import dev.imb11.sounds.sound.CustomSounds;
 import dev.imb11.sounds.sound.events.PotionEventHelper;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.event.player.UseItemCallback;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.impl.client.keybinding.KeyBindingRegistryImpl;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SoundsClient implements ClientModInitializer {
+import java.nio.file.Path;
+
+public class SoundsClient {
+    public static final Path DEFAULT_PACK_PATH = LoaderUtils.getConfigFolder("sounds").resolve("dynamic_sounds");
     public static final Logger LOGGER = LoggerFactory.getLogger("Sounds");
     public static String[] SUPPORTERS = new String[] {
             "You have no internet.",
@@ -29,12 +31,15 @@ public class SoundsClient implements ClientModInitializer {
         return Identifier.of("sounds", id);
     }
 
-    @Override
-    public void onInitializeClient() {
+    public static void init() {
         SoundsConfig.loadAll();
         DynamicSoundHelper.initialize();
 
-        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SoundsReloadListener());
+        if(System.getProperty("fabric-api.datagen") == null) {
+            Unpacker.register(SoundsClient.class, new UnpackedResourcePack("sounds", DEFAULT_PACK_PATH, "sounds", "This folder contains various dynamic sound definitions, you should consult the documentation site for more information: https://docs.imb11.dev/sounds"));
+        }
+
+        ReloadListenerRegistry.register(ResourceType.CLIENT_RESOURCES, new SoundsReloadListener());
 
         CustomSounds.initialize();
         PotionEventHelper.initialize();
@@ -51,7 +56,8 @@ public class SoundsClient implements ClientModInitializer {
         chatSoundsConfig.save();
 
         try {
-            SUPPORTERS = Utilities.getKofiSupporters();
+            API apiClient = new API();
+            SUPPORTERS = apiClient.getKofiSupporters();
         } catch (Exception ignored) {}
     }
 }

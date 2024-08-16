@@ -6,7 +6,6 @@ import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.WorldSoundsConfig;
 import dev.imb11.sounds.dynamic.TagPairHelper;
 import dev.imb11.sounds.util.BlockAccessor;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

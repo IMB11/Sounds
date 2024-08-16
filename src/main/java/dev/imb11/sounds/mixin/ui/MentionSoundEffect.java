@@ -1,8 +1,8 @@
 package dev.imb11.sounds.mixin.ui;
 
+import dev.imb11.mru.LoaderUtils;
 import dev.imb11.sounds.config.ChatSoundsConfig;
 import dev.imb11.sounds.config.SoundsConfig;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.ChatHud;
@@ -47,11 +47,11 @@ public class MentionSoundEffect {
     @Inject(method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;Lnet/minecraft/client/gui/hud/MessageIndicator;)V", at = @At("HEAD"), cancellable = false)
     public void $mention_recieve_sound_effect(Text message, MessageSignatureData signatureData, MessageIndicator indicator, CallbackInfo ci) {
     /*?}*/
-        if (cooldownPeriod > 0 && (SoundsConfig.get(ChatSoundsConfig.class).enableChatSoundCooldown || FabricLoader.getInstance().isModLoaded("chatpatches"))) {
+        if (cooldownPeriod > 0 && (SoundsConfig.get(ChatSoundsConfig.class).enableChatSoundCooldown || LoaderUtils.isModInstalled("chatpatches"))) {
             return;
         }
 
-        cooldownPeriod = (FabricLoader.getInstance().isModLoaded("chatpatches") ? 0.01f : SoundsConfig.get(ChatSoundsConfig.class).chatSoundCooldown) * 20f;
+        cooldownPeriod = (LoaderUtils.isModInstalled("chatpatches") ? 0.01f : SoundsConfig.get(ChatSoundsConfig.class).chatSoundCooldown) * 20f;
 
         String messageString = message.getString();
 

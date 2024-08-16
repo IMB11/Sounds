@@ -1,10 +1,12 @@
-/*? if >=1.21 {*/
+/*? if >=1.21 && fabric {*/
 package dev.imb11.sounds.loaders.fabric.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.datagen.SoundDefinitionProvider;
+import dev.imb11.sounds.sound.CustomSounds;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.SpawnEggItem;
@@ -114,6 +116,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.NETHERITE_PICKAXE)
                 .addKey(Items.NETHERITE_SHOVEL)
                 .addKey(Items.NETHERITE_SWORD)
+                .addKey(Items.MACE)
                 .addKey(Items.NETHERITE_HELMET)
                 .addKey(Items.NETHERITE_CHESTPLATE)
                 .addKey(Items.NETHERITE_LEGGINGS)
@@ -126,13 +129,44 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.LEATHER_LEGGINGS)
                 .addKey(Items.LEATHER_BOOTS)
                 .addKey(Items.LEATHER)
+                .addKey(Items.SADDLE)
                 .addKey(Items.BRUSH)
+                .addKey(Items.WOLF_ARMOR)
                 .addKey(Items.RABBIT_HIDE));
+
+        provider.accept("exoskeletal", create(SoundEvents.ITEM_ARMOR_EQUIP_TURTLE)
+                .addKey(Items.ARMADILLO_SCUTE)
+                .addKey(Items.TURTLE_SCUTE)
+                .addKey(Items.TURTLE_EGG)
+                .setPitch(1.8f)
+                .setVolume(0.5f));
 
         provider.accept("enchanting_books", create(SoundEvents.BLOCK_END_PORTAL_FRAME_FILL)
                 .addKey(Items.ENCHANTED_BOOK)
+                .addKey(Items.EXPERIENCE_BOTTLE)
                 .setVolume(0.2f)
                 .setPitch(0.01f));
+
+        provider.accept("crop_food", create(SoundEvents.BLOCK_CROP_BREAK)
+                .addKey(ConventionalItemTags.VEGETABLES_FOODS)
+                .addKey(ConventionalItemTags.FRUITS_FOODS)
+                .addKey(ConventionalItemTags.BERRIES_FOODS)
+                .addKey(ConventionalItemTags.BREADS_FOODS)
+                .setVolume(1.0f)
+                .setPitch(1.76f));
+
+        provider.accept("bowl_food", create(SoundEvents.ENTITY_MOOSHROOM_SUSPICIOUS_MILK)
+                .addKey(ConventionalItemTags.SOUPS_FOODS)
+                .setVolume(0.5f)
+                .setPitch(1.58f));
+
+        provider.accept("meat_and_fish", create(SoundEvents.ENTITY_PUFFER_FISH_FLOP)
+                 .addKey(ConventionalItemTags.RAW_FISHES_FOODS)
+                .addKey(ConventionalItemTags.RAW_MEATS_FOODS)
+                .addKey(ConventionalItemTags.COOKED_FISHES_FOODS)
+                .addKey(ConventionalItemTags.COOKED_MEATS_FOODS)
+                .setPitch(1.8f)
+                .setVolume(0.20f));
 
         provider.accept("elytra", create(SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA)
                 .addKey(Items.ELYTRA));
@@ -175,6 +209,75 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.LAPIS_LAZULI)
                 .addKey(Items.DIAMOND));
 
+        provider.accept("bowl", create(SoundEvents.BLOCK_BAMBOO_SAPLING_HIT)
+                .addKey(Items.BOWL)
+                .setPitch(1.85f)
+                .setVolume(0.25f));
+
+        provider.accept("oak_boat", create(SoundEvents.BLOCK_WOOD_HIT)
+                .addKey(Items.OAK_BOAT)
+                .addKey(Items.OAK_CHEST_BOAT)
+                .setPitch(1.75f)
+                .setVolume(0.75f));
+
+        provider.accept("birch_boat", create(CustomSounds.BLOCK_BIRCH_PLANKS_HIT.get())
+                .addKey(Items.BIRCH_BOAT)
+                .addKey(Items.BIRCH_CHEST_BOAT)
+                .setPitch(1.75f)
+                .setVolume(0.75f));
+
+        provider.accept("spruce_boat", create(CustomSounds.BLOCK_SPRUCE_PLANKS_HIT.get())
+                .addKey(Items.SPRUCE_BOAT)
+                .addKey(Items.SPRUCE_CHEST_BOAT)
+                .setPitch(1.75f)
+                .setVolume(0.75f));
+
+        provider.accept("jungle_boat", create(CustomSounds.BLOCK_JUNGLE_PLANKS_HIT.get())
+                .addKey(Items.JUNGLE_BOAT)
+                .addKey(Items.JUNGLE_CHEST_BOAT)
+                .setPitch(1.75f)
+                .setVolume(0.75f));
+
+        provider.accept("acacia_boat", create(CustomSounds.BLOCK_ACACIA_PLANKS_HIT.get())
+                .addKey(Items.ACACIA_BOAT)
+                .addKey(Items.ACACIA_CHEST_BOAT)
+                .setPitch(1.75f)
+                .setVolume(0.75f));
+
+        provider.accept("dark_oak_boat", create(SoundEvents.BLOCK_WOOD_HIT)
+                .addKey(Items.DARK_OAK_BOAT)
+                .addKey(Items.DARK_OAK_CHEST_BOAT)
+                .setPitch(1.75f)
+                .setVolume(0.75f));
+
+        provider.accept("cherry_boat", create(SoundEvents.BLOCK_WOOD_HIT)
+                .addKey(Items.CHERRY_BOAT)
+                .addKey(Items.CHERRY_CHEST_BOAT)
+                .setPitch(1.75f)
+                .setVolume(0.75f));
+
+        provider.accept("mangrove_boat", create(CustomSounds.BLOCK_MANGROVE_PLANKS_HIT.get())
+                .addKey(Items.MANGROVE_BOAT)
+                .addKey(Items.MANGROVE_CHEST_BOAT)
+                .setPitch(1.75f)
+                .setVolume(0.75f));
+
+        provider.accept("bamboo_raft", create(SoundEvents.BLOCK_BAMBOO_WOOD_HIT)
+                .addKey(Items.BAMBOO_RAFT)
+                .addKey(Items.BAMBOO_CHEST_RAFT)
+                .setPitch(1.75f)
+                .setVolume(0.75f));
+
+        provider.accept("minecarts", create(SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON)
+                .addKey(Items.MINECART)
+                .addKey(Items.CHEST_MINECART)
+                .addKey(Items.FURNACE_MINECART)
+                .addKey(Items.TNT_MINECART)
+                .addKey(Items.HOPPER_MINECART)
+                .addKey(Items.COMMAND_BLOCK_MINECART)
+                .setPitch(1.75f)
+                .setVolume(0.75f));
+
         provider.accept("dirty_metals", create(SoundEvents.BLOCK_GRAVEL_HIT)
                 .addKey(Items.COAL)
                 .addKey(Items.CHARCOAL)
@@ -212,6 +315,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.POTION)
                 .addKey(Items.DRAGON_BREATH)
                 .addKey(Items.SPLASH_POTION)
+                .addKey(Items.OMINOUS_BOTTLE)
                 .addKey(Items.LINGERING_POTION));
 
         provider.accept("wet_mob_drops", create(SoundEvents.BLOCK_SLIME_BLOCK_HIT)
@@ -229,6 +333,8 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
 
         provider.accept("sculk", create(SoundEvents.BLOCK_SCULK_VEIN_FALL)
                 .addKey(Items.ECHO_SHARD));
+
+
 
         provider.accept("bones", create(SoundEvents.ENTITY_SKELETON_AMBIENT)
                 .addKey(Items.BONE)

@@ -1,38 +1,39 @@
 package dev.imb11.sounds.dynamic;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.JsonOps;
-import dev.imb11.sounds.SoundsClient;
+import dev.imb11.mru.LoaderUtils;
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.config.TagPair;
-import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceReloader;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.profiler.Profiler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
-public class SoundsReloadListener implements SimpleSynchronousResourceReloadListener {
+public class SoundsReloadListener implements ResourceReloader {
     private static final Logger LOGGER = LoggerFactory.getLogger(SoundsReloadListener.class);
     private static final Gson GSON = new Gson();
 
-    @Override
-    public Identifier getFabricId() {
-        return SoundsClient.id("sounds_reload_listener");
-    }
-
-    @Override
     public void reload(ResourceManager manager) {
         handleDynamicSounds(manager);
 
@@ -115,5 +116,14 @@ public class SoundsReloadListener implements SimpleSynchronousResourceReloadList
                 }
             }
         });
+    }
+
+    @Override
+    public CompletableFuture<Void> reload(Synchronizer synchronizer, ResourceManager manager, Profiler prepareProfiler, Profiler applyProfiler, Executor prepareExecutor, Executor applyExecutor) {
+        return CompletableFuture.supplyAsync(() -> {
+            this.reload(manager);
+            synchronizer.whenPrepared(null);
+            return null;
+        }, applyExecutor);
     }
 }

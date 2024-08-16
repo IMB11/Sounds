@@ -3,7 +3,6 @@ package dev.imb11.sounds.config;
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.api.config.ConfiguredSound;
 import dev.imb11.sounds.api.config.DynamicConfiguredSound;
-import dev.imb11.sounds.config.utils.ConfigUtil;
 import dev.imb11.sounds.sound.HotbarDynamicConfiguredSound;
 import dev.imb11.sounds.sound.InventoryDynamicConfiguredSound;
 import dev.imb11.sounds.sound.context.ScreenHandlerSoundContext;
@@ -17,6 +16,8 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+
+import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 
 public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<UISoundsConfig> {
     @SerialEntry
@@ -82,7 +83,7 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
         builder.title(Text.of("UI Sounds"));
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.ui.interface"))
-                .option(ConfigUtil.create(defaults.ignoreEmptyHotbarSlots, v -> config.ignoreEmptyHotbarSlots = v, () -> config.ignoreEmptyHotbarSlots, "sounds.config.ignoreEmptyHotbarSlots"))
+                        .option(HELPER.get("ignoreEmptyHotbarSlots", defaults.ignoreEmptyHotbarSlots, () -> config.ignoreEmptyHotbarSlots, v -> config.ignoreEmptyHotbarSlots = v))
                 .group(config.hotbarScrollSoundEffect.getOptionGroup(defaults.hotbarScrollSoundEffect))
                 .group(config.hotbarPickSoundEffect.getOptionGroup(defaults.hotbarPickSoundEffect))
                 .group(config.inventoryOpenSoundEffect.getOptionGroup(defaults.inventoryOpenSoundEffect))
@@ -92,13 +93,9 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
                 .build());
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.ui.item_management"))
-                .option(ConfigUtil.create(defaults.ignoreEmptyInventorySlots, v -> config.ignoreEmptyInventorySlots = v, () -> config.ignoreEmptyInventorySlots, "sounds.config.ignoreEmptyInventorySlots"))
-                .option(ConfigUtil.create(defaults.enableItemSoundCooldown, v -> config.enableItemSoundCooldown = v, () -> config.enableItemSoundCooldown, "sounds.config.enableItemSoundCooldown"))
-                .option(Option.<Float>createBuilder()
-                        .name(Text.translatable("sounds.config.itemSoundCooldown.name"))
-                        .description(OptionDescription.of(Text.translatable("sounds.config.itemSoundCooldown.description")))
-                        .binding(defaults.itemSoundCooldown, () -> config.itemSoundCooldown, (value) -> config.itemSoundCooldown = value)
-                        .controller(opt -> FloatFieldControllerBuilder.create(opt).min(0.0f)).build())
+                .option(HELPER.get("ignoreEmptyInventorySlots", defaults.ignoreEmptyInventorySlots, () -> config.ignoreEmptyInventorySlots, v -> config.ignoreEmptyInventorySlots = v))
+                .option(HELPER.get("enableItemSoundCooldown", defaults.enableItemSoundCooldown, () -> config.enableItemSoundCooldown, v -> config.enableItemSoundCooldown = v))
+                .option(HELPER.getField("itemSoundCooldown", 0.0f, Float.MAX_VALUE, defaults.itemSoundCooldown, () -> config.itemSoundCooldown, v -> config.itemSoundCooldown = v))
                 .group(config.itemDropSoundEffect.getOptionGroup(defaults.itemDropSoundEffect))
                 .group(config.itemCopySoundEffect.getOptionGroup(defaults.itemCopySoundEffect))
                 .group(config.itemDeleteSoundEffect.getOptionGroup(defaults.itemDeleteSoundEffect))

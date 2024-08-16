@@ -14,16 +14,15 @@
   "license": "ARR",
   "icon": "assets/sounds/icon.png",
   "environment": "client",
-  "accessWidener": "aw/${minecraft_version}.accesswidener",
   "entrypoints": {
     "client": [
-      "dev.imb11.sounds.SoundsClient"
+      "dev.imb11.sounds.loaders.fabric.SoundsFabric"
     ],
     "modmenu": [
-      "dev.imb11.sounds.compat.ModMenuCompat"
+      "dev.imb11.sounds.loaders.fabric.ModMenuCompat"
     ],
     "fabric-datagen": [
-      "dev.imb11.sounds.datagen.SoundsDatagenEntrypoint"
+      "dev.imb11.sounds.loaders.fabric.datagen.SoundsDatagenEntrypoint"
     ]
   },
   "mixins": [
@@ -33,7 +32,6 @@
     "fabricloader": "*",
     "fabric": "*",
     "mru": "~${target_mru}",
-    "yet_another_config_lib_v3": ">=${target_yacl}",
     "minecraft": "${target_minecraft}"
   }
 }

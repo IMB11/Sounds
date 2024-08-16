@@ -1,8 +1,13 @@
 plugins {
-    id 'fabric-loom' version '1.7-SNAPSHOT'
+    id "maven-publish"
+    id "dev.architectury.loom" version "1.7-SNAPSHOT"
 }
 
-version =  property("mod.version") + "+" + stonecutter.current.version
+def loader = property("loom.platform")
+def isFabric = loader == "fabric"
+def mcVersion = property("deps.minecraft")
+
+version = property("mod.version") + "+" + mcVersion + "+" + loader
 group = "dev.imb11"
 
 base {
@@ -11,13 +16,19 @@ base {
 
 repositories {
     mavenCentral()
+    maven { url "https://maven.neoforged.net/releases/" }
     mavenLocal()
-    mavenCentral()
-    maven { url "https://maven.terraformersmc.com/releases" }
-    maven { url 'https://maven.isxander.dev/releases' }
-    maven { url "https://jitpack.io" }
+    maven { url = "https://mvn.devos.one/snapshots/" }
+    maven { url 'https://maven.wispforest.io' }
+    maven { url 'https://maven.imb11.dev/releases' }
+    maven { url "https://maven.neoforged.net/releases/" }
+    maven {
+        name 'Xander Maven'
+        url 'https://maven.isxander.dev/releases'
+    }
     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-    maven { url "https://maven.imb11.dev/releases" }
+    maven { url "https://maven.quiltmc.org/repository/release" }
+    maven { url 'https://maven.terraformersmc.com/releases' }
     exclusiveContent {
         forRepository {
             maven {
@@ -31,21 +42,61 @@ repositories {
     }
 }
 
-dependencies {
-    minecraft "com.mojang:minecraft:${stonecutter.current.version}"
-    mappings "net.fabricmc:yarn:${property('deps.yarn')}:v2"
-
-    modImplementation "net.fabricmc:fabric-loader:+"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fabric_api')}"
-
-    modImplementation include("dev.isxander:yet-another-config-lib:${property("deps.yacl")}") {
-        exclude group: "net.fabricmc.fabric-api", module: "fabric-api"
+afterEvaluate {
+    stonecutter {
+        def platform = property("loom.platform")
+        stonecutter.const("fabric", platform == "fabric")
+        stonecutter.const("forge", platform == "forge")
+        stonecutter.const("neoforge", platform == "neoforge")
     }
-    modLocalRuntime modCompileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
-    modImplementation "dev.imb11:mru:${property("deps.mru")}+${stonecutter.current.version}+fabric"
+}
 
-    modCompileOnly "dev.emi:emi-fabric:${property("compile.emi")}"
-    modCompileOnly ("maven.modrinth:inventorio:${property("compile.inventorio")}")
+dependencies {
+    minecraft "com.mojang:minecraft:${property("deps.minecraft")}"
+    mappings(loom.layered {
+        mappings("net.fabricmc:yarn:${property("deps.yarn")}:v2")
+        if (stonecutter.eval(mcVersion, ">=1.20.6")) {
+            mappings("dev.architectury:yarn-mappings-patch-neoforge:${mcVersion}+build.4")
+        }
+    })
+
+    modImplementation(include("dev.architectury:architectury-${loader}:${property("deps.arch_api")}"))
+    modImplementation "dev.imb11:mru:${property("deps.mru")}+${mcVersion}+${loader}"
+
+    modCompileOnly "dev.emi:emi-${loader}:${property("compile.emi")}"
+    modCompileOnly "maven.modrinth:inventorio:${property("compile.inventorio")}"
+
+    if (isFabric) {
+        modImplementation "net.fabricmc:fabric-loader:+"
+        modImplementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fabric_api')}"
+
+        modImplementation(include("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-${loader}"))
+
+        modLocalRuntime modCompileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
+        include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.5.0-beta.2")))
+    } else {
+        modImplementation(include("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-${loader}"))
+
+        "forgeRuntimeLibrary"(implementation include("com.twelvemonkeys.imageio:imageio-core:3.10.0"))
+        "forgeRuntimeLibrary"(implementation include("com.twelvemonkeys.imageio:imageio-webp:3.10.0"))
+        "forgeRuntimeLibrary"(implementation include("com.twelvemonkeys.imageio:imageio-metadata:3.10.0"))
+        "forgeRuntimeLibrary"(implementation include("com.twelvemonkeys.common:common-lang:3.10.0"))
+        "forgeRuntimeLibrary"(implementation include("com.twelvemonkeys.common:common-io:3.10.0"))
+        "forgeRuntimeLibrary"(implementation include("com.twelvemonkeys.common:common-image:3.10.0"))
+        "forgeRuntimeLibrary"(implementation include("org.quiltmc.parsers:json:0.2.1"))
+        "forgeRuntimeLibrary"(implementation include("org.quiltmc.parsers:gson:0.2.1"))
+
+        if (loader == "forge") {
+            "forge"("net.minecraftforge:forge:${mcVersion}-${property("deps.fml")}")
+
+            compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0-beta.2"))
+            implementation(include("io.github.llamalad7:mixinextras-forge:0.5.0-beta.2"))
+        } else {
+            "neoForge"("net.neoforged:neoforge:${property("deps.neoforge")}")
+            include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-neoforge:0.5.0-beta.2")))
+        }
+    }
+
 }
 
 if (stonecutter.current.active) { // run configs for non-active version would be invalid
@@ -69,40 +120,78 @@ sourceSets {
 
 
 loom {
-    runs {
-        datagenClient {
-            client()
-            name "Data Generation Client"
-            vmArg "-Dfabric-api.datagen"
-            vmArg "-Dfabric-api.datagen.output-dir=" + getRootDir().toPath().resolve("src/main/generated")
-            vmArg "-Dfabric-api.datagen.modid=sounds"
+    if (loader == "fabric" && stonecutter.eval(stonecutter.current.version, ">=1.21")) {
+        runs {
+            datagenClient {
+                client()
+                name "Data Generation Client"
+                vmArg "-Dfabric-api.datagen"
+                vmArg "-Dfabric-api.datagen.output-dir=" + getRootDir().toPath().resolve("src/main/generated")
+                vmArg "-Dfabric-api.datagen.modid=sounds"
 
-            ideConfigGenerated = false
-            runDir "build/datagen"
+                ideConfigGenerated = false
+                runDir "build/datagen"
+            }
         }
     }
 
-    accessWidenerPath = getRootProject().file("src/main/resources/aw/" + stonecutter.current.version + ".accesswidener")
+    if (loader == "forge") {
+        forge {
+            convertAccessWideners = true
+            mixinConfig "mru.mixins.json"
+        }
+    }
 }
 
 java {
-//    withSourcesJar()
     var version = stonecutter.eval(stonecutter.current.version, ">1.20.4") ? JavaVersion.VERSION_21 : JavaVersion.VERSION_17
 
     sourceCompatibility = version
     targetCompatibility = version
 }
 
+tasks.register('buildAndCollect', Copy) {
+    group = "build"
+    from(tasks.remapJar.archiveFile)
+    into(rootProject.layout.buildDirectory.file("libs"))
+    dependsOn("build")
+}
+
+
 processResources {
-    filesMatching('fabric.mod.json') {
-        expand 'mod_version': version,
-                'target_minecraft': project.property('mod.target'),
-                'target_yacl': project.property('deps.yacl'),
-                'target_mru': project.property('deps.mru'),
-                'minecraft_version': stonecutter.current.version
+    def props = [
+            mod_version: version,
+            target_minecraft: project.property("mod.target"),
+            target_mru: project.property("deps.mru") + "+" + mcVersion + "+" + loader
+    ]
+
+    if (loader == "forge" || loader == "neoforge") {
+        props.target_loader = project.property("fml.target")
+        props.loader = loader
+        props.mandatory_inclusion_field = (loader == "forge") ? "mandatory = true" : "type = \"required\""
     }
 
-//    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+//    if (loader == "fabric") {
+//        props.target_architectury = project.property("deps.arch_api")
+//    }
+
+    props.each { key, value -> inputs.property(key, value) }
+
+    if (loader == "fabric") {
+        filesMatching("fabric.mod.json") { expand(props) }
+        exclude(["META-INF/mods.toml"])
+    }
+
+    if (loader == "forge" || loader == "neoforge") {
+        filesMatching(["META-INF/mods.toml", "META-INF/neoforge.mods.toml"]) { expand(props) }
+        exclude("fabric.mod.json")
+
+        if (stonecutter.eval(mcVersion, ">1.20.4")) {
+            exclude("META-INF/mods.toml")
+        } else {
+            exclude("META-INF/neoforge.mods.toml")
+        }
+    }
 }
 
 jar {

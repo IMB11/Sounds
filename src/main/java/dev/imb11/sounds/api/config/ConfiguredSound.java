@@ -120,7 +120,7 @@ public class ConfiguredSound {
     public ButtonOption getPreviewButton() {
         return ButtonOption.createBuilder()
                 .name(Text.translatable("sounds.config.preview.name", ""))
-                .description(OptionDescription.of(Text.translatable("sounds.config.preview.description")))
+                .description(OptionDescription.of(Text.translatable("sounds.config.preview.option.description")))
                 .action((a, b) -> playPreviewSound())
                 .build();
     }
@@ -132,9 +132,9 @@ public class ConfiguredSound {
         allOptions.addAll(extraOptions);
 
         var shouldPlay = Option.<Boolean>createBuilder()
-                .name(Text.translatable("sounds.config.shouldPlay.name"))
+                .name(Text.translatable("sounds.config.shouldPlay.option"))
                 .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sounds.config.shouldPlay.description")).build())
+                        .text(Text.translatable("sounds.config.shouldPlay.option.description")).build())
                 .binding(defaults.enabled, () -> this.enabled, (val) -> this.enabled = val)
                 .listener((opt, val) -> {
                     // Disable/Enable all options when toggled.
@@ -145,9 +145,9 @@ public class ConfiguredSound {
 
         return OptionGroup
                 .createBuilder()
-                .name(Text.translatable("sounds.config." + id + ".name").formatted(Formatting.UNDERLINE))
+                .name(Text.translatable("sounds.config." + id + ".option").formatted(Formatting.UNDERLINE))
                 .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sounds.config." + id + ".description")).build())
+                        .text(Text.translatable("sounds.config." + id + ".option.description")).build())
                 .option(getPreviewButton())
                 .option(shouldPlay)
                 .options(allOptions)

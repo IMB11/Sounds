@@ -1,4 +1,4 @@
-/*? if >=1.21 {*/
+/*? if >=1.21 && fabric {*/
 package dev.imb11.sounds.loaders.fabric.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;

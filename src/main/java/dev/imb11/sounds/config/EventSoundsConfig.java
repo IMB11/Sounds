@@ -2,7 +2,6 @@ package dev.imb11.sounds.config;
 
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.api.config.ConfiguredSound;
-import dev.imb11.sounds.config.utils.ConfigUtil;
 import dev.imb11.sounds.sound.CustomSounds;
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
@@ -10,6 +9,8 @@ import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+
+import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 
 public class EventSoundsConfig extends ConfigGroup<EventSoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<EventSoundsConfig> {
     // == STATUS EFFECTS == //
@@ -55,7 +56,7 @@ public class EventSoundsConfig extends ConfigGroup<EventSoundsConfig> implements
 
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.events.statusEffects"))
-                .option(ConfigUtil.create(defaults.ignoreSilencedStatusEffects, v -> config.ignoreSilencedStatusEffects = v, () -> config.ignoreSilencedStatusEffects, "sounds.config.events.ignoreSilencedStatusEffects"))
+                .option(HELPER.get("ignoreSilencedStatusEffects", config.ignoreSilencedStatusEffects, () -> config.ignoreSilencedStatusEffects, v -> config.ignoreSilencedStatusEffects = v))
                 .group(config.positiveStatusEffectGainSoundEffect.getOptionGroup(defaults.positiveStatusEffectGainSoundEffect))
                 .group(config.positiveStatusEffectLoseSoundEffect.getOptionGroup(defaults.positiveStatusEffectLoseSoundEffect))
                 .group(config.negativeStatusEffectGainSoundEffect.getOptionGroup(defaults.negativeStatusEffectGainSoundEffect))

@@ -61,7 +61,9 @@ dependencies {
     })
 
     modImplementation(include("dev.architectury:architectury-${loader}:${property("deps.arch_api")}"))
-    modImplementation "dev.imb11:mru:${property("deps.mru")}+${mcVersion}+${loader}"
+    modImplementation ("dev.imb11:mru:${property("deps.mru")}+${mcVersion}+${loader}", {
+        transitive = false
+    })
 
     modCompileOnly "dev.emi:emi-${loader}:${property("compile.emi")}"
     modCompileOnly "maven.modrinth:inventorio:${property("compile.inventorio")}"
@@ -75,7 +77,9 @@ dependencies {
         modLocalRuntime modCompileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
         include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.5.0-beta.2")))
     } else {
-        modImplementation(include("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-${loader}"))
+        modImplementation(include("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-${loader}"), {
+            transitive = false
+        })
 
         "forgeRuntimeLibrary"(implementation include("com.twelvemonkeys.imageio:imageio-core:3.10.0"))
         "forgeRuntimeLibrary"(implementation include("com.twelvemonkeys.imageio:imageio-webp:3.10.0"))
@@ -138,9 +142,10 @@ loom {
     if (loader == "forge") {
         forge {
             convertAccessWideners = true
-            mixinConfig "mru.mixins.json"
+            mixinConfig "sounds.mixins.json"
         }
     }
+    accessWidenerPath = getRootProject().file("src/main/resources/sounds.accesswidener")
 }
 
 java {
@@ -191,6 +196,25 @@ processResources {
         } else {
             exclude("META-INF/neoforge.mods.toml")
         }
+    }
+
+    // expand ${pack_format} in pack.mcmeta
+
+
+    int packFormat;
+    switch (mcVersion) {
+        case "1.20.1":
+            packFormat = 15;
+            break;
+        case "1.21":
+            packFormat = 34;
+            break;
+        default:
+            throw new IllegalArgumentException("Unsupported Minecraft version: " + mcVersion);
+    }
+
+    filesMatching("pack.mcmeta") {
+        expand("pack_format": packFormat)
     }
 }
 

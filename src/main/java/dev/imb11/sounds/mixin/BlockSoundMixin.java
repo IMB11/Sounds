@@ -16,6 +16,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,6 +28,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(AbstractBlock.class)
 /*?} else {*/
 /*@Mixin(Block.class)
+@Debug(export = true)
 *//*?}*/
 public abstract class BlockSoundMixin implements BlockAccessor {
     @Unique
@@ -57,6 +59,7 @@ public abstract class BlockSoundMixin implements BlockAccessor {
     @Inject(method = "getSoundGroup", at = @At("HEAD"), cancellable = true)
     public void $manageCustomSounds(BlockState state, CallbackInfoReturnable<BlockSoundGroup> cir) {
 //        if(MinecraftClient.getInstance().world == null) return;
+        SoundsClient.LOGGER.info("Getting sound group for " + state.getBlock().getTranslationKey());
         try {
             if(!hasFetched) {
                 sounds$prepareTagPair(Registries.BLOCK.getId(state.getBlock()));

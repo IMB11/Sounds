@@ -1,6 +1,5 @@
 package dev.imb11.sounds.gui;
 
-import dev.imb11.sounds.mixin.accessors.AnimatedDynamicTextureImageAccessor;
 import dev.isxander.yacl3.gui.image.ImageRendererManager;
 import dev.isxander.yacl3.gui.image.impl.AnimatedDynamicTextureImage;
 import net.minecraft.client.MinecraftClient;
@@ -13,6 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.MathHelper;
 
+import java.lang.reflect.Field;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
@@ -65,16 +65,30 @@ public class ImageButtonWidget extends ClickableWidget {
                 var contentImage = image.get();
                 if (contentImage != null) {
 
-                    // Scale the image so that the image height is the same as the button height.
-                    float neededWidth = ((AnimatedDynamicTextureImageAccessor) contentImage).getFrameWidth() * ((float) this.height / ((AnimatedDynamicTextureImageAccessor) contentImage).getFrameHeight());
+                    // Using reflection, get value of contentImage.frameWidth and frameHeight
+                    try {
+                        Field frameWidthField = contentImage.getClass().getDeclaredField("frameWidth");
+                        frameWidthField.setAccessible(true);
+                        int frameWidth = frameWidthField.getInt(contentImage);
 
-                    // Scale the image to fit within the width and height of the button.
-                    context.getMatrices().push();
-                    // gl bilinear scaling.
-                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-                    contentImage.render(context, getX(), getY(), (int) Math.max(neededWidth, this.width), delta);
-                    context.getMatrices().pop();
+                        Field frameHeightField = contentImage.getClass().getDeclaredField("frameHeight");
+                        frameHeightField.setAccessible(true);
+                        int frameHeight = frameHeightField.getInt(contentImage);
+
+                        // Use frameWidth and frameHeight as needed
+                        // Scale the image so that the image height is the same as the button height.
+                        float neededWidth = frameWidth * ((float) this.height / frameHeight);
+
+                        // Scale the image to fit within the width and height of the button.
+                        context.getMatrices().push();
+                        // gl bilinear scaling.
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                        contentImage.render(context, getX(), getY(), (int) Math.max(neededWidth, this.width), delta);
+                        context.getMatrices().pop();
+                    } catch (NoSuchFieldException | IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
                 }
             } catch (InterruptedException | ExecutionException ignored) {
             }

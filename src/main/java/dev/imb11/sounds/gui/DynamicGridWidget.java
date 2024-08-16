@@ -137,7 +137,7 @@ public class DynamicGridWidget extends WrapperWidget {
             /*? >=1.21 {*/
             child.widget().setHeight(thisCellHeight - padding * 2);
             /*?} else {*/
-            /*((dev.imb11.sounds.mixin.accessors.ClickableWidgetAccessor) child.widget()).setHeight_1_20_1(thisCellHeight - padding * 2);
+            /*child.widget().height = (thisCellHeight - padding * 2);
             *//*?}*/
 
 

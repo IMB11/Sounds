@@ -13,6 +13,7 @@
   },
   "license": "ARR",
   "icon": "assets/sounds/icon.png",
+  "accessWidener": "sounds.accesswidener",
   "environment": "client",
   "entrypoints": {
     "client": [

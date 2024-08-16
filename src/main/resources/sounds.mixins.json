@@ -10,8 +10,6 @@
         "BlockSoundMixin",
         "SoundsOptionsScreenMixin",
         "TitleScreenWidget",
-        "accessors.AnimatedDynamicTextureImageAccessor",
-        "accessors.ClickableWidgetAccessor",
         "accessors.BlockAccessor",
         "compat.EmiSoundEffects",
         "compat.InventiveInventoryCompatMixin",

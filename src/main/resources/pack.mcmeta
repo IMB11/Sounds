@@ -1,0 +1,6 @@
+{
+    "pack": {
+        "description": "Library mod providing compatability utilities and other stuff.",
+        "pack_format": ${pack_format}
+    }
+}

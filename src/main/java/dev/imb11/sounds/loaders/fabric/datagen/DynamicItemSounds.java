@@ -114,6 +114,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.NETHERITE_PICKAXE)
                 .addKey(Items.NETHERITE_SHOVEL)
                 .addKey(Items.NETHERITE_SWORD)
+                .addKey(Items.MACE)
                 .addKey(Items.NETHERITE_HELMET)
                 .addKey(Items.NETHERITE_CHESTPLATE)
                 .addKey(Items.NETHERITE_LEGGINGS)
@@ -127,10 +128,12 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.LEATHER_BOOTS)
                 .addKey(Items.LEATHER)
                 .addKey(Items.BRUSH)
+                .addKey(Items.WOLF_ARMOR)
                 .addKey(Items.RABBIT_HIDE));
 
         provider.accept("enchanting_books", create(SoundEvents.BLOCK_END_PORTAL_FRAME_FILL)
                 .addKey(Items.ENCHANTED_BOOK)
+                .addKey(Items.EXPERIENCE_BOTTLE)
                 .setVolume(0.2f)
                 .setPitch(0.01f));
 
@@ -212,6 +215,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.POTION)
                 .addKey(Items.DRAGON_BREATH)
                 .addKey(Items.SPLASH_POTION)
+                .addKey(Items.OMINOUS_BOTTLE)
                 .addKey(Items.LINGERING_POTION));
 
         provider.accept("wet_mob_drops", create(SoundEvents.BLOCK_SLIME_BLOCK_HIT)

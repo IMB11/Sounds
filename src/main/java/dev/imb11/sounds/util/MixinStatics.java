@@ -1,4 +1,4 @@
-package dev.imb11.sounds;
+package dev.imb11.sounds.util;
 
 import net.minecraft.screen.slot.Slot;
 import org.lwjgl.glfw.GLFW;

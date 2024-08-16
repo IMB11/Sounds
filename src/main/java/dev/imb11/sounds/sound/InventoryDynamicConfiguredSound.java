@@ -1,6 +1,6 @@
 package dev.imb11.sounds.sound;
 
-import dev.imb11.sounds.MixinStatics;
+import dev.imb11.sounds.util.MixinStatics;
 import dev.imb11.sounds.api.config.DynamicConfiguredSound;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;

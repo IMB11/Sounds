@@ -1,0 +1,8 @@
+{
+  "keys": [
+    "#c:foods/soups"
+  ],
+  "pitch": 1.58,
+  "soundEvent": "minecraft:entity.mooshroom.suspicious_milk",
+  "volume": 0.5
+}

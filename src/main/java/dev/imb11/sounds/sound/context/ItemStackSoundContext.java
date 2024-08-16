@@ -17,6 +17,7 @@ import java.lang.reflect.Field;
 
 public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
     private final DynamicSoundHelper.BlockSoundType blockSoundType;
+
     public ItemStackSoundContext() {
         this(DynamicSoundHelper.BlockSoundType.FALL);
     }

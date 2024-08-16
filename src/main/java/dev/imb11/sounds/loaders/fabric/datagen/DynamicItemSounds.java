@@ -137,6 +137,27 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .setVolume(0.2f)
                 .setPitch(0.01f));
 
+        provider.accept("crop_food", create(SoundEvents.BLOCK_CROP_BREAK)
+                .addKey(ConventionalItemTags.VEGETABLES_FOODS)
+                .addKey(ConventionalItemTags.FRUITS_FOODS)
+                .addKey(ConventionalItemTags.BERRIES_FOODS)
+                .addKey(ConventionalItemTags.BREADS_FOODS)
+                .setVolume(1.0f)
+                .setPitch(1.76f));
+
+        provider.accept("bowl_food", create(SoundEvents.ENTITY_MOOSHROOM_SUSPICIOUS_MILK)
+                .addKey(ConventionalItemTags.SOUPS_FOODS)
+                .setVolume(0.5f)
+                .setPitch(1.58f));
+
+        provider.accept("meat_and_fish", create(SoundEvents.ENTITY_PUFFER_FISH_FLOP)
+                 .addKey(ConventionalItemTags.RAW_FISHES_FOODS)
+                .addKey(ConventionalItemTags.RAW_MEATS_FOODS)
+                .addKey(ConventionalItemTags.COOKED_FISHES_FOODS)
+                .addKey(ConventionalItemTags.COOKED_MEATS_FOODS)
+                .setPitch(1.8f)
+                .setVolume(0.20f));
+
         provider.accept("elytra", create(SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA)
                 .addKey(Items.ELYTRA));
 

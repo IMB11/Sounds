@@ -146,6 +146,10 @@ loom {
         }
     }
     accessWidenerPath = getRootProject().file("src/main/resources/sounds.accesswidener")
+
+    mixin {
+        useLegacyMixinAp = true
+    }
 }
 
 java {

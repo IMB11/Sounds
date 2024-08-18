@@ -148,6 +148,7 @@ loom {
     accessWidenerPath = getRootProject().file("src/main/resources/sounds.accesswidener")
 
     mixin {
+        // TODO: Remove this when TinyRemapper gains MixinExtras beta Support!
         useLegacyMixinAp = true
     }
 }

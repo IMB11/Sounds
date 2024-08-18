@@ -16,7 +16,7 @@
         "compat.InventorioCompatMixin",
         "ui.AnvilTypingEffect",
         "ui.CreativeInventorySoundEffects",
-        "ui.CreativeInventorySoundEffects$CreativeScreenHandlerMixin",
+        "ui.CreativeScreenHandlerMixin",
         "ui.HotbarSoundEffects",
         "ui.ImageRenderManagerMixin",
         "ui.ItemDragSoundEffect",
@@ -39,5 +39,6 @@
     ],
     "injectors": {
         "defaultRequire": 1
-  }
+    },
+    "refmap": "Sounds-${version}-refmap.json"
 }

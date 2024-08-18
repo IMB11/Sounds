@@ -92,33 +92,4 @@ public abstract class CreativeInventorySoundEffects extends AbstractInventoryScr
         ItemStack stack = this.handler.getCursorStack();
         SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(stack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
-
-    @Mixin(CreativeInventoryScreen.CreativeScreenHandler.class)
-    public static abstract class CreativeScreenHandlerMixin {
-        @Unique
-        private double prevTime = 0L;
-        @Unique
-        private float prevValue = -69420f;
-
-        @Shadow
-        public abstract ItemStack getCursorStack();
-
-        @Inject(method = "setCursorStack", at = @At("HEAD"), cancellable = false)
-        public void $item_delete_sound_effect(ItemStack stack, CallbackInfo ci) {
-            if (MixinStatics.CURRENT_SLOT == MixinStatics.DELETE_ITEM_SLOT && !getCursorStack().isEmpty())
-                SoundsConfig.get(UISoundsConfig.class).itemDeleteSoundEffect.playDynamicSound(getCursorStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.HIT));
-        }
-
-        @Inject(method = "scrollItems", at = @At("TAIL"))
-        public void $inventory_scroll_sound_effect(float position, CallbackInfo ci) {
-            double currentTime = GLFW.glfwGetTime();
-            double timeElapsed = currentTime - prevTime;
-
-            if (timeElapsed >= 0.05 && prevValue != position) {
-                SoundsConfig.get(UISoundsConfig.class).inventoryScrollSoundEffect.playSound();
-                prevTime = currentTime;
-                prevValue = position;
-            }
-        }
-    }
 }

@@ -221,6 +221,10 @@ processResources {
     filesMatching("pack.mcmeta") {
         expand("pack_format": packFormat)
     }
+
+    filesMatching("sounds.mixins.json") {
+        expand("version": mcVersion + "-" + loader)
+    }
 }
 
 jar {

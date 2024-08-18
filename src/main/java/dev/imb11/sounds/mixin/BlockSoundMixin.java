@@ -59,7 +59,6 @@ public abstract class BlockSoundMixin implements BlockAccessor {
     @Inject(method = "getSoundGroup", at = @At("HEAD"), cancellable = true)
     public void $manageCustomSounds(BlockState state, CallbackInfoReturnable<BlockSoundGroup> cir) {
 //        if(MinecraftClient.getInstance().world == null) return;
-        SoundsClient.LOGGER.info("Getting sound group for " + state.getBlock().getTranslationKey());
         try {
             if(!hasFetched) {
                 sounds$prepareTagPair(Registries.BLOCK.getId(state.getBlock()));

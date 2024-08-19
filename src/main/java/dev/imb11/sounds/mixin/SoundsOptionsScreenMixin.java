@@ -1,6 +1,5 @@
 package dev.imb11.sounds.mixin;
 
-import dev.imb11.sounds.gui.SoundsConfigScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.SoundOptionsScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -26,7 +25,13 @@ public class SoundsOptionsScreenMixin extends Screen {
         int textWidth = this.client.textRenderer.getWidth("Sounds");
         this.addDrawableChild(
                 ButtonWidget
-                        .builder(Text.translatable("sounds.config.static"), (btn) -> this.client.setScreen(new SoundsConfigScreen(this)))
+                        .builder(Text.translatable("sounds.config.static"), (btn) -> {
+                            //? if forge {
+                            /*this.client.setScreen(new dev.imb11.sounds.loaders.forge.SoundsForge.NoConfigScreenWarning(this));
+                            *///?} else {
+                            this.client.setScreen(new dev.imb11.sounds.gui.SoundsConfigScreen(this));
+                            //?}
+                        })
                         .dimensions(this.width - textWidth - 20, 5, textWidth + 10, 20)
                         .build()
         );

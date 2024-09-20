@@ -31,7 +31,7 @@ public class ModConfig extends ConfigGroup<ModConfig> implements YetAnotherConfi
 
     @Override
     public String getID() {
-        return "chat";
+        return "mod_utils";
     }
 
     @Override

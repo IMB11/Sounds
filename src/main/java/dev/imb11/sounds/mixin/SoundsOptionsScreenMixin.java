@@ -1,5 +1,7 @@
 package dev.imb11.sounds.mixin;
 
+import dev.imb11.sounds.config.ModConfig;
+import dev.imb11.sounds.config.SoundsConfig;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.SoundOptionsScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -22,6 +24,9 @@ public class SoundsOptionsScreenMixin extends Screen {
     /*?}*/
     public void $add_sounds_button(CallbackInfo ci) {
         assert this.client != null;
+
+        if (SoundsConfig.get(ModConfig.class).hideSoundsButtonInSoundMenu) return;
+
         int textWidth = this.client.textRenderer.getWidth("Sounds");
         this.addDrawableChild(
                 ButtonWidget

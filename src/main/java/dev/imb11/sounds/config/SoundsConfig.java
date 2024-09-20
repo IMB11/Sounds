@@ -18,6 +18,7 @@ public class SoundsConfig {
         addGroup(new ChatSoundsConfig());
         addGroup(new EventSoundsConfig());
         addGroup(new UISoundsConfig());
+        addGroup(new ModConfig());
     }
 
     private static void addGroup(ConfigGroup group) {

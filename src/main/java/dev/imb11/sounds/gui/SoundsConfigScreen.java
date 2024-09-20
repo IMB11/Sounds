@@ -1,10 +1,7 @@
 package dev.imb11.sounds.gui;
 
 import dev.imb11.sounds.SoundsClient;
-import dev.imb11.sounds.config.ChatSoundsConfig;
-import dev.imb11.sounds.config.SoundsConfig;
-import dev.imb11.sounds.config.UISoundsConfig;
-import dev.imb11.sounds.config.WorldSoundsConfig;
+import dev.imb11.sounds.config.*;
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -97,6 +94,9 @@ public class SoundsConfigScreen extends Screen {
         ConfigGroup<?>[] configGroups = SoundsConfig.getAll();
         // Sort by class name.
         configGroups = Arrays.stream(configGroups).sorted(Comparator.comparing(o -> o.getClass().getSimpleName())).toArray(ConfigGroup[]::new);
+
+        // remove ModConfig.class from the list
+        configGroups = Arrays.stream(configGroups).filter(configGroup -> configGroup.getClass() != ModConfig.class).toArray(ConfigGroup[]::new);
 
         for (ConfigGroup<?> configGroup : configGroups) {
             if (configGroup instanceof ChatSoundsConfig) {

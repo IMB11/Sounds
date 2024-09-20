@@ -1,5 +1,6 @@
 package dev.imb11.sounds.mixin.ui;
 
+import dev.imb11.sounds.config.WorldSoundsConfig;
 import dev.imb11.sounds.util.MixinStatics;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
@@ -50,12 +51,12 @@ public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
     @Unique
     private void playSound(ItemStack stack) {
         if(MixinStatics.hasOpenedInventorioScreen) {
-            dropSoundCooldownTime = System.currentTimeMillis() + 500L;
+            dropSoundCooldownTime = System.currentTimeMillis() + ((long) SoundsConfig.get(UISoundsConfig.class).itemSoundCooldown);
             MixinStatics.hasOpenedInventorioScreen = false;
             return;
         }
         if(dropSoundCooldownTime > System.currentTimeMillis()) return;
-        dropSoundCooldownTime = System.currentTimeMillis() + 500L;
+        dropSoundCooldownTime = System.currentTimeMillis() + ((long) SoundsConfig.get(UISoundsConfig.class).itemSoundCooldown);
 
         if (MixinStatics.previousAction == SlotActionType.QUICK_MOVE) {
             MixinStatics.previousAction = null;

@@ -187,6 +187,11 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
         provider.accept("dyes", create(SoundEvents.ITEM_DYE_USE)
                 .addKey(ConventionalItemTags.DYES));
 
+        provider.accept("papers", create(SoundEvents.ITEM_BOOK_PAGE_TURN)
+                .addKey(Items.PAPER)
+                .addKey(Items.FILLED_MAP)
+                .addKey(Items.MAP));
+
         provider.accept("fireworks", create(SoundEvents.BLOCK_BAMBOO_SAPLING_HIT)
                 .addKey(Items.FIREWORK_ROCKET));
 

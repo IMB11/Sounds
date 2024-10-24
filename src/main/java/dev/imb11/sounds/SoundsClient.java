@@ -3,8 +3,6 @@ package dev.imb11.sounds;
 import dev.architectury.registry.ReloadListenerRegistry;
 import dev.imb11.mru.API;
 import dev.imb11.mru.LoaderUtils;
-import dev.imb11.mru.packing.Unpacker;
-import dev.imb11.mru.packing.resource.UnpackedResourcePack;
 import dev.imb11.sounds.config.ChatSoundsConfig;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
@@ -35,10 +33,6 @@ public class SoundsClient {
         SoundsConfig.loadAll();
         DynamicSoundHelper.initialize();
 
-        if(System.getProperty("fabric-api.datagen") == null) {
-            Unpacker.register(SoundsClient.class, new UnpackedResourcePack("sounds", DEFAULT_PACK_PATH, "sounds", "This folder contains various dynamic sound definitions, you should consult the documentation site for more information: https://docs.imb11.dev/sounds"));
-        }
-
         ReloadListenerRegistry.register(ResourceType.CLIENT_RESOURCES, new SoundsReloadListener());
 
         CustomSounds.initialize();
@@ -52,7 +46,6 @@ public class SoundsClient {
             instanceChatSoundsConfig.mentionKeywords.add("@" + MinecraftClient.getInstance().getSession().getUsername());
         }
 
-        System.out.println();
         chatSoundsConfig.save();
 
         try {

@@ -1,7 +1,0 @@
-{
-  "keys": [
-    "minecraft:generic_3x3",
-    "minecraft:hopper"
-  ],
-  "soundEvent": "minecraft:block.stone.hit"
-}

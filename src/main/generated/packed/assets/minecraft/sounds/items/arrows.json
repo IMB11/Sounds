@@ -1,8 +1,0 @@
-{
-  "keys": [
-    "#minecraft:arrows"
-  ],
-  "pitch": 0.7,
-  "soundEvent": "minecraft:entity.arrow.hit",
-  "volume": 0.3
-}

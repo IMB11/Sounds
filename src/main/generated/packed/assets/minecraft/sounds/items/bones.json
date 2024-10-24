@@ -1,7 +1,0 @@
-{
-  "keys": [
-    "minecraft:bone",
-    "minecraft:bone_meal"
-  ],
-  "soundEvent": "minecraft:entity.skeleton.ambient"
-}

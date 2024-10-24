@@ -214,6 +214,9 @@ processResources {
         case "1.21":
             packFormat = 34;
             break;
+        case "1.21.3":
+            packFormat = 42;
+            break;
         default:
             throw new IllegalArgumentException("Unsupported Minecraft version: " + mcVersion);
     }

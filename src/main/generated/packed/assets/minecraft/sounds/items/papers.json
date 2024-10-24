@@ -1,0 +1,8 @@
+{
+  "keys": [
+    "minecraft:paper",
+    "minecraft:map",
+    "minecraft:filled_map"
+  ],
+  "soundEvent": "minecraft:item.book.page_turn"
+}

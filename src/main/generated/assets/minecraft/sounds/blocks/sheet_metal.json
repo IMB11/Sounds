@@ -20,9 +20,9 @@
     "volume": 1.0
   },
   "keys": [
+    "minecraft:hopper",
     "minecraft:iron_bars",
     "minecraft:iron_trapdoor",
-    "minecraft:hopper",
     "#minecraft:cauldrons"
   ]
 }

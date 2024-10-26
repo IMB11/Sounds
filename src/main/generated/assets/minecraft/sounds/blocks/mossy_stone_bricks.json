@@ -20,10 +20,10 @@
     "volume": 1.0
   },
   "keys": [
-    "minecraft:mossy_stone_bricks",
     "minecraft:infested_mossy_stone_bricks",
     "minecraft:mossy_stone_brick_slab",
     "minecraft:mossy_stone_brick_stairs",
-    "minecraft:mossy_stone_brick_wall"
+    "minecraft:mossy_stone_brick_wall",
+    "minecraft:mossy_stone_bricks"
   ]
 }

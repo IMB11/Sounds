@@ -20,8 +20,8 @@
     "volume": 1.0
   },
   "keys": [
+    "minecraft:blue_ice",
     "minecraft:frosted_ice",
-    "minecraft:packed_ice",
-    "minecraft:blue_ice"
+    "minecraft:packed_ice"
   ]
 }

@@ -1,10 +1,10 @@
 {
   "keys": [
     "minecraft:amethyst_shard",
-    "minecraft:quartz",
+    "minecraft:diamond",
     "minecraft:emerald",
     "minecraft:lapis_lazuli",
-    "minecraft:diamond"
+    "minecraft:quartz"
   ],
   "soundEvent": "minecraft:block.amethyst_cluster.hit"
 }

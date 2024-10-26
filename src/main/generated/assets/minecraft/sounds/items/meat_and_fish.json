@@ -1,9 +1,9 @@
 {
   "keys": [
-    "#c:foods/raw_fishes",
-    "#c:foods/raw_meats",
     "#c:foods/cooked_fishes",
-    "#c:foods/cooked_meats"
+    "#c:foods/cooked_meats",
+    "#c:foods/raw_fishes",
+    "#c:foods/raw_meats"
   ],
   "pitch": 1.8,
   "soundEvent": "minecraft:entity.puffer_fish.flop",

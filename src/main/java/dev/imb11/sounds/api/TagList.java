@@ -7,6 +7,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.TagKey;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class TagList<T> {
@@ -32,6 +33,19 @@ public class TagList<T> {
 
     public void add(Either<RegistryKey<T>, TagKey<T>> either) {
         _list.add(either);
+
+        _list.sort((o1, o2) -> {
+            // Sort alphabetically, tagkeys first then registrykeys
+            if (o1.left().isPresent() && o2.right().isPresent()) {
+                return -1;
+            } else if (o1.right().isPresent() && o2.left().isPresent()) {
+                return 1;
+            } else if (o1.left().isPresent() && o2.left().isPresent()) {
+                return o1.left().get().getValue().compareTo(o2.left().get().getValue());
+            } else {
+                return o1.right().get().id().compareTo(o2.right().get().id());
+            }
+        });
     }
 
     public boolean isValid(T value) {

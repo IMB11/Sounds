@@ -1,15 +1,15 @@
 {
   "keys": [
-    "minecraft:iron_ingot",
-    "minecraft:gold_ingot",
-    "minecraft:netherite_ingot",
     "minecraft:copper_ingot",
-    "minecraft:iron_nugget",
+    "minecraft:gold_ingot",
     "minecraft:gold_nugget",
+    "minecraft:iron_ingot",
+    "minecraft:iron_nugget",
+    "minecraft:netherite_ingot",
     "minecraft:netherite_scrap",
+    "minecraft:raw_copper",
     "minecraft:raw_gold",
-    "minecraft:raw_iron",
-    "minecraft:raw_copper"
+    "minecraft:raw_iron"
   ],
   "soundEvent": "minecraft:block.metal.break"
 }

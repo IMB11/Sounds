@@ -1,7 +1,7 @@
 {
   "keys": [
-    "minecraft:trial_key",
-    "minecraft:ominous_trial_key"
+    "minecraft:ominous_trial_key",
+    "minecraft:trial_key"
   ],
   "pitch": 1.0,
   "soundEvent": "minecraft:block.trial_spawner.spawn_item_begin",

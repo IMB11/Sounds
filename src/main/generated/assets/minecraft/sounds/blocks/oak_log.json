@@ -20,9 +20,9 @@
     "volume": 1.0
   },
   "keys": [
-    "minecraft:oak_log",
-    "minecraft:oak_wood",
     "minecraft:dark_oak_log",
-    "minecraft:dark_oak_wood"
+    "minecraft:dark_oak_wood",
+    "minecraft:oak_log",
+    "minecraft:oak_wood"
   ]
 }

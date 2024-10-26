@@ -20,8 +20,8 @@
     "volume": 1.0
   },
   "keys": [
-    "minecraft:iron_door",
+    "minecraft:heavy_weighted_pressure_plate",
     "minecraft:iron_block",
-    "minecraft:heavy_weighted_pressure_plate"
+    "minecraft:iron_door"
   ]
 }

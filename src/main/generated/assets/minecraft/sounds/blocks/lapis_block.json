@@ -20,13 +20,13 @@
     "volume": 1.0
   },
   "keys": [
-    "minecraft:lapis_block",
     "minecraft:black_glazed_terracotta",
     "minecraft:blue_glazed_terracotta",
     "minecraft:brown_glazed_terracotta",
     "minecraft:cyan_glazed_terracotta",
     "minecraft:gray_glazed_terracotta",
     "minecraft:green_glazed_terracotta",
+    "minecraft:lapis_block",
     "minecraft:light_blue_glazed_terracotta",
     "minecraft:light_gray_glazed_terracotta",
     "minecraft:lime_glazed_terracotta",

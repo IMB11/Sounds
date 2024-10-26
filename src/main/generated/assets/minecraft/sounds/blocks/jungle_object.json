@@ -20,12 +20,12 @@
     "volume": 1.0
   },
   "keys": [
-    "minecraft:jungle_pressure_plate",
-    "minecraft:jungle_fence_gate",
-    "minecraft:jungle_fence",
-    "minecraft:jungle_sign",
     "minecraft:jungle_button",
     "minecraft:jungle_door",
+    "minecraft:jungle_fence",
+    "minecraft:jungle_fence_gate",
+    "minecraft:jungle_pressure_plate",
+    "minecraft:jungle_sign",
     "minecraft:jungle_trapdoor"
   ]
 }

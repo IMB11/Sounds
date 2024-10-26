@@ -20,10 +20,10 @@
     "volume": 1.0
   },
   "keys": [
+    "minecraft:end_stone",
     "minecraft:prismarine",
-    "minecraft:prismarine_stairs",
     "minecraft:prismarine_slab",
-    "minecraft:prismarine_wall",
-    "minecraft:end_stone"
+    "minecraft:prismarine_stairs",
+    "minecraft:prismarine_wall"
   ]
 }

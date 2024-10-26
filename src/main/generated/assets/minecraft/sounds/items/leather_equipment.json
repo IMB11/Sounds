@@ -1,15 +1,15 @@
 {
   "keys": [
-    "minecraft:leather_horse_armor",
-    "minecraft:leather_helmet",
-    "minecraft:leather_chestplate",
-    "minecraft:leather_leggings",
-    "minecraft:leather_boots",
-    "minecraft:leather",
-    "minecraft:saddle",
     "minecraft:brush",
-    "minecraft:wolf_armor",
-    "minecraft:rabbit_hide"
+    "minecraft:leather",
+    "minecraft:leather_boots",
+    "minecraft:leather_chestplate",
+    "minecraft:leather_helmet",
+    "minecraft:leather_horse_armor",
+    "minecraft:leather_leggings",
+    "minecraft:rabbit_hide",
+    "minecraft:saddle",
+    "minecraft:wolf_armor"
   ],
   "soundEvent": "minecraft:item.armor.equip_leather"
 }

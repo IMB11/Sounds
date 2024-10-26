@@ -1,9 +1,9 @@
 {
   "keys": [
-    "#c:foods/vegetables",
-    "#c:foods/fruits",
     "#c:foods/berries",
-    "#c:foods/breads"
+    "#c:foods/breads",
+    "#c:foods/fruits",
+    "#c:foods/vegetables"
   ],
   "pitch": 1.76,
   "soundEvent": "minecraft:block.crop.break",

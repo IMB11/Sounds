@@ -1,11 +1,11 @@
 {
   "keys": [
-    "minecraft:glass_bottle",
-    "minecraft:potion",
     "minecraft:dragon_breath",
-    "minecraft:splash_potion",
+    "minecraft:glass_bottle",
+    "minecraft:lingering_potion",
     "minecraft:ominous_bottle",
-    "minecraft:lingering_potion"
+    "minecraft:potion",
+    "minecraft:splash_potion"
   ],
   "soundEvent": "minecraft:item.bottle.fill"
 }

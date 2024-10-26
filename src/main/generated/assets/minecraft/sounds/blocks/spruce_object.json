@@ -20,12 +20,12 @@
     "volume": 1.0
   },
   "keys": [
-    "minecraft:spruce_pressure_plate",
-    "minecraft:spruce_fence_gate",
-    "minecraft:spruce_fence",
-    "minecraft:spruce_sign",
     "minecraft:spruce_button",
     "minecraft:spruce_door",
+    "minecraft:spruce_fence",
+    "minecraft:spruce_fence_gate",
+    "minecraft:spruce_pressure_plate",
+    "minecraft:spruce_sign",
     "minecraft:spruce_trapdoor"
   ]
 }

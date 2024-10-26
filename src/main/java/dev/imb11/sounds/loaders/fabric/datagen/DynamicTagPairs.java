@@ -6,10 +6,16 @@ import dev.imb11.sounds.api.datagen.TagPairProvider;
 import dev.imb11.sounds.sound.CustomSounds;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
@@ -153,14 +159,20 @@ public class DynamicTagPairs extends TagPairProvider {
                 .addKey(Blocks.END_STONE_BRICK_WALL)
                 .group(1.0F, 1.0F, SoundEvents.BLOCK_DEEPSLATE_BRICKS_BREAK, CustomSounds.BLOCK_QUARTZ_STEP.get(), SoundEvents.BLOCK_DEEPSLATE_BRICKS_PLACE, SoundEvents.BLOCK_DEEPSLATE_BRICKS_HIT, SoundEvents.BLOCK_DEEPSLATE_BRICKS_FALL));
 
-        provider.accept("glass", TagPair.Builder.create()
-                .addKey(ConventionalBlockTags.GLASS_BLOCKS)
-                .addKey(ConventionalBlockTags.GLASS_PANES)
+        var glass = TagPair.Builder.create()
                 .addKey(Blocks.GLOWSTONE)
                 .addKey(Blocks.BEACON)
                 .addKey(Blocks.REDSTONE_LAMP)
                 .addKey(Blocks.SEA_LANTERN)
-                .group(1.0F, 1.0F, CustomSounds.BLOCK_GLASS_BREAK.get(), CustomSounds.BLOCK_GLASS_STEP.get(), CustomSounds.BLOCK_GLASS_PLACE.get(), SoundEvents.BLOCK_GLASS_HIT, SoundEvents.BLOCK_GLASS_FALL));
+                .group(1.0F, 1.0F, CustomSounds.BLOCK_GLASS_BREAK.get(), CustomSounds.BLOCK_GLASS_STEP.get(), CustomSounds.BLOCK_GLASS_PLACE.get(), SoundEvents.BLOCK_GLASS_HIT, SoundEvents.BLOCK_GLASS_FALL);
+
+        for (RegistryKey<Block> block : Registries.BLOCK.getKeys().stream().toList()) {
+            if (block.getValue().getPath().contains("glass")) {
+                glass.addKey(Registries.BLOCK.get(block));
+            }
+        }
+
+        provider.accept("glass", glass);
 
         provider.accept("gold", TagPair.Builder.create()
                 .addKey(Blocks.GOLD_BLOCK)

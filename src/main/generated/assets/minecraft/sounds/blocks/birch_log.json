@@ -20,9 +20,9 @@
     "volume": 1.0
   },
   "keys": [
-    "minecraft:birch_log",
-    "minecraft:birch_wood",
     "minecraft:birch_door",
-    "minecraft:birch_trapdoor"
+    "minecraft:birch_log",
+    "minecraft:birch_trapdoor",
+    "minecraft:birch_wood"
   ]
 }

@@ -20,12 +20,12 @@
     "volume": 1.0
   },
   "keys": [
+    "minecraft:jungle_log",
     "minecraft:jungle_planks",
-    "minecraft:jungle_stairs",
     "minecraft:jungle_slab",
-    "minecraft:stripped_jungle_log",
-    "minecraft:stripped_jungle_wood",
+    "minecraft:jungle_stairs",
     "minecraft:jungle_wood",
-    "minecraft:jungle_log"
+    "minecraft:stripped_jungle_log",
+    "minecraft:stripped_jungle_wood"
   ]
 }

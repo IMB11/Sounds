@@ -20,18 +20,18 @@
     "volume": 1.0
   },
   "keys": [
-    "minecraft:quartz_block",
-    "minecraft:quartz_stairs",
-    "minecraft:quartz_slab",
     "minecraft:chiseled_quartz_block",
-    "minecraft:quartz_pillar",
-    "minecraft:smooth_quartz",
-    "minecraft:smooth_quartz_stairs",
-    "minecraft:smooth_quartz_slab",
-    "minecraft:quartz_bricks",
-    "minecraft:redstone_block",
+    "minecraft:crying_obsidian",
     "minecraft:diamond_block",
     "minecraft:obsidian",
-    "minecraft:crying_obsidian"
+    "minecraft:quartz_block",
+    "minecraft:quartz_bricks",
+    "minecraft:quartz_pillar",
+    "minecraft:quartz_slab",
+    "minecraft:quartz_stairs",
+    "minecraft:redstone_block",
+    "minecraft:smooth_quartz",
+    "minecraft:smooth_quartz_slab",
+    "minecraft:smooth_quartz_stairs"
   ]
 }

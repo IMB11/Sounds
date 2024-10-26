@@ -20,12 +20,12 @@
     "volume": 1.0
   },
   "keys": [
-    "minecraft:mangrove_pressure_plate",
-    "minecraft:mangrove_fence_gate",
-    "minecraft:mangrove_fence",
-    "minecraft:mangrove_sign",
     "minecraft:mangrove_button",
     "minecraft:mangrove_door",
+    "minecraft:mangrove_fence",
+    "minecraft:mangrove_fence_gate",
+    "minecraft:mangrove_pressure_plate",
+    "minecraft:mangrove_sign",
     "minecraft:mangrove_trapdoor"
   ]
 }

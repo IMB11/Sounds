@@ -16,6 +16,7 @@ import net.minecraft.client.toast.SystemToast;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntryOwner;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -46,7 +47,11 @@ public class ConfiguredSound {
 
     public ConfiguredSound(String id, Identifier soundEvent, boolean enabled, float pitch, float volume) {
         this.enabled = enabled;
-        this.soundEvent = RegistryEntry.Reference.standAlone(Registries.SOUND_EVENT.getEntryOwner(), RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent));
+        //? if <1.21.2 {
+        //this.soundEvent = RegistryEntry.Reference.standAlone(Registries.SOUND_EVENT.getEntryOwner(), RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent));
+        //?} else {
+        this.soundEvent = RegistryEntry.Reference.standAlone(Registries.SOUND_EVENT, RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent));
+        //?}
         this.pitch = pitch;
         this.volume = volume;
 
@@ -63,7 +68,11 @@ public class ConfiguredSound {
     }
 
     public ConfiguredSound(String id, SoundEvent soundEvent, boolean enabled, float pitch, float volume) {
-        this(id, soundEvent.getId(), enabled, pitch, volume);
+        //? if <1.21.2 {
+        //this(id, soundEvent.getId(), enabled, pitch, volume);
+        //?} else {
+        this(id, soundEvent.id(), enabled, pitch, volume);
+        //?}
     }
 
     public ConfiguredSound(String id, RegistryEntry<SoundEvent> soundEvent, boolean enabled, float pitch, float volume) {
@@ -99,10 +108,18 @@ public class ConfiguredSound {
                         .text(Text.translatable("sounds.config.event.description")).build())
                 .binding(defaults.soundEvent.registryKey().getValue().toString(), () -> this.soundEvent.registryKey().getValue().toString(), (val) ->
                         this.soundEvent = RegistryEntry.Reference.standAlone(
-                                Registries.SOUND_EVENT.getEntryOwner(),
+                                //? if <1.21.2 {
+                                //Registries.SOUND_EVENT.getEntryOwner(),
+                                //?} else {
+                                Registries.SOUND_EVENT,
+                                //?}
                                 RegistryKey.of(Registries.SOUND_EVENT.getKey(), Identifier.tryParse(val))))
                 .listener((opt, val) -> this._pendingSoundEvent = RegistryEntry.Reference.standAlone(
-                        Registries.SOUND_EVENT.getEntryOwner(),
+                        //? if <1.21.2 {
+                        //Registries.SOUND_EVENT.getEntryOwner(),
+                        //?} else {
+                        Registries.SOUND_EVENT,
+                        //?}
                         RegistryKey.of(Registries.SOUND_EVENT.getKey(), Identifier.tryParse(val))))
                 .controller(opt -> DropdownStringControllerBuilder.create(opt)
                         .allowAnyValue(false)

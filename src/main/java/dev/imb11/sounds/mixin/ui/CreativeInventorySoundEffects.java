@@ -10,7 +10,6 @@ import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import dev.imb11.sounds.util.MixinStatics;
-import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -30,7 +29,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(CreativeInventoryScreen.class)
-public abstract class CreativeInventorySoundEffects extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeScreenHandler> {
+//? if <1.21.2 {
+//public abstract class CreativeInventorySoundEffects extends net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen<CreativeInventoryScreen.CreativeScreenHandler> {
+//?} else {
+public abstract class CreativeInventorySoundEffects extends net.minecraft.client.gui.screen.ingame.HandledScreen<CreativeInventoryScreen.CreativeScreenHandler> {
+//?}
     @Shadow
     @Nullable
     private Slot deleteItemSlot;

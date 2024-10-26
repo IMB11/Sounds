@@ -30,7 +30,17 @@ public class TagPairHelper {
                 if(registryKeyTagKeyEither.left().isPresent()) {
                     BLOCK_CACHE.put(registryKeyTagKeyEither.left().get().getValue(), id);
                 } else if(registryKeyTagKeyEither.right().isPresent()) {
-                    var vals = Registries.BLOCK.getEntryList(registryKeyTagKeyEither.right().get());
+                    //? if <1.21.2 {
+                    /*var vals = Registries.BLOCK.getEntryList(registryKeyTagKeyEither.right().get());
+                    if(vals.isPresent()) {
+                        for (RegistryEntry<Block> block : vals.get()) {
+                            BLOCK_CACHE.put(block.getKey().get().getValue(), id);
+                        }
+                    } else {
+                        SoundsClient.LOGGER.warn("Failed to find block entries for tag key: " + registryKeyTagKeyEither.right().get().id());
+                    }*/
+                    //?} else {
+                    var vals = Registries.BLOCK.getOptional(registryKeyTagKeyEither.right().get());
                     if(vals.isPresent()) {
                         for (RegistryEntry<Block> block : vals.get()) {
                             BLOCK_CACHE.put(block.getKey().get().getValue(), id);
@@ -38,6 +48,8 @@ public class TagPairHelper {
                     } else {
                         SoundsClient.LOGGER.warn("Failed to find block entries for tag key: " + registryKeyTagKeyEither.right().get().id());
                     }
+
+                    //?}
                 }
             }
         }

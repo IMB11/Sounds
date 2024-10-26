@@ -4,6 +4,7 @@ import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -20,10 +21,17 @@ public class HotbarSoundEffects {
     @Final
     public PlayerEntity player;
 
-    @Inject(method = "scrollInHotbar", at = @At("RETURN"), cancellable = false)
+    //? if <1.21.2 {
+    /*@Inject(method = "scrollInHotbar", at = @At("RETURN"), cancellable = false)
     public void $hotbar_scroll_sound_effect(double scrollAmount, CallbackInfo ci) {
         SoundsConfig.get(UISoundsConfig.class).hotbarScrollSoundEffect.playDynamicSound(this.player.getMainHandStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+    }*/
+    //?} else {
+    @Inject(method = "setSelectedSlot", at = @At("RETURN"), cancellable = false)
+    public void $hotbar_scroll_sound_effect(int slot, CallbackInfo ci) {
+        SoundsConfig.get(UISoundsConfig.class).hotbarScrollSoundEffect.playDynamicSound(this.player.getMainHandStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
+    //?}
 
 //    @Inject(method = "dropSelectedItem", at = @At("HEAD"))
 //    public void $item_drop_sound_effect(boolean entireStack, CallbackInfoReturnable<ItemStack> cir) {

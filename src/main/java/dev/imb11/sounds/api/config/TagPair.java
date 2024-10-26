@@ -105,6 +105,14 @@ public class TagPair {
                 .action((a, b) -> action.accept(null))
                 .build();
     }
+    
+    private Identifier getSoundId(SoundEvent event) {
+        //? if <1.21.2 {
+        //return event.getId();
+        //?} else {
+        return event.id();
+        //?}
+    }
 
     public Option<String> createSoundOpt(TagPair defaults, String type) {
         return Option.<String>createBuilder()
@@ -113,23 +121,23 @@ public class TagPair {
                         .text(Text.translatable("sounds.config.event.description")).build())
                 .binding((switch (type) {
                     case "break":
-                        yield defaults.group.getBreakSound().getId().toString();
+                        yield getSoundId(defaults.group.getBreakSound()).toString();
                     case "step":
-                        yield defaults.group.getStepSound().getId().toString();
+                        yield getSoundId(defaults.group.getStepSound()).toString();
                     case "place":
-                        yield defaults.group.getPlaceSound().getId().toString();
+                        yield getSoundId(defaults.group.getPlaceSound()).toString();
                     case "hit":
-                        yield defaults.group.getHitSound().getId().toString();
+                        yield getSoundId(defaults.group.getHitSound()).toString();
                     case "fall":
-                        yield defaults.group.getFallSound().getId().toString();
+                        yield getSoundId(defaults.group.getFallSound()).toString();
                     default:
                         yield "";
                 }), () -> switch (type) {
-                    case "break" -> this.group.getBreakSound().getId().toString();
-                    case "step" -> this.group.getStepSound().getId().toString();
-                    case "place" -> this.group.getPlaceSound().getId().toString();
-                    case "hit" -> this.group.getHitSound().getId().toString();
-                    case "fall" -> this.group.getFallSound().getId().toString();
+                    case "break" -> getSoundId(this.group.getBreakSound()).toString();
+                    case "step" -> getSoundId(this.group.getStepSound()).toString();
+                    case "place" -> getSoundId(this.group.getPlaceSound()).toString();
+                    case "hit" -> getSoundId(this.group.getHitSound()).toString();
+                    case "fall" -> getSoundId(this.group.getFallSound()).toString();
                     default -> "";
                 }, (val) -> {
                     var event = Registries.SOUND_EVENT.get(Identifier.tryParse(val));
@@ -244,6 +252,7 @@ public class TagPair {
                 .build();
     }*/
 
+    /****/
     public static class Builder {
         private final TagList<Block> keys = new TagList<>(new ArrayList<>());;
         private BlockSoundGroup group;

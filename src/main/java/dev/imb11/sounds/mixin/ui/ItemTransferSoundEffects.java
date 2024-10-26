@@ -26,9 +26,6 @@ public abstract class ItemTransferSoundEffects {
     @Shadow
     public abstract Slot getSlot(int index);
 
-    @Unique
-    private SlotActionType previousAction = null;
-
     @Inject(method = "internalOnSlotClick", at = @At("HEAD"))
     void $item_transfer_sound_effects(int slotIndex, int button, SlotActionType actionType, PlayerEntity player, CallbackInfo ci) {
         if (!(player instanceof ClientPlayerEntity)) return;

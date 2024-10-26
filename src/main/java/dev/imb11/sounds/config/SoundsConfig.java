@@ -50,6 +50,10 @@ public class SoundsConfig {
     }
 
     public static RegistryEntry.Reference<SoundEvent> getSoundEventReference(SoundEvent soundEvent) {
-        return Registries.SOUND_EVENT.getEntry(RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent.getId())).get();
+        //? if <1.21.2 {
+        // return Registries.SOUND_EVENT.getEntry(RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent.getId())).get();
+        //?} else {
+        return Registries.SOUND_EVENT.getOptional(RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent.id())).get();
+        //?}
     }
 }

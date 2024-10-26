@@ -60,7 +60,11 @@ public class TagList<T> {
                 }
             } else if (either.right().isPresent()) {
                 TagKey<T> tagKey = either.right().get();
-                Registry<T> registry = (Registry<T>) Registries.REGISTRIES.get(tagKey.registry().getValue());
+                //? if <1.21.2 {
+                //Registry<T> registry = (Registry<T>) Registries.REGISTRIES.get(tagKey.registry().getValue());
+                //?} else {
+                Registry<T> registry = (Registry<T>) Registries.REGISTRIES.get(tagKey.registryRef().getValue());
+                //?}
                 assert registry != null;
                 var entry = registry.getEntry(value);
                 if (entry.isIn(tagKey)) {

@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.SinglePreparationResourceReloader;
@@ -99,7 +100,14 @@ public class SoundsReloadListener extends SinglePreparationResourceReloader<Void
                     itemsWithLoadedDefinitions.add(entry);
                 } else if (registryKeyTagKeyEither.right().isPresent()) {
                     var tagKey = registryKeyTagKeyEither.right().get();
-                    var entries = Registries.ITEM.getOrCreateEntryList(tagKey);
+
+                    //? if <1.21.2 {
+                    //var entries = Registries.ITEM.getOrCreateEntryList(tagKey);
+                    //?} else {
+                    var entriesOpt = Registries.ITEM.getOptional(tagKey);
+                    if(entriesOpt.isEmpty()) continue;
+                    var entries = entriesOpt.get();
+                    //?}
 
                     for (RegistryEntry<Item> key : entries) {
                         var entry = Registries.ITEM.get(key.getKey().get());

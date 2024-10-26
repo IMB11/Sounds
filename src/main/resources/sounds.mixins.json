@@ -19,7 +19,6 @@
         "ui.CreativeInventorySoundEffects",
         "ui.CreativeScreenHandlerMixin",
         "ui.HotbarSoundEffects",
-        "ui.ImageRenderManagerMixin",
         "ui.ItemDragSoundEffect",
         "ui.ItemDropSoundEffect",
         "ui.ItemTransferSoundEffects",

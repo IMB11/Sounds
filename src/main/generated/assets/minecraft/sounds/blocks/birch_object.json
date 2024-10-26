@@ -1,0 +1,30 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.birch_object.break"
+    },
+    "fall": {
+      "sound_id": "sounds:block.birch_object.fall"
+    },
+    "hit": {
+      "sound_id": "sounds:block.birch_planks.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "sounds:block.birch_object.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.birch_object.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:birch_pressure_plate",
+    "minecraft:birch_fence_gate",
+    "minecraft:birch_fence",
+    "minecraft:birch_sign",
+    "minecraft:birch_button",
+    "minecraft:birch_slab"
+  ]
+}

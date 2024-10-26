@@ -1,0 +1,9 @@
+{
+  "keys": [
+    "minecraft:mangrove_boat",
+    "minecraft:mangrove_chest_boat"
+  ],
+  "pitch": 1.75,
+  "soundEvent": "sounds:block.mangrove_planks.hit",
+  "volume": 0.75
+}

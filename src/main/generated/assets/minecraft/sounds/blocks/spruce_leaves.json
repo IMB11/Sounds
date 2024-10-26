@@ -1,0 +1,26 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.spruce_leaves.break"
+    },
+    "fall": {
+      "sound_id": "sounds:block.spruce_leaves.fall"
+    },
+    "hit": {
+      "sound_id": "sounds:block.spruce_leaves.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "sounds:block.spruce_leaves.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.spruce_leaves.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:spruce_leaves",
+    "minecraft:spruce_sapling"
+  ]
+}

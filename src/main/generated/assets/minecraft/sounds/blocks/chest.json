@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "minecraft:block.wood.break"
+    },
+    "fall": {
+      "sound_id": "minecraft:block.wood.fall"
+    },
+    "hit": {
+      "sound_id": "sounds:block.chest.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "sounds:block.barrel.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.chest.step"
+    },
+    "volume": 1.5
+  },
+  "keys": [
+    "minecraft:chest"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.glass.break"
+    },
+    "fall": {
+      "sound_id": "minecraft:block.glass.fall"
+    },
+    "hit": {
+      "sound_id": "minecraft:block.glass.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "sounds:block.glass.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.glass.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "#c:glass_blocks",
+    "#c:glass_panes",
+    "minecraft:glowstone",
+    "minecraft:beacon",
+    "minecraft:redstone_lamp",
+    "minecraft:sea_lantern"
+  ]
+}

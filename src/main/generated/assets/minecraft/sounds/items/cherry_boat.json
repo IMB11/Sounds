@@ -1,0 +1,9 @@
+{
+  "keys": [
+    "minecraft:cherry_boat",
+    "minecraft:cherry_chest_boat"
+  ],
+  "pitch": 1.75,
+  "soundEvent": "minecraft:block.wood.hit",
+  "volume": 0.75
+}

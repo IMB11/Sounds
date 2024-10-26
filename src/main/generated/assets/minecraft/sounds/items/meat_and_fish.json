@@ -1,0 +1,11 @@
+{
+  "keys": [
+    "#c:foods/raw_fishes",
+    "#c:foods/raw_meats",
+    "#c:foods/cooked_fishes",
+    "#c:foods/cooked_meats"
+  ],
+  "pitch": 1.8,
+  "soundEvent": "minecraft:entity.puffer_fish.flop",
+  "volume": 0.2
+}

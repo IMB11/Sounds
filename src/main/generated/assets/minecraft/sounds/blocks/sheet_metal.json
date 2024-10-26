@@ -1,0 +1,28 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.sheet_metal.break"
+    },
+    "fall": {
+      "sound_id": "minecraft:block.netherite_block.fall"
+    },
+    "hit": {
+      "sound_id": "minecraft:block.netherite_block.hit"
+    },
+    "pitch": 1.2,
+    "place": {
+      "sound_id": "minecraft:block.netherite_block.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.sheet_metal.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:iron_bars",
+    "minecraft:iron_trapdoor",
+    "minecraft:hopper",
+    "#minecraft:cauldrons"
+  ]
+}

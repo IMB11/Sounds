@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.beehive.break"
+    },
+    "fall": {
+      "sound_id": "minecraft:block.wood.fall"
+    },
+    "hit": {
+      "sound_id": "sounds:block.beehive.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "sounds:block.beehive.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.bookshelf.step"
+    },
+    "volume": 1.5
+  },
+  "keys": [
+    "minecraft:beehive"
+  ]
+}

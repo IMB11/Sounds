@@ -1,0 +1,26 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.jungle_leaves.break"
+    },
+    "fall": {
+      "sound_id": "sounds:block.jungle_leaves.fall"
+    },
+    "hit": {
+      "sound_id": "sounds:block.jungle_leaves.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "sounds:block.jungle_leaves.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.jungle_leaves.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:jungle_leaves",
+    "minecraft:jungle_sapling"
+  ]
+}

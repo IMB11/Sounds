@@ -1,0 +1,27 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "minecraft:block.deepslate.break"
+    },
+    "fall": {
+      "sound_id": "minecraft:block.deepslate.fall"
+    },
+    "hit": {
+      "sound_id": "minecraft:block.deepslate.hit"
+    },
+    "pitch": 0.7,
+    "place": {
+      "sound_id": "minecraft:block.deepslate.place"
+    },
+    "step": {
+      "sound_id": "minecraft:block.deepslate.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:respawn_anchor",
+    "minecraft:enchanting_table",
+    "minecraft:ender_chest"
+  ]
+}

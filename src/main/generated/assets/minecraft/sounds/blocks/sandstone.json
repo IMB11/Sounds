@@ -1,0 +1,44 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "minecraft:block.tuff.break"
+    },
+    "fall": {
+      "sound_id": "minecraft:block.tuff.fall"
+    },
+    "hit": {
+      "sound_id": "minecraft:block.tuff.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "minecraft:block.tuff.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.sandstone.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:sandstone",
+    "minecraft:chiseled_sandstone",
+    "minecraft:cut_sandstone",
+    "minecraft:smooth_sandstone",
+    "minecraft:red_sandstone",
+    "minecraft:chiseled_red_sandstone",
+    "minecraft:cut_red_sandstone",
+    "minecraft:smooth_red_sandstone",
+    "minecraft:sandstone_slab",
+    "minecraft:red_sandstone_slab",
+    "minecraft:cut_sandstone_slab",
+    "minecraft:cut_red_sandstone_slab",
+    "minecraft:sandstone_stairs",
+    "minecraft:sandstone_wall",
+    "minecraft:red_sandstone_wall",
+    "minecraft:red_sandstone_stairs",
+    "minecraft:smooth_sandstone_stairs",
+    "minecraft:smooth_sandstone_slab",
+    "minecraft:smooth_red_sandstone_stairs",
+    "minecraft:smooth_red_sandstone_slab"
+  ]
+}

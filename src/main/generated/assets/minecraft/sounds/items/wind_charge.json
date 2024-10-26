@@ -1,0 +1,8 @@
+{
+  "keys": [
+    "minecraft:wind_charge"
+  ],
+  "pitch": 2.0,
+  "soundEvent": "minecraft:entity.breeze.wind_burst",
+  "volume": 0.1
+}

@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.gravel.break"
+    },
+    "fall": {
+      "sound_id": "minecraft:block.gravel.fall"
+    },
+    "hit": {
+      "sound_id": "sounds:block.gravel.hit"
+    },
+    "pitch": 1.2,
+    "place": {
+      "sound_id": "sounds:block.gravel.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.gravel.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:gravel"
+  ]
+}

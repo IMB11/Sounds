@@ -1,0 +1,9 @@
+{
+  "keys": [
+    "minecraft:birch_boat",
+    "minecraft:birch_chest_boat"
+  ],
+  "pitch": 1.75,
+  "soundEvent": "sounds:block.birch_planks.hit",
+  "volume": 0.75
+}

@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:trident"
+  ],
+  "soundEvent": "minecraft:item.trident.hit"
+}

@@ -1,0 +1,27 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "minecraft:block.netherite_block.break"
+    },
+    "fall": {
+      "sound_id": "minecraft:block.netherite_block.fall"
+    },
+    "hit": {
+      "sound_id": "minecraft:block.netherite_block.hit"
+    },
+    "pitch": 1.2,
+    "place": {
+      "sound_id": "minecraft:block.netherite_block.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.iron_block.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:iron_door",
+    "minecraft:iron_block",
+    "minecraft:heavy_weighted_pressure_plate"
+  ]
+}

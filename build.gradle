@@ -67,6 +67,7 @@ dependencies {
 
     modCompileOnly "dev.emi:emi-${loader}:${property("compile.emi")}"
     modCompileOnly "maven.modrinth:inventorio:${property("compile.inventorio")}"
+    modImplementation "maven.modrinth:trashslot:${property("compile.trashslot")}"
 
     if (isFabric) {
         modImplementation "net.fabricmc:fabric-loader:+"
@@ -145,7 +146,7 @@ loom {
             mixinConfig "sounds.mixins.json"
         }
     }
-    accessWidenerPath = getRootProject().file("src/main/resources/sounds.accesswidener")
+    accessWidenerPath = file("../../src/main/resources/sounds.accesswidener")
 
     mixin {
         // TODO: Remove this when TinyRemapper gains MixinExtras beta Support!

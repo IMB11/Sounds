@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.magma_block.break"
+    },
+    "fall": {
+      "sound_id": "sounds:block.magma_block.fall"
+    },
+    "hit": {
+      "sound_id": "sounds:block.magma_block.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "sounds:block.magma_block.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.magma_block.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:magma_block"
+  ]
+}

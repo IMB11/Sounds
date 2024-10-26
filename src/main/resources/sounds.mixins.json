@@ -14,6 +14,7 @@
         "compat.EmiSoundEffects",
         "compat.InventiveInventoryCompatMixin",
         "compat.InventorioCompatMixin",
+        "compat.TrashSlotFix",
         "ui.AnvilTypingEffect",
         "ui.CreativeInventorySoundEffects",
         "ui.CreativeScreenHandlerMixin",

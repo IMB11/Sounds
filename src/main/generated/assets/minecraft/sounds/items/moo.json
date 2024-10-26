@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:milk_bucket"
+  ],
+  "soundEvent": "minecraft:entity.cow.ambient"
+}

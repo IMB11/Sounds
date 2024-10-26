@@ -1,0 +1,6 @@
+{
+  "keys": [
+    "minecraft:lectern"
+  ],
+  "soundEvent": "minecraft:entity.villager.work_librarian"
+}

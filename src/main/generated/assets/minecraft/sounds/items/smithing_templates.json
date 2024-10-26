@@ -1,0 +1,7 @@
+{
+  "keys": [
+    "minecraft:netherite_upgrade_smithing_template",
+    "#minecraft:trim_templates"
+  ],
+  "soundEvent": "minecraft:entity.iron_golem.step"
+}

@@ -1,0 +1,33 @@
+{
+  "enabled": true,
+  "group": {
+    "break": {
+      "sound_id": "sounds:block.cobblestone.break"
+    },
+    "fall": {
+      "sound_id": "sounds:block.stone_bricks.fall"
+    },
+    "hit": {
+      "sound_id": "sounds:block.stone_bricks.hit"
+    },
+    "pitch": 1.0,
+    "place": {
+      "sound_id": "minecraft:block.deepslate_bricks.place"
+    },
+    "step": {
+      "sound_id": "sounds:block.stone_bricks.step"
+    },
+    "volume": 1.0
+  },
+  "keys": [
+    "minecraft:stone_bricks",
+    "minecraft:cracked_stone_bricks",
+    "minecraft:chiseled_stone_bricks",
+    "minecraft:infested_stone_bricks",
+    "minecraft:infested_cracked_stone_bricks",
+    "minecraft:infested_chiseled_stone_bricks",
+    "minecraft:stone_brick_slab",
+    "minecraft:stone_brick_stairs",
+    "minecraft:stone_brick_wall"
+  ]
+}

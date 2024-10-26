@@ -86,11 +86,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
                         .description(OptionDescription.EMPTY)
                         .action((screen, option) -> Util.getOperatingSystem().open("https://docs.imb11.dev/sounds/data/custom-block-sounds"))
                         .build())
-                .option(ButtonOption.createBuilder()
-                        .name(Text.of("Open Default Resource Pack Location"))
-                        .description(OptionDescription.EMPTY)
-                        .action((screen, option) -> Util.getOperatingSystem().open(SoundsClient.DEFAULT_PACK_PATH.toFile()))
-                        .build()).build());
+                .build());
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.world.actions"))
                 .option(HELPER.get("enableEnderpearlVariety", defaults.enableEnderpearlVariety, () -> config.enableEnderpearlVariety, v -> config.enableEnderpearlVariety = v))

@@ -4,6 +4,7 @@ issueTrackerURL="https://github.com/IMB11/Sounds/issues"
 displayURL="http://IMB11.dev/"
 logoFile="assets/sounds/icon.png"
 authors="IMB11"
+clientSideOnly = true
 license="All-Rights-Reserved"
 
 [[mods]]

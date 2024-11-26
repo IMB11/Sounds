@@ -11,11 +11,11 @@ pluginManagement {
 }
 
 plugins {
-    id "dev.kikugie.stonecutter" version "0.5-alpha.4"
+    id "dev.kikugie.stonecutter" version "0.5-beta.5"
 }
 
 stonecutter {
-    shared {
+    create (rootProject) {
         vers("1.20.1-fabric", "1.20.1")
         vers("1.20.1-forge", "1.20.1")
 
@@ -27,8 +27,6 @@ stonecutter {
 
         vcsVersion = "1.21.3-fabric"
     }
-
-    create rootProject
 }
 
 rootProject.name = "Sounds"

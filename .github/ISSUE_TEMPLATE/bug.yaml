@@ -1,5 +1,5 @@
-name: Bug report
-description: Found an issue with the mod or encountered an incompatibility?
+name: Bug Report
+description: Found an issue with the mod or encountered an incompatibility? Please provide detailed information to help us resolve it.
 labels:
   - bug
 body:
@@ -8,37 +8,24 @@ body:
       value: >-
         ***
         
+        # 🐞 Bug Report
         
-        # Important Compatibility Note
-        
-        
-        This mod is built and tested using a specific mod loader or environment.
-        It may not be compatible with other loaders or setups. Using it outside
-        its intended environment can lead to unexpected issues, crashes, or
-        incompatibilities that we might be unable to troubleshoot.
-        
-        
-        If you are experiencing problems while using a different mod loader or
-        an unsupported environment, please note that we may not be able to
-        provide a fix for that scenario.
-        
-        
-        **Our focus and resources are dedicated to ensuring the mod runs
-        smoothly within the environment it was designed for.**
-        
+        Thank you for taking the time to report a bug! Please fill out the following form with as much detail as possible to help us identify and fix the issue.
         
         ***
   - type: checkboxes
     id: read
     attributes:
-      label: Have you read the information above?
+      label: Have you read the compatibility information above?
+      description: Please ensure you are using the correct mod loader and game version.
       options:
-        - label: 'Yes'
+        - label: 'Yes, I have read and understand the compatibility note.'
           required: true
+
   - type: dropdown
     id: loader
     attributes:
-      label: Loader
+      label: Mod Loader
       description: Which mod loader are you using?
       options:
         - Fabric
@@ -46,16 +33,20 @@ body:
         - NeoForge
         - Quilt
         - Other
+      placeholder: Select your mod loader
     validations:
       required: true
-  - type: checkboxes
+
+  - type: dropdown
     id: sinytra_connector
     attributes:
       label: Sinytra Connector
       description: Are you using Sinytra Connector?
       options:
-        - label: 'Yes, I am using Sinytra Connector'
-    # This field is optional as no 'required' attribute is set
+        - 'Yes, I am using Sinytra Connector'
+        - 'No, I am not using Sinytra Connector'
+      placeholder: Select an option
+
   - type: dropdown
     id: game_version
     attributes:
@@ -64,60 +55,62 @@ body:
       options:
         - 1.20
         - 1.20.1
-        - 1.20.2
-        - 1.20.3
         - 1.21
         - 1.21.1
         - 1.21.2
         - 1.21.3
         - 1.21.4
+      placeholder: Select your game version
     validations:
       required: true
+
   - type: input
     id: mod_version
     attributes:
       label: Mod Version
       description: Which version of this mod are you using? (e.g., 1.0.0)
+      placeholder: 1.0.0
     validations:
       required: true
+
   - type: dropdown
     id: environment_type
     attributes:
       label: Environment Type
-      description: What environment are you experiencing this issue in?
+      description: In what environment are you experiencing this issue?
       options:
         - Singleplayer
         - Multiplayer (Client)
         - Multiplayer (Server)
         - Other
+      placeholder: Select the environment type
     validations:
       required: true
+
   - type: input
     id: logs
     attributes:
-      label: Provide your logs
+      label: Provide Your Logs
       description: >-
-        Please use [mclo.gs](https://mclo.gs/) to upload your logs and paste the
-        link here. Even if there are no crashes, logs help identify version
-        details and potential error messages.
+        Please use [mclo.gs](https://mclo.gs/) to upload your logs and paste the link here. Even if there are no crashes, logs help identify version details and potential error messages.
         
-        **Do not paste raw logs directly here** as they may contain sensitive
-        information.
+        **Do not paste raw logs directly here** as they may contain sensitive information.
       placeholder: https://mclo.gs/your-log-link
     validations:
       required: true
       pattern: '^https://mclo\.gs/.*$'
       message: 'Please provide a valid mclo.gs URL for your logs.'
+
   - type: textarea
     id: issue
     attributes:
-      label: Describe your issue.
+      label: Describe Your Issue
       description: >-
-        Provide a detailed description of the issue you're encountering. Feel
-        free to include images or videos to better illustrate the problem.
+        Provide a detailed description of the issue you're encountering. Feel free to include images or videos to better illustrate the problem.
       placeholder: The mod crashes when I ...
     validations:
       required: true
+
   - type: textarea
     id: expected_behavior
     attributes:
@@ -126,6 +119,7 @@ body:
       placeholder: I expected the mod to...
     validations:
       required: true
+
   - type: textarea
     id: actual_behavior
     attributes:
@@ -134,13 +128,15 @@ body:
       placeholder: Instead, the mod...
     validations:
       required: true
+
   - type: textarea
     id: steps_to_reproduce
     attributes:
       label: Steps to Reproduce
       description: >-
-        Please list the steps that lead to the issue. Be as specific as possible
-        so we can attempt to replicate it. If you dont know, just tell us what you were doing at the time of the crash.
-      placeholder: 1. Do X\n2. Do Y\n3. Crash/bug occurs
+        Please list the steps that lead to the issue. Be as specific as possible so we can attempt to replicate it. If you are unsure what caused the crash, please provide a detailed description of your actions and the in-game context at the time the crash occurred.
+        1. Do X
+        2. Do Y
+        3. Crash/bug occurs
     validations:
       required: true

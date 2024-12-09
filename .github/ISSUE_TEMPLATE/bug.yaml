@@ -33,7 +33,6 @@ body:
         - NeoForge
         - Quilt
         - Other
-      placeholder: Select your mod loader
     validations:
       required: true
 
@@ -45,7 +44,6 @@ body:
       options:
         - 'Yes, I am using Sinytra Connector'
         - 'No, I am not using Sinytra Connector'
-      placeholder: Select an option
 
   - type: dropdown
     id: game_version
@@ -60,7 +58,6 @@ body:
         - 1.21.2
         - 1.21.3
         - 1.21.4
-      placeholder: Select your game version
     validations:
       required: true
 
@@ -83,7 +80,6 @@ body:
         - Multiplayer (Client)
         - Multiplayer (Server)
         - Other
-      placeholder: Select the environment type
     validations:
       required: true
 
@@ -135,6 +131,7 @@ body:
       label: Steps to Reproduce
       description: >-
         Please list the steps that lead to the issue. Be as specific as possible so we can attempt to replicate it. If you are unsure what caused the crash, please provide a detailed description of your actions and the in-game context at the time the crash occurred.
+        
         1. Do X
         2. Do Y
         3. Crash/bug occurs

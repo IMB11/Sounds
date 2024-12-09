@@ -10,9 +10,9 @@ body:
         
         # 🪲 Bug Report
         
-        Thank you for taking the time to report a bug! Please fill out the following form with as much detail as possible to help us identify and fix the issue.
+        Thank you for taking the time to report a bug! Your willingness to share detailed information helps us understand what’s going wrong and ultimately improve the mod for everyone. Please fill out the following form with as much detail as possible—include any relevant logs, screenshots, steps to reproduce, and context about your setup. The more information you provide, the easier it will be for us to identify, troubleshoot, and fix the issue.
 
-        # ⚠️ Compatibility Notice
+        ### ⚠️ Compatibility Notice
 
         This mod is developed and tested exclusively with specific loaders and game versions.  
         If you choose to run it on unsupported loaders or game versions, please understand that:

@@ -9,30 +9,23 @@ body:
         ***
 
 
-        # Using Quilt?
+        # Important Compatibility Note
 
 
-        This mod is built exclusively for *Fabric*. 
+        This mod is built and tested using a specific mod loader or environment.
+        It may not be compatible with other loaders or setups. Using it outside
+        its intended environment can lead to unexpected issues, crashes, or
+        incompatibilities that we might be unable to troubleshoot.
 
 
-        This means it's **not compatible** with *Quilt*, as the underlying code
-        structures (APIs) differ between the two systems. Trying to force it to
-        work with Quilt will lead to mixin conflicts and likely cause crashes or
-        unexpected issues.
+        If you are experiencing problems while using a different mod loader or
+        an unsupported environment, please note that we may not be able to
+        provide a fix for that scenario.
 
 
-        This is a *Fabric* mod, therefore you should use the *Fabric Loader* to
-        use it. It's as simple as that!
+        **Our focus and resources are dedicated to ensuring the mod runs
+        smoothly within the environment it was designed for.**
 
-
-        I understand some users might prefer Quilt, and there's nothing wrong
-        with that. However, please be aware that **I cannot troubleshoot or fix
-        problems** that happen specifically because you're trying to run a
-        *Fabric* mod on *Quilt*. 
-
-
-        **My time and resources are focused on ensuring the mod works smoothly
-        within its intended environment.**
 
         ***
   - type: checkboxes
@@ -42,17 +35,44 @@ body:
       options:
         - label: 'Yes'
           required: true
+  - type: dropdown
+    id: loader
+    attributes:
+      label: Loader
+      description: Which mod loader are you using?
+      options:
+        - Fabric
+        - Forge
+        - NeoForge
+        - Quilt
+        - Other
+    validations:
+      required: true
+  - type: checkboxes
+    id: sinytra_connector
+    attributes:
+      label: Sinytra Connector
+      description: Are you using Sinytra Connector?
+      options:
+        - label: 'Yes, I am using Sinytra Connector'
+      # No 'required' attribute, so this field is optional.
+  - type: input
+    id: game_version
+    attributes:
+      label: Game Version
+      description: What version of the game are you running? (e.g., 1.20.1)
+    validations:
+      required: true
   - type: textarea
     id: logs
     attributes:
       label: Provide your logs.
-      description: You can use [mclo.gs](https://mclo.gs/) to upload your logs. (EVEN IF THERE ARE NO CRASHES, LOGS LET ME SEE WHAT VERSION YOU ARE USING, ALONGSIDE VERBOSE MESSAGES. PLEASE UPLOAD THEM.)
-      value: >-
-        Please upload your logs to https://mclo.gs/ and paste the link to them
-        here.
+      description: >-
+        Please use [mclo.gs](https://mclo.gs/) to upload your logs and paste the
+        link here. Even if there are no crashes, logs help identify version
+        details and potential error messages.
 
-
-        Do not put raw log files into this box, they may contain sensitive
+        **Do not paste raw logs directly here** as they may contain sensitive
         information.
     validations:
       required: true
@@ -61,8 +81,8 @@ body:
     attributes:
       label: Describe your issue.
       description: >-
-        You can upload images and videos into this area - please describe your
-        issue in full.
+        Provide a detailed description of the issue you're encountering. Feel
+        free to include images or videos to better illustrate the problem.
       placeholder: The mod crashes when I ...
     validations:
       required: true

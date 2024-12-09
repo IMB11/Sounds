@@ -14,16 +14,17 @@ body:
 
         ### ⚠️ Compatibility Notice
 
-        This mod is developed and tested exclusively with specific loaders and game versions.  
+        This mod is developed and tested exclusively with specific loaders and game versions. 
+        
         If you choose to run it on unsupported loaders or game versions, please understand that:
         
         - We cannot guarantee stability or functionality.
+        
         - We will not provide support or address issues arising from unsupported setups.
+
         
         **If you've intentionally used this mod in an unsupported environment and encountered problems, please refrain from opening a new issue.** Instead, consider using the officially supported loader and versions for the best experience.
 
-        
-        ***
   - type: checkboxes
     id: read
     attributes:
@@ -48,27 +49,18 @@ body:
       required: true
 
   - type: dropdown
-    id: sinytra_connector
-    attributes:
-      label: Sinytra Connector
-      description: Are you using Sinytra Connector?
-      options:
-        - 'Yes, I am using Sinytra Connector'
-        - 'No, I am not using Sinytra Connector'
-
-  - type: dropdown
     id: game_version
     attributes:
       label: Game Version
       description: What version of the game are you running?
       options:
-        - 1.20
-        - 1.20.1
-        - 1.21
-        - 1.21.1
-        - 1.21.2
-        - 1.21.3
-        - 1.21.4
+        - "1.20"
+        - "1.20.1"
+        - "1.21"
+        - "1.21.1"
+        - "1.21.2"
+        - "1.21.3"
+        - "1.21.4"
     validations:
       required: true
 
@@ -117,25 +109,7 @@ body:
       placeholder: The mod crashes when I ...
     validations:
       required: true
-
-  - type: textarea
-    id: expected_behavior
-    attributes:
-      label: Expected Behavior
-      description: What did you expect to happen?
-      placeholder: I expected the mod to...
-    validations:
-      required: true
-
-  - type: textarea
-    id: actual_behavior
-    attributes:
-      label: Actual Behavior
-      description: What actually happened?
-      placeholder: Instead, the mod...
-    validations:
-      required: true
-
+      
   - type: textarea
     id: steps_to_reproduce
     attributes:

@@ -7,26 +7,26 @@ body:
     attributes:
       value: >-
         ***
-
-
+        
+        
         # Important Compatibility Note
-
-
+        
+        
         This mod is built and tested using a specific mod loader or environment.
         It may not be compatible with other loaders or setups. Using it outside
         its intended environment can lead to unexpected issues, crashes, or
         incompatibilities that we might be unable to troubleshoot.
-
-
+        
+        
         If you are experiencing problems while using a different mod loader or
         an unsupported environment, please note that we may not be able to
         provide a fix for that scenario.
-
-
+        
+        
         **Our focus and resources are dedicated to ensuring the mod runs
         smoothly within the environment it was designed for.**
-
-
+        
+        
         ***
   - type: checkboxes
     id: read
@@ -55,6 +55,7 @@ body:
       description: Are you using Sinytra Connector?
       options:
         - label: 'Yes, I am using Sinytra Connector'
+    # This field is optional as no 'required' attribute is set
   - type: dropdown
     id: game_version
     attributes:
@@ -63,6 +64,8 @@ body:
       options:
         - 1.20
         - 1.20.1
+        - 1.20.2
+        - 1.20.3
         - 1.21
         - 1.21.1
         - 1.21.2
@@ -86,28 +89,25 @@ body:
         - Singleplayer
         - Multiplayer (Client)
         - Multiplayer (Server)
-        - Other (Specify in Describe Your Issue)
+        - Other
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: logs
     attributes:
-      label: Provide your logs.
+      label: Provide your logs
       description: >-
         Please use [mclo.gs](https://mclo.gs/) to upload your logs and paste the
         link here. Even if there are no crashes, logs help identify version
         details and potential error messages.
-
+        
         **Do not paste raw logs directly here** as they may contain sensitive
         information.
+      placeholder: https://mclo.gs/your-log-link
     validations:
       required: true
-  - type: textarea
-    id: other_mods
-    attributes:
-      label: Other Installed Mods
-      description: List other mods you have installed, if any. (Optional)
-      placeholder: e.g., ModA, ModB, ModC
+      pattern: '^https://mclo\.gs/.*$'
+      message: 'Please provide a valid mclo.gs URL for your logs.'
   - type: textarea
     id: issue
     attributes:
@@ -140,7 +140,7 @@ body:
       label: Steps to Reproduce
       description: >-
         Please list the steps that lead to the issue. Be as specific as possible
-        so we can attempt to replicate it.
+        so we can attempt to replicate it. If you dont know, just tell us what you were doing at the time of the crash.
       placeholder: 1. Do X\n2. Do Y\n3. Crash/bug occurs
     validations:
       required: true

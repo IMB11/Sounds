@@ -8,9 +8,20 @@ body:
       value: >-
         ***
         
-        # 🐞 Bug Report
+        # 🪲 Bug Report
         
         Thank you for taking the time to report a bug! Please fill out the following form with as much detail as possible to help us identify and fix the issue.
+
+        # ⚠️ Compatibility Notice
+
+        This mod is developed and tested exclusively with specific loaders and game versions.  
+        If you choose to run it on unsupported loaders or game versions, please understand that:
+        
+        - We cannot guarantee stability or functionality.
+        - We will not provide support or address issues arising from unsupported setups.
+        
+        **If you've intentionally used this mod in an unsupported environment and encountered problems, please refrain from opening a new issue.** Instead, consider using the officially supported loader and versions for the best experience.
+
         
         ***
   - type: checkboxes

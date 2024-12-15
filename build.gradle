@@ -55,13 +55,11 @@ dependencies {
     minecraft "com.mojang:minecraft:${property("deps.minecraft")}"
     mappings(loom.layered {
         mappings("net.fabricmc:yarn:${property("deps.yarn")}:v2")
-        if (stonecutter.eval(mcVersion, ">=1.20.6")) {
-            mappings("dev.architectury:yarn-mappings-patch-neoforge:${mcVersion.replace(".3", "")}+build.4")
-        }
+        mappings("dev.architectury:yarn-mappings-patch-neoforge:${mcVersion.replace(".3", "").replace(".4", "")}+build.4")
     })
 
     modImplementation(include("dev.architectury:architectury-${loader}:${property("deps.arch_api")}"))
-    modImplementation ("dev.imb11:mru:${property("deps.mru")}+${mcVersion}+${loader}", {
+    modImplementation ("dev.imb11:mru:${property("deps.mru")}+${mcVersion.replace(".3", ".4")}+${loader}", {
         transitive = false
     })
 
@@ -69,37 +67,17 @@ dependencies {
     modCompileOnly "maven.modrinth:inventorio:${property("compile.inventorio")}"
     modCompileOnly "maven.modrinth:trashslot:${property("compile.trashslot")}"
 
+    modImplementation(include("dev.isxander:yet-another-config-lib:${property("deps.yacl")}+${property("deps.minecraft").replace("1.21.3", "1.21.2")}-${loader}"))
+
     if (isFabric) {
         modImplementation "net.fabricmc:fabric-loader:+"
         modImplementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fabric_api')}"
 
-        modImplementation(include("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-${loader}"))
-
         modLocalRuntime modCompileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
         include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.5.0-beta.2")))
     } else {
-        modImplementation(include("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-${loader}"), {
-            transitive = false
-        })
-
-        "forgeRuntimeLibrary"(implementation include("com.twelvemonkeys.imageio:imageio-core:3.10.0"))
-        "forgeRuntimeLibrary"(implementation include("com.twelvemonkeys.imageio:imageio-webp:3.10.0"))
-        "forgeRuntimeLibrary"(implementation include("com.twelvemonkeys.imageio:imageio-metadata:3.10.0"))
-        "forgeRuntimeLibrary"(implementation include("com.twelvemonkeys.common:common-lang:3.10.0"))
-        "forgeRuntimeLibrary"(implementation include("com.twelvemonkeys.common:common-io:3.10.0"))
-        "forgeRuntimeLibrary"(implementation include("com.twelvemonkeys.common:common-image:3.10.0"))
-        "forgeRuntimeLibrary"(implementation include("org.quiltmc.parsers:json:0.2.1"))
-        "forgeRuntimeLibrary"(implementation include("org.quiltmc.parsers:gson:0.2.1"))
-
-        if (loader == "forge") {
-            "forge"("net.minecraftforge:forge:${mcVersion}-${property("deps.fml")}")
-
-            compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0-beta.2"))
-            implementation(include("io.github.llamalad7:mixinextras-forge:0.5.0-beta.2"))
-        } else {
-            "neoForge"("net.neoforged:neoforge:${property("deps.neoforge")}")
-            include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-neoforge:0.5.0-beta.2")))
-        }
+        "neoForge"("net.neoforged:neoforge:${property("deps.neoforge")}")
+        include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-neoforge:0.5.0-beta.2")))
     }
 
 }
@@ -190,23 +168,15 @@ processResources {
 
     if (loader == "fabric") {
         filesMatching("fabric.mod.json") { expand(props) }
-        exclude(["META-INF/mods.toml"])
+        exclude(["META-INF/neoforge.mods.toml"])
     }
 
-    if (loader == "forge" || loader == "neoforge") {
-        filesMatching(["META-INF/mods.toml", "META-INF/neoforge.mods.toml"]) { expand(props) }
+    if (loader == "neoforge") {
+        filesMatching("META-INF/neoforge.mods.toml") { expand(props) }
         exclude("fabric.mod.json")
-
-        if (stonecutter.eval(mcVersion, ">1.20.4")) {
-            exclude("META-INF/mods.toml")
-        } else {
-            exclude("META-INF/neoforge.mods.toml")
-        }
     }
 
     // expand ${pack_format} in pack.mcmeta
-
-
     int packFormat;
     switch (mcVersion) {
         case "1.20.1":
@@ -217,6 +187,9 @@ processResources {
             break;
         case "1.21.3":
             packFormat = 42;
+            break;
+        case "1.21.4":
+            packFormat = 46;
             break;
         default:
             throw new IllegalArgumentException("Unsupported Minecraft version: " + mcVersion);

@@ -8,6 +8,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.collection.DefaultedList;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,6 +21,8 @@ public class HotbarSoundEffects {
     @Shadow
     @Final
     public PlayerEntity player;
+
+    @Shadow @Final public DefaultedList<ItemStack> main;
 
     //? if <1.21.2 {
     /*@Inject(method = "scrollInHotbar", at = @At("RETURN"), cancellable = false)
@@ -38,8 +41,8 @@ public class HotbarSoundEffects {
 //        SoundsConfig.get(UISoundsConfig.class).itemDropSoundEffect.playDynamicSound(this.player.getMainHandStack(), DynamicSoundHelper.BlockSoundType.FALL);
 //    }
 
-    @Inject(method = "addPickBlock", at = @At("RETURN"), cancellable = false)
-    public void $hotbar_pick_sound_effect(ItemStack stack, CallbackInfo ci) {
-        SoundsConfig.get(UISoundsConfig.class).hotbarPickSoundEffect.playDynamicSound(stack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.STEP));
+    @Inject(method = "swapSlotWithHotbar", at = @At("RETURN"), cancellable = false)
+    public void $hotbar_pick_sound_effect(int slot, CallbackInfo ci) {
+        SoundsConfig.get(UISoundsConfig.class).hotbarPickSoundEffect.playDynamicSound(this.main.get(slot), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.STEP));
     }
 }

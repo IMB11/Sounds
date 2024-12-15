@@ -11,9 +11,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -298,7 +301,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
 
         provider.accept("smithing_templates", create(SoundEvents.ENTITY_IRON_GOLEM_STEP)
                 .addKey(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)
-                .addKey(ItemTags.TRIM_TEMPLATES));
+                .addKey(TagKey.of(RegistryKeys.ITEM, Identifier.of("trim_templates"))));
 
         provider.accept("filled_buckets", create(SoundEvents.ITEM_BUCKET_FILL)
                 .addKey(ConventionalItemTags.WATER_BUCKETS)
@@ -338,8 +341,6 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
 
         provider.accept("sculk", create(SoundEvents.BLOCK_SCULK_VEIN_FALL)
                 .addKey(Items.ECHO_SHARD));
-
-
 
         provider.accept("bones", create(SoundEvents.ENTITY_SKELETON_AMBIENT)
                 .addKey(Items.BONE)

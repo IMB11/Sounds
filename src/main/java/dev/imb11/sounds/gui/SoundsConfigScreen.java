@@ -3,6 +3,7 @@ package dev.imb11.sounds.gui;
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.config.*;
 import dev.imb11.sounds.config.utils.ConfigGroup;
+import dev.imb11.sounds.util.RenderUtils;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -75,7 +76,7 @@ public class SoundsConfigScreen extends Screen {
         int textTotalHeight = textRenderer.getWrappedLinesHeight(text, spaceBetween - 20);
         int targetY = 10 + textRenderer.fontHeight / 2;
         int textY = targetY - (textTotalHeight / 2);
-        context.drawTextWrapped(textRenderer, text, textX, textY, spaceBetween - 20, color);
+        RenderUtils.drawTextWrapped(context, textRenderer, text, textX, textY, spaceBetween - 20, color);
     }
 
     @Override

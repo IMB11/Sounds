@@ -26,7 +26,7 @@ public class ImageButtonWidget extends ClickableWidget {
 
     public ImageButtonWidget(int x, int y, int width, int height, Text message, Identifier image, Consumer<ClickableWidget> clickEvent) {
         super(x, y, width, height, message);
-        this.image = ImageRendererManager.registerImage(image, AnimatedDynamicTextureImage.createWEBPFromTexture(image));
+        this.image = ImageRendererManager.registerOrGetImage(image, () -> AnimatedDynamicTextureImage.createWEBPFromTexture(image));
         this.onPress = clickEvent;
     }
 
@@ -37,10 +37,6 @@ public class ImageButtonWidget extends ClickableWidget {
         }
     }
 
-    /*? =1.20.1 {*/
-    /*@Override
-    protected void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
-    *//*?} else {*/
     @Override
     protected void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
         /*?}*/
@@ -61,10 +57,13 @@ public class ImageButtonWidget extends ClickableWidget {
         float alphaScale = MathHelper.clampedLerp(0.7f, 0.2f, MathHelper.clamp(durationHovered - 1f, 0.0f, 1.0f));
 
         if (image.isDone()) {
+
+            int minFilterScalingTypePrev = glGetTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER);
+            int magFilterScalingTypePrev = glGetTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER);
+
             try {
                 var contentImage = image.get();
                 if (contentImage != null) {
-
                     // Using reflection, get value of contentImage.frameWidth and frameHeight
                     try {
                         Field frameWidthField = contentImage.getClass().getDeclaredField("frameWidth");
@@ -86,11 +85,18 @@ public class ImageButtonWidget extends ClickableWidget {
                         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
                         contentImage.render(context, getX(), getY(), (int) Math.max(neededWidth, this.width), delta);
                         context.getMatrices().pop();
+
+                        // reset gl scaling
+
                     } catch (NoSuchFieldException | IllegalAccessException e) {
                         e.printStackTrace();
                     }
                 }
             } catch (InterruptedException | ExecutionException ignored) {
+            } finally {
+                // reset gl scaling
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilterScalingTypePrev);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilterScalingTypePrev);
             }
         }
 
@@ -122,11 +128,7 @@ public class ImageButtonWidget extends ClickableWidget {
 
 //            context.fill(textX, textY, endX, endY, 0xFFFF2F00);
 
-        /*? >1.20.1 {*/
         drawScrollableText(context, client.textRenderer, getMessage(), textX, textY, endX, endY, 0xFFFFFF);
-        /*?} else {*/
-        /*drawScrollableText(context, client.textRenderer, getMessage(), textX, textY, endX, endY, 0xFFFFFF);
-        *//*?}*/
 
         context.getMatrices().pop();
 

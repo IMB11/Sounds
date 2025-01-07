@@ -28,6 +28,7 @@ repositories {
     }
     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     maven { url "https://maven.quiltmc.org/repository/release" }
+    maven { url "https://maven.shedaniel.me/" }
     maven { url 'https://maven.terraformersmc.com/releases' }
     exclusiveContent {
         forRepository {
@@ -64,6 +65,11 @@ dependencies {
     })
 
     modCompileOnly "dev.emi:emi-${loader}:${property("compile.emi")}"
+
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-${loader}:${property("runtime.rei")}"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api:${property("runtime.rei")}"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin:${property("runtime.rei")}"
+
     modCompileOnly "maven.modrinth:inventorio:${property("compile.inventorio")}"
     modCompileOnly "maven.modrinth:trashslot:${property("compile.trashslot")}"
 

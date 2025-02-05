@@ -1,5 +1,5 @@
 /*? if >=1.21 && fabric {*/
-package dev.imb11.sounds.api.datagen;
+/*package dev.imb11.sounds.api.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.config.TagPair;
@@ -31,4 +31,4 @@ public abstract class TagPairProvider extends FabricCodecDataProvider<TagPair> {
         return "TagPairProvider";
     }
 }
-/*?}*/
+*//*?}*/

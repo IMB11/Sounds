@@ -1,5 +1,5 @@
 //? if neoforge {
-/*package dev.imb11.sounds.loaders.neoforge;
+package dev.imb11.sounds.loaders.neoforge;
 
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.gui.SoundsConfigScreen;
@@ -15,4 +15,4 @@ public class SoundsNeoForge {
         ModLoadingContext.get().getActiveContainer().registerExtensionPoint(IConfigScreenFactory.class, (client, parent) -> new SoundsConfigScreen(parent));
     }
 }
-*///?}
+//?}

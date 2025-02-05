@@ -25,16 +25,16 @@ public class HotbarSoundEffects {
     @Shadow @Final public DefaultedList<ItemStack> main;
 
     //? if <1.21.2 {
-    /*@Inject(method = "scrollInHotbar", at = @At("RETURN"), cancellable = false)
+    @Inject(method = "scrollInHotbar", at = @At("RETURN"), cancellable = false)
     public void $hotbar_scroll_sound_effect(double scrollAmount, CallbackInfo ci) {
         SoundsConfig.get(UISoundsConfig.class).hotbarScrollSoundEffect.playDynamicSound(this.player.getMainHandStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
-    }*/
+    }
     //?} else {
-    @Inject(method = "setSelectedSlot", at = @At("RETURN"), cancellable = false)
+    /*@Inject(method = "setSelectedSlot", at = @At("RETURN"), cancellable = false)
     public void $hotbar_scroll_sound_effect(int slot, CallbackInfo ci) {
         SoundsConfig.get(UISoundsConfig.class).hotbarScrollSoundEffect.playDynamicSound(this.player.getMainHandStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
-    //?}
+    *///?}
 
 //    @Inject(method = "dropSelectedItem", at = @At("HEAD"))
 //    public void $item_drop_sound_effect(boolean entireStack, CallbackInfoReturnable<ItemStack> cir) {

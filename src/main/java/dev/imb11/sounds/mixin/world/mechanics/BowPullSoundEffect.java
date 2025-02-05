@@ -23,10 +23,10 @@ public class BowPullSoundEffect {
 
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setCurrentHand(Lnet/minecraft/util/Hand;)V", shift = At.Shift.AFTER))
     //? if <1.21.2 {
-    //public void $start_bow_pull_sound(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<net.minecraft.util.TypedActionResult<ItemStack>> cir) {
+    public void $start_bow_pull_sound(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<net.minecraft.util.TypedActionResult<ItemStack>> cir) {
     //?} else {
-    public void $start_bow_pull_sound(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<net.minecraft.util.ActionResult> cir) {
-    //?}
+    /*public void $start_bow_pull_sound(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<net.minecraft.util.ActionResult> cir) {
+    *///?}
         if (!world.isClient) return;
         this.currentBowPullSound = SoundsConfig.get(WorldSoundsConfig.class).bowPullSoundEffect.getSoundInstance();
         if (this.currentBowPullSound != null) {
@@ -36,10 +36,10 @@ public class BowPullSoundEffect {
 
     @Inject(method = "onStoppedUsing", at = @At(value = "HEAD"))
     //? if <1.21.2 {
-    //public void $stop_bow_pull_sound(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfo ci) {
+    public void $stop_bow_pull_sound(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfo ci) {
     //?} else {
-    public void $stop_bow_pull_sound(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfoReturnable<Boolean> cir) {
-    //?}
+    /*public void $stop_bow_pull_sound(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfoReturnable<Boolean> cir) {
+    *///?}
         if (!world.isClient) return;
         if (this.currentBowPullSound != null) {
             SoundsConfig.get(WorldSoundsConfig.class).bowPullSoundEffect.stopSound(this.currentBowPullSound);

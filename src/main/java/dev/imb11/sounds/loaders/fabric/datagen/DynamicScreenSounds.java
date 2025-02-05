@@ -1,5 +1,5 @@
 /*? if >=1.21 && fabric {*/
-package dev.imb11.sounds.loaders.fabric.datagen;
+/*package dev.imb11.sounds.loaders.fabric.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.datagen.SoundDefinitionProvider;
@@ -65,4 +65,4 @@ public class DynamicScreenSounds extends SoundDefinitionProvider<ScreenHandlerTy
                 .addKey(ScreenHandlerType.HOPPER));
     }
 }
-/*?}*/
+*//*?}*/

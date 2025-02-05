@@ -1,5 +1,5 @@
 /*? if >=1.21 && fabric {*/
-package dev.imb11.sounds.api.datagen;
+/*package dev.imb11.sounds.api.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -44,4 +44,4 @@ public abstract class SoundDefinitionProvider<T> extends FabricCodecDataProvider
         return "SoundDefinition[" + this.registry.getKey().getValue() + "]Provider";
     }
 }
-/*?}*/
+*//*?}*/

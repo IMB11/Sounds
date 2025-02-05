@@ -102,12 +102,12 @@ public class SoundsReloadListener extends SinglePreparationResourceReloader<Void
                     var tagKey = registryKeyTagKeyEither.right().get();
 
                     //? if <1.21.2 {
-                    //var entries = Registries.ITEM.getOrCreateEntryList(tagKey);
+                    var entries = Registries.ITEM.getOrCreateEntryList(tagKey);
                     //?} else {
-                    var entriesOpt = Registries.ITEM.getOptional(tagKey);
+                    /*var entriesOpt = Registries.ITEM.getOptional(tagKey);
                     if(entriesOpt.isEmpty()) continue;
                     var entries = entriesOpt.get();
-                    //?}
+                    *///?}
 
                     for (RegistryEntry<Item> key : entries) {
                         var entry = Registries.ITEM.get(key.getKey().get());

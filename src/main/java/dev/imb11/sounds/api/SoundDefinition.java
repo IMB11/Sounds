@@ -29,10 +29,10 @@ public class SoundDefinition<T> {
     public static <T> Codec<SoundDefinition<T>> getCodec(RegistryKey<? extends Registry<T>> registryKey) {
         return RecordCodecBuilder.create(builder -> builder.group(
                 //? if <1.21.2 {
-                //Identifier.CODEC.xmap(SoundEvent::of, SoundEvent::getId).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
+                Identifier.CODEC.xmap(SoundEvent::of, SoundEvent::getId).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
                 //?} else {
-                Identifier.CODEC.xmap(SoundEvent::of, SoundEvent::id).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
-                //?}
+                /*Identifier.CODEC.xmap(SoundEvent::of, SoundEvent::id).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
+                *///?}
                 TagList.getCodec(registryKey).fieldOf("keys").forGetter(SoundDefinition<T>::getKeys),
                 Codecs.POSITIVE_FLOAT.optionalFieldOf("volume").forGetter(SoundDefinition<T>::getVolume),
                 Codecs.POSITIVE_FLOAT.optionalFieldOf("pitch").forGetter(SoundDefinition<T>::getPitch)

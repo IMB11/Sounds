@@ -51,9 +51,9 @@ public class SoundsConfig {
 
     public static RegistryEntry.Reference<SoundEvent> getSoundEventReference(SoundEvent soundEvent) {
         //? if <1.21.2 {
-        // return Registries.SOUND_EVENT.getEntry(RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent.getId())).get();
+         return Registries.SOUND_EVENT.getEntry(RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent.getId())).get();
         //?} else {
-        return Registries.SOUND_EVENT.getOptional(RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent.id())).get();
-        //?}
+        /*return Registries.SOUND_EVENT.getOptional(RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent.id())).get();
+        *///?}
     }
 }

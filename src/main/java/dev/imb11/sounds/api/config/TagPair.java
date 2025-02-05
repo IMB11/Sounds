@@ -108,10 +108,10 @@ public class TagPair {
     
     private Identifier getSoundId(SoundEvent event) {
         //? if <1.21.2 {
-        //return event.getId();
+        return event.getId();
         //?} else {
-        return event.id();
-        //?}
+        /*return event.id();
+        *///?}
     }
 
     public Option<String> createSoundOpt(TagPair defaults, String type) {

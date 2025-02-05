@@ -48,10 +48,10 @@ public class ConfiguredSound {
     public ConfiguredSound(String id, Identifier soundEvent, boolean enabled, float pitch, float volume) {
         this.enabled = enabled;
         //? if <1.21.2 {
-        //this.soundEvent = RegistryEntry.Reference.standAlone(Registries.SOUND_EVENT.getEntryOwner(), RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent));
+        this.soundEvent = RegistryEntry.Reference.standAlone(Registries.SOUND_EVENT.getEntryOwner(), RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent));
         //?} else {
-        this.soundEvent = RegistryEntry.Reference.standAlone(Registries.SOUND_EVENT, RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent));
-        //?}
+        /*this.soundEvent = RegistryEntry.Reference.standAlone(Registries.SOUND_EVENT, RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent));
+        *///?}
         this.pitch = pitch;
         this.volume = volume;
 
@@ -69,10 +69,10 @@ public class ConfiguredSound {
 
     public ConfiguredSound(String id, SoundEvent soundEvent, boolean enabled, float pitch, float volume) {
         //? if <1.21.2 {
-        //this(id, soundEvent.getId(), enabled, pitch, volume);
+        this(id, soundEvent.getId(), enabled, pitch, volume);
         //?} else {
-        this(id, soundEvent.id(), enabled, pitch, volume);
-        //?}
+        /*this(id, soundEvent.id(), enabled, pitch, volume);
+        *///?}
     }
 
     public ConfiguredSound(String id, RegistryEntry<SoundEvent> soundEvent, boolean enabled, float pitch, float volume) {
@@ -109,17 +109,17 @@ public class ConfiguredSound {
                 .binding(defaults.soundEvent.registryKey().getValue().toString(), () -> this.soundEvent.registryKey().getValue().toString(), (val) ->
                         this.soundEvent = RegistryEntry.Reference.standAlone(
                                 //? if <1.21.2 {
-                                //Registries.SOUND_EVENT.getEntryOwner(),
+                                Registries.SOUND_EVENT.getEntryOwner(),
                                 //?} else {
-                                Registries.SOUND_EVENT,
-                                //?}
+                                /*Registries.SOUND_EVENT,
+                                *///?}
                                 RegistryKey.of(Registries.SOUND_EVENT.getKey(), Identifier.tryParse(val))))
                 .listener((opt, val) -> this._pendingSoundEvent = RegistryEntry.Reference.standAlone(
                         //? if <1.21.2 {
-                        //Registries.SOUND_EVENT.getEntryOwner(),
+                        Registries.SOUND_EVENT.getEntryOwner(),
                         //?} else {
-                        Registries.SOUND_EVENT,
-                        //?}
+                        /*Registries.SOUND_EVENT,
+                        *///?}
                         RegistryKey.of(Registries.SOUND_EVENT.getKey(), Identifier.tryParse(val))))
                 .controller(opt -> DropdownStringControllerBuilder.create(opt)
                         .allowAnyValue(false)

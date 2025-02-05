@@ -30,10 +30,10 @@ import java.util.List;
 
 @Mixin(CreativeInventoryScreen.class)
 //? if <1.21.2 {
-//public abstract class CreativeInventorySoundEffects extends net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen<CreativeInventoryScreen.CreativeScreenHandler> {
+public abstract class CreativeInventorySoundEffects extends net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen<CreativeInventoryScreen.CreativeScreenHandler> {
 //?} else {
-public abstract class CreativeInventorySoundEffects extends net.minecraft.client.gui.screen.ingame.HandledScreen<CreativeInventoryScreen.CreativeScreenHandler> {
-//?}
+/*public abstract class CreativeInventorySoundEffects extends net.minecraft.client.gui.screen.ingame.HandledScreen<CreativeInventoryScreen.CreativeScreenHandler> {
+*///?}
     @Shadow
     @Nullable
     private Slot deleteItemSlot;

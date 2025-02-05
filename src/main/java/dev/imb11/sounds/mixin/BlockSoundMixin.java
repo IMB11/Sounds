@@ -2,6 +2,7 @@ package dev.imb11.sounds.mixin;
 
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.config.TagPair;
+import dev.imb11.sounds.api.event.SoundDefinitionReplacementEvent;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.WorldSoundsConfig;
 import dev.imb11.sounds.dynamic.TagPairHelper;
@@ -58,20 +59,39 @@ public abstract class BlockSoundMixin implements BlockAccessor {
 
     @Inject(method = "getSoundGroup", at = @At("HEAD"), cancellable = true)
     public void $manageCustomSounds(BlockState state, CallbackInfoReturnable<BlockSoundGroup> cir) {
-//        if(MinecraftClient.getInstance().world == null) return;
         try {
+            var id = Registries.BLOCK.getId(state.getBlock());
             if(!hasFetched) {
-                sounds$prepareTagPair(Registries.BLOCK.getId(state.getBlock()));
+                sounds$prepareTagPair(id);
             }
 
-            if(SoundsConfig.get(WorldSoundsConfig.class).disableBlocksEntirely)
+            if(SoundsConfig.get(WorldSoundsConfig.class).disableBlocksEntirely || SoundsConfig.get(WorldSoundsConfig.class).ignoredBlocks.contains(id.toString()))
                 return;
         } catch (Exception ignored) {
             SoundsClient.LOGGER.warn("Failed initial block fetch.");
         }
 
+        BlockSoundGroup group = null;
         if(associatedTagPair != null) {
-            cir.setReturnValue(associatedTagPair.getGroup());
+            group = associatedTagPair.getGroup();
+        }
+
+        var eventResponse = SoundDefinitionReplacementEvent.fire(group);
+
+        if (eventResponse.response() == SoundDefinitionReplacementEvent.ResponseType.OVERRIDE) {
+            var replacement = eventResponse.override();
+
+            if (replacement != null) {
+                cir.setReturnValue(replacement);
+            }
+        }
+
+        // CANCEL - Use vanillas, not ours.
+        if (eventResponse.response() == SoundDefinitionReplacementEvent.ResponseType.CANCEL) return;
+
+        // PASS - No override, continue with normal planned sound group.
+        if (group != null) {
+            cir.setReturnValue(group);
         }
     }
 }

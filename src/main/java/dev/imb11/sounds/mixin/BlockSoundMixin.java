@@ -45,7 +45,7 @@ public abstract class BlockSoundMixin implements BlockAccessor {
                 return;
             }
 
-            if(SoundsConfig.get(WorldSoundsConfig.class).disableBlocksEntirely)
+            if(SoundsConfig.get(WorldSoundsConfig.class).disableBlocksEntirely || SoundsConfig.get(WorldSoundsConfig.class).ignoredBlocks.contains(value.toString()))
                 return;
 
             @Nullable TagPair pair = TagPairHelper.get(value);

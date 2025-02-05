@@ -1,16 +1,27 @@
 package dev.imb11.sounds.config;
 
+import dev.imb11.mru.yacl.EntryType;
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.config.ConfiguredSound;
 import dev.imb11.sounds.api.config.DynamicConfiguredSound;
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.sound.context.RepeaterSoundContext;
 import dev.isxander.yacl3.api.*;
+import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
+import dev.isxander.yacl3.api.controller.ItemControllerBuilder;
+import dev.isxander.yacl3.api.controller.StringControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 
@@ -42,6 +53,8 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
     public boolean enableEnderpearlVariety = true;
     @SerialEntry
     public boolean disableBlocksEntirely = false;
+    @SerialEntry
+    public List<String> ignoredBlocks = new ArrayList<>();
 
     public WorldSoundsConfig() {
         super(WorldSoundsConfig.class);
@@ -86,6 +99,18 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
                         .description(OptionDescription.EMPTY)
                         .action((screen, option) -> Util.getOperatingSystem().open("https://docs.imb11.dev/sounds/data/custom-block-sounds"))
                         .build())
+                .option(LabelOption.create(Text.empty()))
+                .option(ListOption.<String>createBuilder()
+                        .name(HELPER.getText(EntryType.OPTION_NAME, "ignoredBlocks"))
+                        .description(OptionDescription.of(HELPER.getText(EntryType.OPTION_DESCRIPTION, "ignoredBlocks")))
+                        .binding(defaults.ignoredBlocks, () -> config.ignoredBlocks, (val) -> config.ignoredBlocks = val)
+                        .controller(opt -> DropdownStringControllerBuilder.create(opt)
+                                .allowEmptyValue(false)
+                                .values(Registries.BLOCK.getKeys().stream()
+                                        .map(RegistryKey::getValue)
+                                        .map(Identifier::toString).toList()))
+                        .build()
+                )
                 .build());
         builder.category(ConfigCategory.createBuilder()
                 .name(Text.translatable("sounds.config.world.actions"))

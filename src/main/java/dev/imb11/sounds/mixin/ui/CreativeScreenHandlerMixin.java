@@ -6,6 +6,7 @@ import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import dev.imb11.sounds.util.MixinStatics;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,6 +18,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(CreativeInventoryScreen.CreativeScreenHandler.class)
 public abstract class CreativeScreenHandlerMixin {
+
+    @Unique
+    private boolean tempSkip = false;
+    @Unique
+    private int tempSkipCounter = 0;
+
+    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen$CreativeScreenHandler;scrollItems(F)V"), cancellable = false)
+    public void $constructor_sounds_capture(PlayerEntity player, CallbackInfo ci) {
+        tempSkip = true;
+    }
+
     @Unique
     private double prevTime = 0L;
     @Unique
@@ -33,6 +45,16 @@ public abstract class CreativeScreenHandlerMixin {
 
     @Inject(method = "scrollItems", at = @At("TAIL"))
     public void $inventory_scroll_sound_effect(float position, CallbackInfo ci) {
+        // Don't do anything for 0.1s after screen opened.
+        if (tempSkip) {
+            tempSkipCounter++;
+            if (tempSkipCounter == 2) {
+                tempSkipCounter = 0;
+                tempSkip = false;
+            }
+            return;
+        }
+
         double currentTime = GLFW.glfwGetTime();
         double timeElapsed = currentTime - prevTime;
 

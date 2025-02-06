@@ -27,11 +27,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 @Mixin(CreativeModeInventoryScreen.class)
-//? if <1.21.2 {
-//public abstract class CreativeInventorySoundEffects extends net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen<CreativeInventoryScreen.CreativeScreenHandler> {
-//?} else {
 public abstract class CreativeInventorySoundEffects extends net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<CreativeModeInventoryScreen.ItemPickerMenu> {
-//?}
     @Shadow
     @Nullable
     private Slot destroyItemSlot;

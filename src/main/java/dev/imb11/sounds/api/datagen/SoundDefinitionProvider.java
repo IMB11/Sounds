@@ -28,7 +28,12 @@ public abstract class SoundDefinitionProvider<T> extends FabricCodecDataProvider
     }
 
     public SoundDefinition.Builder<T> create(Holder<SoundEvent> event) {
-        return new SoundDefinition.Builder<T>(BuiltInRegistries.SOUND_EVENT.getValue(event.unwrapKey().get()), this.registry);
+        //? if <1.21.2 {
+        /*var val = BuiltInRegistries.SOUND_EVENT.get(event.unwrapKey().get());
+        *///?} else {
+        var val = BuiltInRegistries.SOUND_EVENT.getValue(event.unwrapKey().get());
+        //?}
+        return new SoundDefinition.Builder<T>(val, this.registry);
     }
 
     @Override

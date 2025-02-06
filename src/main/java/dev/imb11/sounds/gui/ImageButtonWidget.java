@@ -13,7 +13,6 @@ import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 
 import static org.lwjgl.opengl.GL20.*;
@@ -101,9 +100,9 @@ public class ImageButtonWidget extends AbstractWidget {
 //        context.drawTexture(image, getX(), getY(), this.width, this.height, 0, 0, 1920, 1080, 1920, 1080);
 
         //? if <1.21.2 {
-        //int greyColor = ColorHelper.Argb.getArgb((int) (alphaScale * 255), 0, 0, 0);
-        //?} else {
-        int greyColor = ARGB.color((int) (alphaScale * 255), 0, 0, 0);
+        /*int greyColor = net.minecraft.util.FastColor.ARGB32.color((int) (alphaScale * 255), 0, 0, 0);
+        *///?} else {
+        int greyColor = net.minecraft.util.ARGB.color((int) (alphaScale * 255), 0, 0, 0);
         //?}
         context.fill(getX(), getY(), getX() + width, getY() + height, greyColor);
 

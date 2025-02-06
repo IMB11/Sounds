@@ -52,9 +52,9 @@ public class ScreenHandlerSoundContext implements DynamicSoundContext<AbstractCo
         }
 
         if (isOpening) {
-            fallback = SoundsConfig.get(UISoundsConfig.class).inventoryOpenSoundEffect.fetchSoundEvent();
+            fallback = SoundsConfig.get(UISoundsConfig.class).inventoryOpenSoundEffect.getSoundEvent();
         } else {
-            fallback = SoundsConfig.get(UISoundsConfig.class).inventoryCloseSoundEffect.fetchSoundEvent();
+            fallback = SoundsConfig.get(UISoundsConfig.class).inventoryCloseSoundEffect.getSoundEvent();
         }
 
         if (soundEvent == null) {

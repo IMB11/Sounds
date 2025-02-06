@@ -28,8 +28,8 @@ public class SoundDefinition<T> {
     public static <T> Codec<SoundDefinition<T>> getCodec(ResourceKey<? extends Registry<T>> registryKey) {
         return RecordCodecBuilder.create(builder -> builder.group(
                 //? if <1.21.2 {
-                //Identifier.CODEC.xmap(SoundEvent::of, SoundEvent::getId).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
-                //?} else {
+                /*ResourceLocation.CODEC.xmap(SoundEvent::createVariableRangeEvent, SoundEvent::getLocation).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
+                *///?} else {
                 ResourceLocation.CODEC.xmap(SoundEvent::createVariableRangeEvent, SoundEvent::location).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
                 //?}
                 TagList.getCodec(registryKey).fieldOf("keys").forGetter(SoundDefinition<T>::getKeys),

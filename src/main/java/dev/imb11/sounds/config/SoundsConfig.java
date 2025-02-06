@@ -50,8 +50,8 @@ public class SoundsConfig {
 
     public static Holder.Reference<SoundEvent> getSoundEventReference(SoundEvent soundEvent) {
         //? if <1.21.2 {
-        // return Registries.SOUND_EVENT.getEntry(RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent.getId())).get();
-        //?} else {
+         /*return BuiltInRegistries.SOUND_EVENT.getHolder(ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), soundEvent.getLocation())).get();
+        *///?} else {
         return BuiltInRegistries.SOUND_EVENT.get(ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), soundEvent.location())).get();
         //?}
     }

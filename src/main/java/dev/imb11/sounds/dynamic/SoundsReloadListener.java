@@ -86,8 +86,8 @@ public class SoundsReloadListener extends SimplePreparableReloadListener<Void> {
 
         // List all items that do not have a dynamic sound event that isn't a BlockItem
         ArrayList<Item> items = new ArrayList<>();
-        BuiltInRegistries.ITEM.listElements().forEach(item -> {
-            items.add(item.value());
+        BuiltInRegistries.ITEM.forEach(item -> {
+            items.add(item);
         });
 
         ArrayList<Item> itemsWithLoadedDefinitions = new ArrayList<>();
@@ -98,22 +98,31 @@ public class SoundsReloadListener extends SimplePreparableReloadListener<Void> {
             for (Either<ResourceKey<Item>, TagKey<Item>> registryKeyTagKeyEither : definitionCast.getKeys().getInternalList()) {
                 if (registryKeyTagKeyEither.left().isPresent()) {
                     var key = registryKeyTagKeyEither.left().get();
+                    //? if <1.21.2 {
+                    /*var entry = BuiltInRegistries.ITEM.get(key.location());
+                    *///?} else {
                     var entry = BuiltInRegistries.ITEM.getValue(key.location());
+                    //?}
+
                     itemsWithLoadedDefinitions.add(entry);
                 } else if (registryKeyTagKeyEither.right().isPresent()) {
                     var tagKey = registryKeyTagKeyEither.right().get();
 
                     //? if <1.21.2 {
-                    //var entries = Registries.ITEM.getOrCreateEntryList(tagKey);
-                    //?} else {
+                    /*var entries = BuiltInRegistries.ITEM.getOrCreateTag(tagKey);
+                    *///?} else {
                     var entriesOpt = BuiltInRegistries.ITEM.get(tagKey);
                     if(entriesOpt.isEmpty()) continue;
                     var entries = entriesOpt.get();
                     //?}
 
                     for (Holder<Item> key : entries) {
-                        var entry = BuiltInRegistries.ITEM.getValue(key.unwrapKey().get());
-                        itemsWithLoadedDefinitions.add(entry);
+                        var entry = BuiltInRegistries.ITEM.get(key.unwrapKey().get());
+                        //? if <1.21.2 {
+                        /*itemsWithLoadedDefinitions.add(entry);
+                        *///?} else {
+                        itemsWithLoadedDefinitions.add(entry.get().value());
+                        //?}
                     }
                 }
             }

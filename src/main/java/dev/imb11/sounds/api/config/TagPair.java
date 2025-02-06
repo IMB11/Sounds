@@ -108,75 +108,75 @@ public class TagPair {
     
     private ResourceLocation getSoundId(SoundEvent event) {
         //? if <1.21.2 {
-        //return event.getId();
-        //?} else {
+        /*return event.getLocation();
+        *///?} else {
         return event.location();
         //?}
     }
 
-    public Option<String> createSoundOpt(TagPair defaults, String type) {
-        return Option.<String>createBuilder()
-                .name(Component.translatable("sounds.config.event.name.brackets", Component.translatable("sounds.config.preview." + type).getString()))
-                .description(OptionDescription.createBuilder()
-                        .text(Component.translatable("sounds.config.event.description")).build())
-                .binding((switch (type) {
-                    case "break":
-                        yield getSoundId(defaults.group.getBreakSound()).toString();
-                    case "step":
-                        yield getSoundId(defaults.group.getStepSound()).toString();
-                    case "place":
-                        yield getSoundId(defaults.group.getPlaceSound()).toString();
-                    case "hit":
-                        yield getSoundId(defaults.group.getHitSound()).toString();
-                    case "fall":
-                        yield getSoundId(defaults.group.getFallSound()).toString();
-                    default:
-                        yield "";
-                }), () -> switch (type) {
-                    case "break" -> getSoundId(this.group.getBreakSound()).toString();
-                    case "step" -> getSoundId(this.group.getStepSound()).toString();
-                    case "place" -> getSoundId(this.group.getPlaceSound()).toString();
-                    case "hit" -> getSoundId(this.group.getHitSound()).toString();
-                    case "fall" -> getSoundId(this.group.getFallSound()).toString();
-                    default -> "";
-                }, (val) -> {
-                    var event = BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.tryParse(val));
-
-                    switch (type) {
-                        case "break" ->
-                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), event, this.group.getStepSound(), this.group.getPlaceSound(), this.group.getHitSound(), this.group.getFallSound());
-                        case "step" ->
-                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), event, this.group.getPlaceSound(), this.group.getHitSound(), this.group.getFallSound());
-                        case "place" ->
-                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), this.group.getStepSound(), event, this.group.getHitSound(), this.group.getFallSound());
-                        case "hit" ->
-                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), this.group.getStepSound(), this.group.getPlaceSound(), event, this.group.getFallSound());
-                        case "fall" ->
-                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), this.group.getStepSound(), this.group.getPlaceSound(), this.group.getHitSound(), event);
-                    }
-                })
-                .listener((opt, val) -> {
-                    var event = BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.tryParse(val));
-
-                    switch (type) {
-                        case "break" ->
-                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), event, this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
-                        case "step" ->
-                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), event, this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
-                        case "place" ->
-                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), event, this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
-                        case "hit" ->
-                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), event, this.pendingGroup.getFallSound());
-                        case "fall" ->
-                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), event);
-                    }
-                })
-                .controller(opt -> DropdownStringControllerBuilder.create(opt)
-                        .allowAnyValue(false)
-                        .allowEmptyValue(false)
-                        .values(BuiltInRegistries.SOUND_EVENT.registryKeySet().stream().map(ResourceKey::location).map(ResourceLocation::toString).toList()))
-                .build();
-    }
+//    public Option<String> createSoundOpt(TagPair defaults, String type) {
+//        return Option.<String>createBuilder()
+//                .name(Component.translatable("sounds.config.event.name.brackets", Component.translatable("sounds.config.preview." + type).getString()))
+//                .description(OptionDescription.createBuilder()
+//                        .text(Component.translatable("sounds.config.event.description")).build())
+//                .binding((switch (type) {
+//                    case "break":
+//                        yield getSoundId(defaults.group.getBreakSound()).toString();
+//                    case "step":
+//                        yield getSoundId(defaults.group.getStepSound()).toString();
+//                    case "place":
+//                        yield getSoundId(defaults.group.getPlaceSound()).toString();
+//                    case "hit":
+//                        yield getSoundId(defaults.group.getHitSound()).toString();
+//                    case "fall":
+//                        yield getSoundId(defaults.group.getFallSound()).toString();
+//                    default:
+//                        yield "";
+//                }), () -> switch (type) {
+//                    case "break" -> getSoundId(this.group.getBreakSound()).toString();
+//                    case "step" -> getSoundId(this.group.getStepSound()).toString();
+//                    case "place" -> getSoundId(this.group.getPlaceSound()).toString();
+//                    case "hit" -> getSoundId(this.group.getHitSound()).toString();
+//                    case "fall" -> getSoundId(this.group.getFallSound()).toString();
+//                    default -> "";
+//                }, (val) -> {
+//                    var event = BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.tryParse(val));
+//
+//                    switch (type) {
+//                        case "break" ->
+//                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), event, this.group.getStepSound(), this.group.getPlaceSound(), this.group.getHitSound(), this.group.getFallSound());
+//                        case "step" ->
+//                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), event, this.group.getPlaceSound(), this.group.getHitSound(), this.group.getFallSound());
+//                        case "place" ->
+//                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), this.group.getStepSound(), event, this.group.getHitSound(), this.group.getFallSound());
+//                        case "hit" ->
+//                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), this.group.getStepSound(), this.group.getPlaceSound(), event, this.group.getFallSound());
+//                        case "fall" ->
+//                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), this.group.getStepSound(), this.group.getPlaceSound(), this.group.getHitSound(), event);
+//                    }
+//                })
+//                .listener((opt, val) -> {
+//                    var event = BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.tryParse(val));
+//
+//                    switch (type) {
+//                        case "break" ->
+//                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), event, this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
+//                        case "step" ->
+//                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), event, this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
+//                        case "place" ->
+//                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), event, this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
+//                        case "hit" ->
+//                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), event, this.pendingGroup.getFallSound());
+//                        case "fall" ->
+//                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), event);
+//                    }
+//                })
+//                .controller(opt -> DropdownStringControllerBuilder.create(opt)
+//                        .allowAnyValue(false)
+//                        .allowEmptyValue(false)
+//                        .values(BuiltInRegistries.SOUND_EVENT.registryKeySet().stream().map(ResourceKey::location).map(ResourceLocation::toString).toList()))
+//                .build();
+//    }
 
     /**
     public OptionGroup createYACL(TagPair defaults) {

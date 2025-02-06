@@ -24,22 +24,26 @@ public class MentionSoundEffect {
     private Minecraft minecraft;
 
     @Unique
-    private float cooldownPeriod = 0f;
+    private float sounds$cooldownPeriod = 0f;
 
     @Inject(method = "render", at = @At("HEAD"))
     public void $cooldown_period(GuiGraphics context, int currentTick, int mouseX, int mouseY, boolean focused, CallbackInfo ci) {
-        if (cooldownPeriod > 0) {
-            cooldownPeriod -= this.minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(true);
+        if (sounds$cooldownPeriod > 0) {
+            //? if <1.21.2 {
+            /*sounds$cooldownPeriod -= this.minecraft.getTimer().getGameTimeDeltaPartialTick(true);
+            *///?} else {
+            sounds$cooldownPeriod -= this.minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(true);
+            //?}
         }
     }
 
     @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V", at = @At("HEAD"), cancellable = false)
     public void $mention_recieve_sound_effect(Component message, MessageSignature signatureData, GuiMessageTag indicator, CallbackInfo ci) {
-        if (cooldownPeriod > 0 && (SoundsConfig.get(ChatSoundsConfig.class).enableChatSoundCooldown || LoaderUtils.isModInstalled("chatpatches"))) {
+        if (sounds$cooldownPeriod > 0 && (SoundsConfig.get(ChatSoundsConfig.class).enableChatSoundCooldown || LoaderUtils.isModInstalled("chatpatches"))) {
             return;
         }
 
-        cooldownPeriod = (LoaderUtils.isModInstalled("chatpatches") ? 0.01f : SoundsConfig.get(ChatSoundsConfig.class).chatSoundCooldown) * 20f;
+        sounds$cooldownPeriod = (LoaderUtils.isModInstalled("chatpatches") ? 0.01f : SoundsConfig.get(ChatSoundsConfig.class).chatSoundCooldown) * 20f;
 
         String messageString = message.getString();
 

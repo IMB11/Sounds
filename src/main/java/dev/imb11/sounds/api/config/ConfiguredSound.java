@@ -9,6 +9,7 @@ import dev.isxander.yacl3.api.OptionGroup;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -47,8 +47,8 @@ public class ConfiguredSound {
     public ConfiguredSound(String id, ResourceLocation soundEvent, boolean enabled, float pitch, float volume) {
         this.enabled = enabled;
         //? if <1.21.2 {
-        //this.soundEvent = RegistryEntry.Reference.standAlone(Registries.SOUND_EVENT.getEntryOwner(), RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent));
-        //?} else {
+        /*this.soundEvent = Holder.Reference.createStandAlone(BuiltInRegistries.SOUND_EVENT.holderOwner(), ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), soundEvent));
+        *///?} else {
         this.soundEvent = Holder.Reference.createStandAlone(BuiltInRegistries.SOUND_EVENT, ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), soundEvent));
         //?}
         this.pitch = pitch;
@@ -68,8 +68,8 @@ public class ConfiguredSound {
 
     public ConfiguredSound(String id, SoundEvent soundEvent, boolean enabled, float pitch, float volume) {
         //? if <1.21.2 {
-        //this(id, soundEvent.getId(), enabled, pitch, volume);
-        //?} else {
+        /*this(id, soundEvent.getLocation(), enabled, pitch, volume);
+        *///?} else {
         this(id, soundEvent.location(), enabled, pitch, volume);
         //?}
     }
@@ -108,15 +108,15 @@ public class ConfiguredSound {
                 .binding(defaults.soundEvent.key().location().toString(), () -> this.soundEvent.key().location().toString(), (val) ->
                         this.soundEvent = Holder.Reference.createStandAlone(
                                 //? if <1.21.2 {
-                                //Registries.SOUND_EVENT.getEntryOwner(),
-                                //?} else {
+                                /*BuiltInRegistries.SOUND_EVENT.holderOwner(),
+                                *///?} else {
                                 BuiltInRegistries.SOUND_EVENT,
                                 //?}
                                 ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), ResourceLocation.tryParse(val))))
                 .listener((opt, val) -> this._pendingSoundEvent = Holder.Reference.createStandAlone(
                         //? if <1.21.2 {
-                        //Registries.SOUND_EVENT.getEntryOwner(),
-                        //?} else {
+                        /*BuiltInRegistries.SOUND_EVENT.holderOwner(),
+                        *///?} else {
                         BuiltInRegistries.SOUND_EVENT,
                         //?}
                         ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), ResourceLocation.tryParse(val))))
@@ -171,22 +171,34 @@ public class ConfiguredSound {
                 .build();
     }
 
-    public final SoundEvent fetchSoundEvent() {
-        return BuiltInRegistries.SOUND_EVENT.getValue(this.soundEvent.key());
+    public final SoundEvent fetchSoundEvent(ResourceKey<SoundEvent> key) {
+        //? if <1.21.2 {
+        /*return BuiltInRegistries.SOUND_EVENT.get(key);
+        *///?} else {
+        return BuiltInRegistries.SOUND_EVENT.getValue(key);
+        //?}
     }
 
     protected static long lastShownToast = -1L;
+
     public void playSound() {
         if (this.enabled) {
             try {
-                final SoundEvent event = BuiltInRegistries.SOUND_EVENT.getValue(this.soundEvent.key());
+                final SoundEvent event = fetchSoundEvent(this.soundEvent.key());
                 this.playSound(event, this.pitch, this.volume);
             } catch (Exception ignored) {
                 // Prevent toast spam:
                 if (System.currentTimeMillis() > lastShownToast + 5000) {
                     lastShownToast = System.currentTimeMillis();
                     Minecraft client = Minecraft.getInstance();
-                    client.getToastManager().addToast(SystemToast.multiline(client,
+
+                    //? if <1.21.2 {
+                    /*var toastManager = client.getToasts();
+                    *///?} else {
+                    var toastManager = client.getToastManager();
+                    //?}
+
+                    toastManager.addToast(SystemToast.multiline(client,
                             SystemToast.SystemToastId.WORLD_ACCESS_FAILURE,
                             Component.translatable("sounds.config.play.error.title"),
                             Component.translatable("sounds.config.play.error.description", this.getId())));
@@ -197,13 +209,20 @@ public class ConfiguredSound {
 
     private void playPreviewSound() {
         try {
-            final SoundEvent event = BuiltInRegistries.SOUND_EVENT.getValue(this._pendingSoundEvent.key());
+            final SoundEvent event = fetchSoundEvent(this._pendingSoundEvent.key());
             this.playSound(event, _pendingPitch, _pendingVolume);
         } catch (Exception ignored) {
             if (System.currentTimeMillis() > lastShownToast + 5000) {
                 lastShownToast = System.currentTimeMillis();
                 Minecraft client = Minecraft.getInstance();
-                client.getToastManager().addToast(SystemToast.multiline(client,
+
+                //? if <1.21.2 {
+                /*var toastManager = client.getToasts();
+                *///?} else {
+                var toastManager = client.getToastManager();
+                //?}
+
+                toastManager.addToast(SystemToast.multiline(client,
                         SystemToast.SystemToastId.WORLD_ACCESS_FAILURE,
                         Component.translatable("sounds.config.preview.error.title"),
                         Component.translatable("sounds.config.preview.error.description")));
@@ -218,7 +237,11 @@ public class ConfiguredSound {
     public @Nullable SimpleSoundInstance getSoundInstance() {
         if (this.enabled) {
             try {
+                //? if <1.21.2 {
+                /*final SoundEvent event = BuiltInRegistries.SOUND_EVENT.get(this.soundEvent.key());
+                *///?} else {
                 final SoundEvent event = BuiltInRegistries.SOUND_EVENT.getValue(this.soundEvent.key());
+                //?}
                 return SimpleSoundInstance.forUI(event, pitch, volume);
             } catch (Exception ignored) {
                 return null;
@@ -244,7 +267,7 @@ public class ConfiguredSound {
     }
 
     public SoundEvent getSoundEvent() {
-        return BuiltInRegistries.SOUND_EVENT.getValue(this.soundEvent.key());
+        return fetchSoundEvent(this.soundEvent.key());
     }
 
     public float getPitch() {

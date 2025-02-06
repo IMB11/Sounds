@@ -53,8 +53,6 @@ modstitch {
         fabricLoaderVersion = "+"
 
         configureLoom {
-            accessWidenerPath = file("../../src/main/resources/sounds.accesswidener")
-
             mixin {
                 useLegacyMixinAp = true
             }

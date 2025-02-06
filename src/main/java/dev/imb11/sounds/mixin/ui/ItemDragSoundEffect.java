@@ -4,9 +4,6 @@ import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.slot.Slot;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,9 +13,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.Set;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
 
-@Mixin(HandledScreen.class)
-public class ItemDragSoundEffect<T extends ScreenHandler> {
+@Mixin(AbstractContainerScreen.class)
+public class ItemDragSoundEffect<T extends AbstractContainerMenu> {
     @Shadow
     @Final
     protected Set<Slot> cursorDragSlots;
@@ -30,6 +30,6 @@ public class ItemDragSoundEffect<T extends ScreenHandler> {
     @Inject(method = "mouseDragged", at = @At(value = "INVOKE", target = "Ljava/util/Set;add(Ljava/lang/Object;)Z"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void $item_drag_sound_effect(double mouseX, double mouseY, int button, double deltaX, double deltaY, CallbackInfoReturnable<Boolean> cir, Slot slot) {
         if (!cursorDragSlots.contains(slot) && cursorDragSlots.size() > 0)
-            SoundsConfig.get(UISoundsConfig.class).itemDragSoundEffect.playDynamicSound(this.handler.getCursorStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+            SoundsConfig.get(UISoundsConfig.class).itemDragSoundEffect.playDynamicSound(this.handler.getCarried(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
 }

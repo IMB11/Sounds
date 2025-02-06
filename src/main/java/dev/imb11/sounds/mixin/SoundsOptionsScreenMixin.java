@@ -2,10 +2,10 @@ package dev.imb11.sounds.mixin;
 
 import dev.imb11.sounds.config.ModConfig;
 import dev.imb11.sounds.config.SoundsConfig;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.option.SoundOptionsScreen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.options.SoundOptionsScreen;
+import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SoundOptionsScreen.class)
 public class SoundsOptionsScreenMixin extends Screen {
-    protected SoundsOptionsScreenMixin(Text title) {
+    protected SoundsOptionsScreenMixin(Component title) {
         super(title);
     }
 
@@ -23,21 +23,17 @@ public class SoundsOptionsScreenMixin extends Screen {
     @Inject(method = "addOptions", at = @At("TAIL"), cancellable = false)
     /*?}*/
     public void $add_sounds_button(CallbackInfo ci) {
-        assert this.client != null;
+        assert this.minecraft != null;
 
         if (SoundsConfig.get(ModConfig.class).hideSoundsButtonInSoundMenu) return;
 
-        int textWidth = this.client.textRenderer.getWidth("Sounds");
-        this.addDrawableChild(
-                ButtonWidget
-                        .builder(Text.translatable("sounds.config.static"), (btn) -> {
-                            //? if forge {
-                            /*this.client.setScreen(new dev.imb11.sounds.loaders.forge.SoundsForge.NoConfigScreenWarning(this));
-                            *///?} else {
-                            this.client.setScreen(new dev.imb11.sounds.gui.SoundsConfigScreen(this));
-                            //?}
+        int textWidth = this.minecraft.font.width("Sounds");
+        this.addRenderableWidget(
+                Button
+                        .builder(Component.translatable("sounds.config.static"), (btn) -> {
+                            this.minecraft.setScreen(new dev.imb11.sounds.gui.SoundsConfigScreen(this));
                         })
-                        .dimensions(this.width - textWidth - 20, 5, textWidth + 10, 20)
+                        .bounds(this.width - textWidth - 20, 5, textWidth + 10, 20)
                         .build()
         );
     }

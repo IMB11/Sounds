@@ -6,9 +6,9 @@ import dev.imb11.sounds.sound.CustomSounds;
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 
 import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 
@@ -17,14 +17,14 @@ public class EventSoundsConfig extends ConfigGroup<EventSoundsConfig> implements
     @SerialEntry
     public boolean ignoreSilencedStatusEffects = true;
     @SerialEntry
-    public ConfiguredSound positiveStatusEffectGainSoundEffect = new ConfiguredSound("positiveStatusEffectGain", SoundEvents.ITEM_TRIDENT_THUNDER, true, 2F, 0.1F);
+    public ConfiguredSound positiveStatusEffectGainSoundEffect = new ConfiguredSound("positiveStatusEffectGain", SoundEvents.TRIDENT_THUNDER, true, 2F, 0.1F);
     @SerialEntry
-    public ConfiguredSound negativeStatusEffectGainSoundEffect = new ConfiguredSound("negativeStatusEffectGain", SoundEvents.ENTITY_ILLUSIONER_MIRROR_MOVE, true, 0.3F, 0.2F);
+    public ConfiguredSound negativeStatusEffectGainSoundEffect = new ConfiguredSound("negativeStatusEffectGain", SoundEvents.ILLUSIONER_MIRROR_MOVE, true, 0.3F, 0.2F);
 
     @SerialEntry
-    public ConfiguredSound positiveStatusEffectLoseSoundEffect = new ConfiguredSound("positiveStatusEffectLose", SoundEvents.ITEM_TRIDENT_RIPTIDE_1, true, 0.5F, 0.1F);
+    public ConfiguredSound positiveStatusEffectLoseSoundEffect = new ConfiguredSound("positiveStatusEffectLose", SoundEvents.TRIDENT_RIPTIDE_1, true, 0.5F, 0.1F);
     @SerialEntry
-    public ConfiguredSound negativeStatusEffectLoseSoundEffect = new ConfiguredSound("negativeStatusEffectLose", SoundEvents.ITEM_TRIDENT_RIPTIDE_1, true, 0.5F, 0.1F);
+    public ConfiguredSound negativeStatusEffectLoseSoundEffect = new ConfiguredSound("negativeStatusEffectLose", SoundEvents.TRIDENT_RIPTIDE_1, true, 0.5F, 0.1F);
 
     public EventSoundsConfig() {
         super(EventSoundsConfig.class);
@@ -36,13 +36,13 @@ public class EventSoundsConfig extends ConfigGroup<EventSoundsConfig> implements
     }
 
     @Override
-    public Identifier getImage() {
-        return Identifier.of("sounds", "textures/gui/event_sounds.webp");
+    public ResourceLocation getImage() {
+        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/event_sounds.webp");
     }
 
     @Override
-    public Text getName() {
-        return Text.translatable("sounds.config.events");
+    public Component getName() {
+        return Component.translatable("sounds.config.events");
     }
 
     @Override
@@ -52,10 +52,10 @@ public class EventSoundsConfig extends ConfigGroup<EventSoundsConfig> implements
 
     @Override
     public YetAnotherConfigLib.Builder build(EventSoundsConfig defaults, EventSoundsConfig config, YetAnotherConfigLib.Builder builder) {
-        builder.title(Text.of("Event Sounds"));
+        builder.title(Component.nullToEmpty("Event Sounds"));
 
         builder.category(ConfigCategory.createBuilder()
-                .name(Text.translatable("sounds.config.events.statusEffects"))
+                .name(Component.translatable("sounds.config.events.statusEffects"))
                 .option(HELPER.get("ignoreSilencedStatusEffects", config.ignoreSilencedStatusEffects, () -> config.ignoreSilencedStatusEffects, v -> config.ignoreSilencedStatusEffects = v))
                 .group(config.positiveStatusEffectGainSoundEffect.getOptionGroup(defaults.positiveStatusEffectGainSoundEffect))
                 .group(config.positiveStatusEffectLoseSoundEffect.getOptionGroup(defaults.positiveStatusEffectLoseSoundEffect))

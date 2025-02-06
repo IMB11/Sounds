@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /*? if >=1.21 {*/
-@Mixin(net.minecraft.entity.Leashable.class)
+@Mixin(net.minecraft.world.entity.Leashable.class)
 public interface LeadSnappingSoundMixin {
 /*?} else {*/
 /*@Mixin(net.minecraft.entity.mob.MobEntity.class)
@@ -20,8 +20,8 @@ public class LeadSnappingSoundMixin {
         if(dropItem) {
     *//*?} else {*/
     @Inject(method = "detachLeash(Lnet/minecraft/entity/Entity;ZZ)V", at = @At("TAIL"), cancellable = false)
-    private static <E extends net.minecraft.entity.Entity & net.minecraft.entity.Leashable> void $lead_snapping_sound_effect(E entity, boolean sendPacket, boolean dropItem, CallbackInfo ci) {
-        if (dropItem && entity.getWorld().isClient) {
+    private static <E extends net.minecraft.world.entity.Entity & net.minecraft.world.entity.Leashable> void $lead_snapping_sound_effect(E entity, boolean sendPacket, boolean dropItem, CallbackInfo ci) {
+        if (dropItem && entity.level().isClientSide) {
     /*?}*/
             SoundsConfig.get(WorldSoundsConfig.class).leadSnappingSoundEffect.playSound();
         }

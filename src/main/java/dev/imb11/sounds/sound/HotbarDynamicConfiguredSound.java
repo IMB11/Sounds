@@ -4,13 +4,13 @@ import dev.imb11.sounds.api.config.DynamicConfiguredSound;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.ItemStack;
 
 public class HotbarDynamicConfiguredSound extends DynamicConfiguredSound<ItemStack, ItemStackSoundContext> {
-    public HotbarDynamicConfiguredSound(String id, Identifier soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
+    public HotbarDynamicConfiguredSound(String id, ResourceLocation soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
         super(id, soundEvent, enabled, pitch, volume, enableDynamicSounds);
     }
 
@@ -18,7 +18,7 @@ public class HotbarDynamicConfiguredSound extends DynamicConfiguredSound<ItemSta
         super(id, soundEvent, enabled, pitch, volume, enableDynamicSounds);
     }
 
-    public HotbarDynamicConfiguredSound(String id, RegistryEntry.Reference<SoundEvent> soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
+    public HotbarDynamicConfiguredSound(String id, Holder.Reference<SoundEvent> soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
         super(id, soundEvent, enabled, pitch, volume, enableDynamicSounds);
     }
 

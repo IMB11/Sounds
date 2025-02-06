@@ -1,15 +1,19 @@
 package dev.imb11.sounds.sound;
 
-import dev.architectury.registry.registries.DeferredRegister;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
-
 import java.util.function.Supplier;
+
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 @SuppressWarnings("unused")
 public class CustomSounds {
-    public static DeferredRegister<SoundEvent> SOUND_EVENT_REGISTRY = DeferredRegister.create("sounds", RegistryKeys.SOUND_EVENT);
+    //? if neoforge {
+    public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, "sounds");
+    //?}
+
     public static final Supplier<SoundEvent> ITEM_SWORD_SWOOSH = register("item.sword.swoosh");
     public static final Supplier<SoundEvent> ITEM_HARD_METAL_HOLD = register("item.hard_metal.hold");
 
@@ -424,11 +428,14 @@ public class CustomSounds {
     public static final Supplier<SoundEvent> BLOCK_STONE_BRICKS_STEP = register("block.stone_bricks.step");
 
     private static Supplier<SoundEvent> register(String id) {
-        Identifier _id = Identifier.of("sounds", id);
-        return SOUND_EVENT_REGISTRY.register(_id, () -> SoundEvent.of(_id));
+        ResourceLocation _id = ResourceLocation.fromNamespaceAndPath("sounds", id);
+        //? if fabric {
+        /*return () -> Registry.register(BuiltInRegistries.SOUND_EVENT, _id, SoundEvent.createVariableRangeEvent(_id));
+        *///?} else {
+        return REGISTRY.register(id, () -> SoundEvent.createVariableRangeEvent(_id));
+        //?}
     }
 
     public static void initialize() {
-        CustomSounds.SOUND_EVENT_REGISTRY.register();
     }
 }

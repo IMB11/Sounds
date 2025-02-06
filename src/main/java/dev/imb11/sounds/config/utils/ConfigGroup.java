@@ -15,8 +15,8 @@ import dev.imb11.sounds.sound.InventoryDynamicConfiguredSound;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
 public abstract class ConfigGroup<T extends ConfigGroup> {
     private ConfigClassHandler<?> handler;
@@ -34,7 +34,7 @@ public abstract class ConfigGroup<T extends ConfigGroup> {
         if(handler == null) {
             handler = ConfigClassHandler
                     .createBuilder(clazz)
-                    .id(Identifier.of("sounds", getID()))
+                    .id(ResourceLocation.fromNamespaceAndPath("sounds", getID()))
                     .serializer(config -> {
                         var builder = GsonConfigSerializerBuilder
                                 .create(config)
@@ -68,9 +68,9 @@ public abstract class ConfigGroup<T extends ConfigGroup> {
 
     public abstract YetAnotherConfigLib getYACL();
 
-    public abstract Identifier getImage();
+    public abstract ResourceLocation getImage();
 
-    public abstract Text getName();
+    public abstract Component getName();
 
     public abstract String getID();
 }

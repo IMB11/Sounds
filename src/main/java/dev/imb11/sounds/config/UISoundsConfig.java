@@ -12,39 +12,39 @@ import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.api.controller.FloatFieldControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 
 import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 
 public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<UISoundsConfig> {
     @SerialEntry
-    public final HotbarDynamicConfiguredSound hotbarScrollSoundEffect = new HotbarDynamicConfiguredSound("hotbarScroll", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 1.8f, 0.2f, true);
+    public final HotbarDynamicConfiguredSound hotbarScrollSoundEffect = new HotbarDynamicConfiguredSound("hotbarScroll", SoundEvents.NOTE_BLOCK_HAT, true, 1.8f, 0.2f, true);
     @SerialEntry
-    public final HotbarDynamicConfiguredSound hotbarPickSoundEffect = new HotbarDynamicConfiguredSound("hotbarPick", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 1.8f, 0.2f, true);
+    public final HotbarDynamicConfiguredSound hotbarPickSoundEffect = new HotbarDynamicConfiguredSound("hotbarPick", SoundEvents.NOTE_BLOCK_HAT, true, 1.8f, 0.2f, true);
     @SerialEntry
-    public final DynamicConfiguredSound<ScreenHandler, ScreenHandlerSoundContext> inventoryOpenSoundEffect = new DynamicConfiguredSound<>("inventoryOpen", SoundsConfig.getSoundEventReference(SoundEvents.UI_TOAST_IN), true, 2f, 0.5f, true);
+    public final DynamicConfiguredSound<AbstractContainerMenu, ScreenHandlerSoundContext> inventoryOpenSoundEffect = new DynamicConfiguredSound<>("inventoryOpen", SoundsConfig.getSoundEventReference(SoundEvents.UI_TOAST_IN), true, 2f, 0.5f, true);
     @SerialEntry
-    public final DynamicConfiguredSound<ScreenHandler, ScreenHandlerSoundContext> inventoryCloseSoundEffect = new DynamicConfiguredSound<>("inventoryClose", SoundsConfig.getSoundEventReference(SoundEvents.UI_TOAST_OUT), true, 2f, 0.5f, false);
+    public final DynamicConfiguredSound<AbstractContainerMenu, ScreenHandlerSoundContext> inventoryCloseSoundEffect = new DynamicConfiguredSound<>("inventoryClose", SoundsConfig.getSoundEventReference(SoundEvents.UI_TOAST_OUT), true, 2f, 0.5f, false);
     @SerialEntry
-    public final ConfiguredSound inventoryScrollSoundEffect = new ConfiguredSound("inventoryScroll", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 1.8f, 0.2f);
+    public final ConfiguredSound inventoryScrollSoundEffect = new ConfiguredSound("inventoryScroll", SoundEvents.NOTE_BLOCK_HAT, true, 1.8f, 0.2f);
     @SerialEntry
-    public final ConfiguredSound inventoryTypingSoundEffect = new ConfiguredSound("inventoryTyping", SoundEvents.BLOCK_NOTE_BLOCK_HAT, true, 1.6f, 0.4f);
+    public final ConfiguredSound inventoryTypingSoundEffect = new ConfiguredSound("inventoryTyping", SoundEvents.NOTE_BLOCK_HAT, true, 1.6f, 0.4f);
     /// == ITEM MANAGEMENT == ///
     @SerialEntry
     public boolean ignoreEmptyInventorySlots = false;
     @SerialEntry
-    public final InventoryDynamicConfiguredSound itemDropSoundEffect = new InventoryDynamicConfiguredSound("itemDrop", SoundEvents.BLOCK_DISPENSER_LAUNCH, true, 1.5f, 0.4f, true);
+    public final InventoryDynamicConfiguredSound itemDropSoundEffect = new InventoryDynamicConfiguredSound("itemDrop", SoundEvents.DISPENSER_LAUNCH, true, 1.5f, 0.4f, true);
     @SerialEntry
-    public final InventoryDynamicConfiguredSound itemCopySoundEffect = new InventoryDynamicConfiguredSound("itemCopy", SoundEvents.BLOCK_FIRE_EXTINGUISH, true, 2f, 0.2f, true);
+    public final InventoryDynamicConfiguredSound itemCopySoundEffect = new InventoryDynamicConfiguredSound("itemCopy", SoundEvents.FIRE_EXTINGUISH, true, 2f, 0.2f, true);
     @SerialEntry
-    public final InventoryDynamicConfiguredSound itemDeleteSoundEffect = new InventoryDynamicConfiguredSound("itemDelete", SoundEvents.BLOCK_FIRE_EXTINGUISH, true, 1.6f, 0.2f, true);
+    public final InventoryDynamicConfiguredSound itemDeleteSoundEffect = new InventoryDynamicConfiguredSound("itemDelete", SoundEvents.FIRE_EXTINGUISH, true, 1.6f, 0.2f, true);
     @SerialEntry
-    public final InventoryDynamicConfiguredSound itemDragSoundEffect = new InventoryDynamicConfiguredSound("itemDrag", SoundEvents.BLOCK_STONE_HIT, true, 1.6f, 0.4f, true);
+    public final InventoryDynamicConfiguredSound itemDragSoundEffect = new InventoryDynamicConfiguredSound("itemDrag", SoundEvents.STONE_HIT, true, 1.6f, 0.4f, true);
     @SerialEntry
-    public final InventoryDynamicConfiguredSound itemClickSoundEffect = new InventoryDynamicConfiguredSound("itemPick", SoundEvents.BLOCK_STONE_HIT, true, 2f, 0.4f, true);
+    public final InventoryDynamicConfiguredSound itemClickSoundEffect = new InventoryDynamicConfiguredSound("itemPick", SoundEvents.STONE_HIT, true, 2f, 0.4f, true);
     /// == INTERFACE (GENERAL) == ///
     @SerialEntry
     public boolean ignoreEmptyHotbarSlots = false;
@@ -63,13 +63,13 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
     }
 
     @Override
-    public Identifier getImage() {
-        return Identifier.of("sounds", "textures/gui/ui_sounds.webp");
+    public ResourceLocation getImage() {
+        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/ui_sounds.webp");
     }
 
     @Override
-    public Text getName() {
-        return Text.translatable("sounds.config.ui");
+    public Component getName() {
+        return Component.translatable("sounds.config.ui");
     }
 
     @Override
@@ -80,9 +80,9 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
     @Override
     public YetAnotherConfigLib.Builder build(UISoundsConfig defaults, UISoundsConfig config, YetAnotherConfigLib.Builder builder) {
 
-        builder.title(Text.of("UI Sounds"));
+        builder.title(Component.nullToEmpty("UI Sounds"));
         builder.category(ConfigCategory.createBuilder()
-                .name(Text.translatable("sounds.config.ui.interface"))
+                .name(Component.translatable("sounds.config.ui.interface"))
                         .option(HELPER.get("ignoreEmptyHotbarSlots", defaults.ignoreEmptyHotbarSlots, () -> config.ignoreEmptyHotbarSlots, v -> config.ignoreEmptyHotbarSlots = v))
                 .group(config.hotbarScrollSoundEffect.getOptionGroup(defaults.hotbarScrollSoundEffect))
                 .group(config.hotbarPickSoundEffect.getOptionGroup(defaults.hotbarPickSoundEffect))
@@ -92,7 +92,7 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
                 .group(config.inventoryTypingSoundEffect.getOptionGroup(defaults.inventoryTypingSoundEffect))
                 .build());
         builder.category(ConfigCategory.createBuilder()
-                .name(Text.translatable("sounds.config.ui.item_management"))
+                .name(Component.translatable("sounds.config.ui.item_management"))
                 .option(HELPER.get("ignoreEmptyInventorySlots", defaults.ignoreEmptyInventorySlots, () -> config.ignoreEmptyInventorySlots, v -> config.ignoreEmptyInventorySlots = v))
                 .option(HELPER.get("enableItemSoundCooldown", defaults.enableItemSoundCooldown, () -> config.enableItemSoundCooldown, v -> config.enableItemSoundCooldown = v))
                 .option(HELPER.getField("itemSoundCooldown", 0.0f, Float.MAX_VALUE, defaults.itemSoundCooldown, () -> config.itemSoundCooldown, v -> config.itemSoundCooldown = v))

@@ -2,15 +2,15 @@ package dev.imb11.sounds.dynamic;
 
 import com.mojang.serialization.Codec;
 import dev.imb11.sounds.api.SoundDefinition;
-import net.minecraft.registry.Registries;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.sound.SoundEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Function;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.level.block.SoundType;
 
 public class DynamicSoundHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicSoundHelper.class);
@@ -27,8 +27,8 @@ public class DynamicSoundHelper {
     }
 
     public static void initialize() {
-        declareDefinitionsToLoad("items", SoundDefinition.getCodec(Registries.ITEM.getKey()));
-        declareDefinitionsToLoad("screens", SoundDefinition.getCodec(Registries.SCREEN_HANDLER.getKey()));
+        declareDefinitionsToLoad("items", SoundDefinition.getCodec(BuiltInRegistries.ITEM.key()));
+        declareDefinitionsToLoad("screens", SoundDefinition.getCodec(BuiltInRegistries.MENU.key()));
     }
 
     public static <T> ArrayList<SoundDefinition<T>> getDefinitions(String directory) {
@@ -36,19 +36,19 @@ public class DynamicSoundHelper {
     }
 
     public enum BlockSoundType {
-        PLACE(BlockSoundGroup::getPlaceSound),
-        HIT(BlockSoundGroup::getHitSound),
-        BREAK(BlockSoundGroup::getBreakSound),
-        FALL(BlockSoundGroup::getFallSound),
-        STEP(BlockSoundGroup::getStepSound);
+        PLACE(SoundType::getPlaceSound),
+        HIT(SoundType::getHitSound),
+        BREAK(SoundType::getBreakSound),
+        FALL(SoundType::getFallSound),
+        STEP(SoundType::getStepSound);
 
-        private final Function<BlockSoundGroup, SoundEvent> transformer;
+        private final Function<SoundType, SoundEvent> transformer;
 
-        BlockSoundType(Function<BlockSoundGroup, SoundEvent> transformer) {
+        BlockSoundType(Function<SoundType, SoundEvent> transformer) {
             this.transformer = transformer;
         }
 
-        public Function<BlockSoundGroup, SoundEvent> getTransformer() {
+        public Function<SoundType, SoundEvent> getTransformer() {
             return transformer;
         }
     }

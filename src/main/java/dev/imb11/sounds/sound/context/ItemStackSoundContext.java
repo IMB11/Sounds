@@ -4,16 +4,13 @@ import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.context.DynamicSoundContext;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.mixin.accessors.BlockAccessor;
-import net.minecraft.client.sound.SoundInstance;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.math.random.Random;
-
-import java.lang.reflect.Field;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
     private final DynamicSoundHelper.BlockSoundType blockSoundType;
@@ -36,7 +33,7 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
 
         if (item instanceof BlockItem blockItem) {
             var block = blockItem.getBlock();
-            fallback = this.blockSoundType.getTransformer().apply(((BlockAccessor)block).invokeGetSoundGroup(block.getDefaultState()));
+            fallback = this.blockSoundType.getTransformer().apply(((BlockAccessor)block).invokeGetSoundType(block.defaultBlockState()));
         }
 
         for (SoundDefinition<Item> definition : DynamicSoundHelper.<Item>getDefinitions("items")) {
@@ -60,6 +57,6 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
 
     @Override
     public SoundInstance getExample(SoundEvent fallback, float pitch, float volume) {
-        return handleContext(Registries.ITEM.getRandom(Random.create()).get().value().getDefaultStack(), fallback, pitch, volume);
+        return handleContext(BuiltInRegistries.ITEM.getRandom(RandomSource.create()).get().value().getDefaultInstance(), fallback, pitch, volume);
     }
 }

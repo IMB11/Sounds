@@ -2,29 +2,28 @@ package dev.imb11.sounds.gui;
 
 import dev.isxander.yacl3.gui.image.ImageRendererManager;
 import dev.isxander.yacl3.gui.image.impl.AnimatedDynamicTextureImage;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
-import net.minecraft.client.gui.screen.narration.NarrationPart;
-import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.ColorHelper;
-import net.minecraft.util.math.MathHelper;
-
 import java.lang.reflect.Field;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.narration.NarratedElementType;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ARGB;
+import net.minecraft.util.Mth;
 
 import static org.lwjgl.opengl.GL20.*;
 
-public class ImageButtonWidget extends ClickableWidget {
+public class ImageButtonWidget extends AbstractWidget {
     float durationHovered = 1f;
     private final CompletableFuture<AnimatedDynamicTextureImage> image;
-    private final Consumer<ClickableWidget> onPress;
+    private final Consumer<AbstractWidget> onPress;
 
-    public ImageButtonWidget(int x, int y, int width, int height, Text message, Identifier image, Consumer<ClickableWidget> clickEvent) {
+    public ImageButtonWidget(int x, int y, int width, int height, Component message, ResourceLocation image, Consumer<AbstractWidget> clickEvent) {
         super(x, y, width, height, message);
         this.image = ImageRendererManager.registerOrGetImage(image, () -> AnimatedDynamicTextureImage.createWEBPFromTexture(image));
         this.onPress = clickEvent;
@@ -38,11 +37,11 @@ public class ImageButtonWidget extends ClickableWidget {
     }
 
     @Override
-    protected void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
+    protected void renderWidget(GuiGraphics context, int mouseX, int mouseY, float delta) {
         context.enableScissor(getX(), getY(), getX() + width, getY() + height);
-        this.hovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.width && mouseY < this.getY() + this.height;
+        this.isHovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.width && mouseY < this.getY() + this.height;
 
-        if (this.hovered || this.isFocused()) {
+        if (this.isHovered || this.isFocused()) {
             durationHovered += delta / 2f;
         } else {
             if (durationHovered < 0) {
@@ -53,7 +52,7 @@ public class ImageButtonWidget extends ClickableWidget {
         }
 
         // Ease in out lerp.
-        float alphaScale = MathHelper.clampedLerp(0.7f, 0.2f, MathHelper.clamp(durationHovered - 1f, 0.0f, 1.0f));
+        float alphaScale = Mth.clampedLerp(0.7f, 0.2f, Mth.clamp(durationHovered - 1f, 0.0f, 1.0f));
 
         if (image.isDone()) {
 
@@ -78,12 +77,12 @@ public class ImageButtonWidget extends ClickableWidget {
                         float neededWidth = frameWidth * ((float) this.height / frameHeight);
 
                         // Scale the image to fit within the width and height of the button.
-                        context.getMatrices().push();
+                        context.pose().pushPose();
                         // gl bilinear scaling.
                         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
                         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
                         contentImage.render(context, getX(), getY(), (int) Math.max(neededWidth, this.width), delta);
-                        context.getMatrices().pop();
+                        context.pose().popPose();
 
                         // reset gl scaling
 
@@ -104,40 +103,40 @@ public class ImageButtonWidget extends ClickableWidget {
         //? if <1.21.2 {
         //int greyColor = ColorHelper.Argb.getArgb((int) (alphaScale * 255), 0, 0, 0);
         //?} else {
-        int greyColor = ColorHelper.getArgb((int) (alphaScale * 255), 0, 0, 0);
+        int greyColor = ARGB.color((int) (alphaScale * 255), 0, 0, 0);
         //?}
         context.fill(getX(), getY(), getX() + width, getY() + height, greyColor);
 
         // Draw text.
-        var client = MinecraftClient.getInstance();
+        var client = Minecraft.getInstance();
 
         float fontScaling = 1.24f;
 
         int unscaledTextX = this.getX() + 5;
-        int unscaledTextY = this.getY() + this.height - client.textRenderer.fontHeight - 5;
+        int unscaledTextY = this.getY() + this.height - client.font.lineHeight - 5;
         int textX = (int) (unscaledTextX / fontScaling);
         int textY = (int) (unscaledTextY / fontScaling);
         int endX = (int) ((this.getX() + this.width - 5) / fontScaling);
         int endY = (int) ((this.getY() + this.height - 5) / fontScaling);
 
-        context.fill(unscaledTextX - 5, unscaledTextY - 5, unscaledTextX + this.width - 5, unscaledTextY + client.textRenderer.fontHeight + 5, 0xAF000000);
+        context.fill(unscaledTextX - 5, unscaledTextY - 5, unscaledTextX + this.width - 5, unscaledTextY + client.font.lineHeight + 5, 0xAF000000);
 
-        context.getMatrices().push();
-        context.getMatrices().scale(fontScaling, fontScaling, 1.0f);
+        context.pose().pushPose();
+        context.pose().scale(fontScaling, fontScaling, 1.0f);
 
 //            context.fill(textX, textY, endX, endY, 0xFFFF2F00);
 
-        drawScrollableText(context, client.textRenderer, getMessage(), textX, textY, endX, endY, 0xFFFFFF);
+        renderScrollingString(context, client.font, getMessage(), textX, textY, endX, endY, 0xFFFFFF);
 
-        context.getMatrices().pop();
+        context.pose().popPose();
 
         // Draw border.
-        context.drawBorder(getX(), getY(), width, height, 0x0FFFFFFF);
+        context.renderOutline(getX(), getY(), width, height, 0x0FFFFFFF);
         context.disableScissor();
     }
 
     @Override
-    protected void appendClickableNarrations(NarrationMessageBuilder builder) {
-        builder.put(NarrationPart.HINT, this.getMessage());
+    protected void updateWidgetNarration(NarrationElementOutput builder) {
+        builder.add(NarratedElementType.HINT, this.getMessage());
     }
 }

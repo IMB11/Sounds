@@ -6,16 +6,12 @@ import dev.imb11.sounds.api.context.DynamicSoundContext;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
-import net.minecraft.client.sound.SoundInstance;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.registry.Registries;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 
-public class ScreenHandlerSoundContext implements DynamicSoundContext<ScreenHandler> {
+public class ScreenHandlerSoundContext implements DynamicSoundContext<AbstractContainerMenu> {
 
     private final boolean isOpening;
 
@@ -32,11 +28,11 @@ public class ScreenHandlerSoundContext implements DynamicSoundContext<ScreenHand
     }
 
     @Override
-    public SoundInstance handleContext(ScreenHandler context, SoundEvent fallback, float pitch, float volume) {
+    public SoundInstance handleContext(AbstractContainerMenu context, SoundEvent fallback, float pitch, float volume) {
         SoundEvent soundEvent = null;
         try {
             var type = context.getType();
-            for (SoundDefinition<ScreenHandlerType<?>> definition : DynamicSoundHelper.<ScreenHandlerType<?>>getDefinitions("screens")) {
+            for (SoundDefinition<MenuType<?>> definition : DynamicSoundHelper.<MenuType<?>>getDefinitions("screens")) {
                 if (definition.getKeys().isValid(type)) {
                     soundEvent = definition.getSoundEvent();
 

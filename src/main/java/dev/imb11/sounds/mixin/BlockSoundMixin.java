@@ -3,19 +3,18 @@ package dev.imb11.sounds.mixin;
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.config.TagPair;
 import dev.imb11.sounds.api.event.SoundDefinitionReplacementEvent;
+import dev.imb11.sounds.api.event.SoundDefinitionReplacementEvent.Response;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.WorldSoundsConfig;
 import dev.imb11.sounds.dynamic.TagPairHelper;
 import dev.imb11.sounds.util.BlockAccessor;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FluidBlock;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.fluid.WaterFluid;
-import net.minecraft.registry.Registries;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /*? if >=1.21 {*/
-@Mixin(AbstractBlock.class)
+@Mixin(BlockBehaviour.class)
 /*?} else {*/
 /*@Mixin(Block.class)
 @Debug(export = true)
@@ -38,10 +37,10 @@ public abstract class BlockSoundMixin implements BlockAccessor {
     private boolean hasFetched = false;
 
     @Override
-    public void sounds$prepareTagPair(Identifier value) {
+    public void sounds$prepareTagPair(ResourceLocation value) {
         try {
-            if(MinecraftClient.getInstance() == null) return;
-            if(((Object) this) instanceof FluidBlock) {
+            if(Minecraft.getInstance() == null) return;
+            if(((Object) this) instanceof LiquidBlock) {
                 hasFetched = true;
                 return;
             }
@@ -58,9 +57,9 @@ public abstract class BlockSoundMixin implements BlockAccessor {
     }
 
     @Inject(method = "getSoundGroup", at = @At("HEAD"), cancellable = true)
-    public void $manageCustomSounds(BlockState state, CallbackInfoReturnable<BlockSoundGroup> cir) {
+    public void $manageCustomSounds(BlockState state, CallbackInfoReturnable<SoundType> cir) {
         try {
-            var id = Registries.BLOCK.getId(state.getBlock());
+            var id = BuiltInRegistries.BLOCK.getKey(state.getBlock());
             if(!hasFetched) {
                 sounds$prepareTagPair(id);
             }
@@ -71,7 +70,7 @@ public abstract class BlockSoundMixin implements BlockAccessor {
             SoundsClient.LOGGER.warn("Failed initial block fetch.");
         }
 
-        BlockSoundGroup group = null;
+        SoundType group = null;
         if(associatedTagPair != null) {
             group = associatedTagPair.getGroup();
         }

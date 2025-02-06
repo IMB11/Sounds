@@ -7,21 +7,20 @@ import dev.isxander.yacl3.api.ButtonOption;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
-import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.client.sound.SoundInstance;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 
 public class DynamicConfiguredSound<T, F extends DynamicSoundContext<T>> extends ConfiguredSound {
     public static final Codec<DynamicConfiguredSound> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.STRING.fieldOf("id").forGetter(ConfiguredSound::getId),
-                    Identifier.CODEC.fieldOf("soundEvent").forGetter(sound -> sound.soundEvent.registryKey().getValue()),
+                    ResourceLocation.CODEC.fieldOf("soundEvent").forGetter(sound -> sound.soundEvent.key().location()),
                     Codec.BOOL.fieldOf("shouldPlay").forGetter(ConfiguredSound::shouldPlay),
                     Codec.FLOAT.fieldOf("pitch").forGetter(ConfiguredSound::getPitch),
                     Codec.FLOAT.fieldOf("volume").forGetter(ConfiguredSound::getVolume),
@@ -29,7 +28,7 @@ public class DynamicConfiguredSound<T, F extends DynamicSoundContext<T>> extends
             ).apply(instance, DynamicConfiguredSound::new));
     public boolean enableDynamicSounds;
 
-    public DynamicConfiguredSound(String id, Identifier soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
+    public DynamicConfiguredSound(String id, ResourceLocation soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
         super(id, soundEvent, enabled, pitch, volume);
         this.enableDynamicSounds = enableDynamicSounds;
     }
@@ -39,7 +38,7 @@ public class DynamicConfiguredSound<T, F extends DynamicSoundContext<T>> extends
         this.enableDynamicSounds = enableDynamicSounds;
     }
 
-    public DynamicConfiguredSound(String id, RegistryEntry.Reference<SoundEvent> soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
+    public DynamicConfiguredSound(String id, Holder.Reference<SoundEvent> soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
         super(id, soundEvent, enabled, pitch, volume);
         this.enableDynamicSounds = enableDynamicSounds;
     }
@@ -49,7 +48,7 @@ public class DynamicConfiguredSound<T, F extends DynamicSoundContext<T>> extends
     }
 
     public void playDynamicSound(SoundEvent event) {
-        playSound(PositionedSoundInstance.master(event, this.pitch, this.volume));
+        playSound(SimpleSoundInstance.forUI(event, this.pitch, this.volume));
     }
 
     public void playDynamicSound(T context, F contextHandler) {
@@ -69,9 +68,9 @@ public class DynamicConfiguredSound<T, F extends DynamicSoundContext<T>> extends
         ArrayList<Option<?>> options = super.addExtraOptions(defaults);
 
         var shouldDynamic = Option.<Boolean>createBuilder()
-                .name(Text.translatable("sounds.config.dynamic.option"))
+                .name(Component.translatable("sounds.config.dynamic.option"))
                 .description(OptionDescription.createBuilder()
-                                .text(Text.translatable("sounds.config.dynamic.option.description")).build())
+                                .text(Component.translatable("sounds.config.dynamic.option.description")).build())
                 .binding(dynamicDefaults.enableDynamicSounds, () -> this.enableDynamicSounds, (val) -> this.enableDynamicSounds = val)
                 .controller(opt -> BooleanControllerBuilder.create(opt).coloured(true).onOffFormatter())
                 .build();

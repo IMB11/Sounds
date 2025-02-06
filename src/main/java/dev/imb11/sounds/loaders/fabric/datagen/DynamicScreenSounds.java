@@ -1,68 +1,67 @@
 /*? if >=1.21 && fabric {*/
-package dev.imb11.sounds.loaders.fabric.datagen;
+/*package dev.imb11.sounds.loaders.fabric.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.datagen.SoundDefinitionProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.sound.SoundEvents;
-
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.inventory.MenuType;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
-public class DynamicScreenSounds extends SoundDefinitionProvider<ScreenHandlerType<?>> {
+public class DynamicScreenSounds extends SoundDefinitionProvider<MenuType<?>> {
 
-    protected DynamicScreenSounds(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-        super(dataOutput, registriesFuture, "screens", Registries.SCREEN_HANDLER);
+    protected DynamicScreenSounds(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        super(dataOutput, registriesFuture, "screens", BuiltInRegistries.MENU);
     }
 
     @Override
-    public void accept(BiConsumer<String, SoundDefinition.Builder<ScreenHandlerType<?>>> provider) {
-        provider.accept("crafting", create(SoundEvents.BLOCK_WOOD_HIT)
-                .addKey(ScreenHandlerType.CRAFTING));
+    public void accept(BiConsumer<String, SoundDefinition.Builder<MenuType<?>>> provider) {
+        provider.accept("crafting", create(SoundEvents.WOOD_HIT)
+                .addKey(MenuType.CRAFTING));
 
-        provider.accept("smithing", create(SoundEvents.ENTITY_IRON_GOLEM_STEP)
-                .addKey(ScreenHandlerType.SMITHING));
+        provider.accept("smithing", create(SoundEvents.IRON_GOLEM_STEP)
+                .addKey(MenuType.SMITHING));
 
-        provider.accept("anvil", create(SoundEvents.BLOCK_ANVIL_PLACE)
-                .addKey(ScreenHandlerType.ANVIL));
+        provider.accept("anvil", create(SoundEvents.ANVIL_PLACE)
+                .addKey(MenuType.ANVIL));
 
-        provider.accept("smoker", create(SoundEvents.BLOCK_CAMPFIRE_CRACKLE)
-                .addKey(ScreenHandlerType.SMOKER));
+        provider.accept("smoker", create(SoundEvents.CAMPFIRE_CRACKLE)
+                .addKey(MenuType.SMOKER));
 
-        provider.accept("furnace", create(SoundEvents.BLOCK_FIRE_AMBIENT)
-                .addKey(ScreenHandlerType.FURNACE)
-                .addKey(ScreenHandlerType.BLAST_FURNACE));
+        provider.accept("furnace", create(SoundEvents.FIRE_AMBIENT)
+                .addKey(MenuType.FURNACE)
+                .addKey(MenuType.BLAST_FURNACE));
 
-        provider.accept("lectern", create(SoundEvents.ENTITY_VILLAGER_WORK_LIBRARIAN)
-                .addKey(ScreenHandlerType.LECTERN));
+        provider.accept("lectern", create(SoundEvents.VILLAGER_WORK_LIBRARIAN)
+                .addKey(MenuType.LECTERN));
 
-        provider.accept("stonecutter", create(SoundEvents.ENTITY_VILLAGER_WORK_MASON)
-                .addKey(ScreenHandlerType.STONECUTTER));
+        provider.accept("stonecutter", create(SoundEvents.VILLAGER_WORK_MASON)
+                .addKey(MenuType.STONECUTTER));
 
-        provider.accept("grindstone", create(SoundEvents.BLOCK_STONE_PLACE)
-                .addKey(ScreenHandlerType.GRINDSTONE));
+        provider.accept("grindstone", create(SoundEvents.STONE_PLACE)
+                .addKey(MenuType.GRINDSTONE));
 
-        provider.accept("beacon", create(SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE)
-                .addKey(ScreenHandlerType.BEACON));
+        provider.accept("beacon", create(SoundEvents.AMETHYST_BLOCK_RESONATE)
+                .addKey(MenuType.BEACON));
 
-        provider.accept("brewing_stand", create(SoundEvents.ITEM_BOTTLE_EMPTY)
-                .addKey(ScreenHandlerType.BREWING_STAND));
+        provider.accept("brewing_stand", create(SoundEvents.BOTTLE_EMPTY)
+                .addKey(MenuType.BREWING_STAND));
 
-        provider.accept("loom", create(SoundEvents.BLOCK_TRIPWIRE_DETACH)
-                .addKey(ScreenHandlerType.LOOM));
+        provider.accept("loom", create(SoundEvents.TRIPWIRE_DETACH)
+                .addKey(MenuType.LOOM));
 
-        provider.accept("cartography_table", create(SoundEvents.ENTITY_VILLAGER_WORK_CARTOGRAPHER)
-                .addKey(ScreenHandlerType.CARTOGRAPHY_TABLE));
+        provider.accept("cartography_table", create(SoundEvents.VILLAGER_WORK_CARTOGRAPHER)
+                .addKey(MenuType.CARTOGRAPHY_TABLE));
 
-        provider.accept("enchantment_table", create(SoundEvents.BLOCK_END_PORTAL_FRAME_FILL)
-                .addKey(ScreenHandlerType.ENCHANTMENT));
+        provider.accept("enchantment_table", create(SoundEvents.END_PORTAL_FRAME_FILL)
+                .addKey(MenuType.ENCHANTMENT));
 
-        provider.accept("redstone_item_movement", create(SoundEvents.BLOCK_STONE_HIT)
-                .addKey(ScreenHandlerType.GENERIC_3X3)
-                .addKey(ScreenHandlerType.HOPPER));
+        provider.accept("redstone_item_movement", create(SoundEvents.STONE_HIT)
+                .addKey(MenuType.GENERIC_3x3)
+                .addKey(MenuType.HOPPER));
     }
 }
-/*?}*/
+*//*?}*/

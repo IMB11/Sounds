@@ -1,8 +1,8 @@
 package dev.imb11.sounds.sound.context;
 
 import dev.imb11.sounds.api.context.DynamicSoundContext;
-import net.minecraft.client.sound.SoundInstance;
-import net.minecraft.sound.SoundEvent;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.sounds.SoundEvent;
 
 public class RepeaterSoundContext implements DynamicSoundContext<Integer> {
     public static RepeaterSoundContext of() {

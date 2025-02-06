@@ -2,20 +2,20 @@ package dev.imb11.sounds.mixin.ui;
 
 import dev.imb11.sounds.config.WorldSoundsConfig;
 import dev.imb11.sounds.util.MixinStatics;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.slot.SlotActionType;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -24,9 +24,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(PlayerEntity.class)
+@Mixin(Player.class)
 abstract class PlayerEntityMixin extends LivingEntity {
-    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
+    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, Level world) {
         super(entityType, world);
     }
 
@@ -35,13 +35,13 @@ abstract class PlayerEntityMixin extends LivingEntity {
     }
 }
 
-@Mixin(ClientPlayerEntity.class)
+@Mixin(LocalPlayer.class)
 public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
-    @Shadow @Final protected MinecraftClient client;
+    @Shadow @Final protected Minecraft client;
 
     @Shadow public abstract void playSound(SoundEvent sound, float volume, float pitch);
 
-    protected ItemDropSoundEffect(EntityType<? extends LivingEntity> entityType, World world) {
+    protected ItemDropSoundEffect(EntityType<? extends LivingEntity> entityType, Level world) {
         super(entityType, world);
     }
 
@@ -58,7 +58,7 @@ public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
         if(dropSoundCooldownTime > System.currentTimeMillis()) return;
         dropSoundCooldownTime = System.currentTimeMillis() + ((long) SoundsConfig.get(UISoundsConfig.class).itemSoundCooldown);
 
-        if (MixinStatics.previousAction == SlotActionType.QUICK_MOVE) {
+        if (MixinStatics.previousAction == ClickType.QUICK_MOVE) {
             MixinStatics.previousAction = null;
             return;
         }
@@ -68,13 +68,13 @@ public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
 
     @Inject(method = "dropSelectedItem(Z)Z", at = @At("HEAD"))
     private void $drop_selected_item_sound_effect(boolean entireStack, CallbackInfoReturnable<Boolean> cir) {
-        ItemStack stack = this.getMainHandStack();
+        ItemStack stack = this.getMainHandItem();
         playSound(stack);
     }
 
     @Override
     protected void $drop_item_sound_effect(ItemStack stack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir) {
-        if (!this.getWorld().isClient) return;
+        if (!this.level().isClientSide) return;
         playSound(stack);
     }
 }

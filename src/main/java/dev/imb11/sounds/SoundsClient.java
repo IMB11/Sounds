@@ -1,6 +1,5 @@
 package dev.imb11.sounds;
 
-import dev.architectury.registry.ReloadListenerRegistry;
 import dev.imb11.mru.API;
 import dev.imb11.mru.LoaderUtils;
 import dev.imb11.sounds.config.ChatSoundsConfig;
@@ -9,15 +8,21 @@ import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.dynamic.SoundsReloadListener;
 import dev.imb11.sounds.sound.CustomSounds;
 import dev.imb11.sounds.sound.events.PotionEventHelper;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.resource.ResourceType;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Util;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
+import net.minecraft.Util;
+import net.minecraft.client.Minecraft;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 
 public class SoundsClient {
     public static final Path DEFAULT_PACK_PATH = LoaderUtils.getConfigFolder("sounds").resolve("dynamic_sounds");
@@ -27,25 +32,22 @@ public class SoundsClient {
             "Unable to gather supporters."
     };
 
-    public static Identifier id(String id) {
-        return Identifier.of("sounds", id);
+    public static ResourceLocation id(String id) {
+        return ResourceLocation.fromNamespaceAndPath("sounds", id);
     }
 
     public static void init() {
         SoundsConfig.loadAll();
         DynamicSoundHelper.initialize();
 
-        ReloadListenerRegistry.register(ResourceType.CLIENT_RESOURCES, new SoundsReloadListener());
-
         CustomSounds.initialize();
-        PotionEventHelper.initialize();
 
         ChatSoundsConfig chatSoundsConfig = SoundsConfig.getRaw(ChatSoundsConfig.class);
         ChatSoundsConfig instanceChatSoundsConfig = (ChatSoundsConfig) chatSoundsConfig.getHandler().instance();
 
         // Add username to mentionKeywords if it's not already there
-        if (!instanceChatSoundsConfig.mentionKeywords.contains("@" + MinecraftClient.getInstance().getSession().getUsername())) {
-            instanceChatSoundsConfig.mentionKeywords.add("@" + MinecraftClient.getInstance().getSession().getUsername());
+        if (!instanceChatSoundsConfig.mentionKeywords.contains("@" + Minecraft.getInstance().getUser().getName())) {
+            instanceChatSoundsConfig.mentionKeywords.add("@" + Minecraft.getInstance().getUser().getName());
         }
 
         chatSoundsConfig.save();
@@ -55,6 +57,6 @@ public class SoundsClient {
                 API apiClient = new API();
                 SUPPORTERS = apiClient.getKofiSupporters();
             } catch (Exception ignored) {}
-        }, Util.getDownloadWorkerExecutor());
+        }, Util.nonCriticalIoPool());
     }
 }

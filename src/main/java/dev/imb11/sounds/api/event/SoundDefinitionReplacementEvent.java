@@ -1,10 +1,10 @@
 package dev.imb11.sounds.api.event;
 
-import net.minecraft.sound.BlockSoundGroup;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import net.minecraft.world.level.block.SoundType;
 
 public class SoundDefinitionReplacementEvent {
     private static final ArrayList<SoundDefinitionReplacementListener> EVENT_LISTENERS = new ArrayList<>();
@@ -26,7 +26,7 @@ public class SoundDefinitionReplacementEvent {
     }
 
     @ApiStatus.Internal
-    public static Response fire(BlockSoundGroup event) {
+    public static Response fire(SoundType event) {
         for (SoundDefinitionReplacementListener listener : EVENT_LISTENERS) {
             Response response = listener.onSoundDefinitionReplacement(event);
             if (response.response() != ResponseType.PASS) {
@@ -56,12 +56,12 @@ public class SoundDefinitionReplacementEvent {
      * @param response The type of response - see the {@link ResponseType} enum for more information.
      * @param override The new block sound group to use, if the response is {@link ResponseType#OVERRIDE}.
      */
-    public record Response(ResponseType response, @Nullable BlockSoundGroup override) {
+    public record Response(ResponseType response, @Nullable SoundType override) {
         public static Response pass() {
             return new Response(ResponseType.PASS, null);
         }
 
-        public static Response override(BlockSoundGroup override) {
+        public static Response override(SoundType override) {
             return new Response(ResponseType.OVERRIDE, override);
         }
 
@@ -77,6 +77,6 @@ public class SoundDefinitionReplacementEvent {
          * @param plannedSoundGroup The block sound group that is planned to be used.
          * @return The response to the event - see the {@link Response} class for more information.
          */
-        Response onSoundDefinitionReplacement(@Nullable BlockSoundGroup plannedSoundGroup);
+        Response onSoundDefinitionReplacement(@Nullable SoundType plannedSoundGroup);
     }
 }

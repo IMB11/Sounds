@@ -3,8 +3,8 @@ package dev.imb11.sounds.config;
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
 public class ModConfig extends ConfigGroup<ModConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<ModConfig> {
     @SerialEntry
@@ -20,13 +20,13 @@ public class ModConfig extends ConfigGroup<ModConfig> implements YetAnotherConfi
     }
 
     @Override
-    public Identifier getImage() {
-        return Identifier.of("sounds", "textures/gui/chat_sounds.webp");
+    public ResourceLocation getImage() {
+        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/chat_sounds.webp");
     }
 
     @Override
-    public Text getName() {
-        return Text.translatable("sounds.config.chat");
+    public Component getName() {
+        return Component.translatable("sounds.config.chat");
     }
 
     @Override

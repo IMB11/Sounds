@@ -9,48 +9,47 @@ import dev.isxander.yacl3.api.OptionGroup;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.client.sound.SoundInstance;
-import net.minecraft.client.toast.SystemToast;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.entry.RegistryEntryOwner;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.toasts.SystemToast;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 
 public class ConfiguredSound {
     public static final Codec<ConfiguredSound> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.STRING.fieldOf("id").forGetter(ConfiguredSound::getId),
-                    Identifier.CODEC.fieldOf("soundEvent").forGetter(sound -> sound.soundEvent.registryKey().getValue()),
+                    ResourceLocation.CODEC.fieldOf("soundEvent").forGetter(sound -> sound.soundEvent.key().location()),
                     Codec.BOOL.fieldOf("shouldPlay").forGetter(ConfiguredSound::shouldPlay),
                     Codec.FLOAT.fieldOf("pitch").forGetter(ConfiguredSound::getPitch),
                     Codec.FLOAT.fieldOf("volume").forGetter(ConfiguredSound::getVolume)
             ).apply(instance, ConfiguredSound::new));
     public final String id;
-    public final MinecraftClient client;
+    public final Minecraft client;
     public boolean enabled;
-    public RegistryEntry.Reference<SoundEvent> soundEvent;
+    public Holder.Reference<SoundEvent> soundEvent;
     public float pitch = 1f;
     public float volume = 1f;
     private float _pendingPitch = 1f;
     private float _pendingVolume = 1f;
-    private RegistryEntry.Reference<SoundEvent> _pendingSoundEvent;
+    private Holder.Reference<SoundEvent> _pendingSoundEvent;
 
-    public ConfiguredSound(String id, Identifier soundEvent, boolean enabled, float pitch, float volume) {
+    public ConfiguredSound(String id, ResourceLocation soundEvent, boolean enabled, float pitch, float volume) {
         this.enabled = enabled;
         //? if <1.21.2 {
         //this.soundEvent = RegistryEntry.Reference.standAlone(Registries.SOUND_EVENT.getEntryOwner(), RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent));
         //?} else {
-        this.soundEvent = RegistryEntry.Reference.standAlone(Registries.SOUND_EVENT, RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent));
+        this.soundEvent = Holder.Reference.createStandAlone(BuiltInRegistries.SOUND_EVENT, ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), soundEvent));
         //?}
         this.pitch = pitch;
         this.volume = volume;
@@ -60,30 +59,30 @@ public class ConfiguredSound {
         _pendingSoundEvent = this.soundEvent;
 
         this.id = id;
-        this.client = MinecraftClient.getInstance();
+        this.client = Minecraft.getInstance();
     }
 
-    public ConfiguredSound(String id, RegistryEntry.Reference<SoundEvent> soundEvent, boolean enabled, float pitch, float volume) {
-        this(id, soundEvent.registryKey().getValue(), enabled, pitch, volume);
+    public ConfiguredSound(String id, Holder.Reference<SoundEvent> soundEvent, boolean enabled, float pitch, float volume) {
+        this(id, soundEvent.key().location(), enabled, pitch, volume);
     }
 
     public ConfiguredSound(String id, SoundEvent soundEvent, boolean enabled, float pitch, float volume) {
         //? if <1.21.2 {
         //this(id, soundEvent.getId(), enabled, pitch, volume);
         //?} else {
-        this(id, soundEvent.id(), enabled, pitch, volume);
+        this(id, soundEvent.location(), enabled, pitch, volume);
         //?}
     }
 
-    public ConfiguredSound(String id, RegistryEntry<SoundEvent> soundEvent, boolean enabled, float pitch, float volume) {
+    public ConfiguredSound(String id, Holder<SoundEvent> soundEvent, boolean enabled, float pitch, float volume) {
         this(id, soundEvent.value(), enabled, pitch, volume);
     }
 
     private <T extends ConfiguredSound> ArrayList<Option<?>> createDefaultOptions(T defaults) {
         var volumeOpt = Option.<Float>createBuilder()
-                .name(Text.translatable("sounds.config.volume.name"))
+                .name(Component.translatable("sounds.config.volume.name"))
                 .description(OptionDescription.createBuilder()
-                                .text(Text.translatable("sounds.config.volume.description")).build())
+                                .text(Component.translatable("sounds.config.volume.description")).build())
                 .binding(defaults.volume, () -> this.volume, (val) -> this.volume = val)
                 .listener((opt, val) -> {
                     this._pendingVolume = val;
@@ -92,9 +91,9 @@ public class ConfiguredSound {
                 .build();
 
         var pitchOpt = Option.<Float>createBuilder()
-                .name(Text.translatable("sounds.config.pitch.name"))
+                .name(Component.translatable("sounds.config.pitch.name"))
                 .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sounds.config.pitch.description")).build())
+                        .text(Component.translatable("sounds.config.pitch.description")).build())
                 .binding(defaults.pitch, () -> this.pitch, (val) -> this.pitch = val)
                 .listener((opt, val) -> {
                     this._pendingPitch = val;
@@ -103,28 +102,28 @@ public class ConfiguredSound {
                 .build();
 
         var soundEventOpt = Option.<String>createBuilder()
-                .name(Text.translatable("sounds.config.event.name"))
+                .name(Component.translatable("sounds.config.event.name"))
                 .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sounds.config.event.description")).build())
-                .binding(defaults.soundEvent.registryKey().getValue().toString(), () -> this.soundEvent.registryKey().getValue().toString(), (val) ->
-                        this.soundEvent = RegistryEntry.Reference.standAlone(
+                        .text(Component.translatable("sounds.config.event.description")).build())
+                .binding(defaults.soundEvent.key().location().toString(), () -> this.soundEvent.key().location().toString(), (val) ->
+                        this.soundEvent = Holder.Reference.createStandAlone(
                                 //? if <1.21.2 {
                                 //Registries.SOUND_EVENT.getEntryOwner(),
                                 //?} else {
-                                Registries.SOUND_EVENT,
+                                BuiltInRegistries.SOUND_EVENT,
                                 //?}
-                                RegistryKey.of(Registries.SOUND_EVENT.getKey(), Identifier.tryParse(val))))
-                .listener((opt, val) -> this._pendingSoundEvent = RegistryEntry.Reference.standAlone(
+                                ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), ResourceLocation.tryParse(val))))
+                .listener((opt, val) -> this._pendingSoundEvent = Holder.Reference.createStandAlone(
                         //? if <1.21.2 {
                         //Registries.SOUND_EVENT.getEntryOwner(),
                         //?} else {
-                        Registries.SOUND_EVENT,
+                        BuiltInRegistries.SOUND_EVENT,
                         //?}
-                        RegistryKey.of(Registries.SOUND_EVENT.getKey(), Identifier.tryParse(val))))
+                        ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), ResourceLocation.tryParse(val))))
                 .controller(opt -> DropdownStringControllerBuilder.create(opt)
                         .allowAnyValue(false)
                         .allowEmptyValue(false)
-                        .values(Registries.SOUND_EVENT.getKeys().stream().map(RegistryKey::getValue).map(Identifier::toString).toList()))
+                        .values(BuiltInRegistries.SOUND_EVENT.registryKeySet().stream().map(ResourceKey::location).map(ResourceLocation::toString).toList()))
                 .build();
 
         return new ArrayList<>(List.of(volumeOpt, pitchOpt, soundEventOpt));
@@ -136,8 +135,8 @@ public class ConfiguredSound {
 
     public ButtonOption getPreviewButton() {
         return ButtonOption.createBuilder()
-                .name(Text.translatable("sounds.config.preview.name", ""))
-                .description(OptionDescription.of(Text.translatable("sounds.config.preview.option.description")))
+                .name(Component.translatable("sounds.config.preview.name", ""))
+                .description(OptionDescription.of(Component.translatable("sounds.config.preview.option.description")))
                 .action((a, b) -> playPreviewSound())
                 .build();
     }
@@ -149,9 +148,9 @@ public class ConfiguredSound {
         allOptions.addAll(extraOptions);
 
         var shouldPlay = Option.<Boolean>createBuilder()
-                .name(Text.translatable("sounds.config.shouldPlay.option"))
+                .name(Component.translatable("sounds.config.shouldPlay.option"))
                 .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sounds.config.shouldPlay.option.description")).build())
+                        .text(Component.translatable("sounds.config.shouldPlay.option.description")).build())
                 .binding(defaults.enabled, () -> this.enabled, (val) -> this.enabled = val)
                 .listener((opt, val) -> {
                     // Disable/Enable all options when toggled.
@@ -162,9 +161,9 @@ public class ConfiguredSound {
 
         return OptionGroup
                 .createBuilder()
-                .name(Text.translatable("sounds.config." + id + ".option").formatted(Formatting.UNDERLINE))
+                .name(Component.translatable("sounds.config." + id + ".option").withStyle(ChatFormatting.UNDERLINE))
                 .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sounds.config." + id + ".option.description")).build())
+                        .text(Component.translatable("sounds.config." + id + ".option.description")).build())
                 .option(getPreviewButton())
                 .option(shouldPlay)
                 .options(allOptions)
@@ -173,24 +172,24 @@ public class ConfiguredSound {
     }
 
     public final SoundEvent fetchSoundEvent() {
-        return Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
+        return BuiltInRegistries.SOUND_EVENT.getValue(this.soundEvent.key());
     }
 
     protected static long lastShownToast = -1L;
     public void playSound() {
         if (this.enabled) {
             try {
-                final SoundEvent event = Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
+                final SoundEvent event = BuiltInRegistries.SOUND_EVENT.getValue(this.soundEvent.key());
                 this.playSound(event, this.pitch, this.volume);
             } catch (Exception ignored) {
                 // Prevent toast spam:
                 if (System.currentTimeMillis() > lastShownToast + 5000) {
                     lastShownToast = System.currentTimeMillis();
-                    MinecraftClient client = MinecraftClient.getInstance();
-                    client.getToastManager().add(SystemToast.create(client,
-                            SystemToast.Type.WORLD_ACCESS_FAILURE,
-                            Text.translatable("sounds.config.play.error.title"),
-                            Text.translatable("sounds.config.play.error.description", this.getId())));
+                    Minecraft client = Minecraft.getInstance();
+                    client.getToastManager().addToast(SystemToast.multiline(client,
+                            SystemToast.SystemToastId.WORLD_ACCESS_FAILURE,
+                            Component.translatable("sounds.config.play.error.title"),
+                            Component.translatable("sounds.config.play.error.description", this.getId())));
                 }
             }
         }
@@ -198,29 +197,29 @@ public class ConfiguredSound {
 
     private void playPreviewSound() {
         try {
-            final SoundEvent event = Registries.SOUND_EVENT.get(this._pendingSoundEvent.registryKey());
+            final SoundEvent event = BuiltInRegistries.SOUND_EVENT.getValue(this._pendingSoundEvent.key());
             this.playSound(event, _pendingPitch, _pendingVolume);
         } catch (Exception ignored) {
             if (System.currentTimeMillis() > lastShownToast + 5000) {
                 lastShownToast = System.currentTimeMillis();
-                MinecraftClient client = MinecraftClient.getInstance();
-                client.getToastManager().add(SystemToast.create(client,
-                        SystemToast.Type.WORLD_ACCESS_FAILURE,
-                        Text.translatable("sounds.config.preview.error.title"),
-                        Text.translatable("sounds.config.preview.error.description")));
+                Minecraft client = Minecraft.getInstance();
+                client.getToastManager().addToast(SystemToast.multiline(client,
+                        SystemToast.SystemToastId.WORLD_ACCESS_FAILURE,
+                        Component.translatable("sounds.config.preview.error.title"),
+                        Component.translatable("sounds.config.preview.error.description")));
             }
         }
     }
 
     private void playSound(SoundEvent event, float pitch, float volume) {
-        this.playSound(PositionedSoundInstance.master(event, pitch, volume));
+        this.playSound(SimpleSoundInstance.forUI(event, pitch, volume));
     }
 
-    public @Nullable PositionedSoundInstance getSoundInstance() {
+    public @Nullable SimpleSoundInstance getSoundInstance() {
         if (this.enabled) {
             try {
-                final SoundEvent event = Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
-                return PositionedSoundInstance.master(event, pitch, volume);
+                final SoundEvent event = BuiltInRegistries.SOUND_EVENT.getValue(this.soundEvent.key());
+                return SimpleSoundInstance.forUI(event, pitch, volume);
             } catch (Exception ignored) {
                 return null;
             }
@@ -245,7 +244,7 @@ public class ConfiguredSound {
     }
 
     public SoundEvent getSoundEvent() {
-        return Registries.SOUND_EVENT.get(this.soundEvent.registryKey());
+        return BuiltInRegistries.SOUND_EVENT.getValue(this.soundEvent.key());
     }
 
     public float getPitch() {

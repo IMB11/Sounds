@@ -3,15 +3,14 @@ package dev.imb11.sounds.api;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.dynamic.Codecs;
-
 import java.util.ArrayList;
 import java.util.Optional;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.ExtraCodecs;
 
 public class SoundDefinition<T> {
     private final SoundEvent soundEvent;
@@ -26,16 +25,16 @@ public class SoundDefinition<T> {
         this.pitch = pitch;
     }
 
-    public static <T> Codec<SoundDefinition<T>> getCodec(RegistryKey<? extends Registry<T>> registryKey) {
+    public static <T> Codec<SoundDefinition<T>> getCodec(ResourceKey<? extends Registry<T>> registryKey) {
         return RecordCodecBuilder.create(builder -> builder.group(
                 //? if <1.21.2 {
                 //Identifier.CODEC.xmap(SoundEvent::of, SoundEvent::getId).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
                 //?} else {
-                Identifier.CODEC.xmap(SoundEvent::of, SoundEvent::id).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
+                ResourceLocation.CODEC.xmap(SoundEvent::createVariableRangeEvent, SoundEvent::location).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
                 //?}
                 TagList.getCodec(registryKey).fieldOf("keys").forGetter(SoundDefinition<T>::getKeys),
-                Codecs.POSITIVE_FLOAT.optionalFieldOf("volume").forGetter(SoundDefinition<T>::getVolume),
-                Codecs.POSITIVE_FLOAT.optionalFieldOf("pitch").forGetter(SoundDefinition<T>::getPitch)
+                ExtraCodecs.POSITIVE_FLOAT.optionalFieldOf("volume").forGetter(SoundDefinition<T>::getVolume),
+                ExtraCodecs.POSITIVE_FLOAT.optionalFieldOf("pitch").forGetter(SoundDefinition<T>::getPitch)
         ).apply(builder, SoundDefinition<T>::new));
     }
 
@@ -68,7 +67,7 @@ public class SoundDefinition<T> {
         }
 
         public Builder<T> addKey(T key) {
-            keys.add(Either.left(registry.getKey(key).orElseThrow(() -> new RuntimeException("SoundDefinition.Builder: Could not find RegistryKey for " + key.toString()))));
+            keys.add(Either.left(registry.getResourceKey(key).orElseThrow(() -> new RuntimeException("SoundDefinition.Builder: Could not find RegistryKey for " + key.toString()))));
             return this;
         }
 

@@ -5,17 +5,16 @@ import dev.imb11.sounds.api.config.DynamicConfiguredSound;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
-
 import java.util.HashMap;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.ItemStack;
 
 public class InventoryDynamicConfiguredSound extends DynamicConfiguredSound<ItemStack, ItemStackSoundContext> {
     private static HashMap<String, Long> itemTypeCooldownMap = new HashMap<>();
 
-    public InventoryDynamicConfiguredSound(String id, Identifier soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
+    public InventoryDynamicConfiguredSound(String id, ResourceLocation soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
         super(id, soundEvent, enabled, pitch, volume, enableDynamicSounds);
     }
 
@@ -23,7 +22,7 @@ public class InventoryDynamicConfiguredSound extends DynamicConfiguredSound<Item
         super(id, soundEvent, enabled, pitch, volume, enableDynamicSounds);
     }
 
-    public InventoryDynamicConfiguredSound(String id, RegistryEntry.Reference<SoundEvent> soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
+    public InventoryDynamicConfiguredSound(String id, Holder.Reference<SoundEvent> soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
         super(id, soundEvent, enabled, pitch, volume, enableDynamicSounds);
     }
 
@@ -34,7 +33,7 @@ public class InventoryDynamicConfiguredSound extends DynamicConfiguredSound<Item
                 || MixinStatics.temporarilyDisableInventorySounds) return;
 
         if(!context.isEmpty()) {
-            String itemId = context.getItem().getTranslationKey();
+            String itemId = context.getItem().getDescriptionId();
             float cooldownDuration = SoundsConfig.get(UISoundsConfig.class).itemSoundCooldown * 1000f;
             long currentTime = System.currentTimeMillis();
 

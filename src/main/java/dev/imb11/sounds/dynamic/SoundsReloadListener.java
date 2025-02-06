@@ -7,23 +7,25 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.JsonOps;
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.config.TagPair;
-import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.entry.RegistryEntryList;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.SinglePreparationResourceReloader;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.profiler.Profiler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Optional;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet.Named;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.item.Item;
 
-public class SoundsReloadListener extends SinglePreparationResourceReloader<Void> {
+public class SoundsReloadListener extends SimplePreparableReloadListener<Void> {
     private static final Logger LOGGER = LoggerFactory.getLogger(SoundsReloadListener.class);
     private static final Gson GSON = new Gson();
 
@@ -33,10 +35,10 @@ public class SoundsReloadListener extends SinglePreparationResourceReloader<Void
         // Load tag pairs
         TagPairHelper.LOADED_TAG_PAIRS.clear();
 
-        for (Identifier id : manager.findResources("sounds/blocks", path -> path.getPath().endsWith(".json")).keySet()) {
+        for (ResourceLocation id : manager.listResources("sounds/blocks", path -> path.getPath().endsWith(".json")).keySet()) {
             try {
                 var resource = manager.getResource(id).orElseThrow();
-                var inputStream = resource.getInputStream();
+                var inputStream = resource.open();
                 var reader = new JsonReader(new InputStreamReader(inputStream));
 
                 TagPair.CODEC.decode(JsonOps.INSTANCE, GSON.fromJson(reader, JsonObject.class))
@@ -57,10 +59,10 @@ public class SoundsReloadListener extends SinglePreparationResourceReloader<Void
         DynamicSoundHelper.loadDirectories.forEach((directory, codec) -> {
             ArrayList<SoundDefinition<?>> resultList = (ArrayList<SoundDefinition<?>>) DynamicSoundHelper.loadedDefinitions.get(directory);
 
-            for (Identifier id : manager.findResources("sounds/" + directory, path -> path.getPath().endsWith(".json")).keySet()) {
+            for (ResourceLocation id : manager.listResources("sounds/" + directory, path -> path.getPath().endsWith(".json")).keySet()) {
                 try {
                     var resource = manager.getResource(id).orElseThrow();
-                    var inputStream = resource.getInputStream();
+                    var inputStream = resource.open();
                     var reader = new JsonReader(new InputStreamReader(inputStream));
 
                     /*? if =1.20.1 {*/
@@ -84,7 +86,7 @@ public class SoundsReloadListener extends SinglePreparationResourceReloader<Void
 
         // List all items that do not have a dynamic sound event that isn't a BlockItem
         ArrayList<Item> items = new ArrayList<>();
-        Registries.ITEM.streamEntries().forEach(item -> {
+        BuiltInRegistries.ITEM.listElements().forEach(item -> {
             items.add(item.value());
         });
 
@@ -93,10 +95,10 @@ public class SoundsReloadListener extends SinglePreparationResourceReloader<Void
         DynamicSoundHelper.loadedDefinitions.get("items").forEach(definition -> {
             SoundDefinition<Item> definitionCast = (SoundDefinition<Item>) definition;
 
-            for (Either<RegistryKey<Item>, TagKey<Item>> registryKeyTagKeyEither : definitionCast.getKeys().getInternalList()) {
+            for (Either<ResourceKey<Item>, TagKey<Item>> registryKeyTagKeyEither : definitionCast.getKeys().getInternalList()) {
                 if (registryKeyTagKeyEither.left().isPresent()) {
                     var key = registryKeyTagKeyEither.left().get();
-                    var entry = Registries.ITEM.get(key.getValue());
+                    var entry = BuiltInRegistries.ITEM.getValue(key.location());
                     itemsWithLoadedDefinitions.add(entry);
                 } else if (registryKeyTagKeyEither.right().isPresent()) {
                     var tagKey = registryKeyTagKeyEither.right().get();
@@ -104,13 +106,13 @@ public class SoundsReloadListener extends SinglePreparationResourceReloader<Void
                     //? if <1.21.2 {
                     //var entries = Registries.ITEM.getOrCreateEntryList(tagKey);
                     //?} else {
-                    var entriesOpt = Registries.ITEM.getOptional(tagKey);
+                    var entriesOpt = BuiltInRegistries.ITEM.get(tagKey);
                     if(entriesOpt.isEmpty()) continue;
                     var entries = entriesOpt.get();
                     //?}
 
-                    for (RegistryEntry<Item> key : entries) {
-                        var entry = Registries.ITEM.get(key.getKey().get());
+                    for (Holder<Item> key : entries) {
+                        var entry = BuiltInRegistries.ITEM.getValue(key.unwrapKey().get());
                         itemsWithLoadedDefinitions.add(entry);
                     }
                 }
@@ -128,7 +130,7 @@ public class SoundsReloadListener extends SinglePreparationResourceReloader<Void
 //    }
 
     @Override
-    protected Void prepare(ResourceManager manager, Profiler profiler) {
+    protected Void prepare(ResourceManager manager, ProfilerFiller profiler) {
         profiler.push("SoundsReloadListener");
         this.reload(manager);
         profiler.pop();
@@ -136,7 +138,7 @@ public class SoundsReloadListener extends SinglePreparationResourceReloader<Void
     }
 
     @Override
-    protected void apply(Void prepared, ResourceManager manager, Profiler profiler) {
+    protected void apply(Void prepared, ResourceManager manager, ProfilerFiller profiler) {
         // NO-OP
     }
 }

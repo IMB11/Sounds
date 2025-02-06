@@ -1,18 +1,17 @@
 package dev.imb11.sounds.mixin.accessors;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 /*? if >=1.21 {*/
-@Mixin(AbstractBlock.class)
+@Mixin(BlockBehaviour.class)
 /*?} else {*/
 /*@Mixin(Block.class)
  *//*?}*/
 public interface BlockAccessor {
-    @Invoker("getSoundGroup")
-    BlockSoundGroup invokeGetSoundGroup(BlockState state);
+    @Invoker("getSoundType")
+    SoundType invokeGetSoundType(BlockState state);
 }

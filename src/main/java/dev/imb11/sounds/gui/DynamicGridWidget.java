@@ -1,14 +1,13 @@
 package dev.imb11.sounds.gui;
 
-import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.client.gui.widget.WrapperWidget;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.layouts.AbstractLayout;
+import net.minecraft.client.gui.layouts.LayoutElement;
 
-public class DynamicGridWidget extends WrapperWidget {
+public class DynamicGridWidget extends AbstractLayout {
     private final List<GridItem> children = new ArrayList<>();
     private int padding = 0;
 
@@ -16,11 +15,11 @@ public class DynamicGridWidget extends WrapperWidget {
         super(x, y, width, height);
     }
 
-    public void addChild(ClickableWidget widget, int cellHeight, int cellWidth) {
+    public void addChild(AbstractWidget widget, int cellHeight, int cellWidth) {
         this.children.add(new GridItem(cellHeight, cellWidth, widget));
     }
 
-    public void addChild(ClickableWidget widget) {
+    public void addChild(AbstractWidget widget) {
         this.children.add(new GridItem(-1, -1, widget));
     }
 
@@ -151,10 +150,10 @@ public class DynamicGridWidget extends WrapperWidget {
     }
 
     @Override
-    public void forEachElement(Consumer<Widget> consumer) {
+    public void visitChildren(Consumer<LayoutElement> consumer) {
         this.children.stream().map(GridItem::widget).forEach(consumer);
     }
 
-    public record GridItem(int cellHeight, int cellWidth, ClickableWidget widget) {
+    public record GridItem(int cellHeight, int cellWidth, AbstractWidget widget) {
     }
 }

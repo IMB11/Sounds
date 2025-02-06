@@ -2,12 +2,11 @@ package dev.imb11.sounds.config;
 
 import dev.imb11.mru.yacl.ConfigHelper;
 import dev.imb11.sounds.config.utils.ConfigGroup;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
-
 import java.util.HashMap;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
 
 public class SoundsConfig {
     public static final ConfigHelper HELPER = new ConfigHelper("sounds", "config");
@@ -49,11 +48,11 @@ public class SoundsConfig {
         throw new IllegalArgumentException("No config group found for class " + clazz.getName());
     }
 
-    public static RegistryEntry.Reference<SoundEvent> getSoundEventReference(SoundEvent soundEvent) {
+    public static Holder.Reference<SoundEvent> getSoundEventReference(SoundEvent soundEvent) {
         //? if <1.21.2 {
         // return Registries.SOUND_EVENT.getEntry(RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent.getId())).get();
         //?} else {
-        return Registries.SOUND_EVENT.getOptional(RegistryKey.of(Registries.SOUND_EVENT.getKey(), soundEvent.id())).get();
+        return BuiltInRegistries.SOUND_EVENT.get(ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), soundEvent.location())).get();
         //?}
     }
 }

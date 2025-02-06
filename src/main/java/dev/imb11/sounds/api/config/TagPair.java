@@ -9,16 +9,6 @@ import dev.isxander.yacl3.api.ButtonOption;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -27,34 +17,44 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 
 public class TagPair {
-    private static final Codec<BlockSoundGroup> BLOCK_GROUP_CODEC = RecordCodecBuilder.create(instance ->
+    private static final Codec<SoundType> BLOCK_GROUP_CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    Codec.FLOAT.fieldOf("pitch").forGetter(BlockSoundGroup::getPitch),
-                    Codec.FLOAT.fieldOf("volume").forGetter(BlockSoundGroup::getVolume),
-                    SoundEvent.CODEC.fieldOf("break").forGetter(BlockSoundGroup::getBreakSound),
-                    SoundEvent.CODEC.fieldOf("step").forGetter(BlockSoundGroup::getStepSound),
-                    SoundEvent.CODEC.fieldOf("place").forGetter(BlockSoundGroup::getPlaceSound),
-                    SoundEvent.CODEC.fieldOf("hit").forGetter(BlockSoundGroup::getHitSound),
-                    SoundEvent.CODEC.fieldOf("fall").forGetter(BlockSoundGroup::getFallSound)
-            ).apply(instance, BlockSoundGroup::new));
+                    Codec.FLOAT.fieldOf("pitch").forGetter(SoundType::getPitch),
+                    Codec.FLOAT.fieldOf("volume").forGetter(SoundType::getVolume),
+                    SoundEvent.DIRECT_CODEC.fieldOf("break").forGetter(SoundType::getBreakSound),
+                    SoundEvent.DIRECT_CODEC.fieldOf("step").forGetter(SoundType::getStepSound),
+                    SoundEvent.DIRECT_CODEC.fieldOf("place").forGetter(SoundType::getPlaceSound),
+                    SoundEvent.DIRECT_CODEC.fieldOf("hit").forGetter(SoundType::getHitSound),
+                    SoundEvent.DIRECT_CODEC.fieldOf("fall").forGetter(SoundType::getFallSound)
+            ).apply(instance, SoundType::new));
     public static final Codec<TagPair> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    TagList.getCodec(Registries.BLOCK.getKey()).fieldOf("keys").forGetter(TagPair::getKeys),
+                    TagList.getCodec(BuiltInRegistries.BLOCK.key()).fieldOf("keys").forGetter(TagPair::getKeys),
                     BLOCK_GROUP_CODEC.fieldOf("group").forGetter(TagPair::getGroup),
                     Codec.BOOL.fieldOf("enabled").forGetter(TagPair::isEnabled)
             ).apply(instance, TagPair::new));
     private final TagList<Block> keys;
-    private BlockSoundGroup group;
-    private BlockSoundGroup pendingGroup;
+    private SoundType group;
+    private SoundType pendingGroup;
     private boolean enabled;
 
     public TagList<Block> getKeys() {
         return keys;
     }
 
-    public BlockSoundGroup getGroup() {
+    public SoundType getGroup() {
         return group;
     }
 
@@ -62,20 +62,20 @@ public class TagPair {
         return enabled;
     }
 
-    public TagPair(TagList<Block> keys, BlockSoundGroup group) {
+    public TagPair(TagList<Block> keys, SoundType group) {
         this.keys = keys;
         this.group = group;
         this.pendingGroup = group;
         this.enabled = true;
     }
 
-    public TagPair(TagList<Block> keys, BlockSoundGroup group, boolean enabled) {
+    public TagPair(TagList<Block> keys, SoundType group, boolean enabled) {
         this(keys, group);
         this.enabled = enabled;
     }
 
     private void playSound(SoundEvent event) {
-        MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(event, group.getPitch(), group.getVolume()));
+        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(event, group.getPitch(), group.getVolume()));
     }
 
     public ButtonOption createAction(String type) {
@@ -100,25 +100,25 @@ public class TagPair {
         };
 
         return ButtonOption.createBuilder()
-                .name(Text.translatable("sounds.config.preview.name.brackets", Text.translatable("sounds.config.preview." + type).getString()))
-                .description(OptionDescription.of(Text.translatable("sounds.config.preview.description")))
+                .name(Component.translatable("sounds.config.preview.name.brackets", Component.translatable("sounds.config.preview." + type).getString()))
+                .description(OptionDescription.of(Component.translatable("sounds.config.preview.description")))
                 .action((a, b) -> action.accept(null))
                 .build();
     }
     
-    private Identifier getSoundId(SoundEvent event) {
+    private ResourceLocation getSoundId(SoundEvent event) {
         //? if <1.21.2 {
         //return event.getId();
         //?} else {
-        return event.id();
+        return event.location();
         //?}
     }
 
     public Option<String> createSoundOpt(TagPair defaults, String type) {
         return Option.<String>createBuilder()
-                .name(Text.translatable("sounds.config.event.name.brackets", Text.translatable("sounds.config.preview." + type).getString()))
+                .name(Component.translatable("sounds.config.event.name.brackets", Component.translatable("sounds.config.preview." + type).getString()))
                 .description(OptionDescription.createBuilder()
-                        .text(Text.translatable("sounds.config.event.description")).build())
+                        .text(Component.translatable("sounds.config.event.description")).build())
                 .binding((switch (type) {
                     case "break":
                         yield getSoundId(defaults.group.getBreakSound()).toString();
@@ -140,41 +140,41 @@ public class TagPair {
                     case "fall" -> getSoundId(this.group.getFallSound()).toString();
                     default -> "";
                 }, (val) -> {
-                    var event = Registries.SOUND_EVENT.get(Identifier.tryParse(val));
+                    var event = BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.tryParse(val));
 
                     switch (type) {
                         case "break" ->
-                                this.group = new BlockSoundGroup(this.group.getPitch(), this.group.getVolume(), event, this.group.getStepSound(), this.group.getPlaceSound(), this.group.getHitSound(), this.group.getFallSound());
+                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), event, this.group.getStepSound(), this.group.getPlaceSound(), this.group.getHitSound(), this.group.getFallSound());
                         case "step" ->
-                                this.group = new BlockSoundGroup(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), event, this.group.getPlaceSound(), this.group.getHitSound(), this.group.getFallSound());
+                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), event, this.group.getPlaceSound(), this.group.getHitSound(), this.group.getFallSound());
                         case "place" ->
-                                this.group = new BlockSoundGroup(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), this.group.getStepSound(), event, this.group.getHitSound(), this.group.getFallSound());
+                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), this.group.getStepSound(), event, this.group.getHitSound(), this.group.getFallSound());
                         case "hit" ->
-                                this.group = new BlockSoundGroup(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), this.group.getStepSound(), this.group.getPlaceSound(), event, this.group.getFallSound());
+                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), this.group.getStepSound(), this.group.getPlaceSound(), event, this.group.getFallSound());
                         case "fall" ->
-                                this.group = new BlockSoundGroup(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), this.group.getStepSound(), this.group.getPlaceSound(), this.group.getHitSound(), event);
+                                this.group = new SoundType(this.group.getPitch(), this.group.getVolume(), this.group.getBreakSound(), this.group.getStepSound(), this.group.getPlaceSound(), this.group.getHitSound(), event);
                     }
                 })
                 .listener((opt, val) -> {
-                    var event = Registries.SOUND_EVENT.get(Identifier.tryParse(val));
+                    var event = BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.tryParse(val));
 
                     switch (type) {
                         case "break" ->
-                                this.pendingGroup = new BlockSoundGroup(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), event, this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
+                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), event, this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
                         case "step" ->
-                                this.pendingGroup = new BlockSoundGroup(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), event, this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
+                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), event, this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
                         case "place" ->
-                                this.pendingGroup = new BlockSoundGroup(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), event, this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
+                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), event, this.pendingGroup.getHitSound(), this.pendingGroup.getFallSound());
                         case "hit" ->
-                                this.pendingGroup = new BlockSoundGroup(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), event, this.pendingGroup.getFallSound());
+                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), event, this.pendingGroup.getFallSound());
                         case "fall" ->
-                                this.pendingGroup = new BlockSoundGroup(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), event);
+                                this.pendingGroup = new SoundType(this.pendingGroup.getPitch(), this.pendingGroup.getVolume(), this.pendingGroup.getBreakSound(), this.pendingGroup.getStepSound(), this.pendingGroup.getPlaceSound(), this.pendingGroup.getHitSound(), event);
                     }
                 })
                 .controller(opt -> DropdownStringControllerBuilder.create(opt)
                         .allowAnyValue(false)
                         .allowEmptyValue(false)
-                        .values(Registries.SOUND_EVENT.getKeys().stream().map(RegistryKey::getValue).map(Identifier::toString).toList()))
+                        .values(BuiltInRegistries.SOUND_EVENT.registryKeySet().stream().map(ResourceKey::location).map(ResourceLocation::toString).toList()))
                 .build();
     }
 
@@ -255,11 +255,11 @@ public class TagPair {
     /****/
     public static class Builder {
         private final TagList<Block> keys = new TagList<>(new ArrayList<>());;
-        private BlockSoundGroup group;
+        private SoundType group;
         private boolean enabled;
 
         private Builder() {
-            this.group = BlockSoundGroup.STONE;
+            this.group = SoundType.STONE;
             this.enabled = true;
         }
 
@@ -268,7 +268,7 @@ public class TagPair {
         }
 
         public Builder group(float pitch, float volume, SoundEvent breakSound, SoundEvent stepSound, SoundEvent placeSound, SoundEvent hitSound, SoundEvent fallSound) {
-            this.group = new BlockSoundGroup(pitch, volume, breakSound, stepSound, placeSound, hitSound, fallSound);
+            this.group = new SoundType(pitch, volume, breakSound, stepSound, placeSound, hitSound, fallSound);
             return this;
         }
 
@@ -281,7 +281,7 @@ public class TagPair {
         }
 
         public Builder addKey(Block key) {
-            keys.add(Either.left(Registries.BLOCK.getKey(key).orElseThrow(() -> new RuntimeException("TagPair.Builder: Could not find RegistryKey for " + key.toString()))));
+            keys.add(Either.left(BuiltInRegistries.BLOCK.getResourceKey(key).orElseThrow(() -> new RuntimeException("TagPair.Builder: Could not find RegistryKey for " + key.toString()))));
             return this;
         }
 

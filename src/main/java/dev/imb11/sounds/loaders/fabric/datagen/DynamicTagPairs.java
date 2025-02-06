@@ -1,27 +1,24 @@
 /*? if >=1.21 && fabric {*/
-package dev.imb11.sounds.loaders.fabric.datagen;
+/*package dev.imb11.sounds.loaders.fabric.datagen;
 
 import dev.imb11.sounds.api.config.TagPair;
+import dev.imb11.sounds.api.config.TagPair.Builder;
 import dev.imb11.sounds.api.datagen.TagPairProvider;
 import dev.imb11.sounds.sound.CustomSounds;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class DynamicTagPairs extends TagPairProvider {
-    protected DynamicTagPairs(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    protected DynamicTagPairs(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(dataOutput, registriesFuture);
     }
 
@@ -57,11 +54,11 @@ public class DynamicTagPairs extends TagPairProvider {
 
         provider.accept("barrel", TagPair.Builder.create()
                 .addKey(Blocks.BARREL)
-                .group(1.0F, 1.0F, SoundEvents.BLOCK_WOOD_BREAK, CustomSounds.BLOCK_BARREL_STEP.get(), CustomSounds.BLOCK_BARREL_PLACE.get(), CustomSounds.BLOCK_BARREL_HIT.get(), SoundEvents.BLOCK_WOOD_FALL));
+                .group(1.0F, 1.0F, SoundEvents.WOOD_BREAK, CustomSounds.BLOCK_BARREL_STEP.get(), CustomSounds.BLOCK_BARREL_PLACE.get(), CustomSounds.BLOCK_BARREL_HIT.get(), SoundEvents.WOOD_FALL));
 
         provider.accept("beehive", TagPair.Builder.create()
                 .addKey(Blocks.BEEHIVE)
-                .group(1.5F, 1.0F, CustomSounds.BLOCK_BEEHIVE_BREAK.get(), CustomSounds.BLOCK_BOOKSHELF_STEP.get(), CustomSounds.BLOCK_BEEHIVE_PLACE.get(), CustomSounds.BLOCK_BEEHIVE_HIT.get(), SoundEvents.BLOCK_WOOD_FALL));
+                .group(1.5F, 1.0F, CustomSounds.BLOCK_BEEHIVE_BREAK.get(), CustomSounds.BLOCK_BOOKSHELF_STEP.get(), CustomSounds.BLOCK_BEEHIVE_PLACE.get(), CustomSounds.BLOCK_BEEHIVE_HIT.get(), SoundEvents.WOOD_FALL));
 
         provider.accept("birch_leaves", TagPair.Builder.create()
                 .addKey(Blocks.BIRCH_LEAVES)
@@ -93,22 +90,22 @@ public class DynamicTagPairs extends TagPairProvider {
 
         provider.accept("bookshelf", TagPair.Builder.create()
                 .addKey(Blocks.BOOKSHELF)
-                .group(1.5F, 1.0F, CustomSounds.BLOCK_BOOKSHELF_BREAK.get(), CustomSounds.BLOCK_BOOKSHELF_STEP.get(), CustomSounds.BLOCK_BOOKSHELF_PLACE.get(), CustomSounds.BLOCK_BOOKSHELF_HIT.get(), SoundEvents.BLOCK_WOOD_FALL));
+                .group(1.5F, 1.0F, CustomSounds.BLOCK_BOOKSHELF_BREAK.get(), CustomSounds.BLOCK_BOOKSHELF_STEP.get(), CustomSounds.BLOCK_BOOKSHELF_PLACE.get(), CustomSounds.BLOCK_BOOKSHELF_HIT.get(), SoundEvents.WOOD_FALL));
 
         provider.accept("chest", TagPair.Builder.create()
                 .addKey(Blocks.CHEST)
-                .group(1.5F, 1.0F, SoundEvents.BLOCK_WOOD_BREAK, CustomSounds.BLOCK_CHEST_STEP.get(), CustomSounds.BLOCK_BARREL_PLACE.get(), CustomSounds.BLOCK_CHEST_HIT.get(), SoundEvents.BLOCK_WOOD_FALL));
+                .group(1.5F, 1.0F, SoundEvents.WOOD_BREAK, CustomSounds.BLOCK_CHEST_STEP.get(), CustomSounds.BLOCK_BARREL_PLACE.get(), CustomSounds.BLOCK_CHEST_HIT.get(), SoundEvents.WOOD_FALL));
 
         provider.accept("clay", TagPair.Builder.create()
                 .addKey(Blocks.CLAY)
-                .group(1.0F, 1.0F, CustomSounds.BLOCK_CLAY_BREAK.get(), CustomSounds.BLOCK_CLAY_STEP.get(), CustomSounds.BLOCK_CLAY_PLACE.get(), CustomSounds.BLOCK_CLAY_HIT.get(), SoundEvents.BLOCK_MUD_FALL));
+                .group(1.0F, 1.0F, CustomSounds.BLOCK_CLAY_BREAK.get(), CustomSounds.BLOCK_CLAY_STEP.get(), CustomSounds.BLOCK_CLAY_PLACE.get(), CustomSounds.BLOCK_CLAY_HIT.get(), SoundEvents.MUD_FALL));
 
         provider.accept("clay_bricks", TagPair.Builder.create()
                 .addKey(Blocks.BRICKS)
                 .addKey(Blocks.BRICK_SLAB)
                 .addKey(Blocks.BRICK_STAIRS)
                 .addKey(Blocks.BRICK_WALL)
-                .group(1.0F, 1.3F, SoundEvents.BLOCK_NETHER_BRICKS_BREAK, SoundEvents.BLOCK_NETHER_BRICKS_STEP, SoundEvents.BLOCK_NETHER_BRICKS_PLACE, SoundEvents.BLOCK_NETHER_BRICKS_HIT, SoundEvents.BLOCK_NETHER_BRICKS_FALL));
+                .group(1.0F, 1.3F, SoundEvents.NETHER_BRICKS_BREAK, SoundEvents.NETHER_BRICKS_STEP, SoundEvents.NETHER_BRICKS_PLACE, SoundEvents.NETHER_BRICKS_HIT, SoundEvents.NETHER_BRICKS_FALL));
 
         provider.accept("cobblestone", TagPair.Builder.create()
                 .addKey(Blocks.COBBLESTONE)
@@ -130,7 +127,7 @@ public class DynamicTagPairs extends TagPairProvider {
                 .addKey(Blocks.DARK_PRISMARINE)
                 .addKey(Blocks.DARK_PRISMARINE_STAIRS)
                 .addKey(Blocks.DARK_PRISMARINE_SLAB)
-                .group(1.0F, 1.0F, SoundEvents.BLOCK_DEEPSLATE_TILES_BREAK, SoundEvents.BLOCK_DEEPSLATE_TILES_STEP, SoundEvents.BLOCK_DEEPSLATE_TILES_PLACE, SoundEvents.BLOCK_DEEPSLATE_TILES_HIT, SoundEvents.BLOCK_DEEPSLATE_TILES_FALL));
+                .group(1.0F, 1.0F, SoundEvents.DEEPSLATE_TILES_BREAK, SoundEvents.DEEPSLATE_TILES_STEP, SoundEvents.DEEPSLATE_TILES_PLACE, SoundEvents.DEEPSLATE_TILES_HIT, SoundEvents.DEEPSLATE_TILES_FALL));
 
         provider.accept("deepslate_copper_ore", TagPair.Builder.create()
                 .addKey(Blocks.DEEPSLATE_COPPER_ORE)
@@ -146,29 +143,29 @@ public class DynamicTagPairs extends TagPairProvider {
 
         provider.accept("emerald_block", TagPair.Builder.create()
                 .addKey(Blocks.EMERALD_BLOCK)
-                .group(1.0F, 1.2F, SoundEvents.BLOCK_BONE_BLOCK_BREAK, SoundEvents.BLOCK_BONE_BLOCK_STEP, CustomSounds.BLOCK_QUARTZ_PLACE.get(), SoundEvents.BLOCK_BONE_BLOCK_HIT, SoundEvents.BLOCK_BONE_BLOCK_FALL));
+                .group(1.0F, 1.2F, SoundEvents.BONE_BLOCK_BREAK, SoundEvents.BONE_BLOCK_STEP, CustomSounds.BLOCK_QUARTZ_PLACE.get(), SoundEvents.BONE_BLOCK_HIT, SoundEvents.BONE_BLOCK_FALL));
 
         provider.accept("end_stone", TagPair.Builder.create()
                 .addKey(Blocks.END_STONE)
-                .group(0.9F, 0.8F, CustomSounds.BLOCK_QUARTZ_BREAK.get(), CustomSounds.BLOCK_QUARTZ_STEP.get(), CustomSounds.BLOCK_QUARTZ_PLACE.get(), SoundEvents.BLOCK_STONE_HIT, SoundEvents.BLOCK_STONE_FALL));
+                .group(0.9F, 0.8F, CustomSounds.BLOCK_QUARTZ_BREAK.get(), CustomSounds.BLOCK_QUARTZ_STEP.get(), CustomSounds.BLOCK_QUARTZ_PLACE.get(), SoundEvents.STONE_HIT, SoundEvents.STONE_FALL));
 
         provider.accept("end_stone_bricks", TagPair.Builder.create()
                 .addKey(Blocks.END_STONE_BRICKS)
                 .addKey(Blocks.END_STONE_BRICK_STAIRS)
                 .addKey(Blocks.END_STONE_BRICK_SLAB)
                 .addKey(Blocks.END_STONE_BRICK_WALL)
-                .group(1.0F, 1.0F, SoundEvents.BLOCK_DEEPSLATE_BRICKS_BREAK, CustomSounds.BLOCK_QUARTZ_STEP.get(), SoundEvents.BLOCK_DEEPSLATE_BRICKS_PLACE, SoundEvents.BLOCK_DEEPSLATE_BRICKS_HIT, SoundEvents.BLOCK_DEEPSLATE_BRICKS_FALL));
+                .group(1.0F, 1.0F, SoundEvents.DEEPSLATE_BRICKS_BREAK, CustomSounds.BLOCK_QUARTZ_STEP.get(), SoundEvents.DEEPSLATE_BRICKS_PLACE, SoundEvents.DEEPSLATE_BRICKS_HIT, SoundEvents.DEEPSLATE_BRICKS_FALL));
 
         var glass = TagPair.Builder.create()
                 .addKey(Blocks.GLOWSTONE)
                 .addKey(Blocks.BEACON)
                 .addKey(Blocks.REDSTONE_LAMP)
                 .addKey(Blocks.SEA_LANTERN)
-                .group(1.0F, 1.0F, CustomSounds.BLOCK_GLASS_BREAK.get(), CustomSounds.BLOCK_GLASS_STEP.get(), CustomSounds.BLOCK_GLASS_PLACE.get(), SoundEvents.BLOCK_GLASS_HIT, SoundEvents.BLOCK_GLASS_FALL);
+                .group(1.0F, 1.0F, CustomSounds.BLOCK_GLASS_BREAK.get(), CustomSounds.BLOCK_GLASS_STEP.get(), CustomSounds.BLOCK_GLASS_PLACE.get(), SoundEvents.GLASS_HIT, SoundEvents.GLASS_FALL);
 
-        for (RegistryKey<Block> block : Registries.BLOCK.getKeys().stream().toList()) {
-            if (block.getValue().getPath().contains("glass")) {
-                glass.addKey(Registries.BLOCK.get(block));
+        for (ResourceKey<Block> block : BuiltInRegistries.BLOCK.registryKeySet().stream().toList()) {
+            if (block.location().getPath().contains("glass")) {
+                glass.addKey(BuiltInRegistries.BLOCK.getValue(block));
             }
         }
 
@@ -177,7 +174,7 @@ public class DynamicTagPairs extends TagPairProvider {
         provider.accept("gold", TagPair.Builder.create()
                 .addKey(Blocks.GOLD_BLOCK)
                 .addKey(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE)
-                .group(1.0F, 1.6F, SoundEvents.BLOCK_NETHERITE_BLOCK_BREAK, CustomSounds.BLOCK_GOLD_BLOCK_STEP.get(), SoundEvents.BLOCK_NETHERITE_BLOCK_PLACE, SoundEvents.BLOCK_NETHERITE_BLOCK_HIT, SoundEvents.BLOCK_NETHERITE_BLOCK_FALL));
+                .group(1.0F, 1.6F, SoundEvents.NETHERITE_BLOCK_BREAK, CustomSounds.BLOCK_GOLD_BLOCK_STEP.get(), SoundEvents.NETHERITE_BLOCK_PLACE, SoundEvents.NETHERITE_BLOCK_HIT, SoundEvents.NETHERITE_BLOCK_FALL));
 
         provider.accept("gold_ore", TagPair.Builder.create()
                 .addKey(Blocks.GOLD_ORE)
@@ -185,11 +182,11 @@ public class DynamicTagPairs extends TagPairProvider {
 
         provider.accept("gravel", TagPair.Builder.create()
                 .addKey(Blocks.GRAVEL)
-                .group(1.0F, 1.2F, CustomSounds.BLOCK_GRAVEL_BREAK.get(), CustomSounds.BLOCK_GRAVEL_STEP.get(), CustomSounds.BLOCK_GRAVEL_PLACE.get(), CustomSounds.BLOCK_GRAVEL_HIT.get(), SoundEvents.BLOCK_GRAVEL_FALL));
+                .group(1.0F, 1.2F, CustomSounds.BLOCK_GRAVEL_BREAK.get(), CustomSounds.BLOCK_GRAVEL_STEP.get(), CustomSounds.BLOCK_GRAVEL_PLACE.get(), CustomSounds.BLOCK_GRAVEL_HIT.get(), SoundEvents.GRAVEL_FALL));
 
         provider.accept("hay_block", TagPair.Builder.create()
                 .addKey(Blocks.HAY_BLOCK)
-                .group(1.0F, 1.0F, CustomSounds.BLOCK_HAY_BLOCK_BREAK.get(), CustomSounds.BLOCK_HAY_BLOCK_STEP.get(), CustomSounds.BLOCK_HAY_BLOCK_PLACE.get(), CustomSounds.BLOCK_HAY_BLOCK_HIT.get(), SoundEvents.BLOCK_TUFF_FALL));
+                .group(1.0F, 1.0F, CustomSounds.BLOCK_HAY_BLOCK_BREAK.get(), CustomSounds.BLOCK_HAY_BLOCK_STEP.get(), CustomSounds.BLOCK_HAY_BLOCK_PLACE.get(), CustomSounds.BLOCK_HAY_BLOCK_HIT.get(), SoundEvents.TUFF_FALL));
 
         provider.accept("ice", TagPair.Builder.create()
                 .addKey(Blocks.ICE)
@@ -200,7 +197,7 @@ public class DynamicTagPairs extends TagPairProvider {
                 .addKey(Blocks.IRON_DOOR)
                 .addKey(Blocks.IRON_BLOCK)
                 .addKey(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE)
-                .group(1.0F, 1.2F, SoundEvents.BLOCK_NETHERITE_BLOCK_BREAK, CustomSounds.BLOCK_IRON_BLOCK_STEP.get(), SoundEvents.BLOCK_NETHERITE_BLOCK_PLACE, SoundEvents.BLOCK_NETHERITE_BLOCK_HIT, SoundEvents.BLOCK_NETHERITE_BLOCK_FALL));
+                .group(1.0F, 1.2F, SoundEvents.NETHERITE_BLOCK_BREAK, CustomSounds.BLOCK_IRON_BLOCK_STEP.get(), SoundEvents.NETHERITE_BLOCK_PLACE, SoundEvents.NETHERITE_BLOCK_HIT, SoundEvents.NETHERITE_BLOCK_FALL));
 
         provider.accept("iron_ore", TagPair.Builder.create()
                 .addKey(Blocks.IRON_ORE)
@@ -249,11 +246,11 @@ public class DynamicTagPairs extends TagPairProvider {
                 .addKey(Blocks.RED_GLAZED_TERRACOTTA)
                 .addKey(Blocks.WHITE_GLAZED_TERRACOTTA)
                 .addKey(Blocks.YELLOW_GLAZED_TERRACOTTA)
-                .group(1.0F, 1.2F, SoundEvents.BLOCK_BONE_BLOCK_BREAK, SoundEvents.BLOCK_BONE_BLOCK_STEP, SoundEvents.BLOCK_BONE_BLOCK_PLACE, SoundEvents.BLOCK_BONE_BLOCK_HIT, SoundEvents.BLOCK_BONE_BLOCK_FALL));
+                .group(1.0F, 1.2F, SoundEvents.BONE_BLOCK_BREAK, SoundEvents.BONE_BLOCK_STEP, SoundEvents.BONE_BLOCK_PLACE, SoundEvents.BONE_BLOCK_HIT, SoundEvents.BONE_BLOCK_FALL));
 
         provider.accept("loom", TagPair.Builder.create()
                 .addKey(Blocks.LOOM)
-                .group(1.0F, 1.0F, CustomSounds.BLOCK_LOOM_BREAK.get(), CustomSounds.BLOCK_LOOM_STEP.get(), CustomSounds.BLOCK_LOOM_PLACE.get(), CustomSounds.BLOCK_LOOM_HIT.get(), SoundEvents.BLOCK_WOOD_FALL));
+                .group(1.0F, 1.0F, CustomSounds.BLOCK_LOOM_BREAK.get(), CustomSounds.BLOCK_LOOM_STEP.get(), CustomSounds.BLOCK_LOOM_PLACE.get(), CustomSounds.BLOCK_LOOM_HIT.get(), SoundEvents.WOOD_FALL));
 
         provider.accept("magma_block", TagPair.Builder.create()
                 .addKey(Blocks.MAGMA_BLOCK)
@@ -295,7 +292,7 @@ public class DynamicTagPairs extends TagPairProvider {
                 .addKey(Blocks.MOSSY_STONE_BRICK_SLAB)
                 .addKey(Blocks.MOSSY_STONE_BRICK_STAIRS)
                 .addKey(Blocks.MOSSY_STONE_BRICK_WALL)
-                .group(1.0F, 1.0F, CustomSounds.BLOCK_MOSSY_COBBLESTONE_BREAK.get(), CustomSounds.BLOCK_MOSSY_STONE_BRICKS_STEP.get(), SoundEvents.BLOCK_DEEPSLATE_BRICKS_PLACE, CustomSounds.BLOCK_MOSSY_STONE_BRICKS_HIT.get(), CustomSounds.BLOCK_MOSSY_STONE_BRICKS_FALL.get()));
+                .group(1.0F, 1.0F, CustomSounds.BLOCK_MOSSY_COBBLESTONE_BREAK.get(), CustomSounds.BLOCK_MOSSY_STONE_BRICKS_STEP.get(), SoundEvents.DEEPSLATE_BRICKS_PLACE, CustomSounds.BLOCK_MOSSY_STONE_BRICKS_HIT.get(), CustomSounds.BLOCK_MOSSY_STONE_BRICKS_FALL.get()));
 
         provider.accept("oak_log", TagPair.Builder.create()
                 .addKey(Blocks.OAK_LOG)
@@ -308,7 +305,7 @@ public class DynamicTagPairs extends TagPairProvider {
                 .addKey(Blocks.RESPAWN_ANCHOR)
                 .addKey(Blocks.ENCHANTING_TABLE)
                 .addKey(Blocks.ENDER_CHEST)
-                .group(1.0F, 0.7F, SoundEvents.BLOCK_DEEPSLATE_BREAK, SoundEvents.BLOCK_DEEPSLATE_STEP, SoundEvents.BLOCK_DEEPSLATE_PLACE, SoundEvents.BLOCK_DEEPSLATE_HIT, SoundEvents.BLOCK_DEEPSLATE_FALL));
+                .group(1.0F, 0.7F, SoundEvents.DEEPSLATE_BREAK, SoundEvents.DEEPSLATE_STEP, SoundEvents.DEEPSLATE_PLACE, SoundEvents.DEEPSLATE_HIT, SoundEvents.DEEPSLATE_FALL));
 
         provider.accept("packed_ice", TagPair.Builder.create()
                 .addKey(Blocks.FROSTED_ICE)
@@ -322,7 +319,7 @@ public class DynamicTagPairs extends TagPairProvider {
                 .addKey(Blocks.PRISMARINE_SLAB)
                 .addKey(Blocks.PRISMARINE_WALL)
                 .addKey(Blocks.END_STONE)
-                .group(1.0F, 1.0F, SoundEvents.BLOCK_DEEPSLATE_BREAK, SoundEvents.BLOCK_DEEPSLATE_STEP, SoundEvents.BLOCK_DEEPSLATE_PLACE, SoundEvents.BLOCK_DEEPSLATE_HIT, SoundEvents.BLOCK_DEEPSLATE_FALL));
+                .group(1.0F, 1.0F, SoundEvents.DEEPSLATE_BREAK, SoundEvents.DEEPSLATE_STEP, SoundEvents.DEEPSLATE_PLACE, SoundEvents.DEEPSLATE_HIT, SoundEvents.DEEPSLATE_FALL));
 
         provider.accept("quartz", TagPair.Builder.create()
                 .addKey(Blocks.QUARTZ_BLOCK)
@@ -338,7 +335,7 @@ public class DynamicTagPairs extends TagPairProvider {
                 .addKey(Blocks.DIAMOND_BLOCK)
                 .addKey(Blocks.OBSIDIAN)
                 .addKey(Blocks.CRYING_OBSIDIAN)
-                .group(1.0F, 1.0F, CustomSounds.BLOCK_QUARTZ_BREAK.get(), CustomSounds.BLOCK_QUARTZ_STEP.get(), SoundEvents.BLOCK_DEEPSLATE_PLACE, SoundEvents.BLOCK_STONE_HIT, SoundEvents.BLOCK_DEEPSLATE_FALL));
+                .group(1.0F, 1.0F, CustomSounds.BLOCK_QUARTZ_BREAK.get(), CustomSounds.BLOCK_QUARTZ_STEP.get(), SoundEvents.DEEPSLATE_PLACE, SoundEvents.STONE_HIT, SoundEvents.DEEPSLATE_FALL));
 
         provider.accept("raw_gold_block", TagPair.Builder.create()
                 .addKey(Blocks.RAW_GOLD_BLOCK)
@@ -365,14 +362,14 @@ public class DynamicTagPairs extends TagPairProvider {
                 .addKey(Blocks.SMOOTH_SANDSTONE_SLAB)
                 .addKey(Blocks.SMOOTH_RED_SANDSTONE_STAIRS)
                 .addKey(Blocks.SMOOTH_RED_SANDSTONE_SLAB)
-                .group(1.0F, 1.0F, SoundEvents.BLOCK_TUFF_BREAK, CustomSounds.BLOCK_SANDSTONE_STEP.get(), SoundEvents.BLOCK_TUFF_PLACE, SoundEvents.BLOCK_TUFF_HIT, SoundEvents.BLOCK_TUFF_FALL));
+                .group(1.0F, 1.0F, SoundEvents.TUFF_BREAK, CustomSounds.BLOCK_SANDSTONE_STEP.get(), SoundEvents.TUFF_PLACE, SoundEvents.TUFF_HIT, SoundEvents.TUFF_FALL));
 
         provider.accept("sheet_metal", TagPair.Builder.create()
                 .addKey(Blocks.IRON_BARS)
                 .addKey(Blocks.IRON_TRAPDOOR)
                 .addKey(Blocks.HOPPER)
                 .addKey(BlockTags.CAULDRONS)
-                .group(1.0F, 1.2F, CustomSounds.BLOCK_SHEET_METAL_BREAK.get(), CustomSounds.BLOCK_SHEET_METAL_STEP.get(), SoundEvents.BLOCK_NETHERITE_BLOCK_PLACE, SoundEvents.BLOCK_NETHERITE_BLOCK_HIT, SoundEvents.BLOCK_NETHERITE_BLOCK_FALL));
+                .group(1.0F, 1.2F, CustomSounds.BLOCK_SHEET_METAL_BREAK.get(), CustomSounds.BLOCK_SHEET_METAL_STEP.get(), SoundEvents.NETHERITE_BLOCK_PLACE, SoundEvents.NETHERITE_BLOCK_HIT, SoundEvents.NETHERITE_BLOCK_FALL));
 
         provider.accept("spruce_leaves", TagPair.Builder.create()
                 .addKey(Blocks.SPRUCE_LEAVES)
@@ -412,7 +409,7 @@ public class DynamicTagPairs extends TagPairProvider {
                 .addKey(Blocks.STONE_BRICK_SLAB)
                 .addKey(Blocks.STONE_BRICK_STAIRS)
                 .addKey(Blocks.STONE_BRICK_WALL)
-                .group(1.0F, 1.0F, CustomSounds.BLOCK_COBBLESTONE_BREAK.get(), CustomSounds.BLOCK_STONE_BRICKS_STEP.get(), SoundEvents.BLOCK_DEEPSLATE_BRICKS_PLACE, CustomSounds.BLOCK_STONE_BRICKS_HIT.get(), CustomSounds.BLOCK_STONE_BRICKS_FALL.get()));
+                .group(1.0F, 1.0F, CustomSounds.BLOCK_COBBLESTONE_BREAK.get(), CustomSounds.BLOCK_STONE_BRICKS_STEP.get(), SoundEvents.DEEPSLATE_BRICKS_PLACE, CustomSounds.BLOCK_STONE_BRICKS_HIT.get(), CustomSounds.BLOCK_STONE_BRICKS_FALL.get()));
 
         provider.accept("terracotta", TagPair.Builder.create()
                 .addKey(Blocks.WHITE_TERRACOTTA)
@@ -433,7 +430,7 @@ public class DynamicTagPairs extends TagPairProvider {
                 .addKey(Blocks.BLACK_TERRACOTTA)
                 .addKey(Blocks.TERRACOTTA)
                 .addKey(Blocks.BEDROCK)
-                .group(1.0F, 0.6F, SoundEvents.BLOCK_CALCITE_BREAK, SoundEvents.BLOCK_CALCITE_STEP, SoundEvents.BLOCK_CALCITE_PLACE, SoundEvents.BLOCK_CALCITE_HIT, SoundEvents.BLOCK_CALCITE_FALL));
+                .group(1.0F, 0.6F, SoundEvents.CALCITE_BREAK, SoundEvents.CALCITE_STEP, SoundEvents.CALCITE_PLACE, SoundEvents.CALCITE_HIT, SoundEvents.CALCITE_FALL));
     }
 }
-/*?}*/
+*//*?}*/

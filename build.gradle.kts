@@ -30,22 +30,27 @@ modstitch {
         modName = "Sounds"
         modVersion = "${property("mod.version") as String}+${mcVersion}+${loader}"
         modGroup = "dev.imb11"
-        modDescription = "A highly configurable sound overhaul mod that adds new sound effects while improving vanilla sounds too."
+        modDescription =
+            "A highly configurable sound overhaul mod that adds new sound effects while improving vanilla sounds too."
         modLicense = "ARR"
 
-        replacementProperties.put("pack_format", when (mcVersion) {
-            "1.20.1" -> 15
-            "1.21.1" -> 34
-            "1.21.3" -> 42
-            "1.21.4" -> 46
-            else -> throw IllegalArgumentException("Unsupported Minecraft version: $mcVersion")
-        }.toString())
+        replacementProperties.put(
+            "pack_format", when (mcVersion) {
+                "1.20.1" -> 15
+                "1.21.1" -> 34
+                "1.21.3" -> 42
+                "1.21.4" -> 46
+                else -> throw IllegalArgumentException("Unsupported Minecraft version: $mcVersion")
+            }.toString()
+        )
         replacementProperties.put("target_minecraft", mcVersion)
         replacementProperties.put("target_mru", property("deps.mru") as String)
-        replacementProperties.put("target_loader", when (loader) {
-            "neoforge" -> property("deps.neoforge") as String
-            else -> ""
-        })
+        replacementProperties.put(
+            "target_loader", when (loader) {
+                "neoforge" -> property("deps.neoforge") as String
+                else -> ""
+            }
+        )
         replacementProperties.put("loader", loader)
     }
 
@@ -60,6 +65,7 @@ modstitch {
             runs {
                 all {
                     runDir = "../../run"
+                    ideConfigGenerated(true)
                 }
 
                 if (loader == "fabric" && stonecutter.eval(mcVersion, ">=1.21")) {
@@ -67,7 +73,9 @@ modstitch {
                         client()
                         name = "Data Generation Client"
                         vmArg("-Dfabric-api.datagen")
-                        vmArg("-Dfabric-api.datagen.output-dir=" + project.rootDir.toPath().resolve("src/main/generated"))
+                        vmArg(
+                            "-Dfabric-api.datagen.output-dir=" + project.rootDir.toPath().resolve("src/main/generated")
+                        )
                         vmArg("-Dfabric-api.datagen.modid=sounds")
                         runDir = "build/datagen"
                     }
@@ -145,10 +153,12 @@ dependencies {
     }
 }
 
-sourceSets {
-    main {
-        resources {
-            srcDirs += files("src/main/generated")
+allprojects {
+    sourceSets {
+        main {
+            resources {
+                srcDir(rootProject.projectDir.resolve("src/main/generated"))
+            }
         }
     }
 }

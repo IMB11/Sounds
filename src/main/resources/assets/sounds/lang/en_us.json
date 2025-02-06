@@ -66,7 +66,7 @@
 	"sounds.config.option.disableBlocksEntirely": "Disable All Modified Block Sounds",
 	"sounds.config.option.description.disableBlocksEntirely": "This will disable all block sounds that have been modified via resource packs. This is useful if you want to use the default block sounds that come with the game.",
 	"sounds.config.option.ignoredBlocks": "Ignored Blocks",
-	"sounds.config.option.ignoredBlocks.description": "A list of blocks that will not have any custom sound definition settings applied to them, even if they are in a tag that has sound settings applied to it.",
+	"sounds.config.option.description.ignoredBlocks": "A list of blocks that will not have any custom sound definition settings applied to them, even if they are in a tag that has sound settings applied to it.",
 
 	"sounds.config.ui": "UI Sounds",
 

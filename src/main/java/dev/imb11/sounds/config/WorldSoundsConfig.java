@@ -106,6 +106,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
                                 .values(BuiltInRegistries.BLOCK.registryKeySet().stream()
                                         .map(ResourceKey::location)
                                         .map(ResourceLocation::toString).toList()))
+                        .initial("minecraft:grass_block")
                         .build()
                 )
                 .build());

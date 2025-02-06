@@ -25,6 +25,11 @@ public class SoundsFabric implements ClientModInitializer {
         public ResourceLocation getFabricId() {
             return SoundsClient.id("reload_listener");
         }
+
+        @Override
+        public void reload(ResourceManager manager) {
+            super.reload(manager);
+        }
     }
 }
 //?}

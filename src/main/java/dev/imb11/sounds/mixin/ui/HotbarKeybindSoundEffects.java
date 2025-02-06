@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 
 @Mixin(Minecraft.class)
 public class HotbarKeybindSoundEffects {
-    @WrapOperation(method = "handleInputEvents", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerInventory;selectedSlot:I"))
+    @WrapOperation(method = "handleKeybinds", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/player/Inventory;selected:I"))
     public void $hotbar_keybind_sound_effect(Inventory instance, int value, Operation<Void> original) {
         instance.setSelectedHotbarSlot(value);
     }

@@ -20,7 +20,7 @@ public class CakeEatSoundMixin {
     private static long lastPlayed = 0;
     @Unique
     private static final long COOLDOWN = 150;
-    @Inject(method = "tryEat", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;incrementStat(Lnet/minecraft/util/Identifier;)V"))
+    @Inject(method = "eat", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;awardStat(Lnet/minecraft/resources/ResourceLocation;)V"))
     private static void eatCake(LevelAccessor world, BlockPos pos, BlockState state, Player player, CallbackInfoReturnable<InteractionResult> cir) {
         // nom nom nom
         long currentTime = System.currentTimeMillis();

@@ -11,12 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(JukeboxBlockEntity.class)
 public class JukeboxBlockEntityMixin {
-    @Inject(method = "setStack", at = @At(value = "HEAD"))
-    /*? if =1.20.1 {*/
-    /*public void $jukebox_use_sound_effect(int slot, ItemStack stack, CallbackInfo ci) {
-    *//*?} else {*/
+    @Inject(method = "setTheItem", at = @At(value = "HEAD"))
     public void $jukebox_use_sound_effect(ItemStack stack, CallbackInfo ci) {
-        /*?}*/
         SoundsConfig.get(WorldSoundsConfig.class).jukeboxUseSoundEffect.playSound();
     }
 }

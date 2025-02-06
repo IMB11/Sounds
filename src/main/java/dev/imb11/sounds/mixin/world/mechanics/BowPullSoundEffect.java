@@ -13,37 +13,36 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BowItem.class)
 public class BowPullSoundEffect {
     @Unique
-    public SoundInstance currentBowPullSound;
+    public SoundInstance sounds$currentBowPullSound;
 
-    @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setCurrentHand(Lnet/minecraft/util/Hand;)V", shift = At.Shift.AFTER))
+    @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;startUsingItem(Lnet/minecraft/world/InteractionHand;)V", shift = At.Shift.AFTER))
     //? if <1.21.2 {
     //public void $start_bow_pull_sound(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<net.minecraft.util.TypedActionResult<ItemStack>> cir) {
     //?} else {
     public void $start_bow_pull_sound(Level world, Player user, InteractionHand hand, CallbackInfoReturnable<net.minecraft.world.InteractionResult> cir) {
     //?}
         if (!world.isClientSide) return;
-        this.currentBowPullSound = SoundsConfig.get(WorldSoundsConfig.class).bowPullSoundEffect.getSoundInstance();
-        if (this.currentBowPullSound != null) {
-            SoundsConfig.get(WorldSoundsConfig.class).bowPullSoundEffect.playSound(this.currentBowPullSound);
+        this.sounds$currentBowPullSound = SoundsConfig.get(WorldSoundsConfig.class).bowPullSoundEffect.getSoundInstance();
+        if (this.sounds$currentBowPullSound != null) {
+            SoundsConfig.get(WorldSoundsConfig.class).bowPullSoundEffect.playSound(this.sounds$currentBowPullSound);
         }
     }
 
-    @Inject(method = "onStoppedUsing", at = @At(value = "HEAD"))
+    @Inject(method = "releaseUsing", at = @At(value = "HEAD"))
     //? if <1.21.2 {
     //public void $stop_bow_pull_sound(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfo ci) {
     //?} else {
     public void $stop_bow_pull_sound(ItemStack stack, Level world, LivingEntity user, int remainingUseTicks, CallbackInfoReturnable<Boolean> cir) {
     //?}
         if (!world.isClientSide) return;
-        if (this.currentBowPullSound != null) {
-            SoundsConfig.get(WorldSoundsConfig.class).bowPullSoundEffect.stopSound(this.currentBowPullSound);
-            this.currentBowPullSound = null;
+        if (this.sounds$currentBowPullSound != null) {
+            SoundsConfig.get(WorldSoundsConfig.class).bowPullSoundEffect.stopSound(this.sounds$currentBowPullSound);
+            this.sounds$currentBowPullSound = null;
         }
     }
 }

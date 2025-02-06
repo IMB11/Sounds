@@ -1,5 +1,5 @@
 //? if neoforge {
-package dev.imb11.sounds.loaders.neoforge;
+/*package dev.imb11.sounds.loaders.neoforge;
 
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.dynamic.SoundsReloadListener;
@@ -37,4 +37,4 @@ public class SoundsNeoForge {
         potionEventHelper.listenForEffectChanges(Minecraft.getInstance().level);
     }
 }
-//?}
+*///?}

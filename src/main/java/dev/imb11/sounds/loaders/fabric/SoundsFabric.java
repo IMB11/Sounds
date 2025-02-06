@@ -1,5 +1,5 @@
 //? if fabric {
-/*package dev.imb11.sounds.loaders.fabric;
+package dev.imb11.sounds.loaders.fabric;
 
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.dynamic.SoundsReloadListener;
@@ -27,4 +27,4 @@ public class SoundsFabric implements ClientModInitializer {
         }
     }
 }
-*///?}
+//?}

@@ -20,48 +20,48 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class CreativeScreenHandlerMixin {
 
     @Unique
-    private boolean tempSkip = false;
+    private boolean sounds$tempSkip = false;
     @Unique
-    private int tempSkipCounter = 0;
+    private int sounds$tempSkipCounter = 0;
 
-    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen$CreativeScreenHandler;scrollItems(F)V"), cancellable = false)
+    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/CreativeModeInventoryScreen$ItemPickerMenu;scrollTo(F)V"), cancellable = false)
     public void $constructor_sounds_capture(Player player, CallbackInfo ci) {
-        tempSkip = true;
+        sounds$tempSkip = true;
     }
 
     @Unique
-    private double prevTime = 0L;
+    private double sounds$prevTime = 0L;
     @Unique
-    private float prevValue = -69420f;
+    private float sounds$prevValue = -69420f;
 
     @Shadow
-    public abstract ItemStack getCursorStack();
+    public abstract ItemStack getCarried();
 
-    @Inject(method = "setCursorStack", at = @At("HEAD"), cancellable = false)
+    @Inject(method = "setCarried", at = @At("HEAD"), cancellable = false)
     public void $item_delete_sound_effect(ItemStack stack, CallbackInfo ci) {
-        if (MixinStatics.CURRENT_SLOT == MixinStatics.DELETE_ITEM_SLOT && !getCursorStack().isEmpty())
-            SoundsConfig.get(UISoundsConfig.class).itemDeleteSoundEffect.playDynamicSound(getCursorStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.HIT));
+        if (MixinStatics.CURRENT_SLOT == MixinStatics.DELETE_ITEM_SLOT && !getCarried().isEmpty())
+            SoundsConfig.get(UISoundsConfig.class).itemDeleteSoundEffect.playDynamicSound(getCarried(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.HIT));
     }
 
-    @Inject(method = "scrollItems", at = @At("TAIL"))
+    @Inject(method = "scrollTo", at = @At("TAIL"))
     public void $inventory_scroll_sound_effect(float position, CallbackInfo ci) {
         // Don't do anything for 0.1s after screen opened.
-        if (tempSkip) {
-            tempSkipCounter++;
-            if (tempSkipCounter == 2) {
-                tempSkipCounter = 0;
-                tempSkip = false;
+        if (sounds$tempSkip) {
+            sounds$tempSkipCounter++;
+            if (sounds$tempSkipCounter == 2) {
+                sounds$tempSkipCounter = 0;
+                sounds$tempSkip = false;
             }
             return;
         }
 
         double currentTime = GLFW.glfwGetTime();
-        double timeElapsed = currentTime - prevTime;
+        double timeElapsed = currentTime - sounds$prevTime;
 
-        if (timeElapsed >= 0.05 && prevValue != position) {
+        if (timeElapsed >= 0.05 && sounds$prevValue != position) {
             SoundsConfig.get(UISoundsConfig.class).inventoryScrollSoundEffect.playSound();
-            prevTime = currentTime;
-            prevValue = position;
+            sounds$prevTime = currentTime;
+            sounds$prevValue = position;
         }
     }
 }

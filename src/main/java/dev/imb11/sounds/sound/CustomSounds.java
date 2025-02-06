@@ -6,13 +6,12 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 @SuppressWarnings("unused")
 public class CustomSounds {
     //? if neoforge {
-    public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, "sounds");
-    //?}
+    /*public static final net.neoforged.neoforge.registries.DeferredRegister<SoundEvent> REGISTRY = net.neoforged.neoforge.registries.DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, "sounds");
+    *///?}
 
     public static final Supplier<SoundEvent> ITEM_SWORD_SWOOSH = register("item.sword.swoosh");
     public static final Supplier<SoundEvent> ITEM_HARD_METAL_HOLD = register("item.hard_metal.hold");
@@ -430,10 +429,11 @@ public class CustomSounds {
     private static Supplier<SoundEvent> register(String id) {
         ResourceLocation _id = ResourceLocation.fromNamespaceAndPath("sounds", id);
         //? if fabric {
-        /*return () -> Registry.register(BuiltInRegistries.SOUND_EVENT, _id, SoundEvent.createVariableRangeEvent(_id));
-        *///?} else {
-        return REGISTRY.register(id, () -> SoundEvent.createVariableRangeEvent(_id));
-        //?}
+        var val = Registry.register(BuiltInRegistries.SOUND_EVENT, _id, SoundEvent.createVariableRangeEvent(_id));
+        return () -> val;
+        //?} else {
+        /*return REGISTRY.register(id, () -> SoundEvent.createVariableRangeEvent(_id));
+        *///?}
     }
 
     public static void initialize() {

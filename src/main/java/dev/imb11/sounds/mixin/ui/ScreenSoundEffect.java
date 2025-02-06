@@ -20,17 +20,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ScreenSoundEffect {
     @Shadow
     @Nullable
-    public Screen currentScreen;
+    public Screen screen;
 
     @Inject(method = "setScreen", at = @At("HEAD"), cancellable = false)
     public void $open_close_inventory_sound_effect(Screen screen, CallbackInfo ci) {
-        if (screen == null && (currentScreen instanceof BookViewScreen || currentScreen instanceof BookEditScreen)) {
+        if (screen == null && (this.screen instanceof BookViewScreen || this.screen instanceof BookEditScreen)) {
             SoundsConfig.get(UISoundsConfig.class).inventoryCloseSoundEffect.playDynamicSound(SoundEvents.VILLAGER_WORK_LIBRARIAN);
-        } else if (currentScreen != screen && (screen instanceof BookViewScreen || screen instanceof BookEditScreen)) {
+        } else if (this.screen != screen && (screen instanceof BookViewScreen || screen instanceof BookEditScreen)) {
             SoundsConfig.get(UISoundsConfig.class).inventoryOpenSoundEffect.playDynamicSound(SoundEvents.VILLAGER_WORK_LIBRARIAN);
-        } else if (screen == null && currentScreen instanceof AbstractContainerScreen<?> handledScreen)
+        } else if (screen == null && this.screen instanceof AbstractContainerScreen<?> handledScreen)
             SoundsConfig.get(UISoundsConfig.class).inventoryCloseSoundEffect.playDynamicSound(handledScreen.getMenu(), ScreenHandlerSoundContext.of(false));
-        else if (currentScreen != screen && screen instanceof AbstractContainerScreen<?> handledScreen)
+        else if (this.screen != screen && screen instanceof AbstractContainerScreen<?> handledScreen)
             SoundsConfig.get(UISoundsConfig.class).inventoryOpenSoundEffect.playDynamicSound(handledScreen.getMenu(), ScreenHandlerSoundContext.of(true));
     }
 }

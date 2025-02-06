@@ -21,15 +21,15 @@ import net.minecraft.world.inventory.Slot;
 public class ItemDragSoundEffect<T extends AbstractContainerMenu> {
     @Shadow
     @Final
-    protected Set<Slot> cursorDragSlots;
+    protected Set<Slot> quickCraftSlots;
 
     @Shadow
     @Final
-    protected T handler;
+    protected T menu;
 
     @Inject(method = "mouseDragged", at = @At(value = "INVOKE", target = "Ljava/util/Set;add(Ljava/lang/Object;)Z"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void $item_drag_sound_effect(double mouseX, double mouseY, int button, double deltaX, double deltaY, CallbackInfoReturnable<Boolean> cir, Slot slot) {
-        if (!cursorDragSlots.contains(slot) && cursorDragSlots.size() > 0)
-            SoundsConfig.get(UISoundsConfig.class).itemDragSoundEffect.playDynamicSound(this.handler.getCarried(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+        if (!quickCraftSlots.contains(slot) && quickCraftSlots.size() > 0)
+            SoundsConfig.get(UISoundsConfig.class).itemDragSoundEffect.playDynamicSound(this.menu.getCarried(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
 }

@@ -1,5 +1,5 @@
 /*? if >=1.21 && fabric {*/
-/*package dev.imb11.sounds.loaders.fabric.datagen;
+package dev.imb11.sounds.loaders.fabric.datagen;
 
 import dev.imb11.sounds.api.config.TagPair;
 import dev.imb11.sounds.api.config.TagPair.Builder;
@@ -433,4 +433,4 @@ public class DynamicTagPairs extends TagPairProvider {
                 .group(1.0F, 0.6F, SoundEvents.CALCITE_BREAK, SoundEvents.CALCITE_STEP, SoundEvents.CALCITE_PLACE, SoundEvents.CALCITE_HIT, SoundEvents.CALCITE_FALL));
     }
 }
-*//*?}*/
+/*?}*/

@@ -21,7 +21,7 @@ public class HotbarSoundEffects {
     @Final
     public Player player;
 
-    @Shadow @Final public NonNullList<ItemStack> main;
+    @Shadow @Final public NonNullList<ItemStack> items;
 
     //? if <1.21.2 {
     /*@Inject(method = "scrollInHotbar", at = @At("RETURN"), cancellable = false)
@@ -29,7 +29,7 @@ public class HotbarSoundEffects {
         SoundsConfig.get(UISoundsConfig.class).hotbarScrollSoundEffect.playDynamicSound(this.player.getMainHandStack(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }*/
     //?} else {
-    @Inject(method = "setSelectedSlot", at = @At("RETURN"), cancellable = false)
+    @Inject(method = "setSelectedHotbarSlot", at = @At("RETURN"), cancellable = false)
     public void $hotbar_scroll_sound_effect(int slot, CallbackInfo ci) {
         SoundsConfig.get(UISoundsConfig.class).hotbarScrollSoundEffect.playDynamicSound(this.player.getMainHandItem(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
@@ -40,8 +40,8 @@ public class HotbarSoundEffects {
 //        SoundsConfig.get(UISoundsConfig.class).itemDropSoundEffect.playDynamicSound(this.player.getMainHandStack(), DynamicSoundHelper.BlockSoundType.FALL);
 //    }
 
-    @Inject(method = "swapSlotWithHotbar", at = @At("RETURN"), cancellable = false)
+    @Inject(method = "pickSlot", at = @At("RETURN"), cancellable = false)
     public void $hotbar_pick_sound_effect(int slot, CallbackInfo ci) {
-        SoundsConfig.get(UISoundsConfig.class).hotbarPickSoundEffect.playDynamicSound(this.main.get(slot), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.STEP));
+        SoundsConfig.get(UISoundsConfig.class).hotbarPickSoundEffect.playDynamicSound(this.items.get(slot), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.STEP));
     }
 }

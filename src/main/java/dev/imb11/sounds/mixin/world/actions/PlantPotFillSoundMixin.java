@@ -19,14 +19,9 @@ public class PlantPotFillSoundMixin {
     //? if <1.21.2 {
     //@Inject(method = "onUse", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/ActionResult;success(Z)Lnet/minecraft/util/ActionResult;"))
     //?} else {
-    @Inject(method = "onUse", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;emitGameEvent(Lnet/minecraft/entity/Entity;Lnet/minecraft/registry/entry/RegistryEntry;Lnet/minecraft/util/math/BlockPos;)V"))
+    @Inject(method = "useWithoutItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;gameEvent(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/Holder;Lnet/minecraft/core/BlockPos;)V"))
     //?}
-
-    /*? if =1.20.1 {*/
-    /*public void playPlantPotFillSound(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-    *//*?} else {*/
     public void playPlantPotFillSound(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
-    /*?}*/
         if(world.isClientSide) {
             SoundsConfig.get(WorldSoundsConfig.class).plantPotFillSoundEffect.playSound();
         }

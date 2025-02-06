@@ -1,6 +1,5 @@
 package dev.imb11.sounds.mixin.ui;
 
-import dev.imb11.sounds.config.WorldSoundsConfig;
 import dev.imb11.sounds.util.MixinStatics;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -16,6 +15,7 @@ import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,33 +30,33 @@ abstract class PlayerEntityMixin extends LivingEntity {
         super(entityType, world);
     }
 
-    @Inject(method = "dropItem(Lnet/minecraft/item/ItemStack;ZZ)Lnet/minecraft/entity/ItemEntity;", at = @At("HEAD"))
+    @Inject(method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("HEAD"))
     protected void $drop_item_sound_effect(ItemStack stack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir) {
     }
 }
 
 @Mixin(LocalPlayer.class)
 public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
-    @Shadow @Final protected Minecraft client;
+    @Shadow @Final protected Minecraft minecraft;
 
-    @Shadow public abstract void playSound(SoundEvent sound, float volume, float pitch);
+    @Shadow public abstract void playSound(@NotNull SoundEvent sound, float volume, float pitch);
 
     protected ItemDropSoundEffect(EntityType<? extends LivingEntity> entityType, Level world) {
         super(entityType, world);
     }
 
     @Unique
-    private static long dropSoundCooldownTime = 0L;
+    private static long sounds$dropSoundCooldownTime = 0L;
 
     @Unique
-    private void playSound(ItemStack stack) {
+    private void sounds$playSound(ItemStack stack) {
         if(MixinStatics.hasOpenedInventorioScreen) {
-            dropSoundCooldownTime = System.currentTimeMillis() + ((long) SoundsConfig.get(UISoundsConfig.class).itemSoundCooldown);
+            sounds$dropSoundCooldownTime = System.currentTimeMillis() + ((long) SoundsConfig.get(UISoundsConfig.class).itemSoundCooldown);
             MixinStatics.hasOpenedInventorioScreen = false;
             return;
         }
-        if(dropSoundCooldownTime > System.currentTimeMillis()) return;
-        dropSoundCooldownTime = System.currentTimeMillis() + ((long) SoundsConfig.get(UISoundsConfig.class).itemSoundCooldown);
+        if(sounds$dropSoundCooldownTime > System.currentTimeMillis()) return;
+        sounds$dropSoundCooldownTime = System.currentTimeMillis() + ((long) SoundsConfig.get(UISoundsConfig.class).itemSoundCooldown);
 
         if (MixinStatics.previousAction == ClickType.QUICK_MOVE) {
             MixinStatics.previousAction = null;
@@ -66,15 +66,15 @@ public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
         SoundsConfig.get(UISoundsConfig.class).itemDropSoundEffect.playDynamicSound(stack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.FALL));
     }
 
-    @Inject(method = "dropSelectedItem(Z)Z", at = @At("HEAD"))
+    @Inject(method = "drop", at = @At("HEAD"))
     private void $drop_selected_item_sound_effect(boolean entireStack, CallbackInfoReturnable<Boolean> cir) {
         ItemStack stack = this.getMainHandItem();
-        playSound(stack);
+        sounds$playSound(stack);
     }
 
     @Override
     protected void $drop_item_sound_effect(ItemStack stack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir) {
         if (!this.level().isClientSide) return;
-        playSound(stack);
+        sounds$playSound(stack);
     }
 }

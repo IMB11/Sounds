@@ -2,27 +2,18 @@ package dev.imb11.sounds.mixin.world.actions;
 
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.WorldSoundsConfig;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Leashable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/*? if >=1.21 {*/
-@Mixin(net.minecraft.world.entity.Leashable.class)
+@Mixin(Leashable.class)
 public interface LeadSnappingSoundMixin {
-/*?} else {*/
-/*@Mixin(net.minecraft.entity.mob.MobEntity.class)
-public class LeadSnappingSoundMixin {
-*//*?}*/
-    /*? if =1.20.1 {*/
-    /*@Inject(method = "detachLeash", at = @At("TAIL"), cancellable = false)
-    public void $lead_snapping_sound_effect(boolean sendPacket, boolean dropItem, CallbackInfo ci) {
-        if(dropItem) {
-    *//*?} else {*/
-    @Inject(method = "detachLeash(Lnet/minecraft/entity/Entity;ZZ)V", at = @At("TAIL"), cancellable = false)
-    private static <E extends net.minecraft.world.entity.Entity & net.minecraft.world.entity.Leashable> void $lead_snapping_sound_effect(E entity, boolean sendPacket, boolean dropItem, CallbackInfo ci) {
+    @Inject(method = "dropLeash(Lnet/minecraft/world/entity/Entity;ZZ)V", at = @At("TAIL"), cancellable = false)
+    private static <E extends Entity & Leashable> void $lead_snapping_sound_effect(E entity, boolean sendPacket, boolean dropItem, CallbackInfo ci) {
         if (dropItem && entity.level().isClientSide) {
-    /*?}*/
             SoundsConfig.get(WorldSoundsConfig.class).leadSnappingSoundEffect.playSound();
         }
     }

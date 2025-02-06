@@ -1,5 +1,5 @@
 //? if fabric {
-/*package dev.imb11.sounds.loaders.fabric;
+package dev.imb11.sounds.loaders.fabric;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
@@ -11,4 +11,4 @@ public class ModMenuCompat implements ModMenuApi {
         return SoundsConfigScreen::new;
     }
 }
-*///?}
+//?}

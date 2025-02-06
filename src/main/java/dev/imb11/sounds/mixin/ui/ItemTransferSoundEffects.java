@@ -21,12 +21,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(AbstractContainerMenu.class)
 public abstract class ItemTransferSoundEffects {
     @Shadow
-    public abstract ItemStack getCursorStack();
-
-    @Shadow
     public abstract Slot getSlot(int index);
 
-    @Inject(method = "internalOnSlotClick", at = @At("HEAD"))
+    @Shadow public abstract ItemStack getCarried();
+
+    @Inject(method = "doClick", at = @At("HEAD"))
     void $item_transfer_sound_effects(int slotIndex, int button, ClickType actionType, Player player, CallbackInfo ci) {
         if (!(player instanceof LocalPlayer)) return;
         if (slotIndex < 0) return;
@@ -34,13 +33,13 @@ public abstract class ItemTransferSoundEffects {
         ItemStack itemStack = getSlot(slotIndex).getItem();
         if (actionType == ClickType.PICKUP) {
             if (itemStack.isEmpty()) {
-                ItemStack cursorStack = this.getCursorStack();
+                ItemStack cursorStack = this.getCarried();
                 SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(cursorStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
             } else {
                 SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(itemStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
             }
         } else if (actionType == ClickType.PICKUP_ALL) {
-            ItemStack cursorStack = this.getCursorStack();
+            ItemStack cursorStack = this.getCarried();
             SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(cursorStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
         } else if (actionType == ClickType.SWAP) {
             if (itemStack.isEmpty()) {
@@ -51,7 +50,7 @@ public abstract class ItemTransferSoundEffects {
             }
         } else if (actionType == ClickType.QUICK_MOVE) {
             if (itemStack.isEmpty()) {
-                ItemStack cursorStack = this.getCursorStack();
+                ItemStack cursorStack = this.getCarried();
                 SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(cursorStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
             } else {
                 SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(itemStack, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));

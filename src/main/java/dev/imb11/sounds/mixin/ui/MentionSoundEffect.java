@@ -21,32 +21,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MentionSoundEffect {
     @Shadow
     @Final
-    private Minecraft client;
+    private Minecraft minecraft;
 
     @Unique
     private float cooldownPeriod = 0f;
 
     @Inject(method = "render", at = @At("HEAD"))
-    /*? if =1.20.1 {*/
-    /*public void $cooldown_period(DrawContext context, int currentTick, int mouseX, int mouseY, CallbackInfo ci) {
-    *//*?} else {*/
     public void $cooldown_period(GuiGraphics context, int currentTick, int mouseX, int mouseY, boolean focused, CallbackInfo ci) {
-    /*?}*/
         if (cooldownPeriod > 0) {
-            /*? if <1.21 {*/
-            /*cooldownPeriod -= this.client.getTickDelta() / 2f;
-            *//*?} else {*/
-            cooldownPeriod -= this.client.getDeltaTracker().getGameTimeDeltaPartialTick(true);
-            /*?}*/
+            cooldownPeriod -= this.minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(true);
         }
     }
-    /*? if =1.20.1 {*/
-    /*@Inject(method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V", at = @At("HEAD"), cancellable = false)
-    public void $mention_recieve_sound_effect(Text message, MessageSignatureData signature, int ticks, MessageIndicator indicator, boolean refresh, CallbackInfo ci) {
-    *//*?} else {*/
-    @Inject(method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;Lnet/minecraft/client/gui/hud/MessageIndicator;)V", at = @At("HEAD"), cancellable = false)
+
+    @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V", at = @At("HEAD"), cancellable = false)
     public void $mention_recieve_sound_effect(Component message, MessageSignature signatureData, GuiMessageTag indicator, CallbackInfo ci) {
-    /*?}*/
         if (cooldownPeriod > 0 && (SoundsConfig.get(ChatSoundsConfig.class).enableChatSoundCooldown || LoaderUtils.isModInstalled("chatpatches"))) {
             return;
         }
@@ -67,11 +55,7 @@ public class MentionSoundEffect {
         boolean isMention = messageString.matches(regex.toString());
 
         if (SoundsConfig.get(ChatSoundsConfig.class).ignoreSystemChats) {
-            /*? >1.20.1 {*/
             if (indicator == GuiMessageTag.system() || indicator == GuiMessageTag.chatError()) {
-                /*?} else {*/
-            /*if(indicator == MessageIndicator.system()) {
-            *//*?}*/
                 return;
             }
         }

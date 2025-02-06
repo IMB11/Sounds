@@ -21,19 +21,12 @@ public abstract class EnderpearlVarietyMixin extends ThrowableItemProjectile {
         super(entityType, world);
     }
 
-    /*? if <1.21 {*/
-    /*@Inject(method = "onCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;requestTeleport(DDD)V"), cancellable = false)
-    public void $enderpearl_variety_effect(net.minecraft.util.hit.HitResult hitResult, CallbackInfo ci) {
-    *//*?} else {*/
-    @Inject(method = "playTeleportSound", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "playSound", at = @At(value = "HEAD"), cancellable = true)
     public void $enderpearl_variety_effect(Level world, Vec3 pos, CallbackInfo ci) {
-    /*?}*/
         if(SoundsConfig.get(WorldSoundsConfig.class).enableEnderpearlVariety) {
             if(this.getOwner() instanceof Player && this.level().isClientSide) {
                 this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS, 0.8F, 1.0F, false);
-                /*? if >=1.21 {*/
                 ci.cancel();
-                /*?}*/
             }
         }
     }

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(DaylightDetectorBlock.class)
 public class DaylightDetectorBlockMixin {
-    @Inject(method = "onUse", at = @At(value = "RETURN", ordinal = 0))
+    @Inject(method = "useWithoutItem", at = @At(value = "RETURN", ordinal = 0))
     public void $daylight_detector_use_sound_effect(CallbackInfoReturnable<InteractionResult> cir) {
         SoundsConfig.get(WorldSoundsConfig.class).daylightDetectorUseSoundEffect.playSound();
     }

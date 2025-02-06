@@ -153,12 +153,10 @@ dependencies {
     }
 }
 
-allprojects {
-    sourceSets {
-        main {
-            resources {
-                srcDir(rootProject.projectDir.resolve("src/main/generated"))
-            }
+sourceSets {
+    main {
+        resources {
+            srcDir(file("src/main/generated"))
         }
     }
 }

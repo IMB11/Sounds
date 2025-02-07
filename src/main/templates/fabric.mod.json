@@ -29,7 +29,7 @@
     "sounds.mixins.json"
   ],
   "depends": {
-    "fabricloader": "*",
+    "fabricloader": "${target_fabricloader}",
     "fabric": "*",
     "mru": "~${target_mru}",
     "minecraft": "${target_minecraft}"

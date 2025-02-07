@@ -10,6 +10,30 @@ val loader = when {
 }
 val mcVersion = property("deps.minecraft") as String
 
+val productionMods: Configuration by configurations.creating {
+    isTransitive = false
+}
+
+if (loader == "fabric") {
+    @Suppress("UnstableApiUsage")
+    val runProdClient by tasks.registering(net.fabricmc.loom.task.prod.ClientProductionRunTask::class) {
+        group = "fabric"
+
+        mods.from(productionMods)
+
+        jvmArgs = listOf("-Dsodium.checks.issue2561=false")
+
+        outputs.upToDateWhen { false }
+    }
+} else {
+    val runProdClient by tasks.registering {
+        group = "sounds/versioned"
+        dependsOn("runClient") // neoforge is prod always
+    }
+}
+createActiveTask(taskName = "runClient")
+createActiveTask(taskName = "runProdClient")
+
 modstitch {
     minecraftVersion = mcVersion
     javaTarget = if (stonecutter.eval(mcVersion, ">1.20.4")) 21 else 17
@@ -52,16 +76,16 @@ modstitch {
             }
         )
         replacementProperties.put("loader", loader)
+        replacementProperties.put("target_fabricloader", when (loader) {
+            "fabric" -> property("deps.fabric_loader") as String
+            else -> ""
+        })
     }
 
     loom {
-        fabricLoaderVersion = "+"
+        fabricLoaderVersion = property("deps.fabric_loader") as String
 
         configureLoom {
-            mixin {
-                useLegacyMixinAp = true
-            }
-
             runs {
                 all {
                     runDir = "../../run"
@@ -113,9 +137,11 @@ stonecutter {
 }
 
 dependencies {
+    fun Dependency?.productionMod() = this?.also { productionMods(it) }
+
     modstitch.loom {
-        modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
-        modstitchModImplementation("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
+        modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}").productionMod()
+        modstitchModImplementation("com.terraformersmc:modmenu:${property("runtime.modmenu")}").productionMod()
         "io.github.llamalad7:mixinextras-fabric:0.5.0-beta.5".let {
             modstitchJiJ(it)
             implementation(it)
@@ -133,7 +159,7 @@ dependencies {
     modstitchImplementation(commonmarkDep)
     modstitchJiJ(commonmarkDep)
 
-    modstitchModImplementation("dev.imb11:mru:${property("deps.mru")}+${loader}")
+    modstitchModImplementation("dev.imb11:mru:${property("deps.mru")}+${loader}").productionMod()
 
     modstitchModCompileOnly("dev.emi:emi-${loader}:${property("compile.emi")}")
 
@@ -150,7 +176,7 @@ dependencies {
             exclude(group = "net.fabricmc.fabric-api", module = "fabric-api")
             exclude(group = "thedarkcolour")
         }
-    }
+    }.productionMod()
 }
 
 sourceSets {
@@ -167,4 +193,29 @@ tasks.jar {
     from("LICENSE") {
         rename { filename -> "${filename}_${project.base.archivesName.get()}" }
     }
+}
+
+fun createActiveTask(
+    taskProvider: TaskProvider<*>? = null,
+    taskName: String? = null,
+    internal: Boolean = false
+): String {
+    val taskExists = taskProvider != null || taskName!! in tasks.names
+    val task = taskProvider ?: taskName?.takeIf { taskExists }?.let { tasks.named(it) }
+    val taskName = when {
+        taskProvider != null -> taskProvider.name
+        taskName != null -> taskName
+        else -> error("Either taskProvider or taskName must be provided")
+    }
+    val activeTaskName = "${taskName}Active"
+
+    if (stonecutter.current.isActive) {
+        rootProject.tasks.register(activeTaskName) {
+            group = "sounds${if (internal) "/versioned" else ""}"
+
+            task?.let { dependsOn(it) }
+        }
+    }
+
+    return activeTaskName
 }

@@ -144,7 +144,8 @@ dependencies {
         modstitchModImplementation("com.terraformersmc:modmenu:${property("runtime.modmenu")}").productionMod()
         "io.github.llamalad7:mixinextras-fabric:0.5.0-beta.5".let {
             modstitchJiJ(it)
-            implementation(it)
+            modstitchImplementation(it)
+            annotationProcessor(it)
         }
     }
 

@@ -23,6 +23,7 @@ public class HotbarKeybindSoundEffects {
     public void $hotbar_keybind_sound_effect(Inventory instance, int value, Operation<Void> original) {
         //? if <1.21.2 {
         /*SoundsConfig.get(UISoundsConfig.class).hotbarScrollSoundEffect.playDynamicSound(this.player.getMainHandItem(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+        original.call(instance, value);
         *///?} else {
         instance.setSelectedHotbarSlot(value);
         //?}

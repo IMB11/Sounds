@@ -12,7 +12,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
 @Mod("sounds")
@@ -28,9 +27,15 @@ public class SoundsNeoForge {
         bus.addListener(SoundsNeoForge::registerResourceReloadListeners);
     }
 
-    private static void registerResourceReloadListeners(RegisterClientReloadListenersEvent event) {
+    //? if <1.21.4 {
+    /^private static void registerResourceReloadListeners(net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent event) {
         event.registerReloadListener(new SoundsReloadListener());
     }
+    ^///?} else {
+    private static void registerResourceReloadListeners(net.neoforged.neoforge.client.event.AddClientReloadListenersEvent event) {
+        event.addListener(SoundsClient.id("reload"), new SoundsReloadListener());
+    }
+    //?}
 
     @SubscribeEvent
     private void clientTickEvent(ClientTickEvent event) {

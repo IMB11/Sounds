@@ -158,10 +158,6 @@ dependencies {
         }
     }
 
-    val commonmarkDep = "org.commonmark:commonmark:0.21.0"
-    modstitchImplementation(commonmarkDep)
-    modstitchJiJ(commonmarkDep)
-
     modstitchModImplementation("dev.imb11:mru:${property("deps.mru")}+${loader}").productionMod()
 
     modstitchModCompileOnly("dev.emi:emi-${loader}:${property("compile.emi")}")
@@ -173,7 +169,7 @@ dependencies {
     modstitchModCompileOnly("maven.modrinth:inventorio:${property("compile.inventorio")}")
     modstitchModCompileOnly("maven.modrinth:trashslot:${property("compile.trashslot")}")
 
-    "dev.isxander:yet-another-config-lib:${property("deps.yacl")}-${loader}".let {
+    "maven.modrinth:yacl:${property("deps.yacl")}-${loader}".let {
         modstitchModApi(it) {
             exclude(group = "net.fabricmc.fabric-api", module = "fabric-api")
             exclude(group = "thedarkcolour")

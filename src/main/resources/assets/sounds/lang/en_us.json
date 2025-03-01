@@ -136,5 +136,6 @@
 	"sounds.config.negativeStatusEffectGain.option": "Negative Status Effect Gain",
 	"sounds.config.negativeStatusEffectGain.option.description": "A sound effect that is played when you gain a negative status effect.",
 	"sounds.config.negativeStatusEffectLose.option": "Negative Status Effect Lose",
-	"sounds.config.negativeStatusEffectLose.option.description": "A sound effect that is played when you lose a negative status effect."
+	"sounds.config.negativeStatusEffectLose.option.description": "A sound effect that is played when you lose a negative status effect.",
+	"sounds.config.mod": "Mod-Specific Options"
 }

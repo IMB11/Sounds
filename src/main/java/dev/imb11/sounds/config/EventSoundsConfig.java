@@ -36,8 +36,8 @@ public class EventSoundsConfig extends ConfigGroup<EventSoundsConfig> implements
     }
 
     @Override
-    public ResourceLocation getImage() {
-        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/event_sounds.webp");
+    public ResourceLocation getIcon() {
+        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/event_sounds.png");
     }
 
     @Override

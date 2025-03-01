@@ -83,44 +83,56 @@ public class SoundsConfigScreen extends Screen {
         super.init();
 
         int fontHeight = font.lineHeight;
-        DynamicGridWidget grid = new DynamicGridWidget(10, 10 + fontHeight + 10, width - 20, height - 20 - fontHeight - 10 - 20);
-//        ImageButtonWidget koFiWidget = new ImageButtonWidget(0, 0, 0, 0, Text.of("Support Me"), Identifier.of("sounds", "textures/gui/kofi.webp"), btn -> {
-//            Util.getOperatingSystem().open("https://ko-fi.com/mineblock11");
-//        });
+        int gridX = 10;
+        int gridY = 10 + fontHeight + 10;
+        int gridWidth = width - 20;
+        int gridHeight = height - 20 - fontHeight - 10 - 20;
 
-        grid.setPadding(3);
-//        grid.addChild(koFiWidget);
+        int numColumns = 4;
+        int numRows = 3;
 
-        ConfigGroup<?>[] configGroups = SoundsConfig.getAll();
-        // Sort by class name.
-        configGroups = Arrays.stream(configGroups).sorted(Comparator.comparing(o -> o.getClass().getSimpleName())).toArray(ConfigGroup[]::new);
+        int cellWidth = gridWidth / numColumns;
+        int cellHeight = gridHeight / numRows;
 
-        // remove ModConfig.class from the list
-        configGroups = Arrays.stream(configGroups).filter(configGroup -> configGroup.getClass() != ModConfig.class).toArray(ConfigGroup[]::new);
+        WorldSoundsConfig worldSoundsConfig = SoundsConfig.getRaw(WorldSoundsConfig.class);
+        ImageButtonWidget worldSoundsButton = new ImageButtonWidget(
+                gridX + 0 * cellWidth, gridY + 0 * cellHeight, 2 * cellWidth - 6, 2 * cellHeight - 6, // -6 for padding of 3 on each side
+                worldSoundsConfig.getName(), worldSoundsConfig.getIcon(), btn -> {
+            this.minecraft.setScreen(worldSoundsConfig.getYACL().generateScreen(this));
+        });
+        addRenderableWidget(worldSoundsButton);
 
-        for (ConfigGroup<?> configGroup : configGroups) {
-            if (configGroup instanceof ChatSoundsConfig) {
-                grid.addChild(new ImageButtonWidget(0, 0, 0, 0, configGroup.getName(), configGroup.getImage(), btn -> {
-                    this.minecraft.setScreen(configGroup.getYACL().generateScreen(this));
-                }), 1, 2);
-            } else if (configGroup instanceof WorldSoundsConfig) {
-                grid.addChild(new ImageButtonWidget(0, 0, 0, 0, configGroup.getName(), configGroup.getImage(), btn -> {
-                    this.minecraft.setScreen(configGroup.getYACL().generateScreen(this));
-                }), 2, 2);
-            } else if (configGroup instanceof UISoundsConfig) {
-                grid.addChild(new ImageButtonWidget(0, 0, 0, 0, configGroup.getName(), configGroup.getImage(), btn -> {
-                    this.minecraft.setScreen(configGroup.getYACL().generateScreen(this));
-                }), 2, 1);
-            } else {
-                grid.addChild(new ImageButtonWidget(0, 0, 0, 0, configGroup.getName(), configGroup.getImage(), btn -> {
-                    this.minecraft.setScreen(configGroup.getYACL().generateScreen(this));
-                }));
-            }
-        }
+        ChatSoundsConfig chatSoundsConfig = SoundsConfig.getRaw(ChatSoundsConfig.class);
+        ImageButtonWidget chatSoundsButton = new ImageButtonWidget(
+                gridX + 2 * cellWidth, gridY + 0 * cellHeight, 2 * cellWidth - 6, cellHeight - 6,
+                chatSoundsConfig.getName(), chatSoundsConfig.getIcon(), btn -> {
+            this.minecraft.setScreen(chatSoundsConfig.getYACL().generateScreen(this));
+        });
+        addRenderableWidget(chatSoundsButton);
 
-        grid.calculateLayout();
+        EventSoundsConfig eventSoundsConfig = SoundsConfig.getRaw(EventSoundsConfig.class);
+        ImageButtonWidget eventSoundsButton = new ImageButtonWidget(
+                gridX + 2 * cellWidth, gridY + 1 * cellHeight, cellWidth - 6, cellHeight - 6,
+                eventSoundsConfig.getName(), eventSoundsConfig.getIcon(), btn -> {
+            this.minecraft.setScreen(eventSoundsConfig.getYACL().generateScreen(this));
+        });
+        addRenderableWidget(eventSoundsButton);
 
-        grid.visitWidgets(this::addRenderableWidget);
+        ModConfig modConfig = SoundsConfig.getRaw(ModConfig.class);
+        ImageButtonWidget modConfigButton = new ImageButtonWidget(
+                gridX + 3 * cellWidth, gridY + 1 * cellHeight, cellWidth - 6, 2 * cellHeight - 6,
+                modConfig.getName(), modConfig.getIcon(), btn -> {
+            this.minecraft.setScreen(modConfig.getYACL().generateScreen(this));
+        });
+        addRenderableWidget(modConfigButton);
+
+        UISoundsConfig uiSoundsConfig = SoundsConfig.getRaw(UISoundsConfig.class);
+        ImageButtonWidget uiSoundsButton = new ImageButtonWidget(
+                gridX + 0 * cellWidth, gridY + 2 * cellHeight, 3 * cellWidth - 6, cellHeight - 6,
+                uiSoundsConfig.getName(), uiSoundsConfig.getIcon(), btn -> {
+            this.minecraft.setScreen(uiSoundsConfig.getYACL().generateScreen(this));
+        });
+        addRenderableWidget(uiSoundsButton);
 
         int discordAndKoFiButtonsWidth = 100 + 100 + 30; // button widths + left margin of Ko-Fi button + right margin of Discord button
         int doneButtonWidth = this.width - discordAndKoFiButtonsWidth;

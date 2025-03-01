@@ -63,8 +63,8 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
     }
 
     @Override
-    public ResourceLocation getImage() {
-        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/world_sounds.webp");
+    public ResourceLocation getIcon() {
+        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/world_sounds.png");
     }
 
     @Override

@@ -46,8 +46,8 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
     }
 
     @Override
-    public ResourceLocation getImage() {
-        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/chat_sounds.webp");
+    public ResourceLocation getIcon() {
+        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/chat_sounds.png");
     }
 
     @Override

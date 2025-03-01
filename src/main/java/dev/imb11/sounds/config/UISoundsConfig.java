@@ -63,8 +63,8 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
     }
 
     @Override
-    public ResourceLocation getImage() {
-        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/ui_sounds.webp");
+    public ResourceLocation getIcon() {
+        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/ui_sounds.png");
     }
 
     @Override

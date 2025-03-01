@@ -1,30 +1,32 @@
 package dev.imb11.sounds.gui;
 
-import dev.isxander.yacl3.gui.image.ImageRendererManager;
-import dev.isxander.yacl3.gui.image.impl.AnimatedDynamicTextureImage;
-import java.lang.reflect.Field;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.function.Consumer;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 
 import static org.lwjgl.opengl.GL20.*;
 
-public class ImageButtonWidget extends AbstractWidget {
-    float durationHovered = 1f;
-    private final CompletableFuture<AnimatedDynamicTextureImage> image;
-    private final Consumer<AbstractWidget> onPress;
+import java.util.List;
+import java.util.function.Consumer;
 
-    public ImageButtonWidget(int x, int y, int width, int height, Component message, ResourceLocation image, Consumer<AbstractWidget> clickEvent) {
+public class ImageButtonWidget extends AbstractWidget {
+    float durationHovered = 0f;
+    private final ResourceLocation imageLocation;
+    private final Consumer<ImageButtonWidget> onPress;
+    private static final int ICON_SIZE = 32; // Fixed icon size
+    private static final int ICON_TEXT_SPACING = 5;
+
+    public ImageButtonWidget(int x, int y, int width, int height, Component message, ResourceLocation imageLocation, Consumer<ImageButtonWidget> clickEvent) {
         super(x, y, width, height, message);
-        this.image = ImageRendererManager.registerOrGetImage(image, () -> AnimatedDynamicTextureImage.createWEBPFromTexture(image));
+        this.imageLocation = imageLocation;
         this.onPress = clickEvent;
     }
 
@@ -37,102 +39,118 @@ public class ImageButtonWidget extends AbstractWidget {
 
     @Override
     protected void renderWidget(GuiGraphics context, int mouseX, int mouseY, float delta) {
-        context.enableScissor(getX(), getY(), getX() + width, getY() + height);
         this.isHovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.width && mouseY < this.getY() + this.height;
 
         if (this.isHovered || this.isFocused()) {
-            durationHovered += delta / 2f;
+            durationHovered = Math.min(durationHovered + delta / 2f, 1f);
         } else {
-            if (durationHovered < 0) {
-                durationHovered = 0;
-            } else {
-                durationHovered -= durationHovered / 4f;
-            }
+            durationHovered = Math.max(durationHovered - delta / 4f, 0f);
         }
 
-        // Ease in out lerp.
-        float alphaScale = Mth.clampedLerp(0.7f, 0.2f, Mth.clamp(durationHovered - 1f, 0.0f, 1.0f));
+        float alphaScale = Mth.clampedLerp(0.9f, 0.5f, durationHovered);
 
-        if (image.isDone()) {
-
-            int minFilterScalingTypePrev = glGetTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER);
-            int magFilterScalingTypePrev = glGetTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER);
-
-            try {
-                var contentImage = image.get();
-                if (contentImage != null) {
-                    // Using reflection, get value of contentImage.frameWidth and frameHeight
-                    try {
-                        Field frameWidthField = contentImage.getClass().getDeclaredField("frameWidth");
-                        frameWidthField.setAccessible(true);
-                        int frameWidth = frameWidthField.getInt(contentImage);
-
-                        Field frameHeightField = contentImage.getClass().getDeclaredField("frameHeight");
-                        frameHeightField.setAccessible(true);
-                        int frameHeight = frameHeightField.getInt(contentImage);
-
-                        // Use frameWidth and frameHeight as needed
-                        // Scale the image so that the image height is the same as the button height.
-                        float neededWidth = frameWidth * ((float) this.height / frameHeight);
-
-                        // Scale the image to fit within the width and height of the button.
-                        context.pose().pushPose();
-                        // gl bilinear scaling.
-                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-                        contentImage.render(context, getX(), getY(), (int) Math.max(neededWidth, this.width), delta);
-                        context.pose().popPose();
-
-                        // reset gl scaling
-
-                    } catch (NoSuchFieldException | IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } catch (InterruptedException | ExecutionException ignored) {
-            } finally {
-                // reset gl scaling
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilterScalingTypePrev);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilterScalingTypePrev);
-            }
-        }
-
-//        context.drawTexture(image, getX(), getY(), this.width, this.height, 0, 0, 1920, 1080, 1920, 1080);
-
-        //? if <1.21.2 {
-        /*int greyColor = net.minecraft.util.FastColor.ARGB32.color((int) (alphaScale * 255), 0, 0, 0);
-        *///?} else {
+        // Grey overlay for hover effect (render first, behind icon and text)
         int greyColor = net.minecraft.util.ARGB.color((int) (alphaScale * 255), 0, 0, 0);
-        //?}
         context.fill(getX(), getY(), getX() + width, getY() + height, greyColor);
 
-        // Draw text.
-        var client = Minecraft.getInstance();
+        // Prepare for icon and text rendering
+        Minecraft client = Minecraft.getInstance();
+        int fontHeight = client.font.lineHeight;
+        int textWidth = client.font.width(getMessage());
 
-        float fontScaling = 1.24f;
+        // Determine layout: vertical or horizontal
+        int totalHorizontalWidth = ICON_SIZE + ICON_TEXT_SPACING + textWidth;
+        boolean preferHorizontal = totalHorizontalWidth <= this.width && this.width >= 2f * this.height;
+        boolean verticalLayout = !preferHorizontal;
 
-        int unscaledTextX = this.getX() + 5;
-        int unscaledTextY = this.getY() + this.height - client.font.lineHeight - 5;
-        int textX = (int) (unscaledTextX / fontScaling);
-        int textY = (int) (unscaledTextY / fontScaling);
-        int endX = (int) ((this.getX() + this.width - 5) / fontScaling);
-        int endY = (int) ((this.getY() + this.height - 5) / fontScaling);
+        int iconX, iconY; // Declare icon position variables here
 
-        context.fill(unscaledTextX - 5, unscaledTextY - 5, unscaledTextX + this.width - 5, unscaledTextY + client.font.lineHeight + 5, 0xAF000000);
+        if (verticalLayout) {
+            // Vertical Layout: Icon above text
+            int totalHeight = ICON_SIZE + ICON_TEXT_SPACING + fontHeight;
 
-        context.pose().pushPose();
-        context.pose().scale(fontScaling, fontScaling, 1.0f);
+            iconY = getY() + (this.height - totalHeight) / 2;
 
-//            context.fill(textX, textY, endX, endY, 0xFFFF2F00);
+            List<FormattedCharSequence> wrappedText = client.font.split(getMessage(), this.width - 20);
+            int wrappedTextHeight = wrappedText.size() * fontHeight;
+            int textY = iconY + ICON_SIZE + ICON_TEXT_SPACING;
 
-        renderScrollingString(context, client.font, getMessage(), textX, textY, endX, endY, 0xFFFFFF);
+            if (wrappedText.size() > 1) {
+                int textStartY = textY + (fontHeight - wrappedTextHeight) / 2;
+                int currentTextY = textY;
 
-        context.pose().popPose();
+                int combinedTotalHeight = ICON_SIZE + ICON_TEXT_SPACING + wrappedTextHeight;
+                int overallStartY = getY() + (this.height - combinedTotalHeight) / 2;
+                iconY = overallStartY;
+                iconX = getX() + (this.width - ICON_SIZE) / 2;
+                textY = overallStartY + ICON_SIZE + ICON_TEXT_SPACING;
+                currentTextY = textY;
+                // Re-render icon with recalculated position if needed, though in this case, position hasn't changed significantly in terms of icon rendering itself.
+                renderIcon(context, iconX, iconY);
 
-        // Draw border.
+
+                for (FormattedCharSequence line : wrappedText) {
+                    context.drawCenteredString(client.font, line, getX() + this.width / 2, currentTextY, 0xFFFFFF);
+                    currentTextY += fontHeight;
+                }
+            } else {
+                int combinedTotalHeight = ICON_SIZE + ICON_TEXT_SPACING + fontHeight;
+                int overallStartY = getY() + (this.height - combinedTotalHeight) / 2;
+                iconY = overallStartY;
+                iconX = getX() + (this.width - ICON_SIZE) / 2;
+                textY = overallStartY + ICON_SIZE + ICON_TEXT_SPACING;
+                renderIcon(context, iconX, iconY);
+                context.drawCenteredString(client.font, getMessage(), getX() + this.width / 2, textY, 0xFFFFFF);
+            }
+        } else {
+            // Horizontal Layout: Icon left of text
+            int totalWidth = ICON_SIZE + ICON_TEXT_SPACING + textWidth;
+            int startX = getX() + (this.width - totalWidth) / 2;
+
+            iconX = startX;
+            iconY = getY() + (this.height - ICON_SIZE) / 2;
+
+            renderIcon(context, iconX, iconY);
+
+            int textX = iconX + ICON_SIZE + ICON_TEXT_SPACING;
+            int textY = getY() + (this.height - fontHeight) / 2;
+
+            List<FormattedCharSequence> wrappedText = client.font.split(getMessage(), this.width - ICON_SIZE - ICON_TEXT_SPACING - 10);
+            if (wrappedText.size() > 1) {
+                int wrappedTextHeight = wrappedText.size() * fontHeight;
+                int textStartY = getY() + (this.height - wrappedTextHeight) / 2;
+                int currentTextY = textStartY;
+                for (FormattedCharSequence line : wrappedText) {
+                    context.drawString(client.font, line, textX, currentTextY, 0xFFFFFF);
+                    currentTextY += fontHeight;
+                }
+            } else {
+                context.drawString(client.font, getMessage(), textX, textY, 0xFFFFFF);
+            }
+        }
+
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+
         context.renderOutline(getX(), getY(), width, height, 0x0FFFFFFF);
-        context.disableScissor();
     }
+
+
+    private void renderIcon(GuiGraphics context, int x, int y) {
+        int minFilterScalingTypePrev = glGetTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER);
+        int magFilterScalingTypePrev = glGetTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER);
+        try {
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            context.pose().pushPose();
+            context.pose().scale(32f / 512f, 32f / 512f, 1f);
+            context.blit(RenderType::guiTexturedOverlay, this.imageLocation, (int) (x / (32f / 512f)), (int) (y / (32f / 512f)), 0, 0, 512, 512, 512, 512);
+            context.pose().popPose();
+        } catch (Exception ignored) {} finally {
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilterScalingTypePrev);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilterScalingTypePrev);
+        }
+    }
+
 
     @Override
     protected void updateWidgetNarration(NarrationElementOutput builder) {

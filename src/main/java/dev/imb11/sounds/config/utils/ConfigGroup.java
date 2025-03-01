@@ -68,7 +68,7 @@ public abstract class ConfigGroup<T extends ConfigGroup> {
 
     public abstract YetAnotherConfigLib getYACL();
 
-    public abstract ResourceLocation getImage();
+    public abstract ResourceLocation getIcon();
 
     public abstract Component getName();
 

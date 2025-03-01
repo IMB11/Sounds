@@ -20,13 +20,13 @@ public class ModConfig extends ConfigGroup<ModConfig> implements YetAnotherConfi
     }
 
     @Override
-    public ResourceLocation getImage() {
-        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/chat_sounds.webp");
+    public ResourceLocation getIcon() {
+        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/mod_options.png");
     }
 
     @Override
     public Component getName() {
-        return Component.translatable("sounds.config.chat");
+        return Component.translatable("sounds.config.mod");
     }
 
     @Override

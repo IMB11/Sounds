@@ -50,7 +50,9 @@ public class ImageButtonWidget extends AbstractWidget {
         float alphaScale = Mth.clampedLerp(0.9f, 0.5f, durationHovered);
 
         // Grey overlay for hover effect (render first, behind icon and text)
-        int greyColor = net.minecraft.util.ARGB.color((int) (alphaScale * 255), 0, 0, 0);
+        int a = (int) (((0xFF000000) & 0xFF) * alphaScale);
+        int greyColor = (a << 24) | (0);
+
         context.fill(getX(), getY(), getX() + width, getY() + height, greyColor);
 
         // Prepare for icon and text rendering
@@ -134,6 +136,14 @@ public class ImageButtonWidget extends AbstractWidget {
         context.renderOutline(getX(), getY(), width, height, 0x0FFFFFFF);
     }
 
+    private static void renderTexture(GuiGraphics drawContext, ResourceLocation texture, int x, int y, int textureWidth, int textureHeight) {
+        //? 1.21 {
+        /*drawContext.blit(texture, x, y, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
+         *///?} else {
+        drawContext.blit(RenderType::guiTexturedOverlay, texture, x, y, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
+        //?}
+    }
+
 
     private void renderIcon(GuiGraphics context, int x, int y) {
         int minFilterScalingTypePrev = glGetTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER);
@@ -143,7 +153,11 @@ public class ImageButtonWidget extends AbstractWidget {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             context.pose().pushPose();
             context.pose().scale(32f / 512f, 32f / 512f, 1f);
+            //? 1.21 {
+            /*context.blit(this.imageLocation, (int) (x / (32f / 512f)), (int) (y / (32f / 512f)), 0, 0, 512, 512, 512, 512);
+             *///?} else {
             context.blit(RenderType::guiTexturedOverlay, this.imageLocation, (int) (x / (32f / 512f)), (int) (y / (32f / 512f)), 0, 0, 512, 512, 512, 512);
+            //?}
             context.pose().popPose();
         } catch (Exception ignored) {} finally {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilterScalingTypePrev);

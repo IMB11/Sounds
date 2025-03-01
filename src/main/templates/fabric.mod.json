@@ -30,6 +30,7 @@
   ],
   "depends": {
     "fabricloader": ">=${target_fabricloader}",
+    "yet_another_config_lib_v3": ">=${target_yacl}",
     "fabric": "*",
     "mru": "~${target_mru}",
     "minecraft": "${target_minecraft}"

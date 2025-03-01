@@ -80,6 +80,8 @@ modstitch {
             "fabric" -> property("deps.fabric_loader") as String
             else -> ""
         })
+
+        replacementProperties.put("target_yacl", "${property("deps.yacl")}-${loader}");
     }
 
     loom {
@@ -172,7 +174,6 @@ dependencies {
     modstitchModCompileOnly("maven.modrinth:trashslot:${property("compile.trashslot")}")
 
     "dev.isxander:yet-another-config-lib:${property("deps.yacl")}-${loader}".let {
-        modstitchJiJ(it)
         modstitchModApi(it) {
             exclude(group = "net.fabricmc.fabric-api", module = "fabric-api")
             exclude(group = "thedarkcolour")

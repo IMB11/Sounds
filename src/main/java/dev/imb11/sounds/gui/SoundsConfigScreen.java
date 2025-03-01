@@ -8,6 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.function.Supplier;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
@@ -85,7 +87,7 @@ public class SoundsConfigScreen extends Screen {
         int fontHeight = font.lineHeight;
         int gridX = 10;
         int gridY = 10 + fontHeight + 10;
-        int gridWidth = width - 20;
+        int gridWidth = width - 15;
         int gridHeight = height - 20 - fontHeight - 10 - 20;
 
         int numColumns = 4;
@@ -136,9 +138,9 @@ public class SoundsConfigScreen extends Screen {
 
         int discordAndKoFiButtonsWidth = 100 + 100 + 30; // button widths + left margin of Ko-Fi button + right margin of Discord button
         int doneButtonWidth = this.width - discordAndKoFiButtonsWidth;
-        Button buttonWidget = Button.builder(CommonComponents.GUI_DONE, (btn) -> this.minecraft.setScreen(this.parent)).bounds(this.width / 2 - doneButtonWidth / 2, this.height - 30, doneButtonWidth, 20).build();
-        Button koFiButton = Button.builder(Component.literal("Donate").withStyle(ChatFormatting.GOLD).withStyle(ChatFormatting.BOLD), (btn) -> Util.getPlatform().openUri("https://ko-fi.com/mineblock11")).bounds(10, this.height - 30, 100, 20).build();
-        Button discordButton = Button.builder(Component.literal("Discord").withStyle(ChatFormatting.AQUA).withStyle(ChatFormatting.BOLD), (btn) -> Util.getPlatform().openUri("https://discord.imb11.dev/")).bounds(this.width - 110, this.height - 30, 100, 20).build();
+        Button buttonWidget = new GreyButton(this.width / 2 - doneButtonWidth / 2, this.height - 30, doneButtonWidth, 20, CommonComponents.GUI_DONE, (btn) -> this.minecraft.setScreen(this.parent), Supplier::get);
+        Button koFiButton = new GreyButton(10, this.height - 30, 100, 20, Component.literal("Donate").withStyle(ChatFormatting.GOLD).withStyle(ChatFormatting.BOLD), (btn) -> Util.getPlatform().openUri("https://ko-fi.com/mineblock11"), Supplier::get);
+        Button discordButton = new GreyButton(this.width - 110, this.height - 30, 100, 20, Component.literal("Discord").withStyle(ChatFormatting.AQUA).withStyle(ChatFormatting.BOLD), (btn) -> Util.getPlatform().openUri("https://discord.imb11.dev/"), Supplier::get);
         this.addRenderableWidget(buttonWidget);
         this.addRenderableWidget(koFiButton);
         this.addRenderableWidget(discordButton);

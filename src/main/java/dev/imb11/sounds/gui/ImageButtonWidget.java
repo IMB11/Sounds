@@ -50,8 +50,8 @@ public class ImageButtonWidget extends AbstractWidget {
         float alphaScale = Mth.clampedLerp(0.9f, 0.5f, durationHovered);
 
         // Grey overlay for hover effect (render first, behind icon and text)
-        int a = (int) (((0xFF000000) & 0xFF) * alphaScale);
-        int greyColor = (a << 24) | (0);
+        int a = (int) (255 * alphaScale);
+        int greyColor = (a << 24);
 
         context.fill(getX(), getY(), getX() + width, getY() + height, greyColor);
 

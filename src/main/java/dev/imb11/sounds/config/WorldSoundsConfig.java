@@ -5,6 +5,7 @@ import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.config.ConfiguredSound;
 import dev.imb11.sounds.api.config.DynamicConfiguredSound;
 import dev.imb11.sounds.config.utils.ConfigGroup;
+import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import dev.imb11.sounds.sound.context.RepeaterSoundContext;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
@@ -19,6 +20,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.ItemStack;
 
 import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 
@@ -43,7 +45,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
     @SerialEntry
     public ConfiguredSound bowPullSoundEffect = new ConfiguredSound("bowPull", SoundEvents.CROSSBOW_LOADING_MIDDLE, true, 1.0F, 0.25F);
     @SerialEntry
-    public ConfiguredSound plantPotFillSoundEffect = new ConfiguredSound("plantPotFill", SoundEvents.GRASS_PLACE, true, 0.5F, 0.4F);
+    public DynamicConfiguredSound<ItemStack, ItemStackSoundContext> plantPotFillSoundEffect = new DynamicConfiguredSound<>("plantPotFill", SoundEvents.GRASS_PLACE, true, 1.1F, 0.4F, true);
     @SerialEntry
     public ConfiguredSound cakeEatSoundEffect = new ConfiguredSound("cakeEat", SoundEvents.GENERIC_EAT, true, 1.2F, 0.7F);
     @SerialEntry

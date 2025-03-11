@@ -3,6 +3,7 @@ package dev.imb11.sounds;
 import dev.imb11.mru.API;
 import dev.imb11.mru.LoaderUtils;
 import dev.imb11.sounds.config.ChatSoundsConfig;
+import dev.imb11.sounds.config.ModConfig;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.dynamic.SoundsReloadListener;
@@ -58,5 +59,12 @@ public class SoundsClient {
                 SUPPORTERS = apiClient.getKofiSupporters();
             } catch (Exception ignored) {}
         }, Util.nonCriticalIoPool());
+
+        if (LoaderUtils.isModInstalled("rsls")) {
+            LOGGER.warn("Raise Sound Limits Simplified was detected, hideSoundsButtonInSoundMenu = true has been set and saved to prevent collision of buttons on the sound mixer menu.");
+            var modConfig = SoundsConfig.get(ModConfig.class);
+            modConfig.hideSoundsButtonInSoundMenu = true;
+            modConfig.save();
+        }
     }
 }

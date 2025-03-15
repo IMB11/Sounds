@@ -18,26 +18,34 @@ modId="${loader}"
 type="required"
 versionRange="${target_loader}"
 ordering="NONE"
-side="BOTH"
+side="CLIENT"
 
 [[dependencies.sounds]]
 modId = "yet_another_config_lib_v3"
 type = "required"
 versionRange="[${target_yacl},)"
+side="CLIENT"
 
 [[dependencies.sounds]]
 modId="minecraft"
 type="required"
 versionRange="${target_minecraft}"
 ordering="NONE"
-side="BOTH"
+side="CLIENT"
 
 [[dependencies.sounds]]
 modId="mru"
 type="required"
 versionRange="[${target_mru},)"
 ordering="NONE"
-side="BOTH"
+side="CLIENT"
+
+[[dependencies.sounds]]
+modId = "rsls"
+type = "optional"
+versionRange = ""
+ordering = "NONE"
+side = "CLIENT"
 
 [[mixins]]
 config="sounds.mixins.json"

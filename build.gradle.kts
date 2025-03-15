@@ -217,3 +217,13 @@ fun createActiveTask(
 
     return activeTaskName
 }
+
+val buildAndCollect by tasks.registering(Copy::class) {
+    group = "build"
+
+    dependsOn(modstitch.finalJarTask)
+    from(modstitch.finalJarTask.flatMap { it.archiveFile })
+
+    into(rootProject.layout.buildDirectory.dir("finalJars"))
+}
+createActiveTask(buildAndCollect)

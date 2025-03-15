@@ -55,3 +55,4 @@ jobs:
           curseforge-id: ${{ vars.CURSEFORGE_ID }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
           github-token: ${{ secrets.CLASSIC_GITHUB_TOKEN }}
+          retry-attempts: '5'

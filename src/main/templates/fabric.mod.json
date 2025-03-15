@@ -34,5 +34,8 @@
     "fabric": "*",
     "mru": "~${target_mru}",
     "minecraft": "${target_minecraft}"
+  },
+  "recommends": {
+    "rsls": "*"
   }
 }

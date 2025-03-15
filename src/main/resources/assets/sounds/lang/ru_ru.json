@@ -1,9 +1,9 @@
 {
   "sounds.incompatability.title": "Обнаружена несовместимость",
-  "sounds.incompatability.message": "Похоже, что установлены оба мода §lQualitySounds§r и §lSounds§r.\n\n§lПожалуйста, удалите мод QualitySounds, так как мод Sounds уже включает в себя все его звуковые эффекты и функциональные возможности.\n\nСохранение обоих установленных модов приведет к конфликтам с миксинами мода Sounds, что приведёт к дублированию звука и другим потенциальным проблемам и сбоям.§r\n\n§lSounds§r обладает полным набором функций, включая все, что предлагает QualitySounds, и ещё более настраиваемый интерфейс.§r\n\nС §lSounds§r, вы можете изменять звуки перемещения, падения, разрушения и шагов для блоков, которым были присвоены пользовательские звуковые эффекты, в том числе изменять их высоту и громкость — функции, которых нет в QualitySounds.\n",
+  "sounds.incompatability.message": "Похоже, что установлены моды §lQualitySounds§r и §lSounds§r.\n\n§lПожалуйста, удалите мод QualitySounds, так как мод Sounds уже включает в себя все его звуковые эффекты и функциональные возможности.\n\nСохранение обоих установленных модов приведет к конфликтам с миксинами мода Sounds, что приведёт к дублированию звука и другим потенциальным проблемам и сбоям.§r\n\n§lSounds§r обладает полным набором функций, включая все, что предлагает QualitySounds, и ещё более настраиваемый интерфейс.§r\n\nС §lSounds§r, вы можете изменять звуки перемещения, падения, разрушения и шагов для блоков, которым были присвоены пользовательские звуковые эффекты, в том числе изменять их высоту и громкость — функции, которых нет в QualitySounds.\n",
   "sounds.config.static": "Звуки",
   "sounds.config.title": "Конфигурация звуков",
-  
+
   "sounds.config.preview.name": "Прослушать",
   "sounds.config.preview.name.brackets": "Прослушать %s звук",
   "sounds.config.preview.break": "Разрушить",
@@ -28,9 +28,9 @@
   "sounds.config.event.name": "Код звукового события",
   "sounds.config.event.name.brackets": "Код звукового события (%s)",
   "sounds.config.event.description": "Идентификатор звукового события, при котором воспроизводится звук.\n\nЭто уникальный идентификатор звукового события, который используется для воспроизведения звука в игре.",
-  
+
   "sounds.config.world": "Звуки мира",
-  
+
   "sounds.config.world.mechanics": "Механики",
   "sounds.config.repeaterUse.option": "Изменение задержки повторителя",
   "sounds.config.repeaterUse.option.description": "Звук, воспроизводимый при взаимодействии с повторителем.",
@@ -40,10 +40,10 @@
   "sounds.config.daylightDetectorUse.option.description": "Звук, воспроизводимый при взаимодействии с датчиком дневного света для изменения его режима.",
   "sounds.config.furnaceMinecartFuel.option": "Загрузка топлива в самоходную вагонетку",
   "sounds.config.furnaceMinecartFuel.option.description": "Звук, воспроизводимый при загрузке топлива в самоходную вагонетку.",
-  
+
   "sounds.config.world.actions": "Действия",
-  "sounds.config.option.enableEnderpearlVariety.name": "Разнообразие звуков эндер-жемчуга",
-  "sounds.config.option.description.enableEnderpearlVariety": "Должен ли звук, воспроизводимый при броске эндер-жемчуга, быть случайным и более похожим на телепортацию плодами хоруса?",
+  "sounds.config.option.enableEnderpearlVariety.name": "Разнообразие звуков Эндер-жемчуга",
+  "sounds.config.option.description.enableEnderpearlVariety": "Должен ли звук, воспроизводимый при броске Эндер-жемчуга, быть случайным и более похожим на телепортацию плодами хоруса?",
   "sounds.config.frostWalker.option": "Заморозка «Ледоходом»",
   "sounds.config.frostWalker.option.description": "Звук, воспроизводимый, когда ботинки с зачарованием «Ледоход» замораживают воду.",
   "sounds.config.leadSnapping.option": "Отвязывание мобов",
@@ -54,20 +54,22 @@
   "sounds.config.plantPotFill.option.description": "Звук, воспроизводимый, когда вы садите растение в цветочный горшок.",
   "sounds.config.cakeEat.option": "Поедание торта",
   "sounds.config.cakeEat.option.description": "Звук, воспроизводимый, когда вы съедаете кусочек торта. Торт может быть ложью, но звук — нет!",
-  
+
   "sounds.config.world.mobs": "Мобы",
   "sounds.config.babyChickenChirp.option": "Щебетание цыплят",
   "sounds.config.babyChickenChirp.option.description": "Звук, воспроизводимый, когда цыплята щебечут.",
   "sounds.config.wolfHowling.option": "Волчий вой",
   "sounds.config.wolfHowling.option.description": "Звук, воспроизводимый, волками во время полной луны... будьте осторожнее!",
-  
+
   "sounds.config.world.blocks": "Блоки",
   "sounds.config.world.blocks.description": "Эти звуки распределяются по категориям и применяются на основе тегов, обеспечивая гибкость и настраиваемость.\nПри поиске звуков рекомендуется использовать строку поиска.\nЧтобы получить полный список блоков, относящихся к тем или иным тегам, нажмите на следующую кнопку:",
   "sounds.config.option.disableBlocksEntirely": "Отключить все изменённые звуки блоков",
   "sounds.config.option.description.disableBlocksEntirely": "Отключает все звуки блоков, которые были изменены с помощью наборов ресурсов. Это полезно, если вы хотите использовать звуки блоков по умолчанию в игре.",
+  "sounds.config.option.ignoredBlocks": "Игнорируемые блоки",
+  "sounds.config.option.description.ignoredBlocks": "Список блоков, к которым не будут применены какие-либо пользовательские настройки определения звука, даже если они находятся в теге, к которому применены настройки звука.",
 
   "sounds.config.ui": "Звуки инвентаря игрока",
-  
+
   "sounds.config.ui.interface": "Интерфейс",
   "sounds.config.option.ignoreEmptyHotbarSlots": "Игнорировать пустые слоты в хотбаре",
   "sounds.config.option.description.ignoreEmptyHotbarSlots": "Следует ли игнорировать пустые слоты в панели быстрого доступа при воспроизведении звуков?\n\nПримечание: Эта настройка НЕ включает в себя звук выбрасывания предметов из панели быстрого доступа из-за «гениальной» реализации этой механики от Mojang. Для этого следует включить настройку «Игнорировать пустые слоты инвентаря».",
@@ -83,7 +85,7 @@
   "sounds.config.hotbarScroll.option.description": "Звук, воспроизводимый при прокрутке панели быстрого доступа или использовании цифровых клавиш для выбора её слотов.",
   "sounds.config.hotbarPick.option": "Выбор блока",
   "sounds.config.hotbarPick.option.description": "Звук, воспроизводимый при использовании функции «Выбор блока».",
-  
+
   "sounds.config.ui.item_management": "Управление предметами",
   "sounds.config.option.ignoreEmptyInventorySlots": "Игнорировать пустые слоты инвентаря",
   "sounds.config.option.description.ignoreEmptyInventorySlots": "Следует ли игнорировать пустые слоты инвентаря при воспроизведении звуков?\n\nПримечание: Эта настройка включает в себя звук выбрасывания предметов из панели быстрого доступа из-за «гениальной» реализации этой механики от Mojang.",
@@ -101,9 +103,9 @@
   "sounds.config.itemDrag.option.description": "Звук, воспроизводимый при перетаскивании предмета по слотам в инвентаре.",
   "sounds.config.itemPick.option": "Нажатие по предмету",
   "sounds.config.itemPick.option.description": "Звук, воспроизводимый при нажатии на предмет в инвентаре.",
-  
+
   "sounds.config.chat": "Звуки чата",
-  
+
   "sounds.config.chat.messaging": "Обмен сообщениями",
   "sounds.config.mentionKeywords.option": "Включить префикс упоминания",
   "sounds.config.mentionKeywords.option.description": "Должен ли использоваться префикс '@' для определения того, упомянуты ли вы в сообщении чата?",
@@ -115,15 +117,15 @@
   "sounds.config.message.option.description": "Звук, воспроизводимый при получении сообщения в чате.",
   "sounds.config.mention.option": "Упоминания в чате",
   "sounds.config.mention.option.description": "Звук, воспроизводимый при упоминании вас в новом сообщении в чате.",
-  
+
   "sounds.config.chat.cooldown": "Перезарядка звуков",
   "sounds.config.option.enableChatSoundCooldown": "Включить перезарядку звуков",
   "sounds.config.option.description.enableChatSoundCooldown": "Следует ли применять перезарядку для звуков чата? Если включено, звук будет воспроизведен один раз за каждый периоде восстановления. Это не относится к печати звуков.",
   "sounds.config.option.chatSoundCooldown": "Период перезарядки звуков",
   "sounds.config.option.description.chatSoundCooldown": "Период перезарядки звуков чата в секундах (Не относится к печати звуков).",
-  
+
   "sounds.config.events": "Звуки событий",
-  
+
   "sounds.config.events.statusEffects": "Эффекты",
   "sounds.config.option.ignoreSilencedStatusEffects": "Игнорировать скрытые эффекты",
   "sounds.config.option.description.ignoreSilencedStatusEffects": "Следует ли игнорировать скрытые эффекты (нет иконки в интерфейсе) при воспроизведении звуков?",
@@ -134,5 +136,8 @@
   "sounds.config.negativeStatusEffectGain.option": "Получение негативного эффекта",
   "sounds.config.negativeStatusEffectGain.option.description": "Звук, воспроизводимый при получении негативного эффекта.",
   "sounds.config.negativeStatusEffectLose.option": "Утрата негативного эффекта",
-  "sounds.config.negativeStatusEffectLose.option.description": "Звук, воспроизводимый при утрате негативного эффекта."
+  "sounds.config.negativeStatusEffectLose.option.description": "Звук, воспроизводимый при утрате негативного эффекта.",
+  "sounds.config.mod": "Настройки конкретных модов",
+  "sounds.config.option.hideSoundsButtonInSoundMenu": "Скрыть кнопку в меню звукового микшера",
+  "sounds.config.option.description.hideSoundsButtonInSoundMenu": "Должен ли мод скрыnь кнопку 'Звуки', которая открывает экран настройки, с ванильного экрана звукового микшера?"
 }

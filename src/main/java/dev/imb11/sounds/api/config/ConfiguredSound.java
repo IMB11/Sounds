@@ -2,6 +2,8 @@ package dev.imb11.sounds.api.config;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.imb11.sounds.util.MixinStatics;
+import dev.imb11.sounds.util.SoundRegistryUtils;
 import dev.isxander.yacl3.api.ButtonOption;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
@@ -29,7 +31,7 @@ public class ConfiguredSound {
     public static final Codec<ConfiguredSound> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.STRING.fieldOf("id").forGetter(ConfiguredSound::getId),
-                    ResourceLocation.CODEC.fieldOf("soundEvent").forGetter(sound -> sound.soundEvent.key().location()),
+                    ResourceLocation.CODEC.fieldOf("soundEvent").forGetter(sound -> sound.soundEvent),
                     Codec.BOOL.fieldOf("shouldPlay").forGetter(ConfiguredSound::shouldPlay),
                     Codec.FLOAT.fieldOf("pitch").forGetter(ConfiguredSound::getPitch),
                     Codec.FLOAT.fieldOf("volume").forGetter(ConfiguredSound::getVolume)
@@ -37,20 +39,16 @@ public class ConfiguredSound {
     public final String id;
     public final Minecraft client;
     public boolean enabled;
-    public Holder.Reference<SoundEvent> soundEvent;
+    public ResourceLocation soundEvent;
     public float pitch = 1f;
     public float volume = 1f;
     private float _pendingPitch = 1f;
     private float _pendingVolume = 1f;
-    private Holder.Reference<SoundEvent> _pendingSoundEvent;
+    private ResourceLocation _pendingSoundEvent;
 
     public ConfiguredSound(String id, ResourceLocation soundEvent, boolean enabled, float pitch, float volume) {
         this.enabled = enabled;
-        //? if <1.21.2 {
-        /*this.soundEvent = Holder.Reference.createStandAlone(BuiltInRegistries.SOUND_EVENT.holderOwner(), ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), soundEvent));
-        *///?} else {
-        this.soundEvent = Holder.Reference.createStandAlone(BuiltInRegistries.SOUND_EVENT, ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), soundEvent));
-        //?}
+        this.soundEvent = soundEvent;
         this.pitch = pitch;
         this.volume = volume;
 
@@ -105,25 +103,13 @@ public class ConfiguredSound {
                 .name(Component.translatable("sounds.config.event.name"))
                 .description(OptionDescription.createBuilder()
                         .text(Component.translatable("sounds.config.event.description")).build())
-                .binding(defaults.soundEvent.key().location().toString(), () -> this.soundEvent.key().location().toString(), (val) ->
-                        this.soundEvent = Holder.Reference.createStandAlone(
-                                //? if <1.21.2 {
-                                /*BuiltInRegistries.SOUND_EVENT.holderOwner(),
-                                *///?} else {
-                                BuiltInRegistries.SOUND_EVENT,
-                                //?}
-                                ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), ResourceLocation.tryParse(val))))
-                .listener((opt, val) -> this._pendingSoundEvent = Holder.Reference.createStandAlone(
-                        //? if <1.21.2 {
-                        /*BuiltInRegistries.SOUND_EVENT.holderOwner(),
-                        *///?} else {
-                        BuiltInRegistries.SOUND_EVENT,
-                        //?}
-                        ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), ResourceLocation.tryParse(val))))
+                .binding(defaults.soundEvent.toString(), () -> this.soundEvent.toString(), (val) ->
+                        this.soundEvent = ResourceLocation.parse(val))
+                .listener((opt, val) -> this._pendingSoundEvent = ResourceLocation.parse(val))
                 .controller(opt -> DropdownStringControllerBuilder.create(opt)
                         .allowAnyValue(false)
                         .allowEmptyValue(false)
-                        .values(BuiltInRegistries.SOUND_EVENT.registryKeySet().stream().map(ResourceKey::location).map(ResourceLocation::toString).toList()))
+                        .values(MixinStatics.FOUND_SOUND_EVENTS.stream().map(ResourceLocation::toString).toList()))
                 .build();
 
         return new ArrayList<>(List.of(volumeOpt, pitchOpt, soundEventOpt));
@@ -171,12 +157,8 @@ public class ConfiguredSound {
                 .build();
     }
 
-    public final SoundEvent fetchSoundEvent(ResourceKey<SoundEvent> key) {
-        //? if <1.21.2 {
-        /*return BuiltInRegistries.SOUND_EVENT.get(key);
-        *///?} else {
-        return BuiltInRegistries.SOUND_EVENT.getValue(key);
-        //?}
+    public final SoundEvent fetchSoundEvent(ResourceLocation location) {
+        return SoundRegistryUtils.getSoundEventRegistry(client.level).apply(location);
     }
 
     protected static long lastShownToast = -1L;
@@ -184,7 +166,7 @@ public class ConfiguredSound {
     public void playSound() {
         if (this.enabled) {
             try {
-                final SoundEvent event = fetchSoundEvent(this.soundEvent.key());
+                final SoundEvent event = fetchSoundEvent(this.soundEvent);
                 this.playSound(event, this.pitch, this.volume);
             } catch (Exception ignored) {
                 // Prevent toast spam:
@@ -209,7 +191,7 @@ public class ConfiguredSound {
 
     private void playPreviewSound() {
         try {
-            final SoundEvent event = fetchSoundEvent(this._pendingSoundEvent.key());
+            final SoundEvent event = fetchSoundEvent(this._pendingSoundEvent);
             this.playSound(event, _pendingPitch, _pendingVolume);
         } catch (Exception ignored) {
             if (System.currentTimeMillis() > lastShownToast + 5000) {
@@ -237,11 +219,7 @@ public class ConfiguredSound {
     public @Nullable SimpleSoundInstance getSoundInstance() {
         if (this.enabled) {
             try {
-                //? if <1.21.2 {
-                /*final SoundEvent event = BuiltInRegistries.SOUND_EVENT.get(this.soundEvent.key());
-                *///?} else {
-                final SoundEvent event = BuiltInRegistries.SOUND_EVENT.getValue(this.soundEvent.key());
-                //?}
+                final SoundEvent event = SoundRegistryUtils.getSoundEventRegistry(client.level).apply(this.soundEvent);
                 return SimpleSoundInstance.forUI(event, pitch, volume);
             } catch (Exception ignored) {
                 return null;
@@ -267,7 +245,7 @@ public class ConfiguredSound {
     }
 
     public SoundEvent getSoundEvent() {
-        return fetchSoundEvent(this.soundEvent.key());
+        return fetchSoundEvent(this.soundEvent);
     }
 
     public float getPitch() {

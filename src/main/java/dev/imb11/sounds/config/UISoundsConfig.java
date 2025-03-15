@@ -25,9 +25,9 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
     @SerialEntry
     public final HotbarDynamicConfiguredSound hotbarPickSoundEffect = new HotbarDynamicConfiguredSound("hotbarPick", SoundEvents.NOTE_BLOCK_HAT, true, 1.8f, 0.2f, true);
     @SerialEntry
-    public final DynamicConfiguredSound<AbstractContainerMenu, ScreenHandlerSoundContext> inventoryOpenSoundEffect = new DynamicConfiguredSound<>("inventoryOpen", SoundsConfig.getSoundEventReference(SoundEvents.UI_TOAST_IN), true, 2f, 0.5f, true);
+    public final DynamicConfiguredSound<AbstractContainerMenu, ScreenHandlerSoundContext> inventoryOpenSoundEffect = new DynamicConfiguredSound<>("inventoryOpen", SoundEvents.UI_TOAST_IN, true, 2f, 0.5f, true);
     @SerialEntry
-    public final DynamicConfiguredSound<AbstractContainerMenu, ScreenHandlerSoundContext> inventoryCloseSoundEffect = new DynamicConfiguredSound<>("inventoryClose", SoundsConfig.getSoundEventReference(SoundEvents.UI_TOAST_OUT), true, 2f, 0.5f, false);
+    public final DynamicConfiguredSound<AbstractContainerMenu, ScreenHandlerSoundContext> inventoryCloseSoundEffect = new DynamicConfiguredSound<>("inventoryClose", SoundEvents.UI_TOAST_OUT, true, 2f, 0.5f, false);
     @SerialEntry
     public final ConfiguredSound inventoryScrollSoundEffect = new ConfiguredSound("inventoryScroll", SoundEvents.NOTE_BLOCK_HAT, true, 1.8f, 0.2f);
     @SerialEntry

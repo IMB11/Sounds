@@ -8,6 +8,7 @@
   "client": [
     "ActionControllerElementMixin",
     "BlockSoundMixin",
+    "SoundManagerMixin",
     "SoundsOptionsScreenMixin",
     "TitleScreenWidget",
     "accessors.BlockAccessor",

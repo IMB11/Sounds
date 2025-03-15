@@ -1,9 +1,0 @@
-{
-  "values": [
-    "minecraft:white_dye",
-    {
-      "id": "#c:white_dyes",
-      "required": false
-    }
-  ]
-}

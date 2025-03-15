@@ -1,9 +1,0 @@
-{
-  "values": [
-    "minecraft:emerald",
-    {
-      "id": "#c:emeralds",
-      "required": false
-    }
-  ]
-}

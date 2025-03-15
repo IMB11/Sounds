@@ -5,6 +5,9 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.ArrayList;
 import java.util.Optional;
+
+import dev.imb11.sounds.util.SoundRegistryUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -13,12 +16,12 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
 
 public class SoundDefinition<T> {
-    private final SoundEvent soundEvent;
+    private final ResourceLocation soundEvent;
     private final TagList<T> keys;
     private final Optional<Float> volume;
     private final Optional<Float> pitch;
 
-    protected SoundDefinition(SoundEvent soundEvent, TagList<T> keys, Optional<Float> volume, Optional<Float> pitch) {
+    protected SoundDefinition(ResourceLocation soundEvent, TagList<T> keys, Optional<Float> volume, Optional<Float> pitch) {
         this.soundEvent = soundEvent;
         this.keys = keys;
         this.volume = volume;
@@ -27,11 +30,7 @@ public class SoundDefinition<T> {
 
     public static <T> Codec<SoundDefinition<T>> getCodec(ResourceKey<? extends Registry<T>> registryKey) {
         return RecordCodecBuilder.create(builder -> builder.group(
-                //? if <1.21.2 {
-                /*ResourceLocation.CODEC.xmap(SoundEvent::createVariableRangeEvent, SoundEvent::getLocation).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
-                *///?} else {
-                ResourceLocation.CODEC.xmap(SoundEvent::createVariableRangeEvent, SoundEvent::location).fieldOf("soundEvent").forGetter(SoundDefinition<T>::getSoundEvent),
-                //?}
+                ResourceLocation.CODEC.fieldOf("soundEvent").forGetter(i -> i.soundEvent),
                 TagList.getCodec(registryKey).fieldOf("keys").forGetter(SoundDefinition<T>::getKeys),
                 ExtraCodecs.POSITIVE_FLOAT.optionalFieldOf("volume").forGetter(SoundDefinition<T>::getVolume),
                 ExtraCodecs.POSITIVE_FLOAT.optionalFieldOf("pitch").forGetter(SoundDefinition<T>::getPitch)
@@ -39,7 +38,7 @@ public class SoundDefinition<T> {
     }
 
     public SoundEvent getSoundEvent() {
-        return soundEvent;
+        return SoundRegistryUtils.getSoundEventRegistry(Minecraft.getInstance().level).apply(this.soundEvent);
     }
 
     public TagList<T> getKeys() {
@@ -55,13 +54,13 @@ public class SoundDefinition<T> {
     }
 
     public static class Builder<T> {
-        private final SoundEvent soundEvent;
+        private final ResourceLocation soundEvent;
         private final TagList<T> keys = new TagList<>(new ArrayList<>());
         private final Registry<T> registry;
         private Optional<Float> volume = Optional.empty();
         private Optional<Float> pitch = Optional.empty();
 
-        public Builder(SoundEvent soundEvent, Registry<T> registry) {
+        public Builder(ResourceLocation soundEvent, Registry<T> registry) {
             this.soundEvent = soundEvent;
             this.registry = registry;
         }

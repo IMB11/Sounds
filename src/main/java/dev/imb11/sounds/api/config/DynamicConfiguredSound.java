@@ -20,7 +20,7 @@ public class DynamicConfiguredSound<T, F extends DynamicSoundContext<T>> extends
     public static final Codec<DynamicConfiguredSound> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.STRING.fieldOf("id").forGetter(ConfiguredSound::getId),
-                    ResourceLocation.CODEC.fieldOf("soundEvent").forGetter(sound -> sound.soundEvent.key().location()),
+                    ResourceLocation.CODEC.fieldOf("soundEvent").forGetter(sound -> sound.soundEvent),
                     Codec.BOOL.fieldOf("shouldPlay").forGetter(ConfiguredSound::shouldPlay),
                     Codec.FLOAT.fieldOf("pitch").forGetter(ConfiguredSound::getPitch),
                     Codec.FLOAT.fieldOf("volume").forGetter(ConfiguredSound::getVolume),

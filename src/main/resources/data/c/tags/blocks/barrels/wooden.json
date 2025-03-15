@@ -1,9 +1,0 @@
-{
-  "values": [
-    "minecraft:barrel",
-    {
-      "id": "#c:wooden_barrels",
-      "required": false
-    }
-  ]
-}

@@ -47,12 +47,4 @@ public class SoundsConfig {
 
         throw new IllegalArgumentException("No config group found for class " + clazz.getName());
     }
-
-    public static Holder.Reference<SoundEvent> getSoundEventReference(SoundEvent soundEvent) {
-        //? if <1.21.2 {
-         /*return BuiltInRegistries.SOUND_EVENT.getHolder(ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), soundEvent.getLocation())).get();
-        *///?} else {
-        return BuiltInRegistries.SOUND_EVENT.get(ResourceKey.create(BuiltInRegistries.SOUND_EVENT.key(), soundEvent.location())).get();
-        //?}
-    }
 }

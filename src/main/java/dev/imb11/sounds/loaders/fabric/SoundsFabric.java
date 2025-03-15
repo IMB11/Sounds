@@ -10,9 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-
 public class SoundsFabric implements ClientModInitializer {
     @Override
     public void onInitializeClient() {

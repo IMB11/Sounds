@@ -62,7 +62,7 @@ public class SoundsClient {
 
         if (LoaderUtils.isModInstalled("rsls")) {
             LOGGER.warn("Raise Sound Limits Simplified was detected, hideSoundsButtonInSoundMenu = true has been set and saved to prevent collision of buttons on the sound mixer menu.");
-            var modConfig = SoundsConfig.get(ModConfig.class);
+            var modConfig = SoundsConfig.getRaw(ModConfig.class);
             modConfig.hideSoundsButtonInSoundMenu = true;
             modConfig.save();
         }

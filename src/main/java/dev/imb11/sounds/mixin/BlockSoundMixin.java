@@ -3,6 +3,7 @@ package dev.imb11.sounds.mixin;
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.config.TagPair;
 import dev.imb11.sounds.api.event.SoundDefinitionReplacementEvent;
+import dev.imb11.sounds.config.ModConfig;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.WorldSoundsConfig;
 import dev.imb11.sounds.dynamic.TagPairHelper;
@@ -49,7 +50,8 @@ public abstract class BlockSoundMixin implements BlockAccessor {
             sounds$associatedTagPair = pair;
             sounds$hasFetched = true;
         } catch (Exception ignored) {
-            SoundsClient.LOGGER.warn("Early-load attempt at getting custom sound block group failed. Ignoring for now.");
+            if (SoundsConfig.get(ModConfig.class).enableVerboseSoundTypeLogging)
+                SoundsClient.LOGGER.warn("Early-load attempt at getting custom sound block group failed. Ignoring for now. {}", value.toString());
         }
     }
 
@@ -64,7 +66,8 @@ public abstract class BlockSoundMixin implements BlockAccessor {
             if(SoundsConfig.get(WorldSoundsConfig.class).disableBlocksEntirely || SoundsConfig.get(WorldSoundsConfig.class).ignoredBlocks.contains(id.toString()))
                 return;
         } catch (Exception ignored) {
-            SoundsClient.LOGGER.warn("Failed initial block fetch.");
+            if (SoundsConfig.get(ModConfig.class).enableVerboseSoundTypeLogging)
+                SoundsClient.LOGGER.warn("Failed initial block fetch for blockstate {}", state.toString());
         }
 
         SoundType group = null;

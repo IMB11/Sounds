@@ -12,6 +12,8 @@ import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 public class ModConfig extends ConfigGroup<ModConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<ModConfig> {
     @SerialEntry
     public boolean hideSoundsButtonInSoundMenu = false;
+    @SerialEntry
+    public boolean enableVerboseSoundTypeLogging = false;
 
     public ModConfig() {
         super(ModConfig.class);

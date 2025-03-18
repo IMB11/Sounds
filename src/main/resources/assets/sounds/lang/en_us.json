@@ -139,5 +139,7 @@
 	"sounds.config.negativeStatusEffectLose.option.description": "A sound effect that is played when you lose a negative status effect.",
 	"sounds.config.mod": "Mod-Specific Options",
 	"sounds.config.option.hideSoundsButtonInSoundMenu": "Hide Button In Sound Mixer Menu",
-	"sounds.config.option.description.hideSoundsButtonInSoundMenu": "Should Sounds hide the 'Sounds' button, that opens the config screen, from the vanilla sound mixer screen?"
+	"sounds.config.option.description.hideSoundsButtonInSoundMenu": "Should Sounds hide the 'Sounds' button, that opens the config screen, from the vanilla sound mixer screen?",
+	"sounds.config.option.enableVerboseSoundTypeLogging": "Enable Verbose Sound Type Logging",
+	"sounds.config.option.description.enableVerboseSoundTypeLogging": "Should Sounds log verbose information about the block sound types in the console? This is useful for debugging purposes."
 }

@@ -6,7 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import dev.imb11.sounds.util.SoundRegistryUtils;
+import dev.imb11.mru.RegistryUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -38,7 +38,7 @@ public class SoundDefinition<T> {
     }
 
     public SoundEvent getSoundEvent() {
-        return SoundRegistryUtils.getSoundEventRegistry(Minecraft.getInstance().level).apply(this.soundEvent);
+        return RegistryUtils.getSoundEventRegistry(Minecraft.getInstance().level).apply(this.soundEvent);
     }
 
     public TagList<T> getKeys() {

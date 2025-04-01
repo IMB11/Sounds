@@ -1,5 +1,6 @@
 package dev.imb11.sounds.mixin;
 
+import dev.imb11.mru.LoaderUtils;
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.config.TagPair;
 import dev.imb11.sounds.api.event.SoundDefinitionReplacementEvent;
@@ -50,7 +51,7 @@ public abstract class BlockSoundMixin implements BlockAccessor {
             sounds$associatedTagPair = pair;
             sounds$hasFetched = true;
         } catch (Exception ignored) {
-            if (SoundsConfig.get(ModConfig.class).enableVerboseSoundTypeLogging)
+            if (LoaderUtils.isDevelopmentEnvironment())
                 SoundsClient.LOGGER.warn("Early-load attempt at getting custom sound block group failed. Ignoring for now. {}", value.toString());
         }
     }
@@ -66,7 +67,7 @@ public abstract class BlockSoundMixin implements BlockAccessor {
             if(SoundsConfig.get(WorldSoundsConfig.class).disableBlocksEntirely || SoundsConfig.get(WorldSoundsConfig.class).ignoredBlocks.contains(id.toString()))
                 return;
         } catch (Exception ignored) {
-            if (SoundsConfig.get(ModConfig.class).enableVerboseSoundTypeLogging)
+            if (LoaderUtils.isDevelopmentEnvironment())
                 SoundsClient.LOGGER.warn("Failed initial block fetch for blockstate {}", state.toString());
         }
 

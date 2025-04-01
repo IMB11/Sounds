@@ -1,8 +1,6 @@
 package dev.imb11.sounds.gui;
 
-import dev.imb11.sounds.util.RenderUtils;
-import java.util.Iterator;
-import java.util.Objects;
+import dev.imb11.mru.RenderUtils;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;

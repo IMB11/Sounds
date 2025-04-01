@@ -2,8 +2,8 @@ package dev.imb11.sounds.api.config;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.imb11.mru.RegistryUtils;
 import dev.imb11.sounds.util.MixinStatics;
-import dev.imb11.sounds.util.SoundRegistryUtils;
 import dev.isxander.yacl3.api.ButtonOption;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
@@ -11,7 +11,6 @@ import dev.isxander.yacl3.api.OptionGroup;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -23,7 +22,6 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 
@@ -158,7 +156,7 @@ public class ConfiguredSound {
     }
 
     public final SoundEvent fetchSoundEvent(ResourceLocation location) {
-        return SoundRegistryUtils.getSoundEventRegistry(client.level).apply(location);
+        return RegistryUtils.getSoundEventRegistry(client.level).apply(location);
     }
 
     protected static long lastShownToast = -1L;
@@ -219,7 +217,7 @@ public class ConfiguredSound {
     public @Nullable SimpleSoundInstance getSoundInstance() {
         if (this.enabled) {
             try {
-                final SoundEvent event = SoundRegistryUtils.getSoundEventRegistry(client.level).apply(this.soundEvent);
+                final SoundEvent event = RegistryUtils.getSoundEventRegistry(client.level).apply(this.soundEvent);
                 return SimpleSoundInstance.forUI(event, pitch, volume);
             } catch (Exception ignored) {
                 return null;

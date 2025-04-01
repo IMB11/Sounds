@@ -54,6 +54,8 @@
 	"sounds.config.plantPotFill.option.description": "A sound effect that is played when you fill a flower pot with a plant.",
 	"sounds.config.cakeEat.option": "Cake Eat",
 	"sounds.config.cakeEat.option.description": "A sound effect that is played when you eat a slice of cake. The cake may be a lie, but the sound isn't!",
+	"sounds.config.iceStress.option": "Ice Stress",
+	"sounds.config.iceStress.option.description": "A sound effect that is played when you jump on ice. Originally from the Icebreak mod for WinterJam 2024.",
 
 	"sounds.config.world.mobs": "Mobs",
 	"sounds.config.babyChickenChirp.option": "Baby Chicken Chirp",

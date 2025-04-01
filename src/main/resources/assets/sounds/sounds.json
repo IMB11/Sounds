@@ -7,6 +7,14 @@
             "sounds:sword_swoosh_2"
         ]
     },
+    "block.ice.stress": {
+        "subtitle": "sound.icebreak.ice.stress",
+        "sounds": [
+            "sounds:world/ice_echo_01",
+            "sounds:world/ice_echo_02",
+            "sounds:world/ice_echo_03"
+        ]
+    },
     "block.acacia_leaves.break": {
         "sounds": [
             "sounds:block/acacia_leaves/break1",

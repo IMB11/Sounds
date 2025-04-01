@@ -426,6 +426,8 @@ public class CustomSounds {
 
     public static final Supplier<SoundEvent> BLOCK_STONE_BRICKS_STEP = register("block.stone_bricks.step");
 
+    public static final Supplier<SoundEvent> BLOCK_ICE_STRESS = register("block.ice.stress");
+
     private static Supplier<SoundEvent> register(String id) {
         ResourceLocation _id = ResourceLocation.fromNamespaceAndPath("sounds", id);
         //? if fabric {

@@ -1,13 +1,10 @@
 package dev.imb11.sounds.gui;
 
+import dev.imb11.mru.RenderUtils;
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.config.*;
-import dev.imb11.sounds.config.utils.ConfigGroup;
-import dev.imb11.sounds.util.RenderUtils;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.function.Supplier;
 
 import net.minecraft.ChatFormatting;

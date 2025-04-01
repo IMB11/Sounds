@@ -144,7 +144,7 @@ dependencies {
     modstitch.loom {
         modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}").productionMod()
         modstitchModImplementation("com.terraformersmc:modmenu:${property("runtime.modmenu")}").productionMod()
-        "io.github.llamalad7:mixinextras-fabric:0.5.0-beta.5".let {
+        "io.github.llamalad7:mixinextras-fabric:0.5.0-rc.1".let {
             modstitchJiJ(it)
             modstitchImplementation(it)
             annotationProcessor(it)
@@ -152,7 +152,7 @@ dependencies {
     }
 
     modstitch.moddevgradle {
-        "io.github.llamalad7:mixinextras-neoforge:0.5.0-beta.5".let {
+        "io.github.llamalad7:mixinextras-neoforge:0.5.0-rc.1".let {
             modstitchJiJ(it)
             implementation(it)
         }
@@ -169,12 +169,7 @@ dependencies {
     modstitchModCompileOnly("maven.modrinth:inventorio:${property("compile.inventorio")}")
     modstitchModCompileOnly("maven.modrinth:trashslot:${property("compile.trashslot")}")
 
-    "maven.modrinth:yacl:${property("deps.yacl")}-${loader}".let {
-        modstitchModApi(it) {
-            exclude(group = "net.fabricmc.fabric-api", module = "fabric-api")
-            exclude(group = "thedarkcolour")
-        }
-    }.productionMod()
+    modstitchModImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-${loader}").productionMod()
 }
 
 sourceSets {

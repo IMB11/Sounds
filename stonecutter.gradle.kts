@@ -26,5 +26,6 @@ allprojects {
         maven("https://maven.quiltmc.org/repository/release")
         maven("https://maven.shedaniel.me/")
         maven("https://maven.terraformersmc.com/releases")
+        maven("https://maven.isxander.dev/releases")
     }
 }

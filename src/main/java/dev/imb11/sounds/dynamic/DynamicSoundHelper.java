@@ -1,7 +1,9 @@
 package dev.imb11.sounds.dynamic;
 
 import com.mojang.serialization.Codec;
+import dev.imb11.mru.RegistryUtils;
 import dev.imb11.sounds.api.SoundDefinition;
+import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,19 +38,19 @@ public class DynamicSoundHelper {
     }
 
     public enum BlockSoundType {
-        PLACE(SoundType::getPlaceSound),
-        HIT(SoundType::getHitSound),
-        BREAK(SoundType::getBreakSound),
-        FALL(SoundType::getFallSound),
-        STEP(SoundType::getStepSound);
+        PLACE(t -> RegistryUtils.getId(t.getPlaceSound())),
+        HIT(t -> RegistryUtils.getId(t.getHitSound())),
+        BREAK(t -> RegistryUtils.getId(t.getBreakSound())),
+        FALL(t -> RegistryUtils.getId(t.getFallSound())),
+        STEP(t -> RegistryUtils.getId(t.getStepSound()));
 
-        private final Function<SoundType, SoundEvent> transformer;
+        private final Function<SoundType, ResourceLocation> transformer;
 
-        BlockSoundType(Function<SoundType, SoundEvent> transformer) {
+        BlockSoundType(Function<SoundType, ResourceLocation> transformer) {
             this.transformer = transformer;
         }
 
-        public Function<SoundType, SoundEvent> getTransformer() {
+        public Function<SoundType, ResourceLocation> getTransformer() {
             return transformer;
         }
     }

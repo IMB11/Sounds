@@ -3,6 +3,7 @@ package dev.imb11.sounds.api.config;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.imb11.mru.RegistryUtils;
+import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.util.MixinStatics;
 import dev.isxander.yacl3.api.ButtonOption;
 import dev.isxander.yacl3.api.Option;
@@ -11,6 +12,9 @@ import dev.isxander.yacl3.api.OptionGroup;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.PositionalRandomFactory;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -164,10 +168,10 @@ public class ConfiguredSound {
     public void playSound() {
         if (this.enabled) {
             try {
-                final SoundEvent event = fetchSoundEvent(this.soundEvent);
-                this.playSound(event, this.pitch, this.volume);
+                this.playSound(this.soundEvent, this.pitch, this.volume);
             } catch (Exception ignored) {
                 // Prevent toast spam:
+                ignored.printStackTrace();
                 if (System.currentTimeMillis() > lastShownToast + 5000) {
                     lastShownToast = System.currentTimeMillis();
                     Minecraft client = Minecraft.getInstance();
@@ -189,8 +193,7 @@ public class ConfiguredSound {
 
     private void playPreviewSound() {
         try {
-            final SoundEvent event = fetchSoundEvent(this._pendingSoundEvent);
-            this.playSound(event, _pendingPitch, _pendingVolume);
+            this.playSound(this._pendingSoundEvent, _pendingPitch, _pendingVolume);
         } catch (Exception ignored) {
             if (System.currentTimeMillis() > lastShownToast + 5000) {
                 lastShownToast = System.currentTimeMillis();
@@ -210,8 +213,8 @@ public class ConfiguredSound {
         }
     }
 
-    private void playSound(SoundEvent event, float pitch, float volume) {
-        this.playSound(SimpleSoundInstance.forUI(event, pitch, volume));
+    private void playSound(ResourceLocation soundEvent, float pitch, float volume) {
+        this.playSound(new SimpleSoundInstance(soundEvent, SoundSource.MASTER, volume, pitch, SoundsClient.RANDOM, false, 0, SoundInstance.Attenuation.LINEAR, 0, 0, 0, true));
     }
 
     public @Nullable SimpleSoundInstance getSoundInstance() {
@@ -242,8 +245,8 @@ public class ConfiguredSound {
         return enabled;
     }
 
-    public SoundEvent getSoundEvent() {
-        return fetchSoundEvent(this.soundEvent);
+    public ResourceLocation getSoundEvent() {
+        return this.soundEvent;
     }
 
     public float getPitch() {

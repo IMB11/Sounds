@@ -10,6 +10,7 @@ import dev.imb11.sounds.dynamic.SoundsReloadListener;
 import dev.imb11.sounds.sound.CustomSounds;
 import dev.imb11.sounds.sound.events.PotionEventHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -26,6 +27,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 
 public class SoundsClient {
+    public static final RandomSource RANDOM = RandomSource.create();
     public static final Path DEFAULT_PACK_PATH = LoaderUtils.getConfigFolder("sounds").resolve("dynamic_sounds");
     public static final Logger LOGGER = LoggerFactory.getLogger("Sounds");
     public static String[] SUPPORTERS = new String[] {

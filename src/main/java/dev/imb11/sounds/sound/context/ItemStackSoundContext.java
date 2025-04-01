@@ -6,6 +6,7 @@ import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.mixin.accessors.BlockAccessor;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
@@ -28,7 +29,7 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
     }
 
     @Override
-    public SoundInstance handleContext(ItemStack context, SoundEvent fallback, float pitch, float volume) {
+    public SoundInstance handleContext(ItemStack context, ResourceLocation fallback, float pitch, float volume) {
         var item = context.getItem();
 
         if (item instanceof BlockItem blockItem) {
@@ -53,10 +54,5 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
         }
 
         return createSoundInstance(fallback, pitch, volume);
-    }
-
-    @Override
-    public SoundInstance getExample(SoundEvent fallback, float pitch, float volume) {
-        return handleContext(BuiltInRegistries.ITEM.getRandom(RandomSource.create()).get().value().getDefaultInstance(), fallback, pitch, volume);
     }
 }

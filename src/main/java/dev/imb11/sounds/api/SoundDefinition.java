@@ -37,8 +37,8 @@ public class SoundDefinition<T> {
         ).apply(builder, SoundDefinition<T>::new));
     }
 
-    public SoundEvent getSoundEvent() {
-        return RegistryUtils.getSoundEventRegistry(Minecraft.getInstance().level).apply(this.soundEvent);
+    public ResourceLocation getSoundEvent() {
+        return this.soundEvent;
     }
 
     public TagList<T> getKeys() {

@@ -7,6 +7,7 @@ import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -28,8 +29,8 @@ public class ScreenHandlerSoundContext implements DynamicSoundContext<AbstractCo
     }
 
     @Override
-    public SoundInstance handleContext(AbstractContainerMenu context, SoundEvent fallback, float pitch, float volume) {
-        SoundEvent soundEvent = null;
+    public SoundInstance handleContext(AbstractContainerMenu context, ResourceLocation fallback, float pitch, float volume) {
+        ResourceLocation soundEvent = null;
         try {
             var type = context.getType();
             for (SoundDefinition<MenuType<?>> definition : DynamicSoundHelper.<MenuType<?>>getDefinitions("screens")) {
@@ -62,10 +63,5 @@ public class ScreenHandlerSoundContext implements DynamicSoundContext<AbstractCo
         }
 
         return createSoundInstance(soundEvent, pitch, volume);
-    }
-
-    @Override
-    public SoundInstance getExample(SoundEvent fallback, float pitch, float volume) {
-        return createSoundInstance(fallback, pitch, volume);
     }
 }

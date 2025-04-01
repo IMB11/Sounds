@@ -25,9 +25,7 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
     @SerialEntry
     public final ConfiguredSound mentionSoundEffect = new ConfiguredSound("mention", SoundEvents.NOTE_BLOCK_CHIME, true, 1.8f, 0.9f);
     @SerialEntry
-    public List<String> mentionKeywords = List.of(
-            "@" + Minecraft.getInstance().getUser().getName()
-    );
+    public List<String> mentionKeywords = List.of();
     @SerialEntry
     public boolean ignoreSystemChats = false;
     // == COOLDOWN SETTINGS == //

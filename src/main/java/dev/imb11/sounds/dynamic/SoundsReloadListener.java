@@ -7,6 +7,9 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.JsonOps;
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.config.TagPair;
+import dev.imb11.sounds.config.ChatSoundsConfig;
+import dev.imb11.sounds.config.SoundsConfig;
+import net.minecraft.client.Minecraft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.InputStream;
@@ -30,6 +33,16 @@ public class SoundsReloadListener extends SimplePreparableReloadListener<Void> {
     private static final Gson GSON = new Gson();
 
     public void reload(ResourceManager manager) {
+        ChatSoundsConfig chatSoundsConfig = SoundsConfig.getRaw(ChatSoundsConfig.class);
+        ChatSoundsConfig instanceChatSoundsConfig = (ChatSoundsConfig) chatSoundsConfig.getHandler().instance();
+
+        // Add username to mentionKeywords if it's not already there
+        if (!instanceChatSoundsConfig.mentionKeywords.contains("@" + Minecraft.getInstance().getUser().getName())) {
+            instanceChatSoundsConfig.mentionKeywords.add("@" + Minecraft.getInstance().getUser().getName());
+        }
+
+        chatSoundsConfig.save();
+
         handleDynamicSounds(manager);
 
         // Load tag pairs

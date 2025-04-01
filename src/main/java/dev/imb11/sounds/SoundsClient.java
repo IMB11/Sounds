@@ -36,16 +36,6 @@ public class SoundsClient {
 
         CustomSounds.initialize();
 
-        ChatSoundsConfig chatSoundsConfig = SoundsConfig.getRaw(ChatSoundsConfig.class);
-        ChatSoundsConfig instanceChatSoundsConfig = (ChatSoundsConfig) chatSoundsConfig.getHandler().instance();
-
-        // Add username to mentionKeywords if it's not already there
-        if (!instanceChatSoundsConfig.mentionKeywords.contains("@" + Minecraft.getInstance().getUser().getName())) {
-            instanceChatSoundsConfig.mentionKeywords.add("@" + Minecraft.getInstance().getUser().getName());
-        }
-
-        chatSoundsConfig.save();
-
         CompletableFuture.runAsync(() -> {
             try {
                 API apiClient = new API();

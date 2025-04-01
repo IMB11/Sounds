@@ -38,16 +38,16 @@ modstitch {
     minecraftVersion = mcVersion
     javaTarget = if (stonecutter.eval(mcVersion, ">1.20.4")) 21 else 17
 
-    parchment {
-        enabled = true
-        minecraftVersion = mcVersion
-        mappingsVersion = when (mcVersion) {
-            "1.21.1" -> "2024.11.17"
-            "1.21.3" -> "2024.12.07"
-            "1.21.4" -> "2025.01.19"
-            else -> throw IllegalArgumentException("Unsupported Minecraft version: $mcVersion")
-        }
-    }
+//    parchment {
+//        enabled = true
+//        minecraftVersion = mcVersion
+//        mappingsVersion = when (mcVersion) {
+//            "1.21.1" -> "2024.11.17"
+//            "1.21.3" -> "2024.12.07"
+//            "1.21.4" -> "2025.01.19"
+//            else -> throw IllegalArgumentException("Unsupported Minecraft version: $mcVersion")
+//        }
+//    }
 
     metadata {
         modId = "sounds"
@@ -64,6 +64,7 @@ modstitch {
                 "1.21.1" -> 34
                 "1.21.3" -> 42
                 "1.21.4" -> 46
+                "1.21.5" -> 52
                 else -> throw IllegalArgumentException("Unsupported Minecraft version: $mcVersion")
             }.toString()
         )
@@ -117,7 +118,11 @@ modstitch {
 
         defaultRuns()
         configureNeoforge {
-            // empty configuration
+            runs {
+                all {
+                    gameDirectory = file("../../run")
+                }
+            }
         }
     }
 
@@ -161,12 +166,6 @@ dependencies {
     modstitchModImplementation("dev.imb11:mru:${property("deps.mru")}+${loader}").productionMod()
 
     modstitchModCompileOnly("dev.emi:emi-${loader}:${property("compile.emi")}")
-
-    modstitchModRuntimeOnly("me.shedaniel:RoughlyEnoughItems-${loader}:${property("runtime.rei")}")
-    modstitchModCompileOnly("me.shedaniel:RoughlyEnoughItems-api:${property("runtime.rei")}")
-    modstitchModCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin:${property("runtime.rei")}")
-
-    modstitchModCompileOnly("maven.modrinth:inventorio:${property("compile.inventorio")}")
     modstitchModCompileOnly("maven.modrinth:trashslot:${property("compile.trashslot")}")
 
     modstitchModImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-${loader}").productionMod()

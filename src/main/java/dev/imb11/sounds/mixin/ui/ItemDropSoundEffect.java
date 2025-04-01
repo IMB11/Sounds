@@ -30,8 +30,18 @@ abstract class PlayerEntityMixin extends LivingEntity {
         super(entityType, world);
     }
 
-    @Inject(method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("HEAD"))
-    protected void $drop_item_sound_effect(ItemStack stack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir) {
+    //? if <1.21.5 {
+    /*@Inject(method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("HEAD"))
+    *///?} else {
+    @Inject(method = "drop", at = @At("HEAD"))
+    //?}
+    protected void $drop_item_sound_effect(
+            ItemStack stack,
+            boolean throwRandomly,
+            //? if <1.21.5 {
+            /*boolean retainOwnership,
+            *///?}
+            CallbackInfoReturnable<ItemEntity> cir) {
     }
 }
 
@@ -73,7 +83,13 @@ public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
     }
 
     @Override
-    protected void $drop_item_sound_effect(ItemStack stack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir) {
+    protected void $drop_item_sound_effect(
+            ItemStack stack,
+            boolean throwRandomly,
+            //? if <1.21.5 {
+            /*boolean retainOwnership,
+            *///?}
+            CallbackInfoReturnable<ItemEntity> cir) {
         if (!this.level().isClientSide) return;
         sounds$playSound(stack);
     }

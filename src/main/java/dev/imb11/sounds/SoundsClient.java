@@ -6,16 +6,8 @@ import dev.imb11.sounds.config.ChatSoundsConfig;
 import dev.imb11.sounds.config.ModConfig;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
-import dev.imb11.sounds.dynamic.SoundsReloadListener;
 import dev.imb11.sounds.sound.CustomSounds;
-import dev.imb11.sounds.sound.events.PotionEventHelper;
-import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +16,6 @@ import java.util.concurrent.CompletableFuture;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
 
 public class SoundsClient {
     public static final RandomSource RANDOM = RandomSource.create();

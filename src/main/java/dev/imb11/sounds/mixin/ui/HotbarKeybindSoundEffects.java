@@ -13,19 +13,23 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
 public class HotbarKeybindSoundEffects {
     @Shadow @Nullable
     public LocalPlayer player;
 
-    @WrapOperation(method = "handleKeybinds", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/player/Inventory;selected:I"))
+    //? if <1.21.5 {
+    /*@WrapOperation(method = "handleKeybinds", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/player/Inventory;selected:I"))
     public void $hotbar_keybind_sound_effect(Inventory instance, int value, Operation<Void> original) {
         //? if <1.21.2 {
-        /*original.call(instance, value);
+        /^original.call(instance, value);
         SoundsConfig.get(UISoundsConfig.class).hotbarScrollSoundEffect.playDynamicSound(instance.items.get(value), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
-        *///?} else {
+        ^///?} else {
         instance.setSelectedHotbarSlot(value);
         //?}
     }
+    *///?}
 }

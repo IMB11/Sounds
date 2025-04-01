@@ -27,13 +27,14 @@ stonecutter {
         fun mc(mcVersion: String, name: String = mcVersion, loaders: List<String>) =
             loaders.forEach { vers("$name-$it", mcVersion) }
 
-        mc("1.21.4", loaders = listOf("fabric", "neoforge"))  // Corrected loaders list type
+        mc("1.21.5", loaders = listOf("fabric", "neoforge"))
+        mc("1.21.4", loaders = listOf("fabric", "neoforge"))
 
         mc("1.21.3", loaders = listOf("fabric", "neoforge"))
         mc("1.21", loaders = listOf("fabric", "neoforge"))
 
-        vcsVersion = "1.21.4-fabric"
+        vcsVersion = "1.21.5-fabric"
     }
 }
 
-rootProject.name = "Sounds" // Keep your project name
+rootProject.name = "Sounds"

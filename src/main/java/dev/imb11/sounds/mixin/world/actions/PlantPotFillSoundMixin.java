@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -33,7 +34,8 @@ public class PlantPotFillSoundMixin {
     //?}
     public void playPlantPotFillSound(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
         if(world.isClientSide) {
-            SoundsConfig.get(WorldSoundsConfig.class).plantPotFillSoundEffect.playDynamicSound(new ItemStack(this.potted), new ItemStackSoundContext());
+            Block blockOrAirIfNull = this.potted == null ? Blocks.AIR : this.potted;
+            SoundsConfig.get(WorldSoundsConfig.class).plantPotFillSoundEffect.playDynamicSound(new ItemStack(blockOrAirIfNull), new ItemStackSoundContext());
         }
     }
 

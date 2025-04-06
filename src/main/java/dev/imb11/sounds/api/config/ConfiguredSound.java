@@ -13,8 +13,6 @@ import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.levelgen.PositionalRandomFactory;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -39,7 +37,6 @@ public class ConfiguredSound {
                     Codec.FLOAT.fieldOf("volume").forGetter(ConfiguredSound::getVolume)
             ).apply(instance, ConfiguredSound::new));
     public final String id;
-    public final Minecraft client;
     public boolean enabled;
     public ResourceLocation soundEvent;
     public float pitch = 1f;
@@ -59,7 +56,7 @@ public class ConfiguredSound {
         _pendingSoundEvent = this.soundEvent;
 
         this.id = id;
-        this.client = Minecraft.getInstance();
+//        this.client = Minecraft.getInstance();
     }
 
     public ConfiguredSound(String id, Holder.Reference<SoundEvent> soundEvent, boolean enabled, float pitch, float volume) {
@@ -160,7 +157,7 @@ public class ConfiguredSound {
     }
 
     public final SoundEvent fetchSoundEvent(ResourceLocation location) {
-        return RegistryUtils.getSoundEventRegistry(client.level).apply(location);
+        return RegistryUtils.getSoundEventRegistry(Minecraft.getInstance().level).apply(location);
     }
 
     protected static long lastShownToast = -1L;
@@ -220,7 +217,7 @@ public class ConfiguredSound {
     public @Nullable SimpleSoundInstance getSoundInstance() {
         if (this.enabled) {
             try {
-                final SoundEvent event = RegistryUtils.getSoundEventRegistry(client.level).apply(this.soundEvent);
+                final SoundEvent event = RegistryUtils.getSoundEventRegistry(Minecraft.getInstance().level).apply(this.soundEvent);
                 return SimpleSoundInstance.forUI(event, pitch, volume);
             } catch (Exception ignored) {
                 return null;
@@ -231,13 +228,13 @@ public class ConfiguredSound {
 
     public void playSound(SoundInstance soundInstance) {
         if (this.enabled) {
-            client.getSoundManager().play(soundInstance);
+            Minecraft.getInstance().getSoundManager().play(soundInstance);
         }
     }
 
     public void stopSound(SoundInstance soundInstance) {
         if (this.enabled) {
-            client.getSoundManager().stop(soundInstance);
+            Minecraft.getInstance().getSoundManager().stop(soundInstance);
         }
     }
 

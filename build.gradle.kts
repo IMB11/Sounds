@@ -1,5 +1,5 @@
 plugins {
-    id("dev.isxander.modstitch.base") version "0.5.12"
+    id("dev.isxander.modstitch.base") version "0.5.+"
 }
 
 val loader = when {
@@ -126,13 +126,10 @@ modstitch {
         }
     }
 
-//    mixin {
-////        addMixinsToModManifest = true
-//
-////        configs.register("sounds")
-////        if (loader == "fabric") configs.register("sounds-fabric")
-////        if (loader == "neoforge") configs.register("sounds-neoforge")
-//    }
+    mixin {
+        addMixinsToModManifest = true
+        configs.register("sounds")
+    }
 }
 
 stonecutter {

@@ -16,21 +16,19 @@ import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import org.jetbrains.annotations.NotNull;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+@Pseudo
 @Mixin(Player.class)
 abstract class PlayerEntityMixin extends LivingEntity {
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, Level world) {
         super(entityType, world);
     }
 
-    //? if <1.21.5 {
+    //? if <=1.21.4 {
     /*@Inject(method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("HEAD"))
     *///?} else {
     @Inject(method = "drop", at = @At("HEAD"))
@@ -38,13 +36,14 @@ abstract class PlayerEntityMixin extends LivingEntity {
     protected void $drop_item_sound_effect(
             ItemStack stack,
             boolean throwRandomly,
-            //? if <1.21.5 {
+            //? if <=1.21.4 {
             /*boolean retainOwnership,
             *///?}
             CallbackInfoReturnable<ItemEntity> cir) {
     }
 }
 
+@Pseudo
 @Mixin(LocalPlayer.class)
 public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
     @Shadow @Final protected Minecraft minecraft;
@@ -86,7 +85,7 @@ public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
     protected void $drop_item_sound_effect(
             ItemStack stack,
             boolean throwRandomly,
-            //? if <1.21.5 {
+            //? if <=1.21.4 {
             /*boolean retainOwnership,
             *///?}
             CallbackInfoReturnable<ItemEntity> cir) {

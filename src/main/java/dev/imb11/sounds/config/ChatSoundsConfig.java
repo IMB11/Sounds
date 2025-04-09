@@ -8,6 +8,8 @@ import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatFieldControllerBuilder;
 import dev.isxander.yacl3.api.controller.StringControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
+
+import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -25,7 +27,9 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
     @SerialEntry
     public final ConfiguredSound mentionSoundEffect = new ConfiguredSound("mention", SoundEvents.NOTE_BLOCK_CHIME, true, 1.8f, 0.9f);
     @SerialEntry
-    public List<String> mentionKeywords = List.of();
+    public ArrayList<String> mentionKeywords = new ArrayList<>(List.of(
+            "@" + Minecraft.getInstance().getUser().getName()
+    ));
     @SerialEntry
     public boolean ignoreSystemChats = false;
     // == COOLDOWN SETTINGS == //
@@ -65,7 +69,7 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
         ListOption<String> mentionKeywordsOption = ListOption.<String>createBuilder()
                 .name(Component.translatable("sounds.config.mentionKeywords.option"))
                 .description(OptionDescription.of(Component.translatable("sounds.config.mentionKeywords.option.description")))
-                .binding(defaults.mentionKeywords, () -> config.mentionKeywords, (value) -> config.mentionKeywords = value)
+                .binding(defaults.mentionKeywords, () -> config.mentionKeywords, (value) -> config.mentionKeywords = new ArrayList<>(value))
                 .controller(StringControllerBuilder::create)
                 .initial("@" + Minecraft.getInstance().getUser().getName())
                 .insertEntriesAtEnd(true)

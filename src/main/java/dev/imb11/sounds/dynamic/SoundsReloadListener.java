@@ -33,16 +33,6 @@ public class SoundsReloadListener extends SimplePreparableReloadListener<Void> {
     private static final Gson GSON = new Gson();
 
     public void reload(ResourceManager manager) {
-        ChatSoundsConfig chatSoundsConfig = SoundsConfig.getRaw(ChatSoundsConfig.class);
-        ChatSoundsConfig instanceChatSoundsConfig = (ChatSoundsConfig) chatSoundsConfig.getHandler().instance();
-
-        // Add username to mentionKeywords if it's not already there
-        if (!instanceChatSoundsConfig.mentionKeywords.contains("@" + Minecraft.getInstance().getUser().getName())) {
-            instanceChatSoundsConfig.mentionKeywords.add("@" + Minecraft.getInstance().getUser().getName());
-        }
-
-        chatSoundsConfig.save();
-
         handleDynamicSounds(manager);
 
         // Load tag pairs
@@ -141,15 +131,6 @@ public class SoundsReloadListener extends SimplePreparableReloadListener<Void> {
             }
         });
     }
-
-//    @Override
-//    public CompletableFuture<Void> reload(Synchronizer synchronizer, ResourceManager manager, Profiler prepareProfiler, Profiler applyProfiler, Executor prepareExecutor, Executor applyExecutor) {
-//        return CompletableFuture.supplyAsync(() -> {
-//            this.reload(manager);
-//            synchronizer.whenPrepared(null);
-//            return null;
-//        }, applyExecutor);
-//    }
 
     @Override
     protected Void prepare(ResourceManager manager, ProfilerFiller profiler) {

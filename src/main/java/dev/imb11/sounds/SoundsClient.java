@@ -7,6 +7,7 @@ import dev.imb11.sounds.config.ModConfig;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.CustomSounds;
+import dev.imb11.sounds.util.ConfigSetters;
 import net.minecraft.util.RandomSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,7 @@ public class SoundsClient {
     }
 
     public static void init() {
-        SoundsConfig.loadAll();
+
         DynamicSoundHelper.initialize();
 
         CustomSounds.initialize();
@@ -43,11 +44,9 @@ public class SoundsClient {
             } catch (Exception ignored) {}
         }, Util.nonCriticalIoPool());
 
-        if (LoaderUtils.isModInstalled("rsls")) {
-            LOGGER.warn("Raise Sound Limits Simplified was detected, hideSoundsButtonInSoundMenu = true has been set and saved to prevent collision of buttons on the sound mixer menu.");
-            var modConfig = SoundsConfig.getRaw(ModConfig.class);
-            modConfig.hideSoundsButtonInSoundMenu = true;
-            modConfig.save();
-        }
+        //? if !(neoforge && >=1.21.5) {
+        SoundsConfig.loadAll();
+        ConfigSetters.init();
+        //?}
     }
 }

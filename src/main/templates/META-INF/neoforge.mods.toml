@@ -46,6 +46,3 @@ type = "optional"
 versionRange = " "
 ordering = "NONE"
 side = "CLIENT"
-
-[[mixins]]
-config="sounds.mixins.json"

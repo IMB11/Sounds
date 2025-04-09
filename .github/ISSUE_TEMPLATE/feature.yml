@@ -39,10 +39,7 @@ body:
       description: Which mod loader are you using?
       options:
         - Fabric
-        - Forge
         - NeoForge
-        - Quilt
-        - Other
     validations:
       required: true
 
@@ -52,15 +49,12 @@ body:
       label: Game Version
       description: What version of the game are you running?
       options:
-        - "1.20"
-        - "1.20.1"
-        - "1.20.2"
-        - "1.20.3"
         - "1.21"
         - "1.21.1"
         - "1.21.2"
         - "1.21.3"
         - "1.21.4"
+        - "1.21.5"
     validations:
       required: true
 

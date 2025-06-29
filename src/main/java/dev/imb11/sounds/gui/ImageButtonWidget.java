@@ -131,7 +131,9 @@ public class ImageButtonWidget extends AbstractWidget {
             }
         }
 
-        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+        //? if <1.21.6 {
+        /*RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+        *///?}
 
         context.renderOutline(getX(), getY(), width, height, 0x0FFFFFFF);
     }
@@ -140,7 +142,13 @@ public class ImageButtonWidget extends AbstractWidget {
         //? 1.21 {
         /*drawContext.blit(texture, x, y, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
          *///?} else {
-        drawContext.blit(RenderType::guiTexturedOverlay, texture, x, y, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
+
+        //? <1.21.6 {
+        /*drawContext.blit(RenderType::guiTexturedOverlay, texture, x, y, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
+        *///?} else {
+        drawContext.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, texture, x, y, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
+        //?}
+
         //?}
     }
 
@@ -151,14 +159,32 @@ public class ImageButtonWidget extends AbstractWidget {
         try {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            context.pose().pushPose();
-            context.pose().scale(32f / 512f, 32f / 512f, 1f);
+
+            //? if <1.21.6 {
+            /*context.pose().pushPose();
+            *///?} else {
+            context.pose().pushMatrix();
+            //?}
+
+            context.pose().scale(32f / 512f, 32f / 512f
+                //? if <1.21.6 {
+                    /*,1.0f
+                *///?}
+            );
             //? 1.21 {
             /*context.blit(this.imageLocation, (int) (x / (32f / 512f)), (int) (y / (32f / 512f)), 0, 0, 512, 512, 512, 512);
              *///?} else {
-            context.blit(RenderType::guiTexturedOverlay, this.imageLocation, (int) (x / (32f / 512f)), (int) (y / (32f / 512f)), 0, 0, 512, 512, 512, 512);
+            //? if >=1.21.6 {
+            context.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, this.imageLocation, (int) (x / (32f / 512f)), (int) (y / (32f / 512f)), 0, 0, 512, 512, 512, 512);
+            //?} else {
+            /*context.blit(RenderType::guiTexturedOverlay, this.imageLocation, (int) (x / (32f / 512f)), (int) (y / (32f / 512f)), 0, 0, 512, 512, 512, 512);
+            *///?}
             //?}
-            context.pose().popPose();
+            //? if <1.21.6 {
+            /*context.pose().popPose();
+             *///?} else {
+            context.pose().popMatrix();
+            //?}
         } catch (Exception ignored) {} finally {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilterScalingTypePrev);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilterScalingTypePrev);

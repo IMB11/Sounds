@@ -41,7 +41,13 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
     @SerialEntry
     public ConfiguredSound frostWalkerSoundEffect = new ConfiguredSound("frostWalker", SoundEvents.POWDER_SNOW_FALL, true, 2.0F, 0.5F);
     @SerialEntry
-    public ConfiguredSound leadSnappingSoundEffect = new ConfiguredSound("leadSnapping", SoundEvents.LEASH_KNOT_BREAK, true, 1.0F, 0.5F);
+    public ConfiguredSound leadSnappingSoundEffect = new ConfiguredSound("leadSnapping",
+            //? if <1.21.6 {
+            /*SoundEvents.LEASH_KNOT_BREAK,
+            *///?} else {
+            SoundEvents.LEAD_BREAK,
+            //?}
+            true, 1.0F, 0.5F);
     @SerialEntry
     public ConfiguredSound bowPullSoundEffect = new ConfiguredSound("bowPull", SoundEvents.CROSSBOW_LOADING_MIDDLE, true, 1.0F, 0.25F);
     @SerialEntry

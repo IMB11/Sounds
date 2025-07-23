@@ -48,7 +48,7 @@ modstitch {
         modLicense = "ARR"
 
         replacementProperties.put("pack_format", "64")
-        replacementProperties.put("target_minecraft", mcVersion)
+        replacementProperties.put("target_minecraft", property("mod.target") as String)
         replacementProperties.put("target_mru", property("deps.mru") as String)
         replacementProperties.put(
             "target_loader", when (loader) {

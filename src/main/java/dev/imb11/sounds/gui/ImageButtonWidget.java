@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -131,25 +132,11 @@ public class ImageButtonWidget extends AbstractWidget {
             }
         }
 
-        //? if <1.21.6 {
-        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-        //?}
-
         context.renderOutline(getX(), getY(), width, height, 0x0FFFFFFF);
     }
 
     private static void renderTexture(GuiGraphics drawContext, ResourceLocation texture, int x, int y, int textureWidth, int textureHeight) {
-        //? 1.21 {
-        drawContext.blit(texture, x, y, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
-         //?} else {
-
-        /*//? <1.21.6 {
-        drawContext.blit(RenderType::guiTexturedOverlay, texture, x, y, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
-        //?} else {
-        /^drawContext.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, texture, x, y, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
-        ^///?}
-
-        *///?}
+        drawContext.blit(RenderPipelines.GUI_TEXTURED, texture, x, y, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
     }
 
 
@@ -160,31 +147,11 @@ public class ImageButtonWidget extends AbstractWidget {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-            //? if <1.21.6 {
-            context.pose().pushPose();
-            //?} else {
-            /*context.pose().pushMatrix();
-            *///?}
+            context.pose().pushMatrix();
 
-            context.pose().scale(32f / 512f, 32f / 512f
-                //? if <1.21.6 {
-                    ,1.0f
-                //?}
-            );
-            //? 1.21 {
-            context.blit(this.imageLocation, (int) (x / (32f / 512f)), (int) (y / (32f / 512f)), 0, 0, 512, 512, 512, 512);
-             //?} else {
-            /*//? if >=1.21.6 {
-            /^context.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, this.imageLocation, (int) (x / (32f / 512f)), (int) (y / (32f / 512f)), 0, 0, 512, 512, 512, 512);
-            ^///?} else {
-            context.blit(RenderType::guiTexturedOverlay, this.imageLocation, (int) (x / (32f / 512f)), (int) (y / (32f / 512f)), 0, 0, 512, 512, 512, 512);
-            //?}
-            *///?}
-            //? if <1.21.6 {
-            context.pose().popPose();
-             //?} else {
-            /*context.pose().popMatrix();
-            *///?}
+            context.pose().scale(32f / 512f, 32f / 512f);
+            context.blit(RenderPipelines.GUI_TEXTURED, this.imageLocation, (int) (x / (32f / 512f)), (int) (y / (32f / 512f)), 0, 0, 512, 512, 512, 512);
+            context.pose().popMatrix();
         } catch (Exception ignored) {} finally {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilterScalingTypePrev);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilterScalingTypePrev);

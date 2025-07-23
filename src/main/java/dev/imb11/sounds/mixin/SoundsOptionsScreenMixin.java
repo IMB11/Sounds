@@ -17,11 +17,7 @@ public class SoundsOptionsScreenMixin extends Screen {
         super(title);
     }
 
-    /*? if <1.21 {*/
-    /*@Inject(method = "init", at = @At("TAIL"), cancellable = false)
-    *//*?} else {*/
     @Inject(method = "addOptions", at = @At("TAIL"), cancellable = false)
-    /*?}*/
     public void $add_sounds_button(CallbackInfo ci) {
         assert this.minecraft != null;
 

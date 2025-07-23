@@ -50,7 +50,7 @@ modstitch {
         replacementProperties.put(
             "pack_format", "34"
         )
-        replacementProperties.put("target_minecraft", mcVersion)
+        replacementProperties.put("target_minecraft", property("mod.target") as String)
         replacementProperties.put("target_mru", property("deps.mru") as String)
         replacementProperties.put(
             "target_loader", when (loader) {
@@ -128,7 +128,7 @@ dependencies {
     modstitch.loom {
         modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}").productionMod()
         modstitchModImplementation("com.terraformersmc:modmenu:${property("runtime.modmenu")}").productionMod()
-        "io.github.llamalad7:mixinextras-fabric:0.5.0-rc.1".let {
+        "io.github.llamalad7:mixinextras-fabric:0.5.0-rc.4".let {
             modstitchJiJ(it)
             modstitchImplementation(it)
             annotationProcessor(it)
@@ -136,7 +136,7 @@ dependencies {
     }
 
     modstitch.moddevgradle {
-        "io.github.llamalad7:mixinextras-neoforge:0.5.0-rc.1".let {
+        "io.github.llamalad7:mixinextras-neoforge:0.5.0-rc.4".let {
             modstitchJiJ(it)
             implementation(it)
         }

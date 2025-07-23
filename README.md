@@ -12,7 +12,7 @@ The mod is also a spiritual continuation of ExtraSounds, Auditory and QualitySou
 - **Fully client-side only**, no need to install on the server!
 - **Highly customizable**, you can change the sounds events used, and even tweak the dynamic block and item sounds through resource packs, especially useful for creating addons for content mods.'
 
-<iframe width="100%" height="520px" src="https://www.youtube.com/embed/mIkTKYTFVFo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+[//]: # (<iframe width="100%" height="520px" src="https://www.youtube.com/embed/mIkTKYTFVFo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>)
 
 ## Configuration
 As mentioned, Sounds is **highly customizable** - the simple effects can be edited either through the configuration found in the `config/sounds/` folder of your game instance, or though the configuration screen.

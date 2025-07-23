@@ -68,13 +68,7 @@ public class SoundsReloadListener extends SimplePreparableReloadListener<Void> {
                     var inputStream = resource.open();
                     var reader = new JsonReader(new InputStreamReader(inputStream));
 
-                    /*? if =1.20.1 {*/
-                    /*SoundDefinition<?> result = (SoundDefinition<?>) codec.parse(JsonOps.INSTANCE, GSON.fromJson(reader, JsonObject.class)).getOrThrow(false, s -> {
-                        throw new RuntimeException(s);
-                    });
-                    *//*?} else {*/
                     SoundDefinition<?> result = (SoundDefinition<?>) codec.parse(JsonOps.INSTANCE, GSON.fromJson(reader, JsonObject.class)).result().orElseThrow();
-                    /*?}*/
 
                     resultList.add(result);
 
@@ -101,31 +95,17 @@ public class SoundsReloadListener extends SimplePreparableReloadListener<Void> {
             for (Either<ResourceKey<Item>, TagKey<Item>> registryKeyTagKeyEither : definitionCast.getKeys().getInternalList()) {
                 if (registryKeyTagKeyEither.left().isPresent()) {
                     var key = registryKeyTagKeyEither.left().get();
-                    //? if <1.21.2 {
                     var entry = BuiltInRegistries.ITEM.get(key.location());
-                    //?} else {
-                    /*var entry = BuiltInRegistries.ITEM.getValue(key.location());
-                    *///?}
 
                     itemsWithLoadedDefinitions.add(entry);
                 } else if (registryKeyTagKeyEither.right().isPresent()) {
                     var tagKey = registryKeyTagKeyEither.right().get();
 
-                    //? if <1.21.2 {
                     var entries = BuiltInRegistries.ITEM.getOrCreateTag(tagKey);
-                    //?} else {
-                    /*var entriesOpt = BuiltInRegistries.ITEM.get(tagKey);
-                    if(entriesOpt.isEmpty()) continue;
-                    var entries = entriesOpt.get();
-                    *///?}
 
                     for (Holder<Item> key : entries) {
                         var entry = BuiltInRegistries.ITEM.get(key.unwrapKey().get());
-                        //? if <1.21.2 {
                         itemsWithLoadedDefinitions.add(entry);
-                        //?} else {
-                        /*itemsWithLoadedDefinitions.add(entry.get().value());
-                        *///?}
                     }
                 }
             }

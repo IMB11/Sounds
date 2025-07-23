@@ -29,11 +29,7 @@ public abstract class SoundDefinitionProvider<T> extends FabricCodecDataProvider
     }
 
     public SoundDefinition.Builder<T> create(SoundEvent event) {
-        //? if >=1.21.2 {
-        /*return this.create(event.location());
-        *///?} else {
         return this.create(event.getLocation());
-        //?}
     }
 
     public SoundDefinition.Builder<T> create(Holder<SoundEvent> event) {

@@ -53,11 +53,7 @@ public class TagList<T> {
         for (Either<ResourceKey<T>, TagKey<T>> either : _list) {
             if (either.left().isPresent()) {
                 var key = either.left().get();
-                //? if <1.21.2 {
                 Registry<T> registry = (Registry<T>) BuiltInRegistries.REGISTRY.get(key.registry());
-                 //?} else {
-                /*Registry<T> registry = (Registry<T>) BuiltInRegistries.REGISTRY.getValue(key.registry());
-                *///?}
                 assert registry != null;
                 var entry = registry.getKey(value);
                 if (either.left().get().location().equals(entry)) {
@@ -65,11 +61,7 @@ public class TagList<T> {
                 }
             } else if (either.right().isPresent()) {
                 TagKey<T> tagKey = either.right().get();
-                //? if <1.21.2 {
                 Registry<T> registry = (Registry<T>) BuiltInRegistries.REGISTRY.get(tagKey.registry().location());
-                //?} else {
-                /*Registry<T> registry = (Registry<T>) BuiltInRegistries.REGISTRY.getValue(tagKey.registry().location());
-                *///?}
                 assert registry != null;
                 var entry = registry.wrapAsHolder(value);
                 if (entry.is(tagKey)) {

@@ -38,17 +38,6 @@ modstitch {
     minecraftVersion = mcVersion
     javaTarget = if (stonecutter.eval(mcVersion, ">1.20.4")) 21 else 17
 
-//    parchment {
-//        enabled = true
-//        minecraftVersion = mcVersion
-//        mappingsVersion = when (mcVersion) {
-//            "1.21.1" -> "2024.11.17"
-//            "1.21.3" -> "2024.12.07"
-//            "1.21.4" -> "2025.01.19"
-//            else -> throw IllegalArgumentException("Unsupported Minecraft version: $mcVersion")
-//        }
-//    }
-
     metadata {
         modId = "sounds"
         modName = "Sounds"
@@ -59,16 +48,7 @@ modstitch {
         modLicense = "ARR"
 
         replacementProperties.put(
-            "pack_format", when (mcVersion) {
-                "1.20.1" -> 15
-                "1.21.1" -> 34
-                "1.21.3" -> 42
-                "1.21.4" -> 46
-                "1.21.5" -> 52
-                "1.21.6" -> 63
-                "1.21.8" -> 64
-                else -> throw IllegalArgumentException("Unsupported Minecraft version: $mcVersion")
-            }.toString()
+            "pack_format", "34"
         )
         replacementProperties.put("target_minecraft", mcVersion)
         replacementProperties.put("target_mru", property("deps.mru") as String)

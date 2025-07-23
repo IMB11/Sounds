@@ -166,10 +166,10 @@ public class DynamicTagPairs extends TagPairProvider {
         for (ResourceKey<Block> block : BuiltInRegistries.BLOCK.registryKeySet().stream().toList()) {
             if (block.location().getPath().contains("glass")) {
                 //? if <1.21.2 {
-                /*var val = BuiltInRegistries.BLOCK.get(block);
-                *///?} else {
-                var val = BuiltInRegistries.BLOCK.getValue(block);
-                //?}
+                var val = BuiltInRegistries.BLOCK.get(block);
+                //?} else {
+                /*var val = BuiltInRegistries.BLOCK.getValue(block);
+                *///?}
                 glass.addKey(val);
             }
         }

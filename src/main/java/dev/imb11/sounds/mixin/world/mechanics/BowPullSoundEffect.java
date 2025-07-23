@@ -23,10 +23,10 @@ public class BowPullSoundEffect {
 
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;startUsingItem(Lnet/minecraft/world/InteractionHand;)V", shift = At.Shift.AFTER))
     //? if <1.21.2 {
-    /*public void $start_bow_pull_sound(Level world, Player player, InteractionHand hand, CallbackInfoReturnable<net.minecraft.world.InteractionResultHolder<ItemStack>> cir) {
-    *///?} else {
-    public void $start_bow_pull_sound(Level world, Player user, InteractionHand hand, CallbackInfoReturnable<net.minecraft.world.InteractionResult> cir) {
-    //?}
+    public void $start_bow_pull_sound(Level world, Player player, InteractionHand hand, CallbackInfoReturnable<net.minecraft.world.InteractionResultHolder<ItemStack>> cir) {
+    //?} else {
+    /*public void $start_bow_pull_sound(Level world, Player user, InteractionHand hand, CallbackInfoReturnable<net.minecraft.world.InteractionResult> cir) {
+    *///?}
         if (!world.isClientSide) return;
         this.sounds$currentBowPullSound = SoundsConfig.get(WorldSoundsConfig.class).bowPullSoundEffect.getSoundInstance();
         if (this.sounds$currentBowPullSound != null) {
@@ -36,10 +36,10 @@ public class BowPullSoundEffect {
 
     @Inject(method = "releaseUsing", at = @At(value = "HEAD"))
     //? if <1.21.2 {
-    /*public void $stop_bow_pull_sound(ItemStack stack, Level world, LivingEntity entityLiving, int timeLeft, CallbackInfo ci) {
-    *///?} else {
-    public void $stop_bow_pull_sound(ItemStack stack, Level world, LivingEntity user, int remainingUseTicks, CallbackInfoReturnable<Boolean> cir) {
-    //?}
+    public void $stop_bow_pull_sound(ItemStack stack, Level world, LivingEntity entityLiving, int timeLeft, CallbackInfo ci) {
+    //?} else {
+    /*public void $stop_bow_pull_sound(ItemStack stack, Level world, LivingEntity user, int remainingUseTicks, CallbackInfoReturnable<Boolean> cir) {
+    *///?}
         if (!world.isClientSide) return;
         if (this.sounds$currentBowPullSound != null) {
             SoundsConfig.get(WorldSoundsConfig.class).bowPullSoundEffect.stopSound(this.sounds$currentBowPullSound);

@@ -34,10 +34,10 @@ public class PotionEventHelper {
 
             for (ResourceLocation effectId : removedEffects.keySet()) {
                 //? if <1.21.2 {
-                /*MobEffect statusEffect = BuiltInRegistries.MOB_EFFECT.get(effectId);
-                *///?} else {
-                MobEffect statusEffect = BuiltInRegistries.MOB_EFFECT.getValue(effectId);
-                //?}
+                MobEffect statusEffect = BuiltInRegistries.MOB_EFFECT.get(effectId);
+                //?} else {
+                /*MobEffect statusEffect = BuiltInRegistries.MOB_EFFECT.getValue(effectId);
+                *///?}
 
                 if (statusEffect == null) continue;
                 if(SoundsConfig.get(EventSoundsConfig.class).ignoreSilencedStatusEffects && !removedEffects.get(effectId).showIcon()) continue;
@@ -53,10 +53,10 @@ public class PotionEventHelper {
 
             for (ResourceLocation effectId : addedEffects.keySet()) {
                 //? if <1.21.2 {
-                /*MobEffect statusEffect = BuiltInRegistries.MOB_EFFECT.get(effectId);
-                *///?} else {
-                MobEffect statusEffect = BuiltInRegistries.MOB_EFFECT.getValue(effectId);
-                //?}
+                MobEffect statusEffect = BuiltInRegistries.MOB_EFFECT.get(effectId);
+                //?} else {
+                /*MobEffect statusEffect = BuiltInRegistries.MOB_EFFECT.getValue(effectId);
+                *///?}
 
                 if (statusEffect == null) continue;
                 if(SoundsConfig.get(EventSoundsConfig.class).ignoreSilencedStatusEffects && !addedEffects.get(effectId).showIcon()) continue;

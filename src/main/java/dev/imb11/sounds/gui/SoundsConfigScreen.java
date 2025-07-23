@@ -35,14 +35,9 @@ public class SoundsConfigScreen extends Screen {
 
     @Override
     public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
-        /*? if =1.20.1 {*/
-        /*super.renderBackground(context);
-        *//*?} else if <1.21.6 {*/
-        /*super.renderBackground(context, mouseX, mouseY, delta);
-         *//*?}*/
+        super.render(context, mouseX, mouseY, delta);
 
         assert this.minecraft != null;
-        float soundsConfigTitleWidth = font.width(Component.translatable("sounds.config.title"));
         context.drawCenteredString(this.minecraft.font, Component.translatable("sounds.config.title"), this.width / 2, 10, 0xFFFFFF);
 
         if(timeSinceLastSupporter == -1) {
@@ -73,9 +68,7 @@ public class SoundsConfigScreen extends Screen {
         int textTotalHeight = font.wordWrapHeight(text, spaceBetween - 20);
         int targetY = 10 + font.lineHeight / 2;
         int textY = targetY - (textTotalHeight / 2);
-        RenderUtils.drawTextWrapped(context, font, text, textX, textY, spaceBetween - 20, color);
-
-        super.render(context, mouseX, mouseY, delta);
+//        RenderUtils.drawTextWrapped(context, font, text, textX, textY, spaceBetween - 20, color);
     }
 
     @Override

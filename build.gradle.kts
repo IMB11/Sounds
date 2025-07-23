@@ -66,7 +66,7 @@ modstitch {
                 "1.21.4" -> 46
                 "1.21.5" -> 52
                 "1.21.6" -> 63
-                "1.21.7" -> 64
+                "1.21.8" -> 64
                 else -> throw IllegalArgumentException("Unsupported Minecraft version: $mcVersion")
             }.toString()
         )

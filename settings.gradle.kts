@@ -28,9 +28,9 @@ stonecutter {
             loaders.forEach { vers("$name-$it", mcVersion) }
 
         mc("1.21.6", loaders = listOf("fabric"))
-        mc("1.21", loaders = listOf("fabric", "neoforge"))
+        mc("1.21.1", loaders = listOf("fabric", "neoforge"))
 
-        vcsVersion = "1.21.6-fabric"
+        vcsVersion = "1.21.1-fabric"
     }
 }
 

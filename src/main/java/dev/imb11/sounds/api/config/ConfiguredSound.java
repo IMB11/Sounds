@@ -65,10 +65,10 @@ public class ConfiguredSound {
 
     public ConfiguredSound(String id, SoundEvent soundEvent, boolean enabled, float pitch, float volume) {
         //? if <1.21.2 {
-        /*this(id, soundEvent.getLocation(), enabled, pitch, volume);
-        *///?} else {
-        this(id, soundEvent.location(), enabled, pitch, volume);
-        //?}
+        this(id, soundEvent.getLocation(), enabled, pitch, volume);
+        //?} else {
+        /*this(id, soundEvent.location(), enabled, pitch, volume);
+        *///?}
     }
 
     public ConfiguredSound(String id, Holder<SoundEvent> soundEvent, boolean enabled, float pitch, float volume) {
@@ -174,10 +174,10 @@ public class ConfiguredSound {
                     Minecraft client = Minecraft.getInstance();
 
                     //? if <1.21.2 {
-                    /*var toastManager = client.getToasts();
-                    *///?} else {
-                    var toastManager = client.getToastManager();
-                    //?}
+                    var toastManager = client.getToasts();
+                    //?} else {
+                    /*var toastManager = client.getToastManager();
+                    *///?}
 
                     toastManager.addToast(SystemToast.multiline(client,
                             SystemToast.SystemToastId.WORLD_ACCESS_FAILURE,
@@ -197,10 +197,10 @@ public class ConfiguredSound {
                 Minecraft client = Minecraft.getInstance();
 
                 //? if <1.21.2 {
-                /*var toastManager = client.getToasts();
-                *///?} else {
-                var toastManager = client.getToastManager();
-                //?}
+                var toastManager = client.getToasts();
+                //?} else {
+                /*var toastManager = client.getToastManager();
+                *///?}
 
                 toastManager.addToast(SystemToast.multiline(client,
                         SystemToast.SystemToastId.WORLD_ACCESS_FAILURE,

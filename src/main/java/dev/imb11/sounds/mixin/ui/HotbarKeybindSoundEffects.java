@@ -22,14 +22,14 @@ public class HotbarKeybindSoundEffects {
     public LocalPlayer player;
 
     //? if <1.21.5 {
-    /*@WrapOperation(method = "handleKeybinds", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/player/Inventory;selected:I"))
+    @WrapOperation(method = "handleKeybinds", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/player/Inventory;selected:I"))
     public void $hotbar_keybind_sound_effect(Inventory instance, int value, Operation<Void> original) {
         //? if <1.21.2 {
-        /^original.call(instance, value);
+        original.call(instance, value);
         SoundsConfig.get(UISoundsConfig.class).hotbarScrollSoundEffect.playDynamicSound(instance.items.get(value), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
-        ^///?} else {
-        instance.setSelectedHotbarSlot(value);
-        //?}
+        //?} else {
+        /*instance.setSelectedHotbarSlot(value);
+        *///?}
     }
-    *///?}
+    //?}
 }

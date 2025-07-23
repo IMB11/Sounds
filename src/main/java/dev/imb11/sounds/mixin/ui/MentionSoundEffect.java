@@ -30,10 +30,10 @@ public class MentionSoundEffect {
     public void $cooldown_period(GuiGraphics context, int currentTick, int mouseX, int mouseY, boolean focused, CallbackInfo ci) {
         if (sounds$cooldownPeriod > 0) {
             //? if <1.21.2 {
-            /*sounds$cooldownPeriod -= this.minecraft.getTimer().getGameTimeDeltaPartialTick(true);
-            *///?} else {
-            sounds$cooldownPeriod -= this.minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(true);
-            //?}
+            sounds$cooldownPeriod -= this.minecraft.getTimer().getGameTimeDeltaPartialTick(true);
+            //?} else {
+            /*sounds$cooldownPeriod -= this.minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(true);
+            *///?}
         }
     }
 

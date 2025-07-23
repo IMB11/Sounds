@@ -102,30 +102,30 @@ public class SoundsReloadListener extends SimplePreparableReloadListener<Void> {
                 if (registryKeyTagKeyEither.left().isPresent()) {
                     var key = registryKeyTagKeyEither.left().get();
                     //? if <1.21.2 {
-                    /*var entry = BuiltInRegistries.ITEM.get(key.location());
-                    *///?} else {
-                    var entry = BuiltInRegistries.ITEM.getValue(key.location());
-                    //?}
+                    var entry = BuiltInRegistries.ITEM.get(key.location());
+                    //?} else {
+                    /*var entry = BuiltInRegistries.ITEM.getValue(key.location());
+                    *///?}
 
                     itemsWithLoadedDefinitions.add(entry);
                 } else if (registryKeyTagKeyEither.right().isPresent()) {
                     var tagKey = registryKeyTagKeyEither.right().get();
 
                     //? if <1.21.2 {
-                    /*var entries = BuiltInRegistries.ITEM.getOrCreateTag(tagKey);
-                    *///?} else {
-                    var entriesOpt = BuiltInRegistries.ITEM.get(tagKey);
+                    var entries = BuiltInRegistries.ITEM.getOrCreateTag(tagKey);
+                    //?} else {
+                    /*var entriesOpt = BuiltInRegistries.ITEM.get(tagKey);
                     if(entriesOpt.isEmpty()) continue;
                     var entries = entriesOpt.get();
-                    //?}
+                    *///?}
 
                     for (Holder<Item> key : entries) {
                         var entry = BuiltInRegistries.ITEM.get(key.unwrapKey().get());
                         //? if <1.21.2 {
-                        /*itemsWithLoadedDefinitions.add(entry);
-                        *///?} else {
-                        itemsWithLoadedDefinitions.add(entry.get().value());
-                        //?}
+                        itemsWithLoadedDefinitions.add(entry);
+                        //?} else {
+                        /*itemsWithLoadedDefinitions.add(entry.get().value());
+                        *///?}
                     }
                 }
             }

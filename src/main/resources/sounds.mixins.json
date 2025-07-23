@@ -4,7 +4,7 @@
   "package": "dev.imb11.sounds.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
-  "minMixinExtrasVersion": "0.5.0-rc.1",
+  "minMixinExtrasVersion": "0.5.0-rc.4",
   "client": [
     "ActionControllerElementMixin",
     "BlockSoundMixin",
@@ -19,7 +19,6 @@
     "ui.AnvilTypingEffect",
     "ui.CreativeInventorySoundEffects",
     "ui.CreativeScreenHandlerMixin",
-    "ui.HotbarKeybindSoundEffects",
     "ui.HotbarSoundEffects",
     "ui.ItemDragSoundEffect",
     "ui.ItemDropSoundEffect",

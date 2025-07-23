@@ -38,17 +38,6 @@ modstitch {
     minecraftVersion = mcVersion
     javaTarget = if (stonecutter.eval(mcVersion, ">1.20.4")) 21 else 17
 
-//    parchment {
-//        enabled = true
-//        minecraftVersion = mcVersion
-//        mappingsVersion = when (mcVersion) {
-//            "1.21.1" -> "2024.11.17"
-//            "1.21.3" -> "2024.12.07"
-//            "1.21.4" -> "2025.01.19"
-//            else -> throw IllegalArgumentException("Unsupported Minecraft version: $mcVersion")
-//        }
-//    }
-
     metadata {
         modId = "sounds"
         modName = "Sounds"
@@ -58,18 +47,7 @@ modstitch {
             "A highly configurable sound overhaul mod that adds new sound effects while improving vanilla sounds too."
         modLicense = "ARR"
 
-        replacementProperties.put(
-            "pack_format", when (mcVersion) {
-                "1.20.1" -> 15
-                "1.21.1" -> 34
-                "1.21.3" -> 42
-                "1.21.4" -> 46
-                "1.21.5" -> 52
-                "1.21.6" -> 63
-                "1.21.8" -> 64
-                else -> throw IllegalArgumentException("Unsupported Minecraft version: $mcVersion")
-            }.toString()
-        )
+        replacementProperties.put("pack_format", "64")
         replacementProperties.put("target_minecraft", mcVersion)
         replacementProperties.put("target_mru", property("deps.mru") as String)
         replacementProperties.put(
@@ -148,7 +126,7 @@ dependencies {
     modstitch.loom {
         modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}").productionMod()
         modstitchModImplementation("com.terraformersmc:modmenu:${property("runtime.modmenu")}").productionMod()
-        "io.github.llamalad7:mixinextras-fabric:0.5.0-rc.1".let {
+        "io.github.llamalad7:mixinextras-fabric:0.5.0-rc.4".let {
             modstitchJiJ(it)
             modstitchImplementation(it)
             annotationProcessor(it)
@@ -156,7 +134,7 @@ dependencies {
     }
 
     modstitch.moddevgradle {
-        "io.github.llamalad7:mixinextras-neoforge:0.5.0-rc.1".let {
+        "io.github.llamalad7:mixinextras-neoforge:0.5.0-rc.4".let {
             modstitchJiJ(it)
             implementation(it)
         }

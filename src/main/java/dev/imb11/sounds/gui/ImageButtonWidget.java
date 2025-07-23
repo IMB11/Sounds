@@ -48,7 +48,7 @@ public class ImageButtonWidget extends AbstractWidget {
             durationHovered = Math.max(durationHovered - delta / 4f, 0f);
         }
 
-        float alphaScale = Mth.clampedLerp(0.9f, 0.5f, durationHovered);
+        float alphaScale = Mth.clampedLerp(0.3f, 0.75f, durationHovered);
 
         // Grey overlay for hover effect (render first, behind icon and text)
         int a = (int) (255 * alphaScale);
@@ -93,7 +93,7 @@ public class ImageButtonWidget extends AbstractWidget {
 
 
                 for (FormattedCharSequence line : wrappedText) {
-                    context.drawCenteredString(client.font, line, getX() + this.width / 2, currentTextY, 0xFFFFFF);
+                    context.drawCenteredString(client.font, line, getX() + this.width / 2, currentTextY, 0xFFFFFFFF);
                     currentTextY += fontHeight;
                 }
             } else {
@@ -103,7 +103,7 @@ public class ImageButtonWidget extends AbstractWidget {
                 iconX = getX() + (this.width - ICON_SIZE) / 2;
                 textY = overallStartY + ICON_SIZE + ICON_TEXT_SPACING;
                 renderIcon(context, iconX, iconY);
-                context.drawCenteredString(client.font, getMessage(), getX() + this.width / 2, textY, 0xFFFFFF);
+                context.drawCenteredString(client.font, getMessage(), getX() + this.width / 2, textY, 0xFFFFFFFF);
             }
         } else {
             // Horizontal Layout: Icon left of text
@@ -124,15 +124,15 @@ public class ImageButtonWidget extends AbstractWidget {
                 int textStartY = getY() + (this.height - wrappedTextHeight) / 2;
                 int currentTextY = textStartY;
                 for (FormattedCharSequence line : wrappedText) {
-                    context.drawString(client.font, line, textX, currentTextY, 0xFFFFFF);
+                    context.drawString(client.font, line, textX, currentTextY, 0xFFFFFFFF);
                     currentTextY += fontHeight;
                 }
             } else {
-                context.drawString(client.font, getMessage(), textX, textY, 0xFFFFFF);
+                context.drawString(client.font, getMessage(), textX, textY, 0xFFFFFFFF);
             }
         }
 
-        context.renderOutline(getX(), getY(), width, height, 0x0FFFFFFF);
+        context.renderOutline(getX(), getY(), width, height, 0x1FFFFFFF);
     }
 
     private static void renderTexture(GuiGraphics drawContext, ResourceLocation texture, int x, int y, int textureWidth, int textureHeight) {
@@ -141,21 +141,11 @@ public class ImageButtonWidget extends AbstractWidget {
 
 
     private void renderIcon(GuiGraphics context, int x, int y) {
-        int minFilterScalingTypePrev = glGetTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER);
-        int magFilterScalingTypePrev = glGetTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER);
-        try {
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        context.pose().pushMatrix();
 
-            context.pose().pushMatrix();
-
-            context.pose().scale(32f / 512f, 32f / 512f);
-            context.blit(RenderPipelines.GUI_TEXTURED, this.imageLocation, (int) (x / (32f / 512f)), (int) (y / (32f / 512f)), 0, 0, 512, 512, 512, 512);
-            context.pose().popMatrix();
-        } catch (Exception ignored) {} finally {
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilterScalingTypePrev);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilterScalingTypePrev);
-        }
+        context.pose().scale(32f / 512f, 32f / 512f);
+        context.blit(RenderPipelines.GUI_TEXTURED, this.imageLocation, (int) (x / (32f / 512f)), (int) (y / (32f / 512f)), 0, 0, 512, 512, 512, 512);
+        context.pose().popMatrix();
     }
 
 

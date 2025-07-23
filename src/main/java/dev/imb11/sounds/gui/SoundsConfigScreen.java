@@ -38,7 +38,7 @@ public class SoundsConfigScreen extends Screen {
         super.render(context, mouseX, mouseY, delta);
 
         assert this.minecraft != null;
-        context.drawCenteredString(this.minecraft.font, Component.translatable("sounds.config.title"), this.width / 2, 10, 0xFFFFFF);
+        context.drawCenteredString(this.minecraft.font, Component.translatable("sounds.config.title"), this.width / 2, 10, 0xFFFFFFFF);
 
         if(timeSinceLastSupporter == -1) {
             timeSinceLastSupporter = Util.getMillis();

@@ -24,7 +24,7 @@ public class GreyButton extends Button {
             durationHovered = Math.max(durationHovered - delta / 4f, 0f);
         }
 
-        float alphaScale = Mth.clampedLerp(0.9f, 0.5f, durationHovered);
+        float alphaScale = Mth.clampedLerp(0.3f, 0.75f, durationHovered);
 
         // Grey overlay for hover effect (render first, behind icon and text)
         int a = (int) (255 * alphaScale);
@@ -34,5 +34,7 @@ public class GreyButton extends Button {
 
         int i = this.active ? 16777215 : 10526880;
         this.renderString(guiGraphics, this.minecraft.font, i | Mth.ceil(this.alpha * 255.0F) << 24);
+
+        guiGraphics.renderOutline(getX(), getY(), width, height, 0x1FFFFFFF);
     }
 }

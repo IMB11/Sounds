@@ -27,7 +27,6 @@ stonecutter {
         fun mc(mcVersion: String, name: String = mcVersion, loaders: List<String>) =
             loaders.forEach { vers("$name-$it", mcVersion) }
 
-        mc("1.21.6", loaders = listOf("fabric"))
         mc("1.21.1", loaders = listOf("fabric", "neoforge"))
 
         vcsVersion = "1.21.1-fabric"

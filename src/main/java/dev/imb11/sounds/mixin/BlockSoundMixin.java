@@ -23,7 +23,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/*? if >=1.21 {*/
 @Mixin(BlockBehaviour.class)
+/*?} else {*/
+/*@Mixin(Block.class)
+@Debug(export = true)
+*//*?}*/
 public abstract class BlockSoundMixin implements BlockAccessor {
     @Unique
     private @Nullable TagPair sounds$associatedTagPair = null;

@@ -12,7 +12,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.ItemStack;
 
 public class InventoryDynamicConfiguredSound extends DynamicConfiguredSound<ItemStack, ItemStackSoundContext> {
-    private static final HashMap<String, Long> itemTypeCooldownMap = new HashMap<>();
+    private static HashMap<String, Long> itemTypeCooldownMap = new HashMap<>();
 
     public InventoryDynamicConfiguredSound(String id, ResourceLocation soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
         super(id, soundEvent, enabled, pitch, volume, enableDynamicSounds);

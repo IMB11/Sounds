@@ -68,7 +68,7 @@ public class SoundsConfigScreen extends Screen {
         int textTotalHeight = font.wordWrapHeight(text, spaceBetween - 20);
         int targetY = 10 + font.lineHeight / 2;
         int textY = targetY - (textTotalHeight / 2);
-        // TODO: Reimpl this.
+//        RenderUtils.drawTextWrapped(context, font, text, textX, textY, spaceBetween - 20, color);
     }
 
     @Override

@@ -9,6 +9,7 @@ import dev.imb11.sounds.sound.CustomSounds;
 import dev.imb11.sounds.sound.events.PotionEventHelper;
 import dev.imb11.sounds.util.ConfigSetters;
 import net.minecraft.client.Minecraft;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
@@ -18,7 +19,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
-@Mod("sounds")
+@Mod(value = "sounds", dist = Dist.CLIENT)
 public class SoundsNeoForge {
     private static final PotionEventHelper potionEventHelper = new PotionEventHelper();
 
@@ -37,23 +38,23 @@ public class SoundsNeoForge {
         }
 
         //? if >=1.21.5 {
-        @SubscribeEvent
+        /^@SubscribeEvent
         private static void setupClientEvent(FMLClientSetupEvent event) {
             SoundsConfig.loadAll();
             ConfigSetters.init();
         }
-        //?}
+        ^///?}
 
         @SubscribeEvent
         //? if <=1.21.3 {
-        /^private static void registerResourceReloadListeners(net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent event) {
+        private static void registerResourceReloadListeners(net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent event) {
             event.registerReloadListener(new SoundsReloadListener());
         }
-        ^///?} else {
-        private static void registerResourceReloadListeners(net.neoforged.neoforge.client.event.AddClientReloadListenersEvent event) {
+        //?} else {
+        /^private static void registerResourceReloadListeners(net.neoforged.neoforge.client.event.AddClientReloadListenersEvent event) {
             event.addListener(SoundsClient.id("reload"), new SoundsReloadListener());
         }
-        //?}
+        ^///?}
     }
 }
 *///?}

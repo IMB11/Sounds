@@ -40,6 +40,7 @@ public class SoundsConfigScreen extends Screen {
         assert this.minecraft != null;
         context.drawCenteredString(this.minecraft.font, Component.translatable("sounds.config.title"), this.width / 2, 10, 0xFFFFFF);
 
+        /*
         if(timeSinceLastSupporter == -1) {
             timeSinceLastSupporter = Util.getMillis();
             supporterIndex = 0;
@@ -55,6 +56,8 @@ public class SoundsConfigScreen extends Screen {
 
         String supporter = SoundsClient.SUPPORTERS[supporterIndex];
 
+
+
         float timePassed = (Util.getMillis() - timeSinceLastSupporter) / 2000f;
         float fadeBetween = (Mth.sin(timePassed * (float)Math.PI) + 1) / 2;
         if(fadeBetween < 0.01) {
@@ -63,11 +66,15 @@ public class SoundsConfigScreen extends Screen {
         int alpha = (int) (fadeBetween * 255.0f);
         int color = (alpha << 24) | (0xFFFFFF);
         Component text = Component.literal(supporter).withStyle(ChatFormatting.GOLD).append(Component.literal(" supports me on Ko-Fi!").withStyle(ChatFormatting.WHITE));
+
         int textX = (int) 10;
+
         int spaceBetween = (this.width / 2 - 40);
         int textTotalHeight = font.wordWrapHeight(text, spaceBetween - 20);
         int targetY = 10 + font.lineHeight / 2;
         int textY = targetY - (textTotalHeight / 2);
+       
+         */
         // TODO: Reimpl this.
     }
 

@@ -50,9 +50,6 @@ body:
       description: What version of the game are you running?
       options:
         - "1.21-1.21.1"
-        - "1.21.2-1.21.3 (Unsupported)"
-        - "1.21.4 (Unsupported)"
-        - "1.21.5 (Unsupported)"
         - "1.21.6-1.21.8"
     validations:
       required: true

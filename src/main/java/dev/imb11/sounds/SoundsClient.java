@@ -39,6 +39,7 @@ public class SoundsClient {
 
         CustomSounds.initialize();
 
+        /*
         CompletableFuture.runAsync(() -> {
             try {
                 API apiClient = new API();
@@ -48,7 +49,7 @@ public class SoundsClient {
                 }
             } catch (Exception ignored) {}
         }, Util.nonCriticalIoPool());
-
+        */
         //? if !(neoforge && >=1.21.5) {
         SoundsConfig.loadAll();
         ConfigSetters.init();

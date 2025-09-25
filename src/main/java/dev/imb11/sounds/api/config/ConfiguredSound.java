@@ -13,6 +13,7 @@ import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -199,7 +200,10 @@ public class ConfiguredSound {
     }
 
     private void playSound(ResourceLocation soundEvent, float pitch, float volume) {
-        this.playSound(new SimpleSoundInstance(soundEvent, SoundSource.MASTER, volume, pitch, SoundsClient.RANDOM, false, 0, SoundInstance.Attenuation.LINEAR, 0, 0, 0, true));
+        var pos = new Vec3(0, 0,0);
+        if (Minecraft.getInstance().player != null)
+            pos = Minecraft.getInstance().player.position();
+        this.playSound(new SimpleSoundInstance(soundEvent, SoundSource.MASTER, volume, pitch, SoundsClient.RANDOM, false, 0, SoundInstance.Attenuation.LINEAR, pos.x, pos.y, pos.z, true));
     }
 
     public @Nullable SimpleSoundInstance getSoundInstance() {

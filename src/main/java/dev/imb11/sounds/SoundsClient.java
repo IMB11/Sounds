@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -40,7 +42,10 @@ public class SoundsClient {
         CompletableFuture.runAsync(() -> {
             try {
                 API apiClient = new API();
-                SUPPORTERS = apiClient.getKofiSupporters();
+                var supporters = apiClient.getKofiSupporters();
+                if (supporters.length>0) {
+                    SUPPORTERS = supporters;
+                }
             } catch (Exception ignored) {}
         }, Util.nonCriticalIoPool());
 

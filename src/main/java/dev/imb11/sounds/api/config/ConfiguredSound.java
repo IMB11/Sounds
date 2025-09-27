@@ -2,6 +2,7 @@ package dev.imb11.sounds.api.config;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.imb11.mru.LoaderUtils;
 import dev.imb11.mru.RegistryUtils;
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.util.MixinStatics;
@@ -212,8 +213,8 @@ public class ConfiguredSound {
     }
 
     private void playSound(ResourceLocation soundEvent, float pitch, float volume) {
-        var pos = new Vec3(0, 0,0);
-        if (Minecraft.getInstance().player != null)
+        var pos = Vec3.ZERO;
+        if (LoaderUtils.isModInstalled("sound_physics_perfected") && Minecraft.getInstance().player != null)
             pos = Minecraft.getInstance().player.position();
         this.playSound(new SimpleSoundInstance(soundEvent, SoundSource.MASTER, volume, pitch, SoundsClient.RANDOM, false, 0, SoundInstance.Attenuation.LINEAR, pos.x, pos.y, pos.z, true));
     }

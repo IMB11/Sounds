@@ -1,5 +1,6 @@
 package dev.imb11.sounds.api.context;
 
+import dev.imb11.mru.LoaderUtils;
 import dev.imb11.sounds.SoundsClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -13,8 +14,8 @@ public interface DynamicSoundContext<T> {
     SoundInstance handleContext(T context, ResourceLocation fallback, float pitch, float volume);
 
     default SimpleSoundInstance createSoundInstance(ResourceLocation event, float pitch, float volume) {
-        var pos = new Vec3(0, 0,0);
-        if (Minecraft.getInstance().player != null)
+        var pos = Vec3.ZERO;
+        if (LoaderUtils.isModInstalled("sound_physics_perfected") && Minecraft.getInstance().player != null)
             pos = Minecraft.getInstance().player.position();
 
         return new SimpleSoundInstance(event, SoundSource.MASTER, volume, pitch, SoundsClient.RANDOM, false, 0, SoundInstance.Attenuation.LINEAR, pos.x, pos.y, pos.z, true);

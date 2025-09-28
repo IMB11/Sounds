@@ -25,7 +25,9 @@
       "dev.imb11.sounds.loaders.fabric.datagen.SoundsDatagenEntrypoint"
     ]
   },
-  "mixins": [],
+  "mixins": [
+    "sounds.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=${target_fabricloader}",
     "yet_another_config_lib_v3": "${target_yacl}",

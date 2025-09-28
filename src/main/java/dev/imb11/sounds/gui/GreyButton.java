@@ -35,6 +35,6 @@ public class GreyButton extends Button {
         int i = this.active ? 16777215 : 10526880;
         this.renderString(guiGraphics, this.minecraft.font, i | Mth.ceil(this.alpha * 255.0F) << 24);
 
-        guiGraphics.renderOutline(getX(), getY(), width, height, 0x1FFFFFFF);
+        guiGraphics.submitOutline(getX(), getY(), width, height, 0x1FFFFFFF);
     }
 }

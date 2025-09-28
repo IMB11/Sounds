@@ -6,8 +6,10 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
@@ -32,7 +34,7 @@ public class ImageButtonWidget extends AbstractWidget {
     }
 
     @Override
-    public void onClick(double mouseX, double mouseY) {
+    public void onClick(MouseButtonEvent event, boolean bl) {
         if (this.onPress != null) {
             this.onPress.accept(this);
         }
@@ -132,7 +134,7 @@ public class ImageButtonWidget extends AbstractWidget {
             }
         }
 
-        context.renderOutline(getX(), getY(), width, height, 0x1FFFFFFF);
+        context.submitOutline(getX(), getY(), width, height, 0x1FFFFFFF);
     }
 
     private static void renderTexture(GuiGraphics drawContext, ResourceLocation texture, int x, int y, int textureWidth, int textureHeight) {

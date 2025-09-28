@@ -79,7 +79,7 @@ public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
             ItemStack stack,
             boolean throwRandomly,
             CallbackInfoReturnable<ItemEntity> cir) {
-        if (!this.level().isClientSide) return;
+        if (!this.level().isClientSide()) return;
         sounds$playSound(stack);
     }
 }

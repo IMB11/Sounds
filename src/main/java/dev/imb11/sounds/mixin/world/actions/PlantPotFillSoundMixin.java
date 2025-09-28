@@ -29,7 +29,7 @@ public class PlantPotFillSoundMixin {
 
     @Inject(method = "useWithoutItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;gameEvent(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/Holder;Lnet/minecraft/core/BlockPos;)V"))
     public void playPlantPotFillSound(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
-        if(world.isClientSide) {
+        if(world.isClientSide()) {
             Block blockOrAirIfNull = this.potted == null ? Blocks.AIR : this.potted;
             SoundsConfig.get(WorldSoundsConfig.class).plantPotFillSoundEffect.playDynamicSound(new ItemStack(blockOrAirIfNull), new ItemStackSoundContext());
         }
@@ -37,7 +37,7 @@ public class PlantPotFillSoundMixin {
 
     @Inject(method = "useItemOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;consume(ILnet/minecraft/world/entity/LivingEntity;)V"))
     public void playPlantPotFillSound(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
-        if(level.isClientSide) {
+        if(level.isClientSide()) {
             SoundsConfig.get(WorldSoundsConfig.class).plantPotFillSoundEffect.playDynamicSound(stack, new ItemStackSoundContext());
         }
     }

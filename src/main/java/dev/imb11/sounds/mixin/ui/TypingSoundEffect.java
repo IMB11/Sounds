@@ -4,6 +4,7 @@ import dev.imb11.sounds.util.MixinStatics;
 import net.minecraft.client.gui.screens.ChatScreen;
 import dev.imb11.sounds.config.ChatSoundsConfig;
 import dev.imb11.sounds.config.SoundsConfig;
+import net.minecraft.client.input.KeyEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -12,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ChatScreen.class)
 public class TypingSoundEffect {
     @Inject(method = "keyPressed", at = @At("HEAD"), cancellable = false)
-    public void $typing_sound_effect(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
-        if (MixinStatics.isNotSpecialKey(keyCode)) {
+    public void $typing_sound_effect(KeyEvent keyEvent, CallbackInfoReturnable<Boolean> cir) {
+        if (MixinStatics.isNotSpecialKey(keyEvent.input())) {
             SoundsConfig.get(ChatSoundsConfig.class).typingSoundEffect.playSound();
         }
     }

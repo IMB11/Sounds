@@ -24,13 +24,15 @@ public abstract class HotbarSoundEffects {
     @Shadow @Final
     private NonNullList<ItemStack> items;
 
-    @Inject(method = "swapPaint", at = @At("RETURN"), cancellable = false)
+    @Inject(method = "swapPaint", at = @At("RETURN"))
     public void $hotbar_scroll_sound_effect(double scrollAmount, CallbackInfo ci) {
-        SoundsConfig.get(UISoundsConfig.class).hotbarScrollSoundEffect.playDynamicSound(this.player.getMainHandItem(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+        if (player.isLocalPlayer())
+            SoundsConfig.get(UISoundsConfig.class).hotbarScrollSoundEffect.playDynamicSound(this.player.getMainHandItem(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
 
-    @Inject(method = "pickSlot", at = @At("RETURN"), cancellable = false)
+    @Inject(method = "pickSlot", at = @At("RETURN"))
     public void $hotbar_pick_sound_effect(int slot, CallbackInfo ci) {
-        SoundsConfig.get(UISoundsConfig.class).hotbarPickSoundEffect.playDynamicSound(this.items.get(slot), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.STEP));
+        if (player.isLocalPlayer())
+            SoundsConfig.get(UISoundsConfig.class).hotbarPickSoundEffect.playDynamicSound(this.items.get(slot), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.STEP));
     }
 }

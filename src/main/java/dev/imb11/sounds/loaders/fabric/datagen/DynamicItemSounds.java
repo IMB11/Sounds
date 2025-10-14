@@ -149,23 +149,23 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .setPitch(0.01f));
 
         provider.accept("crop_food", create(SoundEvents.CROP_BREAK)
-                .addKey(ConventionalItemTags.VEGETABLES_FOODS)
-                .addKey(ConventionalItemTags.FRUITS_FOODS)
-                .addKey(ConventionalItemTags.BERRIES_FOODS)
-                .addKey(ConventionalItemTags.BREADS_FOODS)
+                .addKey(ConventionalItemTags.VEGETABLE_FOODS)
+                .addKey(ConventionalItemTags.FRUIT_FOODS)
+                .addKey(ConventionalItemTags.BERRY_FOODS)
+                .addKey(ConventionalItemTags.BREAD_FOODS)
                 .setVolume(1.0f)
                 .setPitch(1.76f));
 
         provider.accept("bowl_food", create(SoundEvents.MOOSHROOM_MILK_SUSPICIOUSLY)
-                .addKey(ConventionalItemTags.SOUPS_FOODS)
+                .addKey(ConventionalItemTags.SOUP_FOODS)
                 .setVolume(0.5f)
                 .setPitch(1.58f));
 
         provider.accept("meat_and_fish", create(SoundEvents.PUFFER_FISH_FLOP)
-                 .addKey(ConventionalItemTags.RAW_FISHES_FOODS)
-                .addKey(ConventionalItemTags.RAW_MEATS_FOODS)
-                .addKey(ConventionalItemTags.COOKED_FISHES_FOODS)
-                .addKey(ConventionalItemTags.COOKED_MEATS_FOODS)
+                 .addKey(ConventionalItemTags.RAW_FISH_FOODS)
+                .addKey(ConventionalItemTags.RAW_MEAT_FOODS)
+                .addKey(ConventionalItemTags.COOKED_FISH_FOODS)
+                .addKey(ConventionalItemTags.COOKED_MEAT_FOODS)
                 .setPitch(1.8f)
                 .setVolume(0.20f));
 

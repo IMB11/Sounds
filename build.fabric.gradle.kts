@@ -11,14 +11,14 @@ tasks.named<ProcessResources>("processResources") {
 
     val props = HashMap<String, String>().apply {
         this["mod_version"] = prop("mod.version")
-        this["target_minecraft"] = prop("deps.minecraft")
+        this["target_minecraft"] = prop("mod.target")
         this["mod_id"] = "sounds"
         this["mod_name"] = "Sounds"
         this["mod_description"] = "A highly configurable sound overhaul mod that adds new sound effects while improving vanilla sounds too."
         this["mod_license"] = "ARR"
         this["target_yacl"] = "*"
         this["target_mru"] = prop("deps.mru")
-        this["target_fabricloader"] = prop("deps.fabric_loader")
+        this["target_fabricloader"] = "0.17.2"
     }
 
     filesMatching(listOf("fabric.mod.json", "META-INF/neoforge.mods.toml", "META-INF/mods.toml")) {
@@ -60,13 +60,13 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
-    modImplementation("dev.imb11:mru:${property("deps.mru")}+fabric")
+    modImplementation("dev.imb11:mru:${property("deps.mru")}-fabric")
 
     modCompileOnly("dev.emi:emi-fabric:${property("compile.emi")}")
     modCompileOnly("maven.modrinth:trashslot:${property("compile.trashslot")}")
 
     modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-fabric")
-    modCompileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
+    modImplementation("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
 
     val modules = listOf("transitive-access-wideners-v1", "registry-sync-v0", "resource-loader-v0")
     for (it in modules) modImplementation(fabricApi.module("fabric-$it", property("deps.fabric_api") as String))

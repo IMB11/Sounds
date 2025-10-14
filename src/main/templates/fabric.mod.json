@@ -7,9 +7,14 @@
   "authors": [
     "IMB11 (mineblock11)"
   ],
+  "contributors": [
+    "cassiancc"
+  ],
   "contact": {
     "website": "https://imb11.dev/",
-    "repo": "https://github.com/IMB11/Sounds"
+    "repo": "https://github.com/IMB11/Sounds",
+    "issues": "https://github.com/IMB11/Sounds/issues",
+    "sources": "https://github.com/IMB11/Sounds/issues"
   },
   "license": "${mod_license}",
   "icon": "assets/sounds/icon.png",
@@ -29,7 +34,7 @@
   "depends": {
     "fabricloader": ">=${target_fabricloader}",
     "yet_another_config_lib_v3": ">=${target_yacl}",
-    "fabric": "*",
+    "fabric-api": "*",
     "mru": "~${target_mru}",
     "minecraft": "${target_minecraft}"
   },

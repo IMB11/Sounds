@@ -35,8 +35,9 @@ public abstract class HotbarSoundEffects {
         SoundsConfig.get(UISoundsConfig.class).hotbarScrollSoundEffect.playDynamicSound(this.player.getMainHandItem(), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
     }
 
-    @Inject(method = "pickSlot", at = @At("RETURN"), cancellable = false)
+    @Inject(method = "pickSlot", at = @At("RETURN"))
     public void $hotbar_pick_sound_effect(int slot, CallbackInfo ci) {
-        SoundsConfig.get(UISoundsConfig.class).hotbarPickSoundEffect.playDynamicSound(this.items.get(slot), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.STEP));
+        if (player.isLocalPlayer())
+            SoundsConfig.get(UISoundsConfig.class).hotbarPickSoundEffect.playDynamicSound(this.items.get(slot), ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.STEP));
     }
 }

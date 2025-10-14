@@ -1,16 +1,14 @@
 package dev.imb11.sounds.config;
 
 import dev.imb11.mru.yacl.EntryType;
-import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.config.ConfiguredSound;
 import dev.imb11.sounds.api.config.DynamicConfiguredSound;
 import dev.imb11.sounds.config.utils.ConfigGroup;
+import dev.imb11.sounds.sound.CustomSounds;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import dev.imb11.sounds.sound.context.RepeaterSoundContext;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
-import dev.isxander.yacl3.api.controller.ItemControllerBuilder;
-import dev.isxander.yacl3.api.controller.StringControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +34,8 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
     public ConfiguredSound furnaceMinecartFuelSoundEffect = new ConfiguredSound("furnaceMinecartFuel", SoundEvents.CREEPER_HURT, true, 1.9F, 0.2F);
 
     /// == ACTIONS == ///
-//    @SerialEntry
-//    public ConfiguredSound swordSwoopSoundEffect = new ConfiguredSound("swordSwoop", CustomSounds.BLOCK_SWORD_SWOOP, true, 1.0F, 1.0F);
+    @SerialEntry
+    public ConfiguredSound swordSwooshSoundEffect = new ConfiguredSound("swordSwoosh", CustomSounds.ITEM_SWORD_SWOOSH.get(), true, 1.0F, 0.4F);
     @SerialEntry
     public ConfiguredSound frostWalkerSoundEffect = new ConfiguredSound("frostWalker", SoundEvents.POWDER_SNOW_FALL, true, 2.0F, 0.5F);
     @SerialEntry
@@ -115,7 +113,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
         builder.category(ConfigCategory.createBuilder()
                 .name(Component.translatable("sounds.config.world.actions"))
                 .option(HELPER.get("enableEnderpearlVariety", defaults.enableEnderpearlVariety, () -> config.enableEnderpearlVariety, v -> config.enableEnderpearlVariety = v))
-//                .group(config.swordSwoopSoundEffect.getOptionGroup(defaults.swordSwoopSoundEffect))
+                .group(config.swordSwooshSoundEffect.getOptionGroup(defaults.swordSwooshSoundEffect))
                 .group(config.frostWalkerSoundEffect.getOptionGroup(defaults.frostWalkerSoundEffect))
                 .group(config.leadSnappingSoundEffect.getOptionGroup(defaults.leadSnappingSoundEffect))
                 .group(config.bowPullSoundEffect.getOptionGroup(defaults.bowPullSoundEffect))

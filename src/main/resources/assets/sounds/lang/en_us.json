@@ -44,6 +44,8 @@
     "sounds.config.world.actions": "Actions",
 	"sounds.config.option.enableEnderpearlVariety": "Enable Enderpearl Variety",
 	"sounds.config.option.description.enableEnderpearlVariety": "Should the sound effect that is played when you throw an Ender Pearl be randomized and more consistent with the chorus fruit teleport sound?",
+    "sounds.config.swordSwoosh.option": "Sword Swoosh",
+    "sounds.config.swordSwoosh.option.description": "A sound effect that is played when you attack with a sword.",
     "sounds.config.frostWalker.option": "Frost Walker Freeze",
     "sounds.config.frostWalker.option.description": "The sound effect that plays when frost walker boots freeze water.",
 	"sounds.config.leadSnapping.option": "Lead Snapping",

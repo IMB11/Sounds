@@ -36,7 +36,8 @@
     "world.mechanics.DaylightDetectorBlockMixin",
     "world.mechanics.FurnaceMinecartEntityMixin",
     "world.mechanics.JukeboxBlockEntityMixin",
-    "world.mechanics.RepeaterBlockMixin"
+    "world.mechanics.RepeaterBlockMixin",
+    "world.mechanics.SwordSwingSoundEffect"
   ],
   "injectors": {
     "defaultRequire": 1

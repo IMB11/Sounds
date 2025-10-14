@@ -282,6 +282,8 @@ public class DynamicTagPairs extends TagPairProvider {
 
         provider.accept("mangrove_planks", TagPair.Builder.create()
                 .addKey(Blocks.MANGROVE_PLANKS)
+                .addKey(Blocks.STRIPPED_MANGROVE_LOG)
+                .addKey(Blocks.STRIPPED_MANGROVE_WOOD)
                 .group(1.0F, 1.0F, CustomSounds.BLOCK_MANGROVE_PLANKS_BREAK.get(), CustomSounds.BLOCK_MANGROVE_PLANKS_STEP.get(), CustomSounds.BLOCK_MANGROVE_PLANKS_PLACE.get(), CustomSounds.BLOCK_MANGROVE_PLANKS_HIT.get(), CustomSounds.BLOCK_MANGROVE_PLANKS_FALL.get()));
 
         provider.accept("mossy_cobblestone", TagPair.Builder.create()

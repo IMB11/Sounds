@@ -20,6 +20,8 @@
     "volume": 1.0
   },
   "keys": [
-    "minecraft:mangrove_planks"
+    "minecraft:mangrove_planks",
+    "minecraft:stripped_mangrove_log",
+    "minecraft:stripped_mangrove_wood"
   ]
 }

@@ -133,11 +133,11 @@ public class SoundsConfigScreen extends Screen {
         });
         addRenderableWidget(uiSoundsButton);
 
-        int discordAndKoFiButtonsWidth = 100 + 100 + 30; // button widths + left margin of Ko-Fi button + right margin of Discord button
+        int discordAndKoFiButtonsWidth = 80 + 80 + 33; // button widths + left margin of Ko-Fi button + right margin of Discord button
         int doneButtonWidth = this.width - discordAndKoFiButtonsWidth;
-        Button buttonWidget = new GreyButton(this.width / 2 - doneButtonWidth / 2, this.height - 30, doneButtonWidth, 20, CommonComponents.GUI_DONE, (btn) -> this.minecraft.setScreen(this.parent), Supplier::get);
-        Button koFiButton = new GreyButton(10, this.height - 30, 100, 20, Component.literal("Donate").withStyle(ChatFormatting.GOLD).withStyle(ChatFormatting.BOLD), (btn) -> Util.getPlatform().openUri("https://ko-fi.com/imb11"), Supplier::get);
-        Button discordButton = new GreyButton(this.width - 110, this.height - 30, 100, 20, Component.literal("Discord").withStyle(ChatFormatting.AQUA).withStyle(ChatFormatting.BOLD), (btn) -> Util.getPlatform().openUri("https://discord.imb11.dev/"), Supplier::get);
+        Button buttonWidget = new GreyButton(180, this.height - 30, doneButtonWidth, 20, CommonComponents.GUI_DONE, (btn) -> this.minecraft.setScreen(this.parent), Supplier::get);
+        Button koFiButton = new GreyButton(10, this.height - 30, 80, 20, Component.literal("Donate").withStyle(ChatFormatting.GOLD).withStyle(ChatFormatting.BOLD), (btn) -> Util.getPlatform().openUri("https://ko-fi.com/imb11"), Supplier::get);
+        Button discordButton = new GreyButton(95, this.height - 30, 80, 20, Component.literal("Discord").withStyle(ChatFormatting.AQUA).withStyle(ChatFormatting.BOLD), (btn) -> Util.getPlatform().openUri("https://discord.imb11.dev/"), Supplier::get);
         this.addRenderableWidget(buttonWidget);
         this.addRenderableWidget(koFiButton);
         this.addRenderableWidget(discordButton);

@@ -15,8 +15,8 @@ public interface DynamicSoundContext<T> {
 
     default SimpleSoundInstance createSoundInstance(ResourceLocation event, float pitch, float volume) {
         var pos = Vec3.ZERO;
-        if (LoaderUtils.isModInstalled("sound_physics_perfected") && Minecraft.getInstance().player != null)
-            pos = Minecraft.getInstance().player.position();
+        if (LoaderUtils.isModInstalled("sound_physics_perfected"))
+            return new SimpleSoundInstance(event, SoundSource.MASTER, volume, pitch, SoundsClient.RANDOM, false, 0, SoundInstance.Attenuation.NONE, pos.x, pos.y, pos.z, true); // Disable Attenuation when using SPP
 
         return new SimpleSoundInstance(event, SoundSource.MASTER, volume, pitch, SoundsClient.RANDOM, false, 0, SoundInstance.Attenuation.LINEAR, pos.x, pos.y, pos.z, true);
     }

@@ -15,9 +15,10 @@ public interface DynamicSoundContext<T> {
 
     default SimpleSoundInstance createSoundInstance(ResourceLocation event, float pitch, float volume) {
         var pos = Vec3.ZERO;
+        var attenuation = SoundInstance.Attenuation.LINEAR;
         if (LoaderUtils.isModInstalled("sound_physics_perfected"))
-            return new SimpleSoundInstance(event, SoundSource.MASTER, volume, pitch, SoundsClient.RANDOM, false, 0, SoundInstance.Attenuation.NONE, pos.x, pos.y, pos.z, true); // Disable Attenuation when using SPP
+            attenuation = SoundInstance.Attenuation.NONE;  // Disable Attenuation when using SPP
 
-        return new SimpleSoundInstance(event, SoundSource.MASTER, volume, pitch, SoundsClient.RANDOM, false, 0, SoundInstance.Attenuation.LINEAR, pos.x, pos.y, pos.z, true);
+        return new SimpleSoundInstance(event, SoundSource.MASTER, volume, pitch, SoundsClient.RANDOM, false, 0, attenuation, pos.x, pos.y, pos.z, true);
     }
 }

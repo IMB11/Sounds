@@ -214,9 +214,11 @@ public class ConfiguredSound {
 
     private void playSound(ResourceLocation soundEvent, float pitch, float volume) {
         var pos = Vec3.ZERO;
-        if (LoaderUtils.isModInstalled("sound_physics_perfected") && Minecraft.getInstance().player != null)
-            pos = Minecraft.getInstance().player.position();
-        this.playSound(new SimpleSoundInstance(soundEvent, SoundSource.MASTER, volume, pitch, SoundsClient.RANDOM, false, 0, SoundInstance.Attenuation.LINEAR, pos.x, pos.y, pos.z, true));
+        var attenuation = SoundInstance.Attenuation.LINEAR;
+        if (LoaderUtils.isModInstalled("sound_physics_perfected") && Minecraft.getInstance().player != null) {
+            attenuation = SoundInstance.Attenuation.NONE;  // Disable Attenuation when using SPP
+        }
+        this.playSound(new SimpleSoundInstance(soundEvent, SoundSource.MASTER, volume, pitch, SoundsClient.RANDOM, false, 0, attenuation, pos.x, pos.y, pos.z, true));
     }
 
     public @Nullable SimpleSoundInstance getSoundInstance() {

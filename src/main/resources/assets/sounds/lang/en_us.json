@@ -145,5 +145,8 @@
 	"sounds.config.option.hideSoundsButtonInSoundMenu": "Hide Button In Sound Mixer Menu",
 	"sounds.config.option.description.hideSoundsButtonInSoundMenu": "Should Sounds hide the 'Sounds' button, that opens the config screen, from the vanilla sound mixer screen?",
 	"sounds.config.option.enableVerboseSoundTypeLogging": "Enable Verbose Sound Type Logging",
-	"sounds.config.option.description.enableVerboseSoundTypeLogging": "Should Sounds log verbose information about the block sound types in the console? This is useful for debugging purposes."
+	"sounds.config.option.description.enableVerboseSoundTypeLogging": "Should Sounds log verbose information about the block sound types in the console? This is useful for debugging purposes.",
+
+    "sounds.subtitle.sword_swoosh": "Sword swings"
+
 }

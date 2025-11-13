@@ -1,36 +1,28 @@
 pluginManagement {
     repositories {
-        gradlePluginPortal()
+        mavenLocal()
         mavenCentral()
-
-        // Loom platform
-        maven("https://maven.fabricmc.net/")
-
-        // MDG platform
-        maven("https://maven.neoforged.net/releases/")
-
-        // Stonecutter
-        maven("https://maven.kikugie.dev/releases")
-        maven("https://maven.kikugie.dev/snapshots")
+        gradlePluginPortal()
+        maven("https://maven.fabricmc.net/") { name = "Fabric" }
+        maven("https://maven.neoforged.net/releases/") { name = "NeoForged" }
+        maven("https://maven.kikugie.dev/snapshots") { name = "KikuGie" }
+        maven("https://maven.kikugie.dev/releases") { name = "KikuGie Releases" }
+        maven("https://maven.parchmentmc.org") { name = "ParchmentMC" }
     }
 }
 
 plugins {
-    id("dev.kikugie.stonecutter") version "0.6+"
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
+    id("dev.kikugie.stonecutter") version "0.7.10"
 }
 
 stonecutter {
-    kotlinController = true
-    centralScript = "build.gradle.kts"
-
     create(rootProject) {
-        fun mc(mcVersion: String, name: String = mcVersion, loaders: List<String>) =
-            loaders.forEach { vers("$name-$it", mcVersion) }
+        fun match(version: String, vararg loaders: String) = loaders
+            .forEach { vers("$version-$it", version).buildscript = "build.$it.gradle.kts" }
 
-        mc("1.21.1", loaders = listOf("fabric", "neoforge"))
+        match("1.21.1", "fabric", "neoforge")
 
         vcsVersion = "1.21.1-fabric"
     }
 }
-
-rootProject.name = "Sounds"

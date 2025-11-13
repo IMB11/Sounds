@@ -34,7 +34,7 @@ jobs:
       - name: Build JARs
         uses: Wandalen/wretry.action@master
         with:
-          command: "gradle chiseledBuild"
+          command: "gradle build"
           attempt_limit: 3
 
       - name: Upload Built JARs

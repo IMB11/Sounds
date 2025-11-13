@@ -18,7 +18,7 @@ tasks.named<ProcessResources>("processResources") {
         this["mod_license"] = "ARR"
         this["target_yacl"] = "*"
         this["target_mru"] = prop("deps.mru")
-        this["target_loader"] = "0.17.2"
+        this["target_fabricloader"] = "0.17.2"
     }
 
     filesMatching(listOf("fabric.mod.json", "META-INF/neoforge.mods.toml", "META-INF/mods.toml")) {

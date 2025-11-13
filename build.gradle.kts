@@ -148,6 +148,9 @@ dependencies {
     modstitchModCompileOnly("maven.modrinth:trashslot:${property("compile.trashslot")}")
 
     modstitchModImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-${loader}").productionMod()
+
+    modstitchModCompileOnly("maven.modrinth:amendments:${property("compile.amendments")}")
+
 }
 
 sourceSets {

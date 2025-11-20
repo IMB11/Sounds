@@ -12,11 +12,11 @@ import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 
@@ -63,8 +63,8 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
     }
 
     @Override
-    public ResourceLocation getIcon() {
-        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/world_sounds.png");
+    public Identifier getIcon() {
+        return Identifier.fromNamespaceAndPath("sounds", "textures/gui/world_sounds.png");
     }
 
     @Override
@@ -104,8 +104,8 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
                         .controller(opt -> DropdownStringControllerBuilder.create(opt)
                                 .allowEmptyValue(false)
                                 .values(BuiltInRegistries.BLOCK.registryKeySet().stream()
-                                        .map(ResourceKey::location)
-                                        .map(ResourceLocation::toString).toList()))
+                                        .map(ResourceKey::identifier)
+                                        .map(Identifier::toString).toList()))
                         .initial("minecraft:grass_block")
                         .build()
                 )

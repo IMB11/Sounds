@@ -9,7 +9,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,7 +24,7 @@ public abstract class SoundDefinitionProvider<T> extends FabricCodecDataProvider
         this.registry = registry;
     }
 
-    public SoundDefinition.Builder<T> create(ResourceLocation event) {
+    public SoundDefinition.Builder<T> create(Identifier event) {
         return new SoundDefinition.Builder<T>(event, this.registry);
     }
 
@@ -33,19 +33,19 @@ public abstract class SoundDefinitionProvider<T> extends FabricCodecDataProvider
     }
 
     public SoundDefinition.Builder<T> create(Holder<SoundEvent> event) {
-        return this.create(event.unwrapKey().get().location());
+        return this.create(event.unwrapKey().get().identifier());
     }
 
     @Override
-    protected void configure(BiConsumer<ResourceLocation, SoundDefinition<T>> provider, HolderLookup.Provider lookup) {
-        accept((s, tSoundDefinition) -> provider.accept(ResourceLocation.parse(s), tSoundDefinition.build()));
+    protected void configure(BiConsumer<Identifier, SoundDefinition<T>> provider, HolderLookup.Provider lookup) {
+        accept((s, tSoundDefinition) -> provider.accept(Identifier.parse(s), tSoundDefinition.build()));
     }
 
     public abstract void accept(BiConsumer<String, SoundDefinition.Builder<T>> provider);
 
     @Override
     public @NotNull String getName() {
-        return "SoundDefinition[" + this.registry.key().location() + "]Provider";
+        return "SoundDefinition[" + this.registry.key().identifier() + "]Provider";
     }
 }
 /*?}*/

@@ -16,9 +16,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class SoundsClient {
     public static final RandomSource RANDOM = RandomSource.create();
@@ -29,8 +29,8 @@ public class SoundsClient {
             "Unable to gather supporters."
     };
 
-    public static ResourceLocation id(String id) {
-        return ResourceLocation.fromNamespaceAndPath("sounds", id);
+    public static Identifier id(String id) {
+        return Identifier.fromNamespaceAndPath("sounds", id);
     }
 
     public static void init() {

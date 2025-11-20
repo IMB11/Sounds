@@ -11,7 +11,7 @@ import dev.imb11.sounds.dynamic.TagPairHelper;
 import dev.imb11.sounds.util.BlockAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -31,7 +31,7 @@ public abstract class BlockSoundMixin implements BlockAccessor {
     private boolean sounds$hasFetched = false;
 
     @Override
-    public void sounds$prepareTagPair(ResourceLocation value) {
+    public void sounds$prepareTagPair(Identifier value) {
         try {
             if(Minecraft.getInstance() == null) return;
             if(((Object) this) instanceof LiquidBlock) {

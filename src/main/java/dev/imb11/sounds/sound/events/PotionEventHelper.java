@@ -10,29 +10,29 @@ import java.util.concurrent.atomic.AtomicReference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 
 public class PotionEventHelper {
-    private final AtomicReference<Map<ResourceLocation, MobEffectInstance>> previousEffects = new AtomicReference<>(null);
+    private final AtomicReference<Map<Identifier, MobEffectInstance>> previousEffects = new AtomicReference<>(null);
 
     public void listenForEffectChanges(ClientLevel clientWorld) {
         Minecraft client = Minecraft.getInstance();
 
         if (client.player == null) return;
 
-        Map<ResourceLocation, MobEffectInstance> currentEffects = new HashMap<>();
+        Map<Identifier, MobEffectInstance> currentEffects = new HashMap<>();
         client.player.getActiveEffects().forEach(effectInstance -> {
             MobEffect effect = effectInstance.getEffect().value();
             currentEffects.put(BuiltInRegistries.MOB_EFFECT.getKey(effect), effectInstance);
         });
 
         if (previousEffects.get() != null) {
-            Map<ResourceLocation, MobEffectInstance> removedEffects = new HashMap<>(previousEffects.get());
+            Map<Identifier, MobEffectInstance> removedEffects = new HashMap<>(previousEffects.get());
             removedEffects.keySet().removeAll(currentEffects.keySet());
 
-            for (ResourceLocation effectId : removedEffects.keySet()) {
+            for (Identifier effectId : removedEffects.keySet()) {
                 MobEffect statusEffect = BuiltInRegistries.MOB_EFFECT.getValue(effectId);
 
                 if (statusEffect == null) continue;
@@ -44,10 +44,10 @@ public class PotionEventHelper {
                 }
             }
 
-            Map<ResourceLocation, MobEffectInstance> addedEffects = new HashMap<>(currentEffects);
+            Map<Identifier, MobEffectInstance> addedEffects = new HashMap<>(currentEffects);
             addedEffects.keySet().removeAll(previousEffects.get().keySet());
 
-            for (ResourceLocation effectId : addedEffects.keySet()) {
+            for (Identifier effectId : addedEffects.keySet()) {
                 MobEffect statusEffect = BuiltInRegistries.MOB_EFFECT.getValue(effectId);
 
                 if (statusEffect == null) continue;

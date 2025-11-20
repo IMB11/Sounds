@@ -10,18 +10,18 @@ import dev.imb11.mru.RegistryUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
 
 public class SoundDefinition<T> {
-    private final ResourceLocation soundEvent;
+    private final Identifier soundEvent;
     private final TagList<T> keys;
     private final Optional<Float> volume;
     private final Optional<Float> pitch;
 
-    protected SoundDefinition(ResourceLocation soundEvent, TagList<T> keys, Optional<Float> volume, Optional<Float> pitch) {
+    protected SoundDefinition(Identifier soundEvent, TagList<T> keys, Optional<Float> volume, Optional<Float> pitch) {
         this.soundEvent = soundEvent;
         this.keys = keys;
         this.volume = volume;
@@ -30,14 +30,14 @@ public class SoundDefinition<T> {
 
     public static <T> Codec<SoundDefinition<T>> getCodec(ResourceKey<? extends Registry<T>> registryKey) {
         return RecordCodecBuilder.create(builder -> builder.group(
-                ResourceLocation.CODEC.fieldOf("soundEvent").forGetter(i -> i.soundEvent),
+                Identifier.CODEC.fieldOf("soundEvent").forGetter(i -> i.soundEvent),
                 TagList.getCodec(registryKey).fieldOf("keys").forGetter(SoundDefinition<T>::getKeys),
                 ExtraCodecs.POSITIVE_FLOAT.optionalFieldOf("volume").forGetter(SoundDefinition<T>::getVolume),
                 ExtraCodecs.POSITIVE_FLOAT.optionalFieldOf("pitch").forGetter(SoundDefinition<T>::getPitch)
         ).apply(builder, SoundDefinition<T>::new));
     }
 
-    public ResourceLocation getSoundEvent() {
+    public Identifier getSoundEvent() {
         return this.soundEvent;
     }
 
@@ -54,13 +54,13 @@ public class SoundDefinition<T> {
     }
 
     public static class Builder<T> {
-        private final ResourceLocation soundEvent;
+        private final Identifier soundEvent;
         private final TagList<T> keys = new TagList<>(new ArrayList<>());
         private final Registry<T> registry;
         private Optional<Float> volume = Optional.empty();
         private Optional<Float> pitch = Optional.empty();
 
-        public Builder(ResourceLocation soundEvent, Registry<T> registry) {
+        public Builder(Identifier soundEvent, Registry<T> registry) {
             this.soundEvent = soundEvent;
             this.registry = registry;
         }

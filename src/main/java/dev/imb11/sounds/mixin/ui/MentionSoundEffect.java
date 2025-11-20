@@ -26,8 +26,8 @@ public class MentionSoundEffect {
     @Unique
     private float sounds$cooldownPeriod = 0f;
 
-    @Inject(method = "render", at = @At("HEAD"))
-    public void $cooldown_period(GuiGraphics context, int currentTick, int mouseX, int mouseY, boolean focused, CallbackInfo ci) {
+    @Inject(method = "render(Lnet/minecraft/client/gui/components/ChatComponent$ChatGraphicsAccess;IIZ)V", at = @At("HEAD"))
+    public void $cooldown_period(ChatComponent.ChatGraphicsAccess chatGraphicsAccess, int i, int j, boolean bl, CallbackInfo ci) {
         if (sounds$cooldownPeriod > 0) {
             sounds$cooldownPeriod -= this.minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(true);
         }

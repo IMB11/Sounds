@@ -20,7 +20,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet.Named;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
@@ -38,7 +38,7 @@ public class SoundsReloadListener extends SimplePreparableReloadListener<Void> {
         // Load tag pairs
         TagPairHelper.LOADED_TAG_PAIRS.clear();
 
-        for (ResourceLocation id : manager.listResources("sounds/blocks", path -> path.getPath().endsWith(".json")).keySet()) {
+        for (Identifier id : manager.listResources("sounds/blocks", path -> path.getPath().endsWith(".json")).keySet()) {
             try {
                 var resource = manager.getResource(id).orElseThrow();
                 var inputStream = resource.open();
@@ -62,7 +62,7 @@ public class SoundsReloadListener extends SimplePreparableReloadListener<Void> {
         DynamicSoundHelper.loadDirectories.forEach((directory, codec) -> {
             ArrayList<SoundDefinition<?>> resultList = (ArrayList<SoundDefinition<?>>) DynamicSoundHelper.loadedDefinitions.get(directory);
 
-            for (ResourceLocation id : manager.listResources("sounds/" + directory, path -> path.getPath().endsWith(".json")).keySet()) {
+            for (Identifier id : manager.listResources("sounds/" + directory, path -> path.getPath().endsWith(".json")).keySet()) {
                 try {
                     var resource = manager.getResource(id).orElseThrow();
                     var inputStream = resource.open();
@@ -101,7 +101,7 @@ public class SoundsReloadListener extends SimplePreparableReloadListener<Void> {
             for (Either<ResourceKey<Item>, TagKey<Item>> registryKeyTagKeyEither : definitionCast.getKeys().getInternalList()) {
                 if (registryKeyTagKeyEither.left().isPresent()) {
                     var key = registryKeyTagKeyEither.left().get();
-                    var entry = BuiltInRegistries.ITEM.getValue(key.location());
+                    var entry = BuiltInRegistries.ITEM.getValue(key.identifier());
 
                     itemsWithLoadedDefinitions.add(entry);
                 } else if (registryKeyTagKeyEither.right().isPresent()) {

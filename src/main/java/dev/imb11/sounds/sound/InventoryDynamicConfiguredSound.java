@@ -7,14 +7,14 @@ import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
 import java.util.HashMap;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.ItemStack;
 
 public class InventoryDynamicConfiguredSound extends DynamicConfiguredSound<ItemStack, ItemStackSoundContext> {
     private static HashMap<String, Long> itemTypeCooldownMap = new HashMap<>();
 
-    public InventoryDynamicConfiguredSound(String id, ResourceLocation soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
+    public InventoryDynamicConfiguredSound(String id, Identifier soundEvent, boolean enabled, float pitch, float volume, boolean enableDynamicSounds) {
         super(id, soundEvent, enabled, pitch, volume, enableDynamicSounds);
     }
 

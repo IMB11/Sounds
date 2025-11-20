@@ -1,6 +1,5 @@
 package dev.imb11.sounds.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -8,26 +7,22 @@ import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
-
-import static org.lwjgl.opengl.GL20.*;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 public class ImageButtonWidget extends AbstractWidget {
     float durationHovered = 0f;
-    private final ResourceLocation imageLocation;
+    private final Identifier imageLocation;
     private final Consumer<ImageButtonWidget> onPress;
     private static final int ICON_SIZE = 32; // Fixed icon size
     private static final int ICON_TEXT_SPACING = 5;
 
-    public ImageButtonWidget(int x, int y, int width, int height, Component message, ResourceLocation imageLocation, Consumer<ImageButtonWidget> clickEvent) {
+    public ImageButtonWidget(int x, int y, int width, int height, Component message, Identifier imageLocation, Consumer<ImageButtonWidget> clickEvent) {
         super(x, y, width, height, message);
         this.imageLocation = imageLocation;
         this.onPress = clickEvent;
@@ -134,10 +129,10 @@ public class ImageButtonWidget extends AbstractWidget {
             }
         }
 
-        context.submitOutline(getX(), getY(), width, height, 0x1FFFFFFF);
+        context.renderOutline(getX(), getY(), width, height, 0x1FFFFFFF);
     }
 
-    private static void renderTexture(GuiGraphics drawContext, ResourceLocation texture, int x, int y, int textureWidth, int textureHeight) {
+    private static void renderTexture(GuiGraphics drawContext, Identifier texture, int x, int y, int textureWidth, int textureHeight) {
         drawContext.blit(RenderPipelines.GUI_TEXTURED, texture, x, y, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
     }
 

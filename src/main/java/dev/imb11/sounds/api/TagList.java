@@ -8,7 +8,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 
 public class TagList<T> {
@@ -42,7 +42,7 @@ public class TagList<T> {
             } else if (o1.right().isPresent() && o2.left().isPresent()) {
                 return 1;
             } else if (o1.left().isPresent() && o2.left().isPresent()) {
-                return o1.left().get().location().compareTo(o2.left().get().location());
+                return o1.left().get().identifier().compareTo(o2.left().get().identifier());
             } else {
                 return o1.right().get().location().compareTo(o2.right().get().location());
             }
@@ -57,12 +57,12 @@ public class TagList<T> {
 
                 assert registry != null;
                 var entry = registry.getKey(value);
-                if (either.left().get().location().equals(entry)) {
+                if (either.left().get().identifier().equals(entry)) {
                     return true;
                 }
             } else if (either.right().isPresent()) {
                 TagKey<T> tagKey = either.right().get();
-                Registry<T> registry = (Registry<T>) BuiltInRegistries.REGISTRY.getValue(tagKey.registry().location());
+                Registry<T> registry = (Registry<T>) BuiltInRegistries.REGISTRY.getValue(tagKey.registry().identifier());
                 assert registry != null;
                 var entry = registry.wrapAsHolder(value);
                 if (entry.is(tagKey)) {

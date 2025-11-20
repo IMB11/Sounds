@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import dev.imb11.sounds.util.MixinStatics;
 import net.minecraft.client.resources.sounds.SoundEventRegistration;
 import net.minecraft.client.sounds.SoundManager;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,9 +23,9 @@ public class SoundManagerMixin {
 
     @Inject(
             method = "prepare(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Lnet/minecraft/client/sounds/SoundManager$Preparations;",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/sounds/SoundManager$Preparations;handleRegistration(Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/client/resources/sounds/SoundEventRegistration;)V")
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/sounds/SoundManager$Preparations;handleRegistration(Lnet/minecraft/resources/Identifier;Lnet/minecraft/client/resources/sounds/SoundEventRegistration;)V")
     )
     public void $sounds_capture_soundsjson(ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfoReturnable<?> cir, @Local(ordinal = 0) String namespace, @Local Map.Entry<String, SoundEventRegistration> entry) {
-        MixinStatics.FOUND_SOUND_EVENTS.add(ResourceLocation.fromNamespaceAndPath(namespace, entry.getKey()));
+        MixinStatics.FOUND_SOUND_EVENTS.add(Identifier.fromNamespaceAndPath(namespace, entry.getKey()));
     }
 }

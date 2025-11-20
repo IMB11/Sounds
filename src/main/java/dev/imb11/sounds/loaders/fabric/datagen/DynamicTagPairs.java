@@ -164,7 +164,7 @@ public class DynamicTagPairs extends TagPairProvider {
                 .group(1.0F, 1.0F, CustomSounds.BLOCK_GLASS_BREAK.get(), CustomSounds.BLOCK_GLASS_STEP.get(), CustomSounds.BLOCK_GLASS_PLACE.get(), SoundEvents.GLASS_HIT, SoundEvents.GLASS_FALL);
 
         for (ResourceKey<Block> block : BuiltInRegistries.BLOCK.registryKeySet().stream().toList()) {
-            if (block.location().getPath().contains("glass")) {
+            if (block.identifier().getPath().contains("glass")) {
                 //? if <1.21.2 {
                 /*var val = BuiltInRegistries.BLOCK.get(block);
                 *///?} else {

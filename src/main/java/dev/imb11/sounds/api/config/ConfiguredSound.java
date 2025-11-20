@@ -26,28 +26,28 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 
 public class ConfiguredSound {
     public static final Codec<ConfiguredSound> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.STRING.fieldOf("id").forGetter(ConfiguredSound::getId),
-                    ResourceLocation.CODEC.fieldOf("soundEvent").forGetter(sound -> sound.soundEvent),
+                    Identifier.CODEC.fieldOf("soundEvent").forGetter(sound -> sound.soundEvent),
                     Codec.BOOL.fieldOf("shouldPlay").forGetter(ConfiguredSound::shouldPlay),
                     Codec.FLOAT.fieldOf("pitch").forGetter(ConfiguredSound::getPitch),
                     Codec.FLOAT.fieldOf("volume").forGetter(ConfiguredSound::getVolume)
             ).apply(instance, ConfiguredSound::new));
     public final String id;
     public boolean enabled;
-    public ResourceLocation soundEvent;
+    public Identifier soundEvent;
     public float pitch = 1f;
     public float volume = 1f;
     private float _pendingPitch = 1f;
     private float _pendingVolume = 1f;
-    private ResourceLocation _pendingSoundEvent;
+    private Identifier _pendingSoundEvent;
 
-    public ConfiguredSound(String id, ResourceLocation soundEvent, boolean enabled, float pitch, float volume) {
+    public ConfiguredSound(String id, Identifier soundEvent, boolean enabled, float pitch, float volume) {
         this.enabled = enabled;
         this.soundEvent = soundEvent;
         this.pitch = pitch;
@@ -62,7 +62,7 @@ public class ConfiguredSound {
     }
 
     public ConfiguredSound(String id, Holder.Reference<SoundEvent> soundEvent, boolean enabled, float pitch, float volume) {
-        this(id, soundEvent.key().location(), enabled, pitch, volume);
+        this(id, soundEvent.key().identifier(), enabled, pitch, volume);
     }
 
     public ConfiguredSound(String id, SoundEvent soundEvent, boolean enabled, float pitch, float volume) {
@@ -101,12 +101,12 @@ public class ConfiguredSound {
                 .description(OptionDescription.createBuilder()
                         .text(Component.translatable("sounds.config.event.description")).build())
                 .binding(defaults.soundEvent.toString(), () -> this.soundEvent.toString(), (val) ->
-                        this.soundEvent = ResourceLocation.parse(val))
-                .listener((opt, val) -> this._pendingSoundEvent = ResourceLocation.parse(val))
+                        this.soundEvent = Identifier.parse(val))
+                .listener((opt, val) -> this._pendingSoundEvent = Identifier.parse(val))
                 .controller(opt -> DropdownStringControllerBuilder.create(opt)
                         .allowAnyValue(false)
                         .allowEmptyValue(false)
-                        .values(MixinStatics.FOUND_SOUND_EVENTS.stream().map(ResourceLocation::toString).toList()))
+                        .values(MixinStatics.FOUND_SOUND_EVENTS.stream().map(Identifier::toString).toList()))
                 .build();
 
         return new ArrayList<>(List.of(volumeOpt, pitchOpt, soundEventOpt));
@@ -154,7 +154,7 @@ public class ConfiguredSound {
                 .build();
     }
 
-    public final SoundEvent fetchSoundEvent(ResourceLocation location) {
+    public final SoundEvent fetchSoundEvent(Identifier location) {
         return RegistryUtils.getSoundEventRegistry(Minecraft.getInstance().level).apply(location);
     }
 
@@ -200,7 +200,7 @@ public class ConfiguredSound {
         }
     }
 
-    private void playSound(ResourceLocation soundEvent, float pitch, float volume) {
+    private void playSound(Identifier soundEvent, float pitch, float volume) {
         var pos = Vec3.ZERO;
         var attenuation = SoundInstance.Attenuation.LINEAR;
         if (LoaderUtils.isModInstalled("sound_physics_perfected") && Minecraft.getInstance().player != null) {
@@ -237,7 +237,7 @@ public class ConfiguredSound {
         return enabled;
     }
 
-    public ResourceLocation getSoundEvent() {
+    public Identifier getSoundEvent() {
         return this.soundEvent;
     }
 

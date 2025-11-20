@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricCodecDataProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
@@ -18,8 +18,8 @@ public abstract class TagPairProvider extends FabricCodecDataProvider<TagPair> {
     }
 
     @Override
-    protected void configure(BiConsumer<ResourceLocation, TagPair> provider, HolderLookup.Provider lookup) {
-        accept((s, tTagPair) -> provider.accept(ResourceLocation.parse(s), tTagPair.build()));
+    protected void configure(BiConsumer<Identifier, TagPair> provider, HolderLookup.Provider lookup) {
+        accept((s, tTagPair) -> provider.accept(Identifier.parse(s), tTagPair.build()));
     }
 
     public abstract void accept(BiConsumer<String, TagPair.Builder> provider);

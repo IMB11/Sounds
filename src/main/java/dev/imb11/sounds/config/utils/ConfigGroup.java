@@ -16,7 +16,7 @@ import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public abstract class ConfigGroup<T extends ConfigGroup> {
     private ConfigClassHandler<?> handler;
@@ -34,7 +34,7 @@ public abstract class ConfigGroup<T extends ConfigGroup> {
         if(handler == null) {
             handler = ConfigClassHandler
                     .createBuilder(clazz)
-                    .id(ResourceLocation.fromNamespaceAndPath("sounds", getID()))
+                    .id(Identifier.fromNamespaceAndPath("sounds", getID()))
                     .serializer(config -> {
                         var builder = GsonConfigSerializerBuilder
                                 .create(config)
@@ -68,7 +68,7 @@ public abstract class ConfigGroup<T extends ConfigGroup> {
 
     public abstract YetAnotherConfigLib getYACL();
 
-    public abstract ResourceLocation getIcon();
+    public abstract Identifier getIcon();
 
     public abstract Component getName();
 

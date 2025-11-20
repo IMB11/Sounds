@@ -9,7 +9,7 @@ import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -299,7 +299,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
 
         provider.accept("smithing_templates", create(SoundEvents.IRON_GOLEM_STEP)
                 .addKey(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)
-                .addKey(TagKey.create(Registries.ITEM, ResourceLocation.parse("trim_templates"))));
+                .addKey(TagKey.create(Registries.ITEM, Identifier.parse("trim_templates"))));
 
         provider.accept("filled_buckets", create(SoundEvents.BUCKET_FILL)
                 .addKey(ConventionalItemTags.WATER_BUCKETS)

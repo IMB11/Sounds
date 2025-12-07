@@ -66,6 +66,19 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.STONE_SHOVEL)
                 .addKey(Items.STONE_SWORD));
 
+
+        provider.accept("copper_equipment", create(SoundEvents.ARMOR_EQUIP_COPPER)
+                .addKey(Items.COPPER_AXE)
+                .addKey(Items.COPPER_HOE)
+                .addKey(Items.COPPER_PICKAXE)
+                .addKey(Items.COPPER_SHOVEL)
+                .addKey(Items.COPPER_SWORD)
+                .addKey(Items.COPPER_HORSE_ARMOR)
+                .addKey(Items.COPPER_HELMET)
+                .addKey(Items.COPPER_CHESTPLATE)
+                .addKey(Items.COPPER_LEGGINGS)
+                .addKey(Items.COPPER_BOOTS));
+
         provider.accept("chainmail_equipment", create(SoundEvents.ARMOR_EQUIP_CHAIN)
                 .addKey(Items.CHAINMAIL_HELMET)
                 .addKey(Items.CHAINMAIL_CHESTPLATE)
@@ -117,6 +130,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.NETHERITE_PICKAXE)
                 .addKey(Items.NETHERITE_SHOVEL)
                 .addKey(Items.NETHERITE_SWORD)
+//                .addKey(Items.NETHERITE_HORSE_ARMOR)
                 .addKey(Items.MACE)
                 .addKey(Items.NETHERITE_HELMET)
                 .addKey(Items.NETHERITE_CHESTPLATE)

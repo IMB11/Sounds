@@ -1,0 +1,15 @@
+{
+  "keys": [
+    "minecraft:copper_axe",
+    "minecraft:copper_boots",
+    "minecraft:copper_chestplate",
+    "minecraft:copper_helmet",
+    "minecraft:copper_hoe",
+    "minecraft:copper_horse_armor",
+    "minecraft:copper_leggings",
+    "minecraft:copper_pickaxe",
+    "minecraft:copper_shovel",
+    "minecraft:copper_sword"
+  ],
+  "soundEvent": "minecraft:item.armor.equip_copper"
+}

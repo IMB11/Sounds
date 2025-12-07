@@ -7,6 +7,7 @@ import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.context.ItemStackSoundContext;
+import dev.imb11.sounds.util.MixinStatics;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,5 +25,12 @@ public abstract class EmiSoundEffects {
         if (!cir.getReturnValue()) return;
         ItemStack item = stack.getStack().getEmiStacks().get(0).getItemStack();
         SoundsConfig.get(UISoundsConfig.class).itemClickSoundEffect.playDynamicSound(item, ItemStackSoundContext.of(DynamicSoundHelper.BlockSoundType.PLACE));
+    }
+
+    @Inject(method = "keyPressed", at = @At("RETURN"), remap = false)
+    private static void $item_picked_up(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
+        if (MixinStatics.isNotSpecialKey(keyCode)) {
+            SoundsConfig.get(UISoundsConfig.class).inventoryTypingSoundEffect.playSound();
+        }
     }
 }

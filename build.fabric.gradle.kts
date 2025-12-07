@@ -52,18 +52,60 @@ stonecutter {
 
 repositories {
     mavenLocal()
-    maven("https://mvn.devos.one/snapshots/")
-    maven("https://maven.wispforest.io")
-    maven("https://maven.imb11.dev/releases")
-    maven("https://maven.neoforged.net/releases/")
-    maven("https://maven.isxander.dev/releases")
-    maven("https://oss.sonatype.org/content/repositories/snapshots")
-    maven("https://maven.quiltmc.org/repository/release")
-    maven("https://maven.shedaniel.me/")
-    maven("https://maven.terraformersmc.com/releases")
-    maven("https://maven.isxander.dev/releases")
-    maven("https://thedarkcolour.github.io/KotlinForForge/")
-    maven("https://api.modrinth.com/maven")
+    maven ( "https://maven.minecraftforge.net" ) {
+        name = "Minecraft Forge"
+    }
+    maven {
+        name = "shedaniel (Cloth Config)"
+        url = uri("https://maven.shedaniel.me/")
+        content {
+            includeGroupAndSubgroups("me.shedaniel")
+        }
+    }
+    maven {
+        name = "Terraformers (Mod Menu)"
+        url = uri("https://maven.terraformersmc.com/releases/")
+        content {
+            includeGroupAndSubgroups("com.terraformersmc")
+            includeGroupAndSubgroups("dev.emi")
+        }
+    }
+    maven {
+        name = "Wisp Forest Maven"
+        url = uri("https://maven.wispforest.io/releases/")
+        content {
+            includeGroupAndSubgroups("io.wispforest")
+        }
+    }
+    maven {
+        name = "Modrinth"
+        url = uri("https://api.modrinth.com/maven")
+        content {
+            includeGroupAndSubgroups("maven.modrinth")
+        }
+    }
+    maven {
+        name = "Parchment Mappings"
+        url = uri("https://maven.parchmentmc.org")
+        content {
+            includeGroupAndSubgroups("org.parchmentmc")
+        }
+    }
+    maven {
+        name = "Xander Maven"
+        url = uri("https://maven.isxander.dev/releases")
+        content {
+            includeGroupAndSubgroups("dev.isxander")
+            includeGroupAndSubgroups("org.quiltmc.parsers")
+        }
+    }
+    maven {
+        name = "IMB11 Maven"
+        url = uri("https://maven.imb11.dev/releases")
+        content {
+            includeGroupAndSubgroups("dev.imb11")
+        }
+    }
 }
 
 dependencies {

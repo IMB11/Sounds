@@ -12,8 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Pseudo
-@Mixin(value = EditBox.class, remap = false)
+@Mixin(value = EditBox.class)
 public abstract class EditBoxSoundEffects extends AbstractWidget {
 
     public EditBoxSoundEffects(int i, int j, int k, int l, Component component) {
@@ -21,7 +20,7 @@ public abstract class EditBoxSoundEffects extends AbstractWidget {
     }
 
     @Inject(method = "keyPressed", at = @At("RETURN"))
-    private void $item_picked_up(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
+    private void $editBoxSounds(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
         if (this.isActive() && this.isFocused() && MixinStatics.isNotSpecialKey(keyCode)) {
             SoundsConfig.get(UISoundsConfig.class).inventoryTypingSoundEffect.playSound();
         }

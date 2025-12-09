@@ -20,7 +20,7 @@ public abstract class EditBoxSoundEffects extends AbstractWidget {
         super(i, j, k, l, component);
     }
 
-    @Inject(method = "keyPressed", at = @At("RETURN"), remap = false)
+    @Inject(method = "keyPressed", at = @At("RETURN"))
     private void $item_picked_up(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
         if (this.isActive() && this.isFocused() && MixinStatics.isNotSpecialKey(keyCode)) {
             SoundsConfig.get(UISoundsConfig.class).inventoryTypingSoundEffect.playSound();

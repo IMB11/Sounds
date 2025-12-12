@@ -54,7 +54,7 @@ public class SoundsReloadListener extends SimplePreparableReloadListener<Void> {
             }
         }
 
-        TagPairHelper.buildCache();
+//        TagPairHelper.buildCache();
     }
 
     private static void handleDynamicSounds(ResourceManager manager) {

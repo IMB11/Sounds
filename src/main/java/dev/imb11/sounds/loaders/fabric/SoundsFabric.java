@@ -3,8 +3,10 @@ package dev.imb11.sounds.loaders.fabric;
 
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.dynamic.SoundsReloadListener;
+import dev.imb11.sounds.dynamic.TagPairHelper;
 import dev.imb11.sounds.sound.events.PotionEventHelper;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.reloader.ResourceReloaderKeys;
@@ -20,6 +22,7 @@ public class SoundsFabric implements ClientModInitializer {
         SoundsClient.init();
 
         ClientTickEvents.START_WORLD_TICK.register(potionEventHelper::listenForEffectChanges);
+        ClientWorldEvents.AFTER_CLIENT_WORLD_CHANGE.register((minecraft, level) -> TagPairHelper.buildCache());
     }
 }
 //?}

@@ -23,6 +23,7 @@ public class TagPairHelper {
     }
 
     public static void buildCache() {
+        SoundsClient.LOGGER.info("Building tag cache.");
         BLOCK_CACHE.clear();
         for (var entry : LOADED_TAG_PAIRS.entrySet()) {
             var id = entry.getKey();

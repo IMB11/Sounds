@@ -4,11 +4,13 @@
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.dynamic.SoundsReloadListener;
+import dev.imb11.sounds.dynamic.TagPairHelper;
 import dev.imb11.sounds.gui.SoundsConfigScreen;
 import dev.imb11.sounds.sound.CustomSounds;
 import dev.imb11.sounds.sound.events.PotionEventHelper;
 import dev.imb11.sounds.util.ConfigSetters;
 import net.minecraft.client.Minecraft;
+import net.minecraft.server.level.ServerLevel;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -16,8 +18,12 @@ import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.ModLifecycleEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.event.level.LevelEvent;
+import net.neoforged.neoforge.event.server.ServerLifecycleEvent;
 
 @Mod(value = "sounds", dist = Dist.CLIENT)
 public class SoundsNeoForge {
@@ -37,13 +43,10 @@ public class SoundsNeoForge {
             potionEventHelper.listenForEffectChanges(Minecraft.getInstance().level);
         }
 
-        //? if >=1.21.5 {
-        /^@SubscribeEvent
-        private static void setupClientEvent(FMLClientSetupEvent event) {
-            SoundsConfig.loadAll();
-            ConfigSetters.init();
+        @SubscribeEvent
+        private static void setupClientEvent(RecipesUpdatedEvent event) {
+           TagPairHelper.buildCache();
         }
-        ^///?}
 
         @SubscribeEvent
         //? if <=1.21.3 {

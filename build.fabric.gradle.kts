@@ -35,19 +35,13 @@ jsonlang {
 }
 
 repositories {
-    mavenLocal()
-    maven("https://mvn.devos.one/snapshots/")
     maven {
-        name = "Wisp Forest Maven"
-        url = uri("https://maven.wispforest.io/releases/")
+        name = "IMB11"
+        url = uri("https://maven.imb11.dev/releases")
         content {
-            includeGroupAndSubgroups("io.wispforest")
+            includeGroupAndSubgroups("dev.imb11")
         }
     }
-    maven("https://maven.imb11.dev/releases")
-    maven("https://maven.neoforged.net/releases/")
-    maven("https://oss.sonatype.org/content/repositories/snapshots")
-    maven("https://maven.quiltmc.org/repository/release")
     maven {
         name = "shedaniel (Cloth Config)"
         url = uri("https://maven.shedaniel.me/")
@@ -122,6 +116,10 @@ tasks {
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
         dependsOn("build")
     }
+}
+
+tasks.named("processResources") {
+    dependsOn(":${stonecutter.current.project}:stonecutterGenerate")
 }
 
 java {

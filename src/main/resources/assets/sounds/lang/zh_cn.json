@@ -1,6 +1,6 @@
 {
 	"sounds.incompatability.title": "检测到不兼容模组",
-	"sounds.incompatability.message": "检测到 §lQualitySounds§r 与 §lSounds§r 均被安装。\n\n§l请删除 QualitySounds，因为 Sounds 已涵盖该模组所有的声音与功能。\n\n同时安装这两个模组将造成 Mixin 冲突，将导致声音重复及其他潜在的问题及崩溃。§r\n\n§lSounds§r 拥有 QualitySounds 所提供的全部功能，且支持更多的自定义选项。§r\n\n使用 §lSounds§r，您将可以修改即使有特殊方块声音的放置、摔落、破坏和行走声音，包括 QualitySounds 并不拥有的修改音调与音量功能。",
+	"sounds.incompatability.message": "检测到 §lQualitySounds§r 与 §lSounds§r 均被安装。\n\n§l请删除 QualitySounds，因为 Sounds 已涵盖该模组所有的声音与功能。\n\n同时安装这两个模组将造成 Mixin 冲突，将导致声音重复及其他潜在的问题及崩溃。§r\n\n§lSounds§r 拥有 QualitySounds 所提供的全部功能，且支持更多的自定义选项。§r\n\n使用 §lSounds§r，您将可以修改即使有特殊方块声音的放置、摔落、破坏和行走声音，包括 QualitySounds 并不拥有的修改音调与音量功能。\n",
 	"sounds.config.static": "Sounds",
 	"sounds.config.title": "Sounds 配置",
 
@@ -44,6 +44,8 @@
 	"sounds.config.world.actions": "行为",
 	"sounds.config.option.enableEnderpearlVariety": "随机末影珍珠声音",
 	"sounds.config.option.description.enableEnderpearlVariety": "是否随机播放末影珍珠投掷时的声音并使其与紫颂果传送声音更相似？",
+	"sounds.config.swordSwoosh.option": "剑挥砍",
+	"sounds.config.swordSwoosh.option.description": "使用剑进行攻击时播放的声音。",
 	"sounds.config.frostWalker.option": "冰霜行者结冰",
 	"sounds.config.frostWalker.option.description": "冰霜行者附魔使水结冰时播放的声音。",
 	"sounds.config.leadSnapping.option": "栓绳断裂",
@@ -54,6 +56,8 @@
 	"sounds.config.plantPotFill.option.description": "向花盆中放置任意植物时播放的声音。",
 	"sounds.config.cakeEat.option": "食用蛋糕",
 	"sounds.config.cakeEat.option.description": "食用蛋糕时播放的声音。蛋糕是个谎言，但声音不是！",
+	"sounds.config.iceStress.option": "冰受压",
+	"sounds.config.iceStress.option.description": "在冰上跳跃时播放的声音。源自在 WinterJam 2024 所制作的 Icebreak 模组。",
 
 	"sounds.config.world.mobs": "生物",
 	"sounds.config.babyChickenChirp.option": "小鸡叫",
@@ -62,16 +66,18 @@
 	"sounds.config.wolfHowling.option.description": "满月时狼将发出狼嚎……小心！",
 
 	"sounds.config.world.blocks": "方块",
-	"sounds.config.world.blocks.description": "方块声音现在通过资源包进行管理。\n\n详情请点击下方链接查看 Sounds Wiki。",
+	"sounds.config.world.blocks.description": "方块声音现已通过资源包进行管理。\n\n欲了解更多信息，点击下方 Sounds Wiki 链接以查看。",
 	"sounds.config.option.disableBlocksEntirely": "禁用全部方块声音修改",
 	"sounds.config.option.description.disableBlocksEntirely": "这将禁用由资源包修改的全部方块声音。 对想使用默认方块声音的人很有帮助。",
+	"sounds.config.option.ignoredBlocks": "忽略方块",
+	"sounds.config.option.description.ignoredBlocks": "列表中的方块将不会应用任何声音定义，即使拥有被应用的声音标签。",
 
 	"sounds.config.ui": "UI 声音",
 
 	"sounds.config.ui.interface": "界面",
 	"sounds.config.option.ignoreEmptyHotbarSlots": "忽略空槽位",
 	"sounds.config.option.description.ignoreEmptyHotbarSlots": "播放声音时是否忽略空的快捷栏槽？\n\n注意：由于 Mojank 的奇怪物品掉落执行机制，这并不包括快捷栏丢弃物品声音。为此您需要关闭“忽略空槽位”。",
-	"sounds.config.inventoryOpen.option": "物品栏打开",
+	"sounds.config.inventoryOpen.option": "打开物品栏",
 	"sounds.config.inventoryOpen.option.description": "打开任意拥有物品栏界面时播放的声音，例如附魔台界面。",
 	"sounds.config.inventoryScroll.option": "物品栏滚动",
 	"sounds.config.inventoryScroll.option.description": "使用物品栏内滚动条时播放的声音。",
@@ -88,7 +94,7 @@
 	"sounds.config.option.ignoreEmptyInventorySlots": "忽略空槽位",
 	"sounds.config.option.description.ignoreEmptyInventorySlots": "播放声音时是否忽略空的快捷栏槽？\n\n注意：由于 Mojank 的奇怪物品掉落执行机制，这包括快捷栏丢弃物品声音。",
 	"sounds.config.option.enableItemSoundCooldown": "启用物品声音冷却",
-	"sounds.config.option.description.enableItemSoundCooldown": "是否对物品声音启用冷却？如果启用，声音仅会在冷却周期内播放一次。",
+	"sounds.config.option.description.enableItemSoundCooldown": "是否对物品声音启用冷却？如果启用，在冷却周期内所有声音仅会播放一次。",
 	"sounds.config.option.itemSoundCooldown": "物品声音冷却",
 	"sounds.config.option.description.itemSoundCooldown": "对物品声音的冷却周期（秒）。",
 	"sounds.config.itemCopy.option": "物品复制",
@@ -118,21 +124,29 @@
 
 	"sounds.config.chat.cooldown": "冷却",
 	"sounds.config.option.enableChatSoundCooldown": "启用冷却",
-	"sounds.config.option.description.enableChatSoundCooldown": "是否对聊天信息声音启用冷却？如果启用，所有声音仅会在冷却周期内播放一次。对聊天输入声音无效。",
+	"sounds.config.option.description.enableChatSoundCooldown": "是否对聊天信息声音启用冷却？如果启用，在冷却周期内所有声音仅会播放一次。对聊天输入声音无效。",
 	"sounds.config.option.chatSoundCooldown": "冷却周期",
 	"sounds.config.option.description.chatSoundCooldown": "对聊天信息声音的冷却周期（秒）。对聊天输入声音无效。",
 
 	"sounds.config.events": "事件声音",
 
 	"sounds.config.events.statusEffects": "状态效果",
-	"sounds.config.option.ignoreSilencedStatusEffects": "忽略隐藏状态效果",
+	"sounds.config.option.ignoreSilencedStatusEffects": "忽略隐藏的状态效果",
 	"sounds.config.option.description.ignoreSilencedStatusEffects": "播放声音时是否忽略隐藏（无 HUD 图标）的状态效果？",
-	"sounds.config.positiveStatusEffectGain.option": "正面状态效果获得",
+	"sounds.config.positiveStatusEffectGain.option": "获得正面状态效果",
 	"sounds.config.positiveStatusEffectGain.option.description": "获得正面状态效果时播放的声音。",
-	"sounds.config.positiveStatusEffectLose.option": "正面状态效果失去",
+	"sounds.config.positiveStatusEffectLose.option": "失去正面状态效果",
 	"sounds.config.positiveStatusEffectLose.option.description": "失去正面状态效果时播放的声音。",
-	"sounds.config.negativeStatusEffectGain.option": "负面状态效果获得",
+	"sounds.config.negativeStatusEffectGain.option": "获得负面状态效果",
 	"sounds.config.negativeStatusEffectGain.option.description": "获得负面状态效果时播放的声音。",
-	"sounds.config.negativeStatusEffectLose.option": "负面状态效果失去",
-	"sounds.config.negativeStatusEffectLose.option.description": "失去负面状态效果时播放的声音。"
+	"sounds.config.negativeStatusEffectLose.option": "失去负面状态效果",
+	"sounds.config.negativeStatusEffectLose.option.description": "失去负面状态效果时播放的声音。",
+	"sounds.config.mod": "特定模组选项",
+	"sounds.config.option.hideSoundsButtonInSoundMenu": "在音乐和声音选项中隐藏按钮",
+	"sounds.config.option.description.hideSoundsButtonInSoundMenu": "是否要隐藏在音乐和声音选项中用于打开模组配置的按钮？",
+	"sounds.config.option.enableVerboseSoundTypeLogging": "启用详细声音类型日志",
+	"sounds.config.option.description.enableVerboseSoundTypeLogging": "是否在控制台输出详细的方块声音类型信息？这对调试很有帮助。",
+
+	"sounds.subtitle.sword_swoosh": "挥砍"
+
 }

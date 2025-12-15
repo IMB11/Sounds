@@ -88,7 +88,11 @@ repositories {
 }
 
 neoForge {
-    version = property("deps.neoforge") as String
+    enable {
+        version = property("deps.neoforge") as String
+        // Disable recompilation if the "CI" environment variable is set to true. It is automatically set by GitHub Actions.
+        isDisableRecompilation = System.getenv("CI") == "true"
+    }
     validateAccessTransformers = true
 
     if (hasProperty("deps.parchment")) parchment {

@@ -71,6 +71,27 @@ repositories {
             includeGroupAndSubgroups("maven.modrinth")
         }
     }
+    maven {
+        name = "Parchment Mappings"
+        url = uri("https://maven.parchmentmc.org")
+        content {
+            includeGroupAndSubgroups("org.parchmentmc")
+        }
+    }
+    maven {
+        name = "Xander Maven"
+        url = uri("https://maven.isxander.dev/releases")
+        content {
+            includeGroupAndSubgroups("org.quiltmc.parsers")
+        }
+    }
+    maven {
+        name = "IMB11 Maven"
+        url = uri("https://maven.imb11.dev/releases")
+        content {
+            includeGroupAndSubgroups("dev.imb11")
+        }
+    }
     mavenCentral()
 }
 

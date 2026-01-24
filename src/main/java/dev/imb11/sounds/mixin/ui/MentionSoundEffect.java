@@ -1,11 +1,11 @@
 package dev.imb11.sounds.mixin.ui;
 
 import dev.imb11.mru.LoaderUtils;
+import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.config.ChatSoundsConfig;
 import dev.imb11.sounds.config.SoundsConfig;
 import net.minecraft.client.GuiMessageTag;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MessageSignature;
@@ -16,6 +16,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.regex.PatternSyntaxException;
 
 @Mixin(ChatComponent.class)
 public class MentionSoundEffect {
@@ -52,7 +54,14 @@ public class MentionSoundEffect {
         regex.deleteCharAt(regex.length() - 1);
         regex.append(").*");
 
-        boolean isMention = messageString.matches(regex.toString());
+        boolean isMention;
+        try {
+            isMention = messageString.matches(regex.toString());
+        } catch (PatternSyntaxException e) {
+            SoundsClient.LOGGER.error("Invalid mention expression", e);
+            isMention = false;
+        }
+
 
         if (SoundsConfig.get(ChatSoundsConfig.class).ignoreSystemChats) {
             if (indicator == GuiMessageTag.system() || indicator == GuiMessageTag.chatError()) {

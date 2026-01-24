@@ -37,7 +37,7 @@ public class SwordSwingSoundEffect {
         long currentTime = System.currentTimeMillis();
         var entity =  (LivingEntity) (Object) this;
         if (!entity.level().isClientSide()) return;
-        if (entity instanceof LocalPlayer localPlayer && localPlayer.equals(Minecraft.getInstance().player)) {
+        if (entity instanceof LocalPlayer localPlayer && Minecraft.getInstance().player != null && localPlayer.getUUID().equals(Minecraft.getInstance().player.getUUID())) {
             if (entity.getItemInHand(interactionHand).is(ItemTags.SWORDS) && (currentTime - lastPlayed > COOLDOWN)) {
                 this.sounds$currentSwordSwooshSound = SoundsConfig.get(WorldSoundsConfig.class).swordSwooshSoundEffect.getSoundInstance();
                 if (this.sounds$currentSwordSwooshSound != null) {

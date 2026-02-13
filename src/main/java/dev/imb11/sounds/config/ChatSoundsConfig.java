@@ -21,8 +21,6 @@ import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<ChatSoundsConfig> {
     // == MESSAGING SOUNDS == //
     @SerialEntry
-    public final ConfiguredSound typingSoundEffect = new ConfiguredSound("typing", SoundEvents.NOTE_BLOCK_HAT, true, 1.6f, 0.4f);
-    @SerialEntry
     public final ConfiguredSound messageSoundEffect = new ConfiguredSound("message", SoundEvents.NOTE_BLOCK_HAT, true, 2.0f, 0.8f);
     @SerialEntry
     public final ConfiguredSound mentionSoundEffect = new ConfiguredSound("mention", SoundEvents.NOTE_BLOCK_CHIME, true, 1.8f, 0.9f);
@@ -79,7 +77,6 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
         builder.category(ConfigCategory.createBuilder()
                 .name(Component.translatable("sounds.config.chat.messaging"))
                 .option(HELPER.get("ignoreSystemChats", defaults.ignoreSystemChats, () -> config.ignoreSystemChats, v -> config.ignoreSystemChats = v))
-                .group(config.typingSoundEffect.getOptionGroup(defaults.typingSoundEffect))
                 .group(config.messageSoundEffect.getOptionGroup(defaults.messageSoundEffect))
                 .group(config.mentionSoundEffect.getOptionGroup(defaults.mentionSoundEffect))
                 .option(mentionKeywordsOption)

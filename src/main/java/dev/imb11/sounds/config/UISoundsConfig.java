@@ -7,10 +7,7 @@ import dev.imb11.sounds.sound.HotbarDynamicConfiguredSound;
 import dev.imb11.sounds.sound.InventoryDynamicConfiguredSound;
 import dev.imb11.sounds.sound.context.ScreenHandlerSoundContext;
 import dev.isxander.yacl3.api.ConfigCategory;
-import dev.isxander.yacl3.api.Option;
-import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
-import dev.isxander.yacl3.api.controller.FloatFieldControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -31,7 +28,7 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
     @SerialEntry
     public final ConfiguredSound inventoryScrollSoundEffect = new ConfiguredSound("inventoryScroll", SoundEvents.NOTE_BLOCK_HAT, true, 1.8f, 0.2f);
     @SerialEntry
-    public final ConfiguredSound inventoryTypingSoundEffect = new ConfiguredSound("inventoryTyping", SoundEvents.NOTE_BLOCK_HAT, true, 1.6f, 0.4f);
+    public final ConfiguredSound typingSoundEffect = new ConfiguredSound("typing", SoundEvents.NOTE_BLOCK_HAT, true, 1.6f, 0.4f);
     /// == ITEM MANAGEMENT == ///
     @SerialEntry
     public boolean ignoreEmptyInventorySlots = false;
@@ -89,7 +86,7 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
                 .group(config.inventoryOpenSoundEffect.getOptionGroup(defaults.inventoryOpenSoundEffect))
                 .group(config.inventoryCloseSoundEffect.getOptionGroup(defaults.inventoryCloseSoundEffect))
                 .group(config.inventoryScrollSoundEffect.getOptionGroup(defaults.inventoryScrollSoundEffect))
-                .group(config.inventoryTypingSoundEffect.getOptionGroup(defaults.inventoryTypingSoundEffect))
+                .group(config.typingSoundEffect.getOptionGroup(defaults.typingSoundEffect))
                 .build());
         builder.category(ConfigCategory.createBuilder()
                 .name(Component.translatable("sounds.config.ui.item_management"))

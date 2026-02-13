@@ -45,7 +45,7 @@ public abstract class CreativeInventorySoundEffects extends net.minecraft.client
 
     @Inject(method = "refreshSearchResults", at = @At("HEAD"), cancellable = false)
     public void $inventory_typing_sound_effect(CallbackInfo ci) {
-        SoundsConfig.get(UISoundsConfig.class).inventoryTypingSoundEffect.playSound();
+        SoundsConfig.get(UISoundsConfig.class).typingSoundEffect.playSound();
     }
 
     @Inject(method = "slotClicked", at = @At("HEAD"), cancellable = false)

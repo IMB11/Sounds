@@ -8,7 +8,6 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -23,7 +22,7 @@ public abstract class EditBoxSoundEffects extends AbstractWidget {
     @Inject(method = "keyPressed", at = @At("RETURN"))
     private void $editBoxSounds(KeyEvent keyEvent, CallbackInfoReturnable<Boolean> cir) {
         if (this.isActive() && this.isFocused() && MixinStatics.isNotSpecialKey(keyEvent.key())) {
-            SoundsConfig.get(UISoundsConfig.class).inventoryTypingSoundEffect.playSound();
+            SoundsConfig.get(UISoundsConfig.class).typingSoundEffect.playSound();
         }
     }
 }

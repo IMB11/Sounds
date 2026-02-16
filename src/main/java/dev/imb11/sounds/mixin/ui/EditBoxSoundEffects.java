@@ -19,8 +19,8 @@ public abstract class EditBoxSoundEffects extends AbstractWidget {
     }
 
     @Inject(method = "keyPressed", at = @At("RETURN"))
-    private void $editBoxSounds(KeyEvent keyEvent, CallbackInfoReturnable<Boolean> cir) {
-        if (this.isActive() && this.isFocused() && MixinStatics.isNotSpecialKey(keyEvent.key())) {
+    private void $editBoxSounds(int i, int j, int k, CallbackInfoReturnable<Boolean> cir) {
+        if (this.isActive() && this.isFocused() && MixinStatics.isNotSpecialKey(i)) {
             SoundsConfig.get(UISoundsConfig.class).typingSoundEffect.playSound();
         }
     }

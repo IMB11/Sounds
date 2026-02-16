@@ -6,6 +6,7 @@ import dev.imb11.sounds.config.ChatSoundsConfig;
 import dev.imb11.sounds.config.SoundsConfig;
 import net.minecraft.client.GuiMessageTag;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MessageSignature;
@@ -29,7 +30,7 @@ public class MentionSoundEffect {
     private float sounds$cooldownPeriod = 0f;
 
     @Inject(method = "render", at = @At("HEAD"))
-    public void $cooldown_period(GuiGraphics context, int currentTick, int mouseX, int mouseY, boolean focused, CallbackInfo ci) {
+    public void $cooldown_period(GuiGraphics guiGraphics, int i, int j, int k, boolean bl, CallbackInfo ci) {
         if (sounds$cooldownPeriod > 0) {
             sounds$cooldownPeriod -= this.minecraft.getTimer().getGameTimeDeltaPartialTick(true);
         }

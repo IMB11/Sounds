@@ -71,24 +71,10 @@ repositories {
         }
     }
     maven {
-        name = "Wisp Forest Maven"
-        url = uri("https://maven.wispforest.io/releases/")
-        content {
-            includeGroupAndSubgroups("io.wispforest")
-        }
-    }
-    maven {
         name = "Modrinth"
         url = uri("https://api.modrinth.com/maven")
         content {
             includeGroupAndSubgroups("maven.modrinth")
-        }
-    }
-    maven {
-        name = "Parchment Mappings"
-        url = uri("https://maven.parchmentmc.org")
-        content {
-            includeGroupAndSubgroups("org.parchmentmc")
         }
     }
     maven {
@@ -128,6 +114,10 @@ fabricApi {
         outputDirectory = file("$rootDir/src/main/generated")
         client = true
     }
+}
+
+tasks.named("processResources") {
+    dependsOn(":${stonecutter.current.project}:stonecutterGenerate")
 }
 
 tasks {

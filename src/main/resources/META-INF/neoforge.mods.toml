@@ -4,7 +4,6 @@ issueTrackerURL="https://github.com/IMB11/Sounds/issues"
 displayURL="http://IMB11.dev/"
 logoFile="assets/sounds/icon.png"
 authors="IMB11, cassiancc"
-clientSideOnly = true
 license="${mod_license}"
 
 [[mods]]
@@ -46,3 +45,7 @@ type = "optional"
 versionRange = " "
 ordering = "NONE"
 side = "CLIENT"
+
+
+[[mixins]]
+config="sounds.mixins.json"

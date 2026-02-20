@@ -1,3 +1,4 @@
+/*
 package dev.imb11.sounds.mixin.compat;
 
 import dev.imb11.sounds.config.SoundsConfig;
@@ -23,7 +24,7 @@ public class AmendmentsDirectionalCakeMixin {
     private static long lastPlayed = 0;
     @Unique
     private static final long COOLDOWN = 150;
-    @Inject(method = "eatSliceD", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;awardStat(Lnet/minecraft/resources/ResourceLocation;)V"))
+    @Inject(method = "eatSliceD", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;awardStat(Lnet/minecraft/resources/Identifier;)V"))
     private static void eatCake(LevelAccessor level, BlockPos pos, BlockState state, Player player, Direction dir, CallbackInfoReturnable<InteractionResult> cir) {
         // nom nom nom
         long currentTime = System.currentTimeMillis();
@@ -33,3 +34,4 @@ public class AmendmentsDirectionalCakeMixin {
         }
     }
 }
+*/

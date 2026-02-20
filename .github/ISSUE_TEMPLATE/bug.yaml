@@ -51,8 +51,8 @@ body:
       label: Game Version
       description: What version of the game are you running?
       options:
-        - "1.21.1"
         - "1.21.11"
+        - "26.1"
     validations:
       required: true
 

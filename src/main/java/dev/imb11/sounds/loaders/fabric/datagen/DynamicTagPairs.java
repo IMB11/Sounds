@@ -5,7 +5,7 @@ import dev.imb11.sounds.api.config.TagPair;
 import dev.imb11.sounds.api.config.TagPair.Builder;
 import dev.imb11.sounds.api.datagen.TagPairProvider;
 import dev.imb11.sounds.sound.CustomSounds;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class DynamicTagPairs extends TagPairProvider {
-    protected DynamicTagPairs(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    protected DynamicTagPairs(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(dataOutput, registriesFuture);
     }
 

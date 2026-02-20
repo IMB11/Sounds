@@ -3,7 +3,7 @@ package dev.imb11.sounds.loaders.fabric.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.datagen.SoundDefinitionProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
@@ -13,7 +13,7 @@ import java.util.function.BiConsumer;
 
 public class DynamicScreenSounds extends SoundDefinitionProvider<MenuType<?>> {
 
-    protected DynamicScreenSounds(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    protected DynamicScreenSounds(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(dataOutput, registriesFuture, "screens", BuiltInRegistries.MENU);
     }
 

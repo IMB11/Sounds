@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.entity.vehicle.minecart.MinecartFurnace;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +22,7 @@ public abstract class FurnaceMinecartEntityMixin extends AbstractMinecart {
     }
 
     @Inject(method = "interact", at = @At(value = "TAIL"))
-    public void $furnace_minecart_fuel_sound_effect(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
+    public void $furnace_minecart_fuel_sound_effect(Player player, InteractionHand hand, Vec3 location, CallbackInfoReturnable<InteractionResult> cir) {
         if (this.level().isClientSide()) {
             SoundsConfig.get(WorldSoundsConfig.class).furnaceMinecartFuelSoundEffect.playSound();
         }

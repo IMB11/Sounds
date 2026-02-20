@@ -4,7 +4,7 @@ package dev.imb11.sounds.loaders.fabric.datagen;
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.datagen.SoundDefinitionProvider;
 import dev.imb11.sounds.sound.CustomSounds;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -13,6 +13,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.animal.cow.CowSoundVariants;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
@@ -21,7 +22,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
-    protected DynamicItemSounds(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    protected DynamicItemSounds(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(dataOutput, registriesFuture, "items", BuiltInRegistries.ITEM);
     }
 
@@ -319,7 +320,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(ConventionalItemTags.WATER_BUCKETS)
                 .addKey(ConventionalItemTags.ENTITY_WATER_BUCKETS));
 
-        provider.accept("moo", create(SoundEvents.COW_AMBIENT)
+        provider.accept("moo", create(SoundEvents.COW_SOUNDS.get(CowSoundVariants.SoundSet.CLASSIC).ambientSound())
                 .addKey(Items.MILK_BUCKET));
 
         provider.accept("banner_templates", create(SoundEvents.WOOL_HIT)

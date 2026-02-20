@@ -37,7 +37,7 @@
     "fabricloader": ">=${target_fabricloader}",
     "yet_another_config_lib_v3": "${target_yacl}",
     "fabric-api": "*",
-    "mru": "~${target_mru}",
+    "mru": "${target_mru}",
     "minecraft": "${target_minecraft}"
   },
   "recommends": {

@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class FrostWalkerSoundsMixin {
     @Inject(method = "onPlace", at = @At("TAIL"))
     private void $frost_walker_freeze_sound_effect(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
-    if (world.random.nextInt(4) == 0) {
+    if (world.getRandom().nextInt(4) == 0) {
             SoundsConfig.get(WorldSoundsConfig.class).frostWalkerSoundEffect.playSound();
         }
     }

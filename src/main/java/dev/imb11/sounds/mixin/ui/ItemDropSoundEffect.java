@@ -8,7 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import dev.imb11.sounds.config.SoundsConfig;
@@ -60,7 +60,7 @@ public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
         if(sounds$dropSoundCooldownTime > System.currentTimeMillis()) return;
         sounds$dropSoundCooldownTime = System.currentTimeMillis() + ((long) SoundsConfig.get(UISoundsConfig.class).itemSoundCooldown);
 
-        if (MixinStatics.previousAction == ClickType.QUICK_MOVE) {
+        if (MixinStatics.previousAction == ContainerInput.QUICK_MOVE) {
             MixinStatics.previousAction = null;
             return;
         }

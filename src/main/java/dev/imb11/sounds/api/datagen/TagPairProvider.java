@@ -3,7 +3,7 @@ package dev.imb11.sounds.api.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.config.TagPair;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricCodecDataProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -13,7 +13,7 @@ import java.util.function.BiConsumer;
 
 public abstract class TagPairProvider extends FabricCodecDataProvider<TagPair> {
 
-    protected TagPairProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    protected TagPairProvider(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(dataOutput, registriesFuture, PackOutput.Target.RESOURCE_PACK, "sounds/blocks", TagPair.CODEC);
     }
 

@@ -25,7 +25,7 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.event.level.LevelEvent;
 import net.neoforged.neoforge.event.server.ServerLifecycleEvent;
 
-@Mod(value = "sounds", dist = Dist.CLIENT)
+@Mod("sounds")
 public class SoundsNeoForge {
     private static final PotionEventHelper potionEventHelper = new PotionEventHelper();
 
@@ -43,21 +43,28 @@ public class SoundsNeoForge {
             potionEventHelper.listenForEffectChanges(Minecraft.getInstance().level);
         }
 
+        //? if >=1.21.5 {
         @SubscribeEvent
-        private static void setupClientEvent(RecipesUpdatedEvent event) {
+        private static void setupClientEvent(FMLClientSetupEvent event) {
+            SoundsConfig.loadAll();
+            ConfigSetters.init();
+        }
+        //?}
+        @SubscribeEvent
+        private static void setupTagCache(RecipesUpdatedEvent event) {
            TagPairHelper.buildCache();
         }
 
         @SubscribeEvent
         //? if <=1.21.3 {
-        private static void registerResourceReloadListeners(net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent event) {
+        /^private static void registerResourceReloadListeners(net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent event) {
             event.registerReloadListener(new SoundsReloadListener());
         }
-        //?} else {
-        /^private static void registerResourceReloadListeners(net.neoforged.neoforge.client.event.AddClientReloadListenersEvent event) {
+        ^///?} else {
+        private static void registerResourceReloadListeners(net.neoforged.neoforge.client.event.AddClientReloadListenersEvent event) {
             event.addListener(SoundsClient.id("reload"), new SoundsReloadListener());
         }
-        ^///?}
+        //?}
     }
 }
 *///?}

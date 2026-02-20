@@ -15,7 +15,7 @@ public class GreyButton extends Button {
     }
 
     @Override
-    protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+    protected void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         this.isHovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.width && mouseY < this.getY() + this.height;
 
         if (this.isHovered || this.isFocused()) {
@@ -24,7 +24,7 @@ public class GreyButton extends Button {
             durationHovered = Math.max(durationHovered - delta / 4f, 0f);
         }
 
-        float alphaScale = Mth.clampedLerp(0.9f, 0.5f, durationHovered);
+        float alphaScale = Mth.clampedLerp(0.3f, 0.75f, durationHovered);
 
         // Grey overlay for hover effect (render first, behind icon and text)
         int a = (int) (255 * alphaScale);
@@ -33,6 +33,8 @@ public class GreyButton extends Button {
         guiGraphics.fill(getX(), getY(), getX() + width, getY() + height, greyColor);
 
         int i = this.active ? 16777215 : 10526880;
-        this.renderString(guiGraphics, this.minecraft.font, i | Mth.ceil(this.alpha * 255.0F) << 24);
+        this.renderScrollingStringOverContents(guiGraphics.textRenderer(), this.getMessage(), i | Mth.ceil(this.alpha * 255.0F) << 24);
+
+        guiGraphics.renderOutline(getX(), getY(), width, height, 0x1FFFFFFF);
     }
 }

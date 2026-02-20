@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 
 @SuppressWarnings("unused")
@@ -429,7 +429,7 @@ public class CustomSounds {
     public static final Supplier<SoundEvent> BLOCK_ICE_STRESS = register("block.ice.stress");
 
     private static Supplier<SoundEvent> register(String id) {
-        ResourceLocation _id = ResourceLocation.fromNamespaceAndPath("sounds", id);
+        Identifier _id = Identifier.fromNamespaceAndPath("sounds", id);
         //? if fabric {
         var val = Registry.register(BuiltInRegistries.SOUND_EVENT, _id, SoundEvent.createVariableRangeEvent(_id));
         return () -> val;

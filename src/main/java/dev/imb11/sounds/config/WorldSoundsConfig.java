@@ -12,11 +12,11 @@ import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 
@@ -35,11 +35,11 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
 
     /// == ACTIONS == ///
     @SerialEntry
-    public ConfiguredSound swordSwooshSoundEffect = new ConfiguredSound("swordSwoosh", ResourceLocation.fromNamespaceAndPath("sounds", "item.sword.swoosh"), true, 1.3F, 0.3F);
+    public ConfiguredSound swordSwooshSoundEffect = new ConfiguredSound("swordSwoosh", CustomSounds.ITEM_SWORD_SWOOSH.get(), true, 1.3F, 0.3F);
     @SerialEntry
     public ConfiguredSound frostWalkerSoundEffect = new ConfiguredSound("frostWalker", SoundEvents.POWDER_SNOW_FALL, true, 2.0F, 0.5F);
     @SerialEntry
-    public ConfiguredSound leadSnappingSoundEffect = new ConfiguredSound("leadSnapping", SoundEvents.LEASH_KNOT_BREAK, true, 1.0F, 0.5F);
+    public ConfiguredSound leadSnappingSoundEffect = new ConfiguredSound("leadSnapping", SoundEvents.LEAD_BREAK, true, 1.0F, 0.5F);
     @SerialEntry
     public ConfiguredSound bowPullSoundEffect = new ConfiguredSound("bowPull", SoundEvents.CROSSBOW_LOADING_MIDDLE, true, 1.0F, 0.25F);
     @SerialEntry
@@ -63,8 +63,8 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
     }
 
     @Override
-    public ResourceLocation getIcon() {
-        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/world_sounds.png");
+    public Identifier getIcon() {
+        return Identifier.fromNamespaceAndPath("sounds", "textures/gui/world_sounds.png");
     }
 
     @Override
@@ -104,8 +104,8 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
                         .controller(opt -> DropdownStringControllerBuilder.create(opt)
                                 .allowEmptyValue(false)
                                 .values(BuiltInRegistries.BLOCK.registryKeySet().stream()
-                                        .map(ResourceKey::location)
-                                        .map(ResourceLocation::toString).toList()))
+                                        .map(ResourceKey::identifier)
+                                        .map(Identifier::toString).toList()))
                         .initial("minecraft:grass_block")
                         .build()
                 )

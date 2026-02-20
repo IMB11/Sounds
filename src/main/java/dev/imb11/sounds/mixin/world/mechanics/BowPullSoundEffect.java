@@ -22,8 +22,8 @@ public class BowPullSoundEffect {
     public SoundInstance sounds$currentBowPullSound;
 
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;startUsingItem(Lnet/minecraft/world/InteractionHand;)V", shift = At.Shift.AFTER))
-    public void $start_bow_pull_sound(Level world, Player player, InteractionHand hand, CallbackInfoReturnable<net.minecraft.world.InteractionResultHolder<ItemStack>> cir) {
-        if (!world.isClientSide) return;
+    public void $start_bow_pull_sound(Level world, Player user, InteractionHand hand, CallbackInfoReturnable<net.minecraft.world.InteractionResult> cir) {
+        if (!world.isClientSide()) return;
         this.sounds$currentBowPullSound = SoundsConfig.get(WorldSoundsConfig.class).bowPullSoundEffect.getSoundInstance();
         if (this.sounds$currentBowPullSound != null) {
             SoundsConfig.get(WorldSoundsConfig.class).bowPullSoundEffect.playSound(this.sounds$currentBowPullSound);
@@ -31,8 +31,8 @@ public class BowPullSoundEffect {
     }
 
     @Inject(method = "releaseUsing", at = @At(value = "HEAD"))
-    public void $stop_bow_pull_sound(ItemStack stack, Level world, LivingEntity entityLiving, int timeLeft, CallbackInfo ci) {
-        if (!world.isClientSide) return;
+    public void $stop_bow_pull_sound(ItemStack stack, Level world, LivingEntity user, int remainingUseTicks, CallbackInfoReturnable<Boolean> cir) {
+        if (!world.isClientSide()) return;
         if (this.sounds$currentBowPullSound != null) {
             SoundsConfig.get(WorldSoundsConfig.class).bowPullSoundEffect.stopSound(this.sounds$currentBowPullSound);
             this.sounds$currentBowPullSound = null;

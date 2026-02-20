@@ -4,15 +4,16 @@ package dev.imb11.sounds.loaders.fabric.datagen;
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.datagen.SoundDefinitionProvider;
 import dev.imb11.sounds.sound.CustomSounds;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.animal.cow.CowSoundVariants;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
@@ -21,7 +22,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
-    protected DynamicItemSounds(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    protected DynamicItemSounds(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(dataOutput, registriesFuture, "items", BuiltInRegistries.ITEM);
     }
 
@@ -65,6 +66,19 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.STONE_PICKAXE)
                 .addKey(Items.STONE_SHOVEL)
                 .addKey(Items.STONE_SWORD));
+
+
+        provider.accept("copper_equipment", create(SoundEvents.ARMOR_EQUIP_COPPER)
+                .addKey(Items.COPPER_AXE)
+                .addKey(Items.COPPER_HOE)
+                .addKey(Items.COPPER_PICKAXE)
+                .addKey(Items.COPPER_SHOVEL)
+                .addKey(Items.COPPER_SWORD)
+                .addKey(Items.COPPER_HORSE_ARMOR)
+                .addKey(Items.COPPER_HELMET)
+                .addKey(Items.COPPER_CHESTPLATE)
+                .addKey(Items.COPPER_LEGGINGS)
+                .addKey(Items.COPPER_BOOTS));
 
         provider.accept("chainmail_equipment", create(SoundEvents.ARMOR_EQUIP_CHAIN)
                 .addKey(Items.CHAINMAIL_HELMET)
@@ -117,6 +131,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.NETHERITE_PICKAXE)
                 .addKey(Items.NETHERITE_SHOVEL)
                 .addKey(Items.NETHERITE_SWORD)
+//                .addKey(Items.NETHERITE_HORSE_ARMOR)
                 .addKey(Items.MACE)
                 .addKey(Items.NETHERITE_HELMET)
                 .addKey(Items.NETHERITE_CHESTPLATE)
@@ -299,13 +314,13 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
 
         provider.accept("smithing_templates", create(SoundEvents.IRON_GOLEM_STEP)
                 .addKey(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)
-                .addKey(TagKey.create(Registries.ITEM, ResourceLocation.parse("trim_templates"))));
+                .addKey(TagKey.create(Registries.ITEM, Identifier.parse("trim_templates"))));
 
         provider.accept("filled_buckets", create(SoundEvents.BUCKET_FILL)
                 .addKey(ConventionalItemTags.WATER_BUCKETS)
                 .addKey(ConventionalItemTags.ENTITY_WATER_BUCKETS));
 
-        provider.accept("moo", create(SoundEvents.COW_AMBIENT)
+        provider.accept("moo", create(SoundEvents.COW_SOUNDS.get(CowSoundVariants.SoundSet.CLASSIC).ambientSound())
                 .addKey(Items.MILK_BUCKET));
 
         provider.accept("banner_templates", create(SoundEvents.WOOL_HIT)

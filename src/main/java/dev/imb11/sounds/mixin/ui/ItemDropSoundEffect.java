@@ -8,7 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import dev.imb11.sounds.config.SoundsConfig;
@@ -28,11 +28,10 @@ abstract class PlayerEntityMixin extends LivingEntity {
         super(entityType, world);
     }
 
-    @Inject(method = "drop(Lnet/minecraft/world/item/ItemStack;ZZ)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("HEAD"))
+    @Inject(method = "drop", at = @At("HEAD"))
     protected void $drop_item_sound_effect(
             ItemStack stack,
             boolean throwRandomly,
-            boolean retainOwnership,
             CallbackInfoReturnable<ItemEntity> cir) {
     }
 }
@@ -61,7 +60,7 @@ public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
         if(sounds$dropSoundCooldownTime > System.currentTimeMillis()) return;
         sounds$dropSoundCooldownTime = System.currentTimeMillis() + ((long) SoundsConfig.get(UISoundsConfig.class).itemSoundCooldown);
 
-        if (MixinStatics.previousAction == ClickType.QUICK_MOVE) {
+        if (MixinStatics.previousAction == ContainerInput.QUICK_MOVE) {
             MixinStatics.previousAction = null;
             return;
         }
@@ -79,9 +78,8 @@ public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
     protected void $drop_item_sound_effect(
             ItemStack stack,
             boolean throwRandomly,
-            boolean retainOwnership,
             CallbackInfoReturnable<ItemEntity> cir) {
-        if (!this.level().isClientSide) return;
+        if (!this.level().isClientSide()) return;
         sounds$playSound(stack);
     }
 }

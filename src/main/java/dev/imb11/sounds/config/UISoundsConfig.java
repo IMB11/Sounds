@@ -10,7 +10,7 @@ import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 
@@ -49,6 +49,8 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
     public float itemSoundCooldown = 0.05f;
     @SerialEntry
     public boolean enableItemSoundCooldown = true;
+    @SerialEntry
+    public boolean enableDynamicItemSounds = true;
 
     public UISoundsConfig() {
         super(UISoundsConfig.class);
@@ -60,8 +62,8 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
     }
 
     @Override
-    public ResourceLocation getIcon() {
-        return ResourceLocation.fromNamespaceAndPath("sounds", "textures/gui/ui_sounds.png");
+    public Identifier getIcon() {
+        return Identifier.fromNamespaceAndPath("sounds", "textures/gui/ui_sounds.png");
     }
 
     @Override
@@ -90,6 +92,7 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
                 .build());
         builder.category(ConfigCategory.createBuilder()
                 .name(Component.translatable("sounds.config.ui.item_management"))
+                .option(HELPER.get("enableDynamicItemSounds", defaults.enableDynamicItemSounds, () -> config.enableDynamicItemSounds, v -> config.enableDynamicItemSounds = v))
                 .option(HELPER.get("ignoreEmptyInventorySlots", defaults.ignoreEmptyInventorySlots, () -> config.ignoreEmptyInventorySlots, v -> config.ignoreEmptyInventorySlots = v))
                 .option(HELPER.get("enableItemSoundCooldown", defaults.enableItemSoundCooldown, () -> config.enableItemSoundCooldown, v -> config.enableItemSoundCooldown = v))
                 .option(HELPER.getField("itemSoundCooldown", 0.0f, Float.MAX_VALUE, defaults.itemSoundCooldown, () -> config.itemSoundCooldown, v -> config.itemSoundCooldown = v))

@@ -5,13 +5,14 @@ import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.util.MixinStatics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = EditBox.class)
+@Mixin(EditBox.class)
 public abstract class EditBoxSoundEffects extends AbstractWidget {
 
     public EditBoxSoundEffects(int i, int j, int k, int l, Component component) {
@@ -19,8 +20,8 @@ public abstract class EditBoxSoundEffects extends AbstractWidget {
     }
 
     @Inject(method = "keyPressed", at = @At("RETURN"))
-    private void $editBoxSounds(int i, int j, int k, CallbackInfoReturnable<Boolean> cir) {
-        if (this.isActive() && this.isFocused() && MixinStatics.isNotSpecialKey(i)) {
+    private void $editBoxSounds(KeyEvent keyEvent, CallbackInfoReturnable<Boolean> cir) {
+        if (this.isActive() && this.isFocused() && MixinStatics.isNotSpecialKey(keyEvent.key())) {
             SoundsConfig.get(UISoundsConfig.class).typingSoundEffect.playSound();
         }
     }

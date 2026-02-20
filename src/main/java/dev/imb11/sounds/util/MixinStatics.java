@@ -1,8 +1,7 @@
 package dev.imb11.sounds.util;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.inventory.ClickType;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.Slot;
 import org.lwjgl.glfw.GLFW;
 
@@ -13,8 +12,8 @@ public class MixinStatics {
     public static Slot DELETE_ITEM_SLOT;
     public static boolean temporarilyDisableInventorySounds = false;
     public static boolean hasOpenedInventorioScreen = false;
-    public static final HashSet<ResourceLocation> FOUND_SOUND_EVENTS = new HashSet<>();
-    public static ClickType previousAction;
+    public static final HashSet<Identifier> FOUND_SOUND_EVENTS = new HashSet<>();
+    public static ContainerInput previousAction;
 
     public static boolean isNotSpecialKey(int keycode) {
         return switch (keycode) {

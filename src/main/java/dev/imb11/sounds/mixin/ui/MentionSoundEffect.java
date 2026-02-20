@@ -4,10 +4,10 @@ import dev.imb11.mru.LoaderUtils;
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.config.ChatSoundsConfig;
 import dev.imb11.sounds.config.SoundsConfig;
-import net.minecraft.client.GuiMessageTag;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ChatComponent;
+import net.minecraft.client.multiplayer.chat.GuiMessageSource;
+import net.minecraft.client.multiplayer.chat.GuiMessageTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MessageSignature;
 import org.spongepowered.asm.mixin.Final;
@@ -29,15 +29,15 @@ public class MentionSoundEffect {
     @Unique
     private float sounds$cooldownPeriod = 0f;
 
-    @Inject(method = "render", at = @At("HEAD"))
-    public void $cooldown_period(GuiGraphics guiGraphics, int i, int j, int k, boolean bl, CallbackInfo ci) {
+    @Inject(method = "render(Lnet/minecraft/client/gui/components/ChatComponent$ChatGraphicsAccess;IILnet/minecraft/client/gui/components/ChatComponent$DisplayMode;)V", at = @At("HEAD"))
+    public void $cooldown_period(ChatComponent.ChatGraphicsAccess graphics, int screenHeight, int ticks, ChatComponent.DisplayMode displayMode, CallbackInfo ci) {
         if (sounds$cooldownPeriod > 0) {
-            sounds$cooldownPeriod -= this.minecraft.getTimer().getGameTimeDeltaPartialTick(true);
+            sounds$cooldownPeriod -= this.minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(true);
         }
     }
 
-    @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V", at = @At("HEAD"), cancellable = false)
-    public void $mention_recieve_sound_effect(Component message, MessageSignature signatureData, GuiMessageTag indicator, CallbackInfo ci) {
+    @Inject(method = "addMessage", at = @At("HEAD"), cancellable = false)
+    public void $mention_recieve_sound_effect(Component message, MessageSignature signature, GuiMessageSource source, GuiMessageTag indicator, CallbackInfo ci) {
         if (sounds$cooldownPeriod > 0 && (SoundsConfig.get(ChatSoundsConfig.class).enableChatSoundCooldown || LoaderUtils.isModInstalled("chatpatches"))) {
             return;
         }

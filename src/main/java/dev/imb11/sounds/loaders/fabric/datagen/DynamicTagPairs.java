@@ -306,6 +306,8 @@ public class DynamicTagPairs extends TagPairProvider {
                 .addKey(Blocks.OAK_WOOD)
                 .addKey(Blocks.DARK_OAK_LOG)
                 .addKey(Blocks.DARK_OAK_WOOD)
+                .addKey(Blocks.PALE_OAK_LOG)
+                .addKey(Blocks.PALE_OAK_WOOD)
                 .group(1.0F, 1.0F, CustomSounds.BLOCK_OAK_LOG_BREAK.get(), CustomSounds.BLOCK_OAK_LOG_STEP.get(), CustomSounds.BLOCK_OAK_LOG_PLACE.get(), CustomSounds.BLOCK_OAK_LOG_HIT.get(), CustomSounds.BLOCK_OAK_LOG_FALL.get()));
 
         provider.accept("obsidian", TagPair.Builder.create()

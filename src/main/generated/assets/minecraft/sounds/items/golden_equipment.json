@@ -8,8 +8,10 @@
     "minecraft:golden_hoe",
     "minecraft:golden_horse_armor",
     "minecraft:golden_leggings",
+    "minecraft:golden_nautilus_armor",
     "minecraft:golden_pickaxe",
     "minecraft:golden_shovel",
+    "minecraft:golden_spear",
     "minecraft:golden_sword"
   ],
   "soundEvent": "minecraft:item.armor.equip_gold"

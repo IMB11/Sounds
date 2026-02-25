@@ -3,5 +3,5 @@
     "minecraft:bone",
     "minecraft:bone_meal"
   ],
-  "soundEvent": "minecraft:entity.skeleton.ambient"
+  "soundEvent": "minecraft:block.bone_block.hit"
 }

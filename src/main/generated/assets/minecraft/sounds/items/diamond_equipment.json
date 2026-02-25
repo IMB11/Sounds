@@ -7,8 +7,10 @@
     "minecraft:diamond_hoe",
     "minecraft:diamond_horse_armor",
     "minecraft:diamond_leggings",
+    "minecraft:diamond_nautilus_armor",
     "minecraft:diamond_pickaxe",
     "minecraft:diamond_shovel",
+    "minecraft:diamond_spear",
     "minecraft:diamond_sword"
   ],
   "soundEvent": "minecraft:item.armor.equip_diamond"

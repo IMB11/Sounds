@@ -23,6 +23,8 @@
     "minecraft:dark_oak_log",
     "minecraft:dark_oak_wood",
     "minecraft:oak_log",
-    "minecraft:oak_wood"
+    "minecraft:oak_wood",
+    "minecraft:pale_oak_log",
+    "minecraft:pale_oak_wood"
   ]
 }

@@ -4,6 +4,7 @@
     "minecraft:stone_hoe",
     "minecraft:stone_pickaxe",
     "minecraft:stone_shovel",
+    "minecraft:stone_spear",
     "minecraft:stone_sword"
   ],
   "soundEvent": "minecraft:item.armor.equip_generic"

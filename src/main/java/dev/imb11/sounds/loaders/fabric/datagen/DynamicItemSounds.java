@@ -33,11 +33,6 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.CHIPPED_ANVIL)
                 .addKey(Items.DAMAGED_ANVIL));
 
-        provider.accept("arrows", create(SoundEvents.ARROW_HIT)
-                .addKey(ItemTags.ARROWS)
-                .setPitch(0.7f)
-                .setVolume(0.3f));
-
         provider.accept("trial_keys", create(SoundEvents.TRIAL_SPAWNER_SPAWN_ITEM_BEGIN)
                 .addKey(Items.TRIAL_KEY)
                 .addKey(Items.OMINOUS_TRIAL_KEY)
@@ -55,6 +50,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.WOODEN_PICKAXE)
                 .addKey(Items.WOODEN_SHOVEL)
                 .addKey(Items.WOODEN_SWORD)
+                .addKey(Items.WOODEN_SPEAR)
                 .addKey(Items.CARROT_ON_A_STICK)
                 .addKey(Items.STICK)
                 .addKey(Items.WARPED_FUNGUS_ON_A_STICK)
@@ -65,6 +61,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.STONE_HOE)
                 .addKey(Items.STONE_PICKAXE)
                 .addKey(Items.STONE_SHOVEL)
+                .addKey(Items.STONE_SPEAR)
                 .addKey(Items.STONE_SWORD));
 
 
@@ -73,8 +70,10 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.COPPER_HOE)
                 .addKey(Items.COPPER_PICKAXE)
                 .addKey(Items.COPPER_SHOVEL)
+                .addKey(Items.COPPER_SPEAR)
                 .addKey(Items.COPPER_SWORD)
                 .addKey(Items.COPPER_HORSE_ARMOR)
+                .addKey(Items.COPPER_NAUTILUS_ARMOR)
                 .addKey(Items.COPPER_HELMET)
                 .addKey(Items.COPPER_CHESTPLATE)
                 .addKey(Items.COPPER_LEGGINGS)
@@ -93,8 +92,10 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.IRON_HOE)
                 .addKey(Items.IRON_PICKAXE)
                 .addKey(Items.IRON_SHOVEL)
+                .addKey(Items.IRON_SPEAR)
                 .addKey(Items.IRON_SWORD)
                 .addKey(Items.IRON_HORSE_ARMOR)
+                .addKey(Items.IRON_NAUTILUS_ARMOR)
                 .addKey(Items.IRON_HELMET)
                 .addKey(Items.IRON_CHESTPLATE)
                 .addKey(Items.IRON_LEGGINGS)
@@ -105,9 +106,11 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.GOLDEN_HOE)
                 .addKey(Items.GOLDEN_PICKAXE)
                 .addKey(Items.GOLDEN_SHOVEL)
+                .addKey(Items.GOLDEN_SPEAR)
                 .addKey(Items.GOLDEN_SWORD)
                 .addKey(Items.CLOCK)
                 .addKey(Items.GOLDEN_HORSE_ARMOR)
+                .addKey(Items.GOLDEN_NAUTILUS_ARMOR)
                 .addKey(Items.GOLDEN_HELMET)
                 .addKey(Items.GOLDEN_CHESTPLATE)
                 .addKey(Items.GOLDEN_LEGGINGS)
@@ -118,8 +121,10 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.DIAMOND_HOE)
                 .addKey(Items.DIAMOND_PICKAXE)
                 .addKey(Items.DIAMOND_SHOVEL)
+                .addKey(Items.DIAMOND_SPEAR)
                 .addKey(Items.DIAMOND_SWORD)
                 .addKey(Items.DIAMOND_HORSE_ARMOR)
+                .addKey(Items.DIAMOND_NAUTILUS_ARMOR)
                 .addKey(Items.DIAMOND_HELMET)
                 .addKey(Items.DIAMOND_CHESTPLATE)
                 .addKey(Items.DIAMOND_LEGGINGS)
@@ -130,8 +135,10 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.NETHERITE_HOE)
                 .addKey(Items.NETHERITE_PICKAXE)
                 .addKey(Items.NETHERITE_SHOVEL)
+                .addKey(Items.NETHERITE_SPEAR)
                 .addKey(Items.NETHERITE_SWORD)
-//                .addKey(Items.NETHERITE_HORSE_ARMOR)
+                .addKey(Items.NETHERITE_HORSE_ARMOR)
+                .addKey(Items.NETHERITE_NAUTILUS_ARMOR)
                 .addKey(Items.MACE)
                 .addKey(Items.NETHERITE_HELMET)
                 .addKey(Items.NETHERITE_CHESTPLATE)
@@ -271,6 +278,12 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .setPitch(1.75f)
                 .setVolume(0.75f));
 
+        provider.accept("pale_oak_boat", create(SoundEvents.WOOD_HIT)
+                .addKey(Items.PALE_OAK_BOAT)
+                .addKey(Items.PALE_OAK_CHEST_BOAT)
+                .setPitch(1.75f)
+                .setVolume(0.75f));
+
         provider.accept("cherry_boat", create(SoundEvents.WOOD_HIT)
                 .addKey(Items.CHERRY_BOAT)
                 .addKey(Items.CHERRY_CHEST_BOAT)
@@ -320,9 +333,6 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(ConventionalItemTags.WATER_BUCKETS)
                 .addKey(ConventionalItemTags.ENTITY_WATER_BUCKETS));
 
-        provider.accept("moo", create(SoundEvents.COW_SOUNDS.get(CowSoundVariants.SoundSet.CLASSIC).ambientSound())
-                .addKey(Items.MILK_BUCKET));
-
         provider.accept("banner_templates", create(SoundEvents.WOOL_HIT)
                 .addKey(Items.CREEPER_BANNER_PATTERN)
                 .addKey(Items.FLOWER_BANNER_PATTERN)
@@ -355,7 +365,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
         provider.accept("sculk", create(SoundEvents.SCULK_VEIN_FALL)
                 .addKey(Items.ECHO_SHARD));
 
-        provider.accept("bones", create(SoundEvents.SKELETON_AMBIENT)
+        provider.accept("bones", create(SoundEvents.BONE_BLOCK_HIT)
                 .addKey(Items.BONE)
                 .addKey(Items.BONE_MEAL));
 

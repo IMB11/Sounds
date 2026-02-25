@@ -51,17 +51,6 @@ stonecutter {
 }
 
 repositories {
-    mavenLocal()
-    maven ( "https://maven.minecraftforge.net" ) {
-        name = "Minecraft Forge"
-    }
-    maven {
-        name = "shedaniel (Cloth Config)"
-        url = uri("https://maven.shedaniel.me/")
-        content {
-            includeGroupAndSubgroups("me.shedaniel")
-        }
-    }
     maven {
         name = "Terraformers (Mod Menu)"
         url = uri("https://maven.terraformersmc.com/releases/")

@@ -34,15 +34,11 @@ jsonlang {
 }
 
 repositories {
-    maven("https://maven.imb11.dev/releases")
-    maven("https://maven.neoforged.net/releases/")
-    maven("https://oss.sonatype.org/content/repositories/snapshots")
-    maven("https://maven.quiltmc.org/repository/release")
     maven {
-        name = "shedaniel (Cloth Config)"
-        url = uri("https://maven.shedaniel.me/")
+        name = "IMB11 Maven"
+        url = uri("https://maven.imb11.dev/releases")
         content {
-            includeGroupAndSubgroups("me.shedaniel")
+            includeGroupAndSubgroups("dev.imb11")
         }
     }
     maven {
@@ -75,7 +71,6 @@ repositories {
             includeGroupAndSubgroups("thedarkcolour")
         }
     }
-    mavenLocal()
     mavenCentral()
 }
 

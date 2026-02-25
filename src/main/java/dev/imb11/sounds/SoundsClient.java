@@ -1,8 +1,10 @@
 package dev.imb11.sounds;
 
 import dev.imb11.mru.LoaderUtils;
+import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.CustomSounds;
+import dev.imb11.sounds.util.ConfigSetters;
 import net.minecraft.util.RandomSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,5 +25,7 @@ public class SoundsClient {
     public static void init() {
         DynamicSoundHelper.initialize();
         CustomSounds.initialize();
+        SoundsConfig.loadAll();
+        ConfigSetters.init();
     }
 }

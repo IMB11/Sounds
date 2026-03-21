@@ -7,6 +7,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Optional;
+
+import net.fabricmc.fabric.api.tag.client.v1.ClientTags;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
@@ -32,7 +34,12 @@ public class TagPairHelper {
                 if(registryKeyTagKeyEither.left().isPresent()) {
                     BLOCK_CACHE.put(registryKeyTagKeyEither.left().get().identifier(), id);
                 } else if(registryKeyTagKeyEither.right().isPresent()) {
-                    var vals = BuiltInRegistries.BLOCK.get(registryKeyTagKeyEither.right().get());
+                    //? fabric {
+                    ClientTags.getOrCreateLocalTag(registryKeyTagKeyEither.right().get()).forEach(identifier -> {
+                        BLOCK_CACHE.put(identifier, id);
+                    });
+                    //?} else {
+                    /*var vals = BuiltInRegistries.BLOCK.get(registryKeyTagKeyEither.right().get());
                     if(vals.isPresent()) {
                         for (Holder<Block> block : vals.get()) {
                             BLOCK_CACHE.put(block.unwrapKey().get().identifier(), id);
@@ -40,6 +47,7 @@ public class TagPairHelper {
                     } else {
                         SoundsClient.LOGGER.warn("Failed to find block entries for tag key: " + registryKeyTagKeyEither.right().get().location());
                     }
+                    *///?}
                 }
             }
         }

@@ -68,13 +68,7 @@ public class SoundsReloadListener extends SimplePreparableReloadListener<Void> {
                     var inputStream = resource.open();
                     var reader = new JsonReader(new InputStreamReader(inputStream));
 
-                    /*? if =1.20.1 {*/
-                    /*SoundDefinition<?> result = (SoundDefinition<?>) codec.parse(JsonOps.INSTANCE, GSON.fromJson(reader, JsonObject.class)).getOrThrow(false, s -> {
-                        throw new RuntimeException(s);
-                    });
-                    *//*?} else {*/
                     SoundDefinition<?> result = (SoundDefinition<?>) codec.parse(JsonOps.INSTANCE, GSON.fromJson(reader, JsonObject.class)).result().orElseThrow();
-                    /*?}*/
 
                     resultList.add(result);
 

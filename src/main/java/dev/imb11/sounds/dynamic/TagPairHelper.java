@@ -2,6 +2,7 @@ package dev.imb11.sounds.dynamic;
 
 import com.mojang.datafixers.util.Either;
 import dev.imb11.sounds.SoundsClient;
+import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.config.TagPair;
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,11 +15,14 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 public class TagPairHelper {
     protected static HashMap<Identifier, TagPair> LOADED_TAG_PAIRS = new HashMap<>();
     protected static HashMap<Identifier, Identifier> BLOCK_CACHE = new HashMap<>();
+    public static HashMap<ResourceKey<Item>, SoundDefinition<Item>> ITEM_CACHE = new HashMap<>();
+    public static HashMap<TagKey<Item>, SoundDefinition<Item>> ITEM_TAG_CACHE = new HashMap<>();
 
     public static Collection<TagPair> getAllTagPairs() {
         return LOADED_TAG_PAIRS.values();
@@ -27,6 +31,8 @@ public class TagPairHelper {
     public static void buildCache() {
         SoundsClient.LOGGER.info("Building tag cache.");
         BLOCK_CACHE.clear();
+        ITEM_TAG_CACHE.clear();
+        ITEM_CACHE.clear();
         for (var entry : LOADED_TAG_PAIRS.entrySet()) {
             var id = entry.getKey();
             var val = entry.getValue();
@@ -50,6 +56,16 @@ public class TagPairHelper {
                     *///?}
                 }
             }
+        }
+        for (SoundDefinition<Item> definition : DynamicSoundHelper.<Item>getDefinitions("items")) {
+            definition.getKeys().getInternalList().forEach(value -> {
+                if (value.left().isPresent()) {
+                    ITEM_CACHE.put(value.left().get(), definition);
+                }
+                else if (value.right().isPresent()) {
+                    ITEM_TAG_CACHE.put(value.right().get(), definition);
+                }
+            });
         }
     }
 

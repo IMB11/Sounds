@@ -9,6 +9,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLevelEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.CommonLifecycleEvents;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.reloader.ResourceReloaderKeys;
 import net.minecraft.server.packs.PackType;
@@ -23,7 +24,7 @@ public class SoundsFabric implements ClientModInitializer {
         SoundsClient.init();
 
         ClientTickEvents.START_LEVEL_TICK.register(potionEventHelper::listenForEffectChanges);
-        ClientLevelEvents.AFTER_CLIENT_LEVEL_CHANGE.register((minecraft, level) -> TagPairHelper.buildCache());
+        CommonLifecycleEvents.TAGS_LOADED.register((registryAccess, b) -> TagPairHelper.buildCache());
     }
 }
 //?}

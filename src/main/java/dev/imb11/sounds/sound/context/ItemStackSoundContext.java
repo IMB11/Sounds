@@ -7,13 +7,16 @@ import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.mixin.accessors.BlockAccessor;
 import net.minecraft.client.resources.sounds.SoundInstance;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.RandomSource;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+
+import static dev.imb11.sounds.dynamic.TagPairHelper.ITEM_CACHE;
+import static dev.imb11.sounds.dynamic.TagPairHelper.ITEM_TAG_CACHE;
 
 public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
     private final DynamicSoundHelper.BlockSoundType blockSoundType;
@@ -33,27 +36,41 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
     @Override
     public SoundInstance handleContext(ItemStack context, Identifier fallback, float pitch, float volume) {
         if (SoundsConfig.get(UISoundsConfig.class).enableDynamicItemSounds) {
-            var item = context.getItem();
+			Item item = context.getItem();
             if (item instanceof BlockItem blockItem) {
-                var block = blockItem.getBlock();
+				Block block = blockItem.getBlock();
                 fallback = this.blockSoundType.getTransformer().apply(((BlockAccessor)block).invokeGetSoundType(block.defaultBlockState()));
             }
 
-            for (SoundDefinition<Item> definition : DynamicSoundHelper.<Item>getDefinitions("items")) {
-                if (definition.getKeys().isValid(item)) {
-                    fallback = definition.getSoundEvent();
+            ResourceKey<Item> key = item.builtInRegistryHolder().key();
+            if (ITEM_CACHE.containsKey(key)) {
+                SoundDefinition<Item> definition = ITEM_CACHE.get(key);
+                fallback = definition.getSoundEvent();
 
-                    if (definition.getPitch().isPresent()) {
-                        pitch = definition.getPitch().get();
-                    }
+                if (definition.getPitch().isPresent()) {
+                    pitch = definition.getPitch().get();
+                }
 
-                    if (definition.getVolume().isPresent()) {
-                        volume = definition.getVolume().get();
-                    }
-
-                    break;
+                if (definition.getVolume().isPresent()) {
+                    volume = definition.getVolume().get();
                 }
             }
+            else {
+				for (TagKey<Item> itemTagKey : context.tags().toList()) {
+                    if (ITEM_TAG_CACHE.containsKey(itemTagKey)) {
+                        var definition =  ITEM_TAG_CACHE.get(itemTagKey);
+                        ITEM_CACHE.put(key, definition);
+                        if (definition.getPitch().isPresent()) {
+                            pitch = definition.getPitch().get();
+                        }
+
+                        if (definition.getVolume().isPresent()) {
+                            volume = definition.getVolume().get();
+                        }
+                        break;
+                    }
+                }
+			}
         }
         return createSoundInstance(fallback, pitch, volume);
     }

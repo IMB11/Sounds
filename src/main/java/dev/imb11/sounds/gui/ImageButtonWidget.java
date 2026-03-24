@@ -1,7 +1,7 @@
 package dev.imb11.sounds.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -36,7 +36,7 @@ public class ImageButtonWidget extends AbstractWidget {
     }
 
     @Override
-    protected void renderWidget(GuiGraphics context, int mouseX, int mouseY, float delta) {
+    protected void extractWidgetRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
         this.isHovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.width && mouseY < this.getY() + this.height;
 
         if (this.isHovered || this.isFocused()) {
@@ -86,11 +86,11 @@ public class ImageButtonWidget extends AbstractWidget {
                 textY = overallStartY + ICON_SIZE + ICON_TEXT_SPACING;
                 currentTextY = textY;
                 // Re-render icon with recalculated position if needed, though in this case, position hasn't changed significantly in terms of icon rendering itself.
-                renderIcon(context, iconX, iconY);
+                extractIcon(context, iconX, iconY);
 
 
                 for (FormattedCharSequence line : wrappedText) {
-                    context.drawCenteredString(client.font, line, getX() + this.width / 2, currentTextY, 0xFFFFFFFF);
+                    context.centeredText(client.font, line, getX() + this.width / 2, currentTextY, 0xFFFFFFFF);
                     currentTextY += fontHeight;
                 }
             } else {
@@ -99,8 +99,8 @@ public class ImageButtonWidget extends AbstractWidget {
                 iconY = overallStartY;
                 iconX = getX() + (this.width - ICON_SIZE) / 2;
                 textY = overallStartY + ICON_SIZE + ICON_TEXT_SPACING;
-                renderIcon(context, iconX, iconY);
-                context.drawCenteredString(client.font, getMessage(), getX() + this.width / 2, textY, 0xFFFFFFFF);
+                extractIcon(context, iconX, iconY);
+                context.centeredText(client.font, getMessage(), getX() + this.width / 2, textY, 0xFFFFFFFF);
             }
         } else {
             // Horizontal Layout: Icon left of text
@@ -110,7 +110,7 @@ public class ImageButtonWidget extends AbstractWidget {
             iconX = startX;
             iconY = getY() + (this.height - ICON_SIZE) / 2;
 
-            renderIcon(context, iconX, iconY);
+            extractIcon(context, iconX, iconY);
 
             int textX = iconX + ICON_SIZE + ICON_TEXT_SPACING;
             int textY = getY() + (this.height - fontHeight) / 2;
@@ -121,23 +121,23 @@ public class ImageButtonWidget extends AbstractWidget {
                 int textStartY = getY() + (this.height - wrappedTextHeight) / 2;
                 int currentTextY = textStartY;
                 for (FormattedCharSequence line : wrappedText) {
-                    context.drawString(client.font, line, textX, currentTextY, 0xFFFFFFFF);
+                    context.text(client.font, line, textX, currentTextY, 0xFFFFFFFF);
                     currentTextY += fontHeight;
                 }
             } else {
-                context.drawString(client.font, getMessage(), textX, textY, 0xFFFFFFFF);
+                context.text(client.font, getMessage(), textX, textY, 0xFFFFFFFF);
             }
         }
 
-        context.renderOutline(getX(), getY(), width, height, 0x1FFFFFFF);
+        context.outline(getX(), getY(), width, height, 0x1FFFFFFF);
     }
 
-    private static void renderTexture(GuiGraphics drawContext, Identifier texture, int x, int y, int textureWidth, int textureHeight) {
+    private static void extractTexture(GuiGraphicsExtractor drawContext, Identifier texture, int x, int y, int textureWidth, int textureHeight) {
         drawContext.blit(RenderPipelines.GUI_TEXTURED, texture, x, y, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
     }
 
 
-    private void renderIcon(GuiGraphics context, int x, int y) {
+    private void extractIcon(GuiGraphicsExtractor context, int x, int y) {
         context.pose().pushMatrix();
 
         context.pose().scale(32f / 512f, 32f / 512f);

@@ -1,7 +1,7 @@
 package dev.imb11.sounds.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -15,7 +15,7 @@ public class GreyButton extends Button {
     }
 
     @Override
-    protected void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+    protected void extractContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float delta) {
         this.isHovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.width && mouseY < this.getY() + this.height;
 
         if (this.isHovered || this.isFocused()) {
@@ -33,8 +33,8 @@ public class GreyButton extends Button {
         guiGraphics.fill(getX(), getY(), getX() + width, getY() + height, greyColor);
 
         int i = this.active ? 16777215 : 10526880;
-        this.renderScrollingStringOverContents(guiGraphics.textRenderer(), this.getMessage(), i | Mth.ceil(this.alpha * 255.0F) << 24);
+        this.extractScrollingStringOverContents(guiGraphics.textRenderer(), this.getMessage(), i | Mth.ceil(this.alpha * 255.0F) << 24);
 
-        guiGraphics.renderOutline(getX(), getY(), width, height, 0x1FFFFFFF);
+        guiGraphics.outline(getX(), getY(), width, height, 0x1FFFFFFF);
     }
 }

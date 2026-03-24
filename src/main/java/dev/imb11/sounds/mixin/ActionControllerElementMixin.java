@@ -5,7 +5,7 @@ import dev.isxander.yacl3.gui.YACLScreen;
 import dev.isxander.yacl3.gui.controllers.ActionController;
 import dev.isxander.yacl3.gui.controllers.ControllerWidget;
 import dev.isxander.yacl3.gui.utils.GuiUtils;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -29,7 +29,7 @@ public abstract class ActionControllerElementMixin extends ControllerWidget<Acti
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
         if(this.control.option().name().getString().contains(Component.translatable("sounds.config.preview.name").getString().split(" ")[0])) {
             hovered = isMouseOver(mouseX, mouseY);
 
@@ -37,15 +37,15 @@ public abstract class ActionControllerElementMixin extends ControllerWidget<Acti
             Component shortenedName = Component.literal(GuiUtils.shortenString(name.getString(), textRenderer, getDimension().width() - getControlWidth() - getXPadding() - 7, "...")).setStyle(name.getStyle());
 
             drawButtonRect(graphics, getDimension().x(), getDimension().y(), getDimension().xLimit(), getDimension().yLimit(), hovered || focused, isAvailable());
-            graphics.drawString(textRenderer, shortenedName, getDimension().x() + getXPadding(), getTextY(), getValueColor(), true);
+            graphics.text(textRenderer, shortenedName, getDimension().x() + getXPadding(), getTextY(), getValueColor(), true);
 
             String valueText = "LISTEN";
-            graphics.drawString(textRenderer, valueText, getDimension().xLimit() - textRenderer.width(valueText) - getXPadding(), getTextY(), getValueColor(), true);
+            graphics.text(textRenderer, valueText, getDimension().xLimit() - textRenderer.width(valueText) - getXPadding(), getTextY(), getValueColor(), true);
             if (isHovered()) {
-                drawHoveredControl(graphics, mouseX, mouseY, delta);
+                extractHoveredControl(graphics, mouseX, mouseY, delta);
             }
         } else {
-            super.render(graphics, mouseX, mouseY, delta);
+            super.extractRenderState(graphics, mouseX, mouseY, delta);
         }
     }
 }

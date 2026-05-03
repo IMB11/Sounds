@@ -60,6 +60,14 @@ repositories {
         }
     }
     maven {
+        name = "gegy"
+        url = uri("https://maven.gegy.dev")
+        content {
+            includeGroupAndSubgroups("dev.yumi")
+            includeGroupAndSubgroups("dev.lambdaurora")
+        }
+    }
+    maven {
         name = "Modrinth"
         url = uri("https://api.modrinth.com/maven")
         content {
@@ -96,6 +104,8 @@ dependencies {
     implementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-fabric")
     implementation("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
 
+    include("dev.yumi.mc.core:yumi-mc-foundation:${property("deps.yumi_mc_foundation")}")
+    implementation("dev.yumi.mc.core:yumi-mc-foundation:${property("deps.yumi_mc_foundation")}")
 }
 
 fabricApi {

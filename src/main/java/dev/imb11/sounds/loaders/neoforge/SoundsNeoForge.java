@@ -30,9 +30,6 @@ public class SoundsNeoForge {
     private static final PotionEventHelper potionEventHelper = new PotionEventHelper();
 
     public SoundsNeoForge(IEventBus bus) {
-        SoundsClient.init();
-
-        CustomSounds.REGISTRY.register(bus);
         ModLoadingContext.get().getActiveContainer().registerExtensionPoint(IConfigScreenFactory.class, (client, parent) -> new SoundsConfigScreen(parent));
     }
 
@@ -41,12 +38,6 @@ public class SoundsNeoForge {
         @SubscribeEvent
         private static void clientTickEvent(ClientTickEvent.Pre event) {
             potionEventHelper.listenForEffectChanges(Minecraft.getInstance().level);
-        }
-
-        @SubscribeEvent
-        private static void setupClientEvent(FMLClientSetupEvent event) {
-            SoundsConfig.loadAll();
-            ConfigSetters.init();
         }
 
         @SubscribeEvent

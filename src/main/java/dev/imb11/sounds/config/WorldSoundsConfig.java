@@ -35,7 +35,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
 
     /// == ACTIONS == ///
     @SerialEntry
-    public ConfiguredSound swordSwooshSoundEffect = new ConfiguredSound("swordSwoosh", CustomSounds.ITEM_SWORD_SWOOSH.get(), true, 1.3F, 0.3F);
+    public ConfiguredSound swordSwooshSoundEffect = new ConfiguredSound("swordSwoosh", CustomSounds.ITEM_SWORD_SWOOSH, true, 1.3F, 0.3F);
     @SerialEntry
     public ConfiguredSound frostWalkerSoundEffect = new ConfiguredSound("frostWalker", SoundEvents.POWDER_SNOW_FALL, true, 2.0F, 0.5F);
     @SerialEntry

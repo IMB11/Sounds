@@ -3,10 +3,6 @@ package dev.imb11.sounds.config;
 import dev.imb11.mru.yacl.ConfigHelper;
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import java.util.HashMap;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.sounds.SoundEvent;
 
 public class SoundsConfig {
     public static final ConfigHelper HELPER = new ConfigHelper("sounds", "config");

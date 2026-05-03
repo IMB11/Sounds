@@ -21,7 +21,6 @@ public class SoundsFabric implements ClientModInitializer {
     public void onInitializeClient() {
         ResourceLoader.get(PackType.CLIENT_RESOURCES).registerReloadListener(SoundsClient.id("reload_listener"), new SoundsReloadListener());
         ResourceLoader.get(PackType.CLIENT_RESOURCES).addListenerOrdering(ResourceReloaderKeys.AFTER_VANILLA, SoundsClient.id("reload_listener"));
-        SoundsClient.init();
 
         ClientTickEvents.START_LEVEL_TICK.register(potionEventHelper::listenForEffectChanges);
         CommonLifecycleEvents.TAGS_LOADED.register((registryAccess, b) -> TagPairHelper.buildCache());

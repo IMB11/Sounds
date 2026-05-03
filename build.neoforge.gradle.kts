@@ -109,6 +109,9 @@ dependencies {
 
     implementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-neoforge")
 
+    jarJar("dev.yumi.mc.core:yumi-mc-foundation:${property("deps.yumi_mc_foundation")}")
+    implementation("dev.yumi.mc.core:yumi-mc-foundation:${property("deps.yumi_mc_foundation")}")
+
     implementation("io.github.llamalad7:mixinextras-neoforge:0.5.0")
     jarJar("io.github.llamalad7:mixinextras-neoforge:0.5.0")
 }

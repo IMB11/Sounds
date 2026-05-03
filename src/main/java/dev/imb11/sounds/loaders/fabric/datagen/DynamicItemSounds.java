@@ -248,25 +248,25 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .setPitch(1.75f)
                 .setVolume(0.75f));
 
-        provider.accept("birch_boat", create(CustomSounds.BLOCK_BIRCH_PLANKS_HIT.get())
+        provider.accept("birch_boat", create(CustomSounds.BLOCK_BIRCH_PLANKS_HIT)
                 .addKey(Items.BIRCH_BOAT)
                 .addKey(Items.BIRCH_CHEST_BOAT)
                 .setPitch(1.75f)
                 .setVolume(0.75f));
 
-        provider.accept("spruce_boat", create(CustomSounds.BLOCK_SPRUCE_PLANKS_HIT.get())
+        provider.accept("spruce_boat", create(CustomSounds.BLOCK_SPRUCE_PLANKS_HIT)
                 .addKey(Items.SPRUCE_BOAT)
                 .addKey(Items.SPRUCE_CHEST_BOAT)
                 .setPitch(1.75f)
                 .setVolume(0.75f));
 
-        provider.accept("jungle_boat", create(CustomSounds.BLOCK_JUNGLE_PLANKS_HIT.get())
+        provider.accept("jungle_boat", create(CustomSounds.BLOCK_JUNGLE_PLANKS_HIT)
                 .addKey(Items.JUNGLE_BOAT)
                 .addKey(Items.JUNGLE_CHEST_BOAT)
                 .setPitch(1.75f)
                 .setVolume(0.75f));
 
-        provider.accept("acacia_boat", create(CustomSounds.BLOCK_ACACIA_PLANKS_HIT.get())
+        provider.accept("acacia_boat", create(CustomSounds.BLOCK_ACACIA_PLANKS_HIT)
                 .addKey(Items.ACACIA_BOAT)
                 .addKey(Items.ACACIA_CHEST_BOAT)
                 .setPitch(1.75f)
@@ -290,7 +290,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .setPitch(1.75f)
                 .setVolume(0.75f));
 
-        provider.accept("mangrove_boat", create(CustomSounds.BLOCK_MANGROVE_PLANKS_HIT.get())
+        provider.accept("mangrove_boat", create(CustomSounds.BLOCK_MANGROVE_PLANKS_HIT)
                 .addKey(Items.MANGROVE_BOAT)
                 .addKey(Items.MANGROVE_CHEST_BOAT)
                 .setPitch(1.75f)

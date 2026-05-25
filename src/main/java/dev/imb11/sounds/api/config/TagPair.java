@@ -13,6 +13,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -93,6 +94,13 @@ public class TagPair {
 
         @SafeVarargs
         public final Builder addMultipleKeys(Block... keys) {
+            for (Block key : keys) {
+                addKey(key);
+            }
+            return this;
+        }
+
+        public final Builder addMultipleKeys(List<Block> keys) {
             for (Block key : keys) {
                 addKey(key);
             }

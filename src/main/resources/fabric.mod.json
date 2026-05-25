@@ -19,7 +19,8 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "dev.imb11.sounds.loaders.fabric.SoundsFabric"
+      "dev.imb11.sounds.loaders.fabric.SoundsFabric",
+      "dev.imb11.sounds.SoundsClient"
     ],
     "modmenu": [
       "dev.imb11.sounds.loaders.fabric.ModMenuCompat"
@@ -27,10 +28,7 @@
     "fabric-datagen": [
       "dev.imb11.sounds.loaders.fabric.datagen.SoundsDatagenEntrypoint"
     ],
-    "yumi:client_init": [
-      "dev.imb11.sounds.SoundsClient"
-    ],
-    "yumi:init": [
+    "main": [
       "dev.imb11.sounds.SoundsClient"
     ]
   },

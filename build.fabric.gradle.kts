@@ -102,10 +102,10 @@ dependencies {
     implementation("dev.imb11:mru:${property("deps.mru")}-fabric")
 
     implementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-fabric")
-    implementation("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
+    compileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
 
-    include("dev.yumi.mc.core:yumi-mc-foundation:${property("deps.yumi_mc_foundation")}")
-    implementation("dev.yumi.mc.core:yumi-mc-foundation:${property("deps.yumi_mc_foundation")}")
+//    include("dev.yumi.mc.core:yumi-mc-foundation:${property("deps.yumi_mc_foundation")}")
+//    implementation("dev.yumi.mc.core:yumi-mc-foundation:${property("deps.yumi_mc_foundation")}")
 }
 
 fabricApi {

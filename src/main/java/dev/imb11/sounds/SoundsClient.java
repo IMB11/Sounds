@@ -5,9 +5,8 @@ import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.sound.CustomSounds;
 import dev.imb11.sounds.util.ConfigSetters;
-import dev.yumi.mc.core.api.ModContainer;
-import dev.yumi.mc.core.api.entrypoint.ModInitializer;
-import dev.yumi.mc.core.api.entrypoint.client.ClientModInitializer;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.RandomSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,12 +25,12 @@ public class SoundsClient implements ClientModInitializer, ModInitializer {
     }
 
     @Override
-    public void onInitialize(ModContainer modContainer) {
+    public void onInitialize() {
         CustomSounds.initialize();
     }
 
     @Override
-    public void onInitializeClient(ModContainer modContainer) {
+    public void onInitializeClient() {
         DynamicSoundHelper.initialize();
         SoundsConfig.loadAll();
         ConfigSetters.init();

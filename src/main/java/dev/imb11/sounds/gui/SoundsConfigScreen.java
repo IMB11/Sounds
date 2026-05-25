@@ -27,7 +27,7 @@ public class SoundsConfigScreen extends Screen {
     @Override
     public void onClose() {
         assert this.minecraft != null;
-        this.minecraft.setScreen(this.parent);
+        this.minecraft.gui.setScreen(this.parent);
     }
 
     public float timeSinceLastSupporter = -1;
@@ -97,7 +97,7 @@ public class SoundsConfigScreen extends Screen {
         ImageButtonWidget worldSoundsButton = new ImageButtonWidget(
                 gridX + 0 * cellWidth, gridY + 0 * cellHeight, 2 * cellWidth - 6, 2 * cellHeight - 6, // -6 for padding of 3 on each side
                 worldSoundsConfig.getName(), worldSoundsConfig.getIcon(), btn -> {
-            this.minecraft.setScreen(worldSoundsConfig.getYACL().generateScreen(this));
+            this.minecraft.gui.setScreen(worldSoundsConfig.getYACL().generateScreen(this));
         });
         addRenderableWidget(worldSoundsButton);
 
@@ -105,7 +105,7 @@ public class SoundsConfigScreen extends Screen {
         ImageButtonWidget chatSoundsButton = new ImageButtonWidget(
                 gridX + 2 * cellWidth, gridY + 0 * cellHeight, 2 * cellWidth - 6, cellHeight - 6,
                 chatSoundsConfig.getName(), chatSoundsConfig.getIcon(), btn -> {
-            this.minecraft.setScreen(chatSoundsConfig.getYACL().generateScreen(this));
+            this.minecraft.gui.setScreen(chatSoundsConfig.getYACL().generateScreen(this));
         });
         addRenderableWidget(chatSoundsButton);
 
@@ -113,7 +113,7 @@ public class SoundsConfigScreen extends Screen {
         ImageButtonWidget eventSoundsButton = new ImageButtonWidget(
                 gridX + 2 * cellWidth, gridY + 1 * cellHeight, cellWidth - 6, cellHeight - 6,
                 eventSoundsConfig.getName(), eventSoundsConfig.getIcon(), btn -> {
-            this.minecraft.setScreen(eventSoundsConfig.getYACL().generateScreen(this));
+            this.minecraft.gui.setScreen(eventSoundsConfig.getYACL().generateScreen(this));
         });
         addRenderableWidget(eventSoundsButton);
 
@@ -121,7 +121,7 @@ public class SoundsConfigScreen extends Screen {
         ImageButtonWidget modConfigButton = new ImageButtonWidget(
                 gridX + 3 * cellWidth, gridY + 1 * cellHeight, cellWidth - 6, 2 * cellHeight - 6,
                 modConfig.getName(), modConfig.getIcon(), btn -> {
-            this.minecraft.setScreen(modConfig.getYACL().generateScreen(this));
+            this.minecraft.gui.setScreen(modConfig.getYACL().generateScreen(this));
         });
         addRenderableWidget(modConfigButton);
 
@@ -129,13 +129,13 @@ public class SoundsConfigScreen extends Screen {
         ImageButtonWidget uiSoundsButton = new ImageButtonWidget(
                 gridX + 0 * cellWidth, gridY + 2 * cellHeight, 3 * cellWidth - 6, cellHeight - 6,
                 uiSoundsConfig.getName(), uiSoundsConfig.getIcon(), btn -> {
-            this.minecraft.setScreen(uiSoundsConfig.getYACL().generateScreen(this));
+            this.minecraft.gui.setScreen(uiSoundsConfig.getYACL().generateScreen(this));
         });
         addRenderableWidget(uiSoundsButton);
 
         int discordAndKoFiButtonsWidth = 80 + 80 + 33; // button widths + left margin of Ko-Fi button + right margin of Discord button
         int doneButtonWidth = this.width - discordAndKoFiButtonsWidth;
-        Button buttonWidget = new GreyButton(180, this.height - 30, doneButtonWidth, 20, CommonComponents.GUI_DONE, (btn) -> this.minecraft.setScreen(this.parent), Supplier::get);
+        Button buttonWidget = new GreyButton(180, this.height - 30, doneButtonWidth, 20, CommonComponents.GUI_DONE, (btn) -> this.minecraft.gui.setScreen(this.parent), Supplier::get);
         Button koFiButton = new GreyButton(10, this.height - 30, 80, 20, Component.literal("Donate").withStyle(ChatFormatting.GOLD).withStyle(ChatFormatting.BOLD), (btn) -> Util.getPlatform().openUri("https://ko-fi.com/imb11"), Supplier::get);
         Button discordButton = new GreyButton(95, this.height - 30, 80, 20, Component.literal("Discord").withStyle(ChatFormatting.AQUA).withStyle(ChatFormatting.BOLD), (btn) -> Util.getPlatform().openUri("https://discord.imb11.dev/"), Supplier::get);
         this.addRenderableWidget(buttonWidget);

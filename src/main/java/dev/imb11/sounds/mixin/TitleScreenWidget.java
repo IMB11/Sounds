@@ -21,7 +21,7 @@ public abstract class TitleScreenWidget extends Screen {
     public void init(CallbackInfo ci) {
 
         if(LoaderUtils.isModInstalled("qualitysounds")) {
-            this.minecraft.setScreen(new IncompatabilityScreen());
+            this.minecraft.gui.setScreen(new IncompatabilityScreen());
         }
     }
 }

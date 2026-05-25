@@ -42,6 +42,7 @@ public class ModConfig extends ConfigGroup<ModConfig> implements YetAnotherConfi
         return builder.title(getName())
                 .category(ConfigCategory.createBuilder()
                         .name(getName())
-                        .option(HELPER.get("hideSoundsButtonInSoundMenu", defaults.hideSoundsButtonInSoundMenu, () -> hideSoundsButtonInSoundMenu, val -> hideSoundsButtonInSoundMenu = val, false)).build());
+                        .option(HELPER.get("hideSoundsButtonInSoundMenu", defaults.hideSoundsButtonInSoundMenu, () -> config.hideSoundsButtonInSoundMenu, val -> config.hideSoundsButtonInSoundMenu = val, false))
+                        .build());
     }
 }

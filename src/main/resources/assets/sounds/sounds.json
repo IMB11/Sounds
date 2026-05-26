@@ -2571,7 +2571,7 @@
             }
         ]
     },
-    "block.end_portal_frame.fill": {
+    "block.enchantment_table.use": {
         "sounds": [
             "block/end_portal/eyeplace1",
             "block/end_portal/eyeplace2",
@@ -2634,11 +2634,106 @@
             }
         ]
     },
-    "block.anvil.place": {
+    "block.anvil.use": {
         "sounds": [
             {
                 "name": "random/anvil_land",
                 "volume": 0.5
+            }
+        ]
+    },
+    "item.flintandsteel.use": {
+        "sounds": [
+            "fire/ignite"
+        ]
+    },
+    "block.smoker.use": {
+        "sounds": [
+            "block/campfire/crackle1",
+            "block/campfire/crackle2",
+            "block/campfire/crackle3",
+            "block/campfire/crackle4",
+            "block/campfire/crackle5",
+            "block/campfire/crackle6"
+        ]
+    },
+    "block.funrace.use": {
+        "sounds": [
+            "fire/fire"
+        ]
+    },
+    "block.lectern.use": {
+        "sounds": [
+            {
+                "name": "item/book/open_flip1",
+                "volume": 2.0
+            },
+            {
+                "name": "item/book/open_flip2",
+                "volume": 2.0
+            },
+            {
+                "name": "item/book/open_flip3",
+                "volume": 2.0
+            }
+        ]
+    },
+    "block.stonecutter.use": {
+        "sounds": [
+            "ui/stonecutter/cut1",
+            {
+                "name": "ui/stonecutter/cut1",
+                "pitch": 0.92
+            },
+            "ui/stonecutter/cut2",
+            {
+                "name": "ui/stonecutter/cut2",
+                "pitch": 0.92
+            }
+        ]
+    },
+    "block.cartography_table.use": {
+        "sounds": [
+            "ui/cartography_table/drawmap1",
+            "ui/cartography_table/drawmap2",
+            "ui/cartography_table/drawmap3"
+        ]
+    },
+    "block.brewing_stand.use": {
+        "sounds": [
+            "item/bottle/empty1",
+            "item/bottle/empty2"
+        ]
+    },
+    "block.loom.use": {
+        "sounds": [
+            "random/bowhit1",
+            "random/bowhit2",
+            "random/bowhit3",
+            "random/bowhit4"
+        ]
+    },
+    "item.bowl.dynamic": {
+        "sounds": [
+            {
+                "name": "block/bamboo/sapling_hit1",
+                "volume": 0.8
+            },
+            {
+                "name": "block/bamboo/sapling_hit2",
+                "volume": 0.8
+            },
+            {
+                "name": "block/bamboo/sapling_hit3",
+                "volume": 0.8
+            },
+            {
+                "name": "block/bamboo/sapling_hit4",
+                "volume": 0.8
+            },
+            {
+                "name": "block/bamboo/sapling_hit5",
+                "volume": 0.8
             }
         ]
     }

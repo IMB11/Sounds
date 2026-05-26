@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import dev.imb11.mru.RegistryUtils;
@@ -72,6 +73,13 @@ public class SoundDefinition<T> {
 
         @SafeVarargs
         public final Builder<T> addMultipleKeys(T... keys) {
+            for (T key : keys) {
+                addKey(key);
+            }
+            return this;
+        }
+
+        public final Builder<T> addMultipleKeys(List<T> keys) {
             for (T key : keys) {
                 addKey(key);
             }

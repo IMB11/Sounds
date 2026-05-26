@@ -163,7 +163,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .setPitch(1.8f)
                 .setVolume(0.5f));
 
-        provider.accept("enchanting_books", create(CustomSounds.END_PORTAL_FRAME_FILL)
+        provider.accept("enchanting_books", create(CustomSounds.USE_ENCHANTMENT_TABLE)
                 .addKey(Items.ENCHANTED_BOOK)
                 .addKey(Items.EXPERIENCE_BOTTLE)
                 .setVolume(0.2f)
@@ -203,7 +203,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
         provider.accept("fishing_rods", create(SoundEvents.POINTED_DRIPSTONE_DRIP_WATER_INTO_CAULDRON)
                 .addKey(Items.FISHING_ROD));
 
-        provider.accept("flint_and_steel", create(SoundEvents.FLINTANDSTEEL_USE)
+        provider.accept("flint_and_steel", create(CustomSounds.FLINTANDSTEEL_USE)
                 .addKey(Items.FLINT_AND_STEEL));
 
         provider.accept("dyes", create(SoundEvents.DYE_USE)
@@ -236,7 +236,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.LAPIS_LAZULI)
                 .addKey(Items.DIAMOND));
 
-        provider.accept("bowl", create(SoundEvents.BAMBOO_SAPLING_HIT)
+        provider.accept("bowl", create(CustomSounds.BOWL)
                 .addKey(Items.BOWL)
                 .setPitch(1.85f)
                 .setVolume(0.25f));
@@ -324,7 +324,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.DISC_FRAGMENT_5)
                 .addKey(ItemTags.DECORATED_POT_SHERDS));
 
-        provider.accept("smithing_templates", create(SoundEvents.IRON_GOLEM_STEP)
+        provider.accept("smithing_templates", create(CustomSounds.USE_SMITHING_TABLE)
                 .addKey(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)
                 .addKey(TagKey.create(Registries.ITEM, Identifier.parse("trim_templates"))));
 
@@ -373,7 +373,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
         List<Item> spawnEggs = BuiltInRegistries.ITEM.stream().filter(item -> item instanceof SpawnEggItem).toList();
         provider.accept("spawn_eggs", create(SoundEvents.SNIFFER_EGG_PLOP)
                 .addKey(Items.EGG)
-                .addMultipleKeys(spawnEggs.toArray(Item[]::new)));
+                .addMultipleKeys(spawnEggs));
     }
 
 //    private Identifier getAmbientSoundForEntity(EntityType<?> entityType) {

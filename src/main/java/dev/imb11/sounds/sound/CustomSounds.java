@@ -456,7 +456,7 @@ public class CustomSounds {
 
     public static final SoundEvent WOODEN_EQUIPMENT = register("item.axe.strip");
 
-    public static final SoundEvent SMITHING_TABLE = register("block.smithing_table.open");
+    public static final SoundEvent USE_SMITHING_TABLE = register("block.smithing_table.open");
 
     public static final SoundEvent ANVIL_FALL = register("block.anvil.fall");
 
@@ -484,7 +484,7 @@ public class CustomSounds {
 
     public static final SoundEvent EQUIP_TURTLE = register("item.armor.equip_turtle");
 
-    public static final SoundEvent END_PORTAL_FRAME_FILL = register("block.end_portal_frame.fill");
+    public static final SoundEvent USE_ENCHANTMENT_TABLE = register("block.enchantment_table.use");
 
     public static final SoundEvent BOTTLE_FILL = register("item.bottle.fill");
 
@@ -498,7 +498,25 @@ public class CustomSounds {
 
     public static final SoundEvent AMETHYST_BLOCK_RESONATE = register("block.amethyst_block.resonate");
 
-    public static final SoundEvent ANVIL_PLACE = register("block.anvil.place");
+    public static final SoundEvent USE_ANVIL = register("block.anvil.use");
+
+    public static final SoundEvent FLINTANDSTEEL_USE = register("item.flintandsteel.use");
+
+    public static final SoundEvent USE_SMOKER = register("block.smoker.use");
+
+    public static final SoundEvent USE_FURNACE = register("block.furnace.use");
+
+    public static final SoundEvent USE_LECTERN = register("block.lectern.use");
+
+    public static final SoundEvent USE_STONECUTTER = register("block.stonecutter.use");
+
+    public static final SoundEvent USE_CARTOGRAPHY_TABLE = register("block.cartography_table.use");
+
+    public static final SoundEvent USE_BREWING_STAND = register("block.brewing_stand.use");
+
+    public static final SoundEvent USE_LOOM = register("block.loom.use");
+
+    public static final SoundEvent BOWL = register("item.bowl.dynamic");
 
     private static SoundEvent register(String name) {
         Identifier id = Identifier.fromNamespaceAndPath("sounds", name);

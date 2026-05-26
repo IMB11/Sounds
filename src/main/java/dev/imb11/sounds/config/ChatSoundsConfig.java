@@ -1,29 +1,28 @@
 package dev.imb11.sounds.config;
 
 import dev.imb11.mru.LoaderUtils;
-import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.api.config.ConfiguredSound;
+import dev.imb11.sounds.config.utils.ConfigGroup;
+import dev.imb11.sounds.sound.CustomSounds;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
-import dev.isxander.yacl3.api.controller.FloatFieldControllerBuilder;
 import dev.isxander.yacl3.api.controller.StringControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.sounds.SoundEvents;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 
 public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<ChatSoundsConfig> {
     // == MESSAGING SOUNDS == //
     @SerialEntry
-    public final ConfiguredSound messageSoundEffect = new ConfiguredSound("message", SoundEvents.NOTE_BLOCK_HAT, true, 2.0f, 0.8f);
+    public final ConfiguredSound messageSoundEffect = new ConfiguredSound("message", CustomSounds.INVENTORY_SCROLL, true, 2.0f, 0.8f);
     @SerialEntry
-    public final ConfiguredSound mentionSoundEffect = new ConfiguredSound("mention", SoundEvents.NOTE_BLOCK_CHIME, true, 1.8f, 0.9f);
+    public final ConfiguredSound mentionSoundEffect = new ConfiguredSound("mention", CustomSounds.CHAT_PING, true, 1.8f, 0.9f);
     @SerialEntry
     public ArrayList<String> mentionKeywords = new ArrayList<>(List.of(
             "@" + Minecraft.getInstance().getUser().getName()

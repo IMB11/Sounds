@@ -2144,5 +2144,83 @@
             "sounds:block/stone_bricks/step5"
         ],
         "subtitle": "subtitles.block.generic.footsteps"
+    },
+    "ui.inventory.scroll": {
+        "sounds": [
+            "note/hat"
+        ]
+    },
+    "ui.inventory.pick": {
+        "sounds": [
+            "step/stone1",
+            "step/stone2",
+            "step/stone3",
+            "step/stone4",
+            "step/stone5",
+            "step/stone6"
+        ]
+    },
+    "ui.inventory.copy": {
+        "sounds": [
+            "random/fizz"
+        ]
+    },
+    "ui.inventory.delete": {
+        "sounds": [
+            "random/fizz"
+        ]
+    },
+    "ui.inventory.drop": {
+        "sounds": [
+            "random/bow"
+        ]
+    },
+    "ui.chat.ping": {
+        "sounds": [
+            "note/icechime"
+        ],
+        "subtitle": "sounds.subtitle.chat_ping"
+    },
+    "event.status_effect.gain_positive": {
+        "sounds": [
+            "item/trident/thunder1",
+            "item/trident/thunder2"
+        ]
+    },
+    "event.status_effect.gain_negative": {
+        "sounds": [
+            "mob/illusion_illager/mirror_move1",
+            "mob/illusion_illager/mirror_move2"
+        ]
+    },
+    "event.status_effect.lose": {
+        "sounds": [
+            "item/trident/riptide1"
+        ]
+    },
+    "block.repeater.click_on": {
+        "sounds": [
+            {
+                "name": "random/click",
+                "pitch": 0.6,
+                "volume": 0.3
+            }
+        ],
+        "subtitle": "sounds.subtitle.block.repeater.click"
+    },
+    "block.daylight_detector.use": {
+        "sounds": [
+            "note/hat"
+        ],
+        "subtitle": "sounds.subtitle.block.daylight_detector.use"
+    },
+    "entity.furnace_minecart.use": {
+        "sounds": [
+            "mob/creeper/say1",
+            "mob/creeper/say2",
+            "mob/creeper/say3",
+            "mob/creeper/say4"
+        ],
+        "subtitle": "sounds.subtitle.entity.furnace_minecart.use"
     }
 }

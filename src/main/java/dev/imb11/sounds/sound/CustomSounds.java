@@ -1,7 +1,6 @@
 package dev.imb11.sounds.sound;
 
-import java.util.function.Supplier;
-
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -11,9 +10,6 @@ import net.minecraft.sounds.SoundEvent;
 public class CustomSounds {
 
     public static final SoundEvent ITEM_SWORD_SWOOSH = register("item.sword.swoosh");
-    public static final SoundEvent ITEM_HARD_METAL_HOLD = register("item.hard_metal.hold");
-
-    public static final SoundEvent ITEM_SHINY_METAL_HOLD = register("item.shiny_metal.hold");
 
     public static final SoundEvent BLOCK_ACACIA_LEAVES_BREAK = register("block.acacia_leaves.break");
 
@@ -425,9 +421,33 @@ public class CustomSounds {
 
     public static final SoundEvent BLOCK_ICE_STRESS = register("block.ice.stress");
 
-    private static SoundEvent register(String id) {
-        Identifier _id = Identifier.fromNamespaceAndPath("sounds", id);
-		return Registry.register(BuiltInRegistries.SOUND_EVENT, _id, SoundEvent.createVariableRangeEvent(_id));
+    public static final SoundEvent INVENTORY_SCROLL = register("ui.inventory.scroll");
+
+    public static final SoundEvent ITEM_PICK = register("ui.inventory.pick");
+
+    public static final SoundEvent ITEM_COPY = register("ui.inventory.copy");
+
+    public static final SoundEvent ITEM_DELETE = register("ui.inventory.delete");
+
+    public static final SoundEvent ITEM_DROP = register("ui.inventory.drop");
+
+    public static final SoundEvent CHAT_PING = register("ui.chat.ping");
+
+    public static final SoundEvent POSITIVE_STATUS_EFFECT_GAIN = register("event.status_effect.gain_positive");
+
+    public static final SoundEvent NEGATIVE_STATUS_EFFECT_GAIN = register("event.status_effect.gain_negative");
+
+    public static final SoundEvent STATUS_EFFECT_LOSE = register("event.status_effect.lose");
+
+    public static final SoundEvent REPEATER_CLICK = register("block.repeater.click_on");
+
+    public static final SoundEvent DAYLIGHT_DETECTOR_USE = register("block.daylight_detector.use");
+
+    public static final SoundEvent FURNACE_MINECART_USE = register("entity.furnace_minecart.use");
+
+    private static SoundEvent register(String name) {
+        Identifier id = Identifier.fromNamespaceAndPath("sounds", name);
+		return Registry.register(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
     }
 
     public static void initialize() {

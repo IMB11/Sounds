@@ -25,13 +25,13 @@ import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<WorldSoundsConfig> {
     /// == MECHANICS == ///
     @SerialEntry
-    public DynamicConfiguredSound<Integer, RepeaterSoundContext> repeaterUseSoundEffect = new DynamicConfiguredSound<>("repeaterUse", SoundEvents.STONE_BUTTON_CLICK_ON, true, 0.95F, 0.3F, true);
+    public DynamicConfiguredSound<Integer, RepeaterSoundContext> repeaterUseSoundEffect = new DynamicConfiguredSound<>("repeaterUse", CustomSounds.REPEATER_CLICK, true, 0.95F, 0.3F, true);
     @SerialEntry
     public ConfiguredSound jukeboxUseSoundEffect = new ConfiguredSound("jukeboxUse", SoundEvents.NOTE_BLOCK_BASEDRUM, true, 0.8F, 0.75F);
     @SerialEntry
-    public ConfiguredSound daylightDetectorUseSoundEffect = new ConfiguredSound("daylightDetectorUse", SoundEvents.NOTE_BLOCK_HAT, true, 0.8F, 0.45F);
+    public ConfiguredSound daylightDetectorUseSoundEffect = new ConfiguredSound("daylightDetectorUse", CustomSounds.DAYLIGHT_DETECTOR_USE, true, 0.8F, 0.45F);
     @SerialEntry
-    public ConfiguredSound furnaceMinecartFuelSoundEffect = new ConfiguredSound("furnaceMinecartFuel", SoundEvents.CREEPER_HURT, true, 1.9F, 0.2F);
+    public ConfiguredSound furnaceMinecartFuelSoundEffect = new ConfiguredSound("furnaceMinecartFuel", CustomSounds.FURNACE_MINECART_USE, true, 1.9F, 0.2F);
 
     /// == ACTIONS == ///
     @SerialEntry
@@ -79,7 +79,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
 
     @Override
     public YetAnotherConfigLib.Builder build(WorldSoundsConfig defaults, WorldSoundsConfig config, YetAnotherConfigLib.Builder builder) {
-        builder.title(Component.nullToEmpty("World Sounds"));
+        builder.title(Component.literal("World Sounds"));
         builder.category(ConfigCategory.createBuilder()
                 .name(Component.translatable("sounds.config.world.mechanics"))
                 .group(config.repeaterUseSoundEffect.getOptionGroup(defaults.repeaterUseSoundEffect))
@@ -92,7 +92,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
                 .option(HELPER.get("disableBlocksEntirely", defaults.disableBlocksEntirely, () -> config.disableBlocksEntirely, v1 -> config.disableBlocksEntirely = v1))
                 .option(LabelOption.create(Component.translatable("sounds.config.world.blocks.description")))
                 .option(ButtonOption.createBuilder()
-                        .name(Component.nullToEmpty("Open Wiki"))
+                        .name(Component.literal("Open Wiki"))
                         .description(OptionDescription.EMPTY)
                         .action((screen, option) -> Util.getPlatform().openUri("https://docs.imb11.dev/sounds/data/custom-block-sounds"))
                         .build())

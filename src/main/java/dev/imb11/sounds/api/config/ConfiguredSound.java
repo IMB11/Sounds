@@ -13,6 +13,7 @@ import dev.isxander.yacl3.api.OptionGroup;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
+import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -201,12 +202,15 @@ public class ConfiguredSound {
     }
 
     private void playSound(Identifier soundEvent, float pitch, float volume) {
-        var pos = Vec3.ZERO;
+        playSound(soundEvent, pitch, volume, BlockPos.ZERO);
+    }
+
+    private void playSound(Identifier soundEvent, float pitch, float volume, BlockPos pos) {
         var attenuation = SoundInstance.Attenuation.LINEAR;
         if (LoaderUtils.isModInstalled("sound_physics_perfected") && Minecraft.getInstance().player != null) {
             attenuation = SoundInstance.Attenuation.NONE;  // Disable Attenuation when using SPP
         }
-        this.playSound(new SimpleSoundInstance(soundEvent, SoundSource.MASTER, volume, pitch, SoundsClient.RANDOM, false, 0, attenuation, pos.x, pos.y, pos.z, true));
+        this.playSound(new SimpleSoundInstance(soundEvent, SoundSource.UI, volume, pitch, SoundsClient.RANDOM, false, 0, attenuation, pos.getX(), pos.getY(), pos.getZ(), true));
     }
 
     public @Nullable SimpleSoundInstance getSoundInstance() {

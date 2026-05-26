@@ -8,7 +8,6 @@ import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.sounds.SoundEvents;
 
 import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 
@@ -17,14 +16,14 @@ public class EventSoundsConfig extends ConfigGroup<EventSoundsConfig> implements
     @SerialEntry
     public boolean ignoreSilencedStatusEffects = true;
     @SerialEntry
-    public ConfiguredSound positiveStatusEffectGainSoundEffect = new ConfiguredSound("positiveStatusEffectGain", SoundEvents.TRIDENT_THUNDER, true, 2F, 0.1F);
+    public ConfiguredSound positiveStatusEffectGainSoundEffect = new ConfiguredSound("positiveStatusEffectGain", CustomSounds.POSITIVE_STATUS_EFFECT_GAIN, true, 2F, 0.1F);
     @SerialEntry
-    public ConfiguredSound negativeStatusEffectGainSoundEffect = new ConfiguredSound("negativeStatusEffectGain", SoundEvents.ILLUSIONER_MIRROR_MOVE, true, 0.3F, 0.2F);
+    public ConfiguredSound negativeStatusEffectGainSoundEffect = new ConfiguredSound("negativeStatusEffectGain", CustomSounds.NEGATIVE_STATUS_EFFECT_GAIN, true, 0.3F, 0.2F);
 
     @SerialEntry
-    public ConfiguredSound positiveStatusEffectLoseSoundEffect = new ConfiguredSound("positiveStatusEffectLose", SoundEvents.TRIDENT_RIPTIDE_1, true, 0.5F, 0.1F);
+    public ConfiguredSound positiveStatusEffectLoseSoundEffect = new ConfiguredSound("positiveStatusEffectLose", CustomSounds.STATUS_EFFECT_LOSE, true, 0.5F, 0.1F);
     @SerialEntry
-    public ConfiguredSound negativeStatusEffectLoseSoundEffect = new ConfiguredSound("negativeStatusEffectLose", SoundEvents.TRIDENT_RIPTIDE_1, true, 0.5F, 0.1F);
+    public ConfiguredSound negativeStatusEffectLoseSoundEffect = new ConfiguredSound("negativeStatusEffectLose", CustomSounds.STATUS_EFFECT_LOSE, true, 0.5F, 0.1F);
 
     public EventSoundsConfig() {
         super(EventSoundsConfig.class);

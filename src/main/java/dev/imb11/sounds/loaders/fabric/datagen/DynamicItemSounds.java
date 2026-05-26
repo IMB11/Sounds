@@ -1,4 +1,4 @@
-/*? if >=1.21 && fabric {*/
+//? fabric {
 package dev.imb11.sounds.loaders.fabric.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;
@@ -13,7 +13,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.animal.cow.CowSoundVariants;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
@@ -28,23 +27,23 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
 
     @Override
     public void accept(BiConsumer<String, SoundDefinition.Builder<Item>> provider) {
-        provider.accept("anvils", create(SoundEvents.ANVIL_FALL)
+        provider.accept("anvils", create(CustomSounds.ANVIL_FALL)
                 .addKey(Items.ANVIL)
                 .addKey(Items.CHIPPED_ANVIL)
                 .addKey(Items.DAMAGED_ANVIL));
 
-        provider.accept("trial_keys", create(SoundEvents.TRIAL_SPAWNER_SPAWN_ITEM_BEGIN)
+        provider.accept("trial_keys", create(CustomSounds.TRIAL_KEY)
                 .addKey(Items.TRIAL_KEY)
                 .addKey(Items.OMINOUS_TRIAL_KEY)
                 .setPitch(1f)
                 .setVolume(0.4f));
 
-        provider.accept("wind_charge", create(SoundEvents.BREEZE_WIND_CHARGE_BURST)
+        provider.accept("wind_charge", create(CustomSounds.WIND_CHARGE)
                 .addKey(Items.WIND_CHARGE)
                 .setPitch(2f)
                 .setVolume(0.1f));
 
-        provider.accept("wooden_equipment", create(SoundEvents.AXE_STRIP)
+        provider.accept("wooden_equipment", create(CustomSounds.WOODEN_EQUIPMENT)
                 .addKey(Items.WOODEN_AXE)
                 .addKey(Items.WOODEN_HOE)
                 .addKey(Items.WOODEN_PICKAXE)
@@ -56,7 +55,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.WARPED_FUNGUS_ON_A_STICK)
                 .addKey(Items.DEBUG_STICK));
 
-        provider.accept("stone_equipment", create(SoundEvents.ARMOR_EQUIP_GENERIC)
+        provider.accept("stone_equipment", create(CustomSounds.EQUIP_GENERIC)
                 .addKey(Items.STONE_AXE)
                 .addKey(Items.STONE_HOE)
                 .addKey(Items.STONE_PICKAXE)
@@ -65,7 +64,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.STONE_SWORD));
 
 
-        provider.accept("copper_equipment", create(SoundEvents.ARMOR_EQUIP_COPPER)
+        provider.accept("copper_equipment", create(CustomSounds.EQUIP_COPPER)
                 .addKey(Items.COPPER_AXE)
                 .addKey(Items.COPPER_HOE)
                 .addKey(Items.COPPER_PICKAXE)
@@ -79,13 +78,13 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.COPPER_LEGGINGS)
                 .addKey(Items.COPPER_BOOTS));
 
-        provider.accept("chainmail_equipment", create(SoundEvents.ARMOR_EQUIP_CHAIN)
+        provider.accept("chainmail_equipment", create(CustomSounds.CHAIN)
                 .addKey(Items.CHAINMAIL_HELMET)
                 .addKey(Items.CHAINMAIL_CHESTPLATE)
                 .addKey(Items.CHAINMAIL_LEGGINGS)
                 .addKey(Items.CHAINMAIL_BOOTS));
 
-        provider.accept("iron_equipment", create(SoundEvents.ARMOR_EQUIP_IRON)
+        provider.accept("iron_equipment", create(CustomSounds.EQUIP_IRON)
                 .addKey(Items.SHEARS)
                 .addKey(Items.SHIELD)
                 .addKey(Items.IRON_AXE)
@@ -101,7 +100,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.IRON_LEGGINGS)
                 .addKey(Items.IRON_BOOTS));
 
-        provider.accept("golden_equipment", create(SoundEvents.ARMOR_EQUIP_GOLD)
+        provider.accept("golden_equipment", create(CustomSounds.EQUIP_GOLD)
                 .addKey(Items.GOLDEN_AXE)
                 .addKey(Items.GOLDEN_HOE)
                 .addKey(Items.GOLDEN_PICKAXE)
@@ -116,7 +115,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.GOLDEN_LEGGINGS)
                 .addKey(Items.GOLDEN_BOOTS));
 
-        provider.accept("diamond_equipment", create(SoundEvents.ARMOR_EQUIP_DIAMOND)
+        provider.accept("diamond_equipment", create(CustomSounds.EQUIP_DIAMOND)
                 .addKey(Items.DIAMOND_AXE)
                 .addKey(Items.DIAMOND_HOE)
                 .addKey(Items.DIAMOND_PICKAXE)
@@ -130,7 +129,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.DIAMOND_LEGGINGS)
                 .addKey(Items.DIAMOND_BOOTS));
 
-        provider.accept("netherite_equipment", create(SoundEvents.ARMOR_EQUIP_NETHERITE)
+        provider.accept("netherite_equipment", create(CustomSounds.EQUIP_NETHERITE)
                 .addKey(Items.NETHERITE_AXE)
                 .addKey(Items.NETHERITE_HOE)
                 .addKey(Items.NETHERITE_PICKAXE)
@@ -145,7 +144,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.NETHERITE_LEGGINGS)
                 .addKey(Items.NETHERITE_BOOTS));
 
-        provider.accept("leather_equipment", create(SoundEvents.ARMOR_EQUIP_LEATHER)
+        provider.accept("leather_equipment", create(CustomSounds.EQUIP_LEATHER)
                 .addKey(Items.LEATHER_HORSE_ARMOR)
                 .addKey(Items.LEATHER_HELMET)
                 .addKey(Items.LEATHER_CHESTPLATE)
@@ -157,20 +156,20 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.WOLF_ARMOR)
                 .addKey(Items.RABBIT_HIDE));
 
-        provider.accept("exoskeletal", create(SoundEvents.ARMOR_EQUIP_TURTLE)
+        provider.accept("exoskeletal", create(CustomSounds.EQUIP_TURTLE)
                 .addKey(Items.ARMADILLO_SCUTE)
                 .addKey(Items.TURTLE_SCUTE)
                 .addKey(Items.TURTLE_EGG)
                 .setPitch(1.8f)
                 .setVolume(0.5f));
 
-        provider.accept("enchanting_books", create(SoundEvents.END_PORTAL_FRAME_FILL)
+        provider.accept("enchanting_books", create(CustomSounds.END_PORTAL_FRAME_FILL)
                 .addKey(Items.ENCHANTED_BOOK)
                 .addKey(Items.EXPERIENCE_BOTTLE)
                 .setVolume(0.2f)
                 .setPitch(0.01f));
 
-        provider.accept("crop_food", create(SoundEvents.CROP_BREAK)
+        provider.accept("crop_food", create(CustomSounds.CROP_FOODS)
                 .addKey(ConventionalItemTags.VEGETABLE_FOODS)
                 .addKey(ConventionalItemTags.FRUIT_FOODS)
                 .addKey(ConventionalItemTags.BERRY_FOODS)
@@ -178,12 +177,12 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .setVolume(1.0f)
                 .setPitch(1.76f));
 
-        provider.accept("bowl_food", create(SoundEvents.MOOSHROOM_MILK_SUSPICIOUSLY)
+        provider.accept("bowl_food", create(CustomSounds.SOUP_FOODS)
                 .addKey(ConventionalItemTags.SOUP_FOODS)
                 .setVolume(0.5f)
                 .setPitch(1.58f));
 
-        provider.accept("meat_and_fish", create(SoundEvents.PUFFER_FISH_FLOP)
+        provider.accept("meat_and_fish", create(CustomSounds.MEAT_AND_FISH_FOOD)
                  .addKey(ConventionalItemTags.RAW_FISH_FOODS)
                 .addKey(ConventionalItemTags.RAW_MEAT_FOODS)
                 .addKey(ConventionalItemTags.COOKED_FISH_FOODS)
@@ -191,13 +190,13 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .setPitch(1.8f)
                 .setVolume(0.20f));
 
-        provider.accept("elytra", create(SoundEvents.ARMOR_EQUIP_ELYTRA)
+        provider.accept("elytra", create(CustomSounds.EQUIP_ELYTRA)
                 .addKey(Items.ELYTRA));
 
-        provider.accept("trident", create(SoundEvents.TRIDENT_HIT)
+        provider.accept("trident", create(CustomSounds.TRIDENT)
                 .addKey(Items.TRIDENT));
 
-        provider.accept("bows", create(SoundEvents.ARROW_SHOOT)
+        provider.accept("bows", create(CustomSounds.BOW)
                 .addKey(Items.BOW)
                 .addKey(Items.CROSSBOW));
 
@@ -242,7 +241,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .setPitch(1.85f)
                 .setVolume(0.25f));
 
-        provider.accept("oak_boat", create(SoundEvents.WOOD_HIT)
+        provider.accept("oak_boat", create(CustomSounds.WOOD)
                 .addKey(Items.OAK_BOAT)
                 .addKey(Items.OAK_CHEST_BOAT)
                 .setPitch(1.75f)
@@ -272,19 +271,19 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .setPitch(1.75f)
                 .setVolume(0.75f));
 
-        provider.accept("dark_oak_boat", create(SoundEvents.WOOD_HIT)
+        provider.accept("dark_oak_boat", create(CustomSounds.WOOD)
                 .addKey(Items.DARK_OAK_BOAT)
                 .addKey(Items.DARK_OAK_CHEST_BOAT)
                 .setPitch(1.75f)
                 .setVolume(0.75f));
 
-        provider.accept("pale_oak_boat", create(SoundEvents.WOOD_HIT)
+        provider.accept("pale_oak_boat", create(CustomSounds.WOOD)
                 .addKey(Items.PALE_OAK_BOAT)
                 .addKey(Items.PALE_OAK_CHEST_BOAT)
                 .setPitch(1.75f)
                 .setVolume(0.75f));
 
-        provider.accept("cherry_boat", create(SoundEvents.WOOD_HIT)
+        provider.accept("cherry_boat", create(CustomSounds.WOOD)
                 .addKey(Items.CHERRY_BOAT)
                 .addKey(Items.CHERRY_CHEST_BOAT)
                 .setPitch(1.75f)
@@ -296,7 +295,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .setPitch(1.75f)
                 .setVolume(0.75f));
 
-        provider.accept("bamboo_raft", create(SoundEvents.BAMBOO_WOOD_HIT)
+        provider.accept("bamboo_raft", create(CustomSounds.BAMBOO_WOOD)
                 .addKey(Items.BAMBOO_RAFT)
                 .addKey(Items.BAMBOO_CHEST_RAFT)
                 .setPitch(1.75f)
@@ -333,7 +332,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(ConventionalItemTags.WATER_BUCKETS)
                 .addKey(ConventionalItemTags.ENTITY_WATER_BUCKETS));
 
-        provider.accept("banner_templates", create(SoundEvents.WOOL_HIT)
+        provider.accept("banner_templates", create(CustomSounds.WOOL)
                 .addKey(Items.CREEPER_BANNER_PATTERN)
                 .addKey(Items.FLOWER_BANNER_PATTERN)
                 .addKey(Items.GLOBE_BANNER_PATTERN)
@@ -341,7 +340,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.SKULL_BANNER_PATTERN)
                 .addKey(Items.PIGLIN_BANNER_PATTERN));
 
-        provider.accept("brewing_items", create(SoundEvents.BOTTLE_FILL)
+        provider.accept("brewing_items", create(CustomSounds.BOTTLE_FILL)
                 .addKey(Items.GLASS_BOTTLE)
                 .addKey(Items.POTION)
                 .addKey(Items.DRAGON_BREATH)
@@ -370,19 +369,6 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.BONE_MEAL));
 
         // Spawn Eggs
-//        for (Item item : Registries.ITEM) {
-//            if (item instanceof SpawnEggItem spawnEggItem) {
-//                EntityType<?> entityType = spawnEggItem.getEntityType(null);
-//                Identifier soundEventID = getAmbientSoundForEntity(entityType);
-//                @Nullable SoundEvent soundEvent = Registries.SOUND_EVENT.get(soundEventID);
-//                if (soundEvent != null) {
-//                    String spawnEggName = Registries.ITEM.getId(spawnEggItem).getPath();
-//                    provider.accept(spawnEggName, create(soundEvent).addKey(spawnEggItem));
-//                } else {
-//                    LOGGER.warn("Could not find ambient sound event for entity type " + entityType.getTranslationKey());
-//                }
-//            }
-//        }
 
         List<Item> spawnEggs = BuiltInRegistries.ITEM.stream().filter(item -> item instanceof SpawnEggItem).toList();
         provider.accept("spawn_eggs", create(SoundEvents.SNIFFER_EGG_PLOP)
@@ -394,4 +380,4 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
 //        return Identifier.of("entity." + entityType.getUntranslatedName() + ".ambient");
 //    }
 }
-/*?}*/
+//?}

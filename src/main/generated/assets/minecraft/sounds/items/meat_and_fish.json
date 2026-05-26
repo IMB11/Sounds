@@ -6,6 +6,6 @@
     "#c:foods/raw_meat"
   ],
   "pitch": 1.8,
-  "soundEvent": "minecraft:entity.puffer_fish.flop",
+  "soundEvent": "sounds:item.dynamic.meat_and_fish",
   "volume": 0.2
 }

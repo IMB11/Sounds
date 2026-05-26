@@ -7,5 +7,5 @@
     "minecraft:potion",
     "minecraft:splash_potion"
   ],
-  "soundEvent": "minecraft:item.bottle.fill"
+  "soundEvent": "sounds:item.bottle.fill"
 }

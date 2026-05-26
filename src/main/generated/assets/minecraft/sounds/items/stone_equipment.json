@@ -7,5 +7,5 @@
     "minecraft:stone_spear",
     "minecraft:stone_sword"
   ],
-  "soundEvent": "minecraft:item.armor.equip_generic"
+  "soundEvent": "sounds:item.armor.equip_generic"
 }

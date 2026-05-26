@@ -1,6 +1,5 @@
 package dev.imb11.sounds.sound;
 
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -444,6 +443,62 @@ public class CustomSounds {
     public static final SoundEvent DAYLIGHT_DETECTOR_USE = register("block.daylight_detector.use");
 
     public static final SoundEvent FURNACE_MINECART_USE = register("entity.furnace_minecart.use");
+
+    public static final SoundEvent CROP_FOODS = register("item.dynamic.crop_food");
+
+    public static final SoundEvent SOUP_FOODS = register("item.dynamic.soup");
+
+    public static final SoundEvent MEAT_AND_FISH_FOOD = register("item.dynamic.meat_and_fish");
+
+    public static final SoundEvent WOOD = register("block.wood.hit");
+
+    public static final SoundEvent BAMBOO_WOOD = register("block.bamboo_wood.hit");
+
+    public static final SoundEvent WOODEN_EQUIPMENT = register("item.axe.strip");
+
+    public static final SoundEvent SMITHING_TABLE = register("block.smithing_table.open");
+
+    public static final SoundEvent ANVIL_FALL = register("block.anvil.fall");
+
+    public static final SoundEvent TRIAL_KEY = register("block.trial_spawner.spawn_item_begin");
+
+    public static final SoundEvent WIND_CHARGE = register("entity.breeze.wind_burst");
+
+    public static final SoundEvent CHAIN = register("item.armor.equip_chain");
+
+    public static final SoundEvent EQUIP_DIAMOND = register("item.armor.equip_diamond");
+
+    public static final SoundEvent EQUIP_ELYTRA = register("item.armor.equip_elytra");
+
+    public static final SoundEvent EQUIP_GENERIC = register("item.armor.equip_generic");
+
+    public static final SoundEvent EQUIP_GOLD = register("item.armor.equip_gold");
+
+    public static final SoundEvent EQUIP_IRON = register("item.armor.equip_iron");
+
+    public static final SoundEvent EQUIP_LEATHER = register("item.armor.equip_leather");
+
+    public static final SoundEvent EQUIP_COPPER = register("item.armor.equip_copper");
+
+    public static final SoundEvent EQUIP_NETHERITE = register("item.armor.equip_netherite");
+
+    public static final SoundEvent EQUIP_TURTLE = register("item.armor.equip_turtle");
+
+    public static final SoundEvent END_PORTAL_FRAME_FILL = register("block.end_portal_frame.fill");
+
+    public static final SoundEvent BOTTLE_FILL = register("item.bottle.fill");
+
+    public static final SoundEvent WOOL = register("block.wool.hit");
+
+    public static final SoundEvent TRIDENT = register("item.trident");
+
+    public static final SoundEvent BOW = register("item.bow");
+
+    public static final SoundEvent STONE_PLACE = register("block.stone.place");
+
+    public static final SoundEvent AMETHYST_BLOCK_RESONATE = register("block.amethyst_block.resonate");
+
+    public static final SoundEvent ANVIL_PLACE = register("block.anvil.place");
 
     private static SoundEvent register(String name) {
         Identifier id = Identifier.fromNamespaceAndPath("sounds", name);

@@ -15,5 +15,5 @@
     "minecraft:shears",
     "minecraft:shield"
   ],
-  "soundEvent": "minecraft:item.armor.equip_iron"
+  "soundEvent": "sounds:item.armor.equip_iron"
 }

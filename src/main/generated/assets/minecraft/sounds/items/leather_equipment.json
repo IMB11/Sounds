@@ -11,5 +11,5 @@
     "minecraft:saddle",
     "minecraft:wolf_armor"
   ],
-  "soundEvent": "minecraft:item.armor.equip_leather"
+  "soundEvent": "sounds:item.armor.equip_leather"
 }

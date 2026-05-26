@@ -3,6 +3,6 @@
     "#c:foods/soup"
   ],
   "pitch": 1.58,
-  "soundEvent": "minecraft:entity.mooshroom.suspicious_milk",
+  "soundEvent": "sounds:item.dynamic.soup",
   "volume": 0.5
 }

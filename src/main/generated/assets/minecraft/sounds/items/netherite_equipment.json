@@ -14,5 +14,5 @@
     "minecraft:netherite_spear",
     "minecraft:netherite_sword"
   ],
-  "soundEvent": "minecraft:item.armor.equip_netherite"
+  "soundEvent": "sounds:item.armor.equip_netherite"
 }

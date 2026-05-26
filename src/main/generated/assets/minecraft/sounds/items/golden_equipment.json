@@ -14,5 +14,5 @@
     "minecraft:golden_spear",
     "minecraft:golden_sword"
   ],
-  "soundEvent": "minecraft:item.armor.equip_gold"
+  "soundEvent": "sounds:item.armor.equip_gold"
 }

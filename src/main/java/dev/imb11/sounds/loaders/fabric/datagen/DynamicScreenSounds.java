@@ -3,6 +3,7 @@ package dev.imb11.sounds.loaders.fabric.datagen;
 
 import dev.imb11.sounds.api.SoundDefinition;
 import dev.imb11.sounds.api.datagen.SoundDefinitionProvider;
+import dev.imb11.sounds.sound.CustomSounds;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -19,13 +20,13 @@ public class DynamicScreenSounds extends SoundDefinitionProvider<MenuType<?>> {
 
     @Override
     public void accept(BiConsumer<String, SoundDefinition.Builder<MenuType<?>>> provider) {
-        provider.accept("crafting", create(SoundEvents.WOOD_HIT)
+        provider.accept("crafting", create(CustomSounds.WOOD)
                 .addKey(MenuType.CRAFTING));
 
-        provider.accept("smithing", create(SoundEvents.IRON_GOLEM_STEP)
+        provider.accept("smithing", create(CustomSounds.SMITHING_TABLE)
                 .addKey(MenuType.SMITHING));
 
-        provider.accept("anvil", create(SoundEvents.ANVIL_PLACE)
+        provider.accept("anvil", create(CustomSounds.ANVIL_PLACE)
                 .addKey(MenuType.ANVIL));
 
         provider.accept("smoker", create(SoundEvents.CAMPFIRE_CRACKLE)
@@ -41,10 +42,10 @@ public class DynamicScreenSounds extends SoundDefinitionProvider<MenuType<?>> {
         provider.accept("stonecutter", create(SoundEvents.VILLAGER_WORK_MASON)
                 .addKey(MenuType.STONECUTTER));
 
-        provider.accept("grindstone", create(SoundEvents.STONE_PLACE)
+        provider.accept("grindstone", create(CustomSounds.STONE_PLACE)
                 .addKey(MenuType.GRINDSTONE));
 
-        provider.accept("beacon", create(SoundEvents.AMETHYST_BLOCK_RESONATE)
+        provider.accept("beacon", create(CustomSounds.AMETHYST_BLOCK_RESONATE)
                 .addKey(MenuType.BEACON));
 
         provider.accept("brewing_stand", create(SoundEvents.BOTTLE_EMPTY)
@@ -56,10 +57,10 @@ public class DynamicScreenSounds extends SoundDefinitionProvider<MenuType<?>> {
         provider.accept("cartography_table", create(SoundEvents.VILLAGER_WORK_CARTOGRAPHER)
                 .addKey(MenuType.CARTOGRAPHY_TABLE));
 
-        provider.accept("enchantment_table", create(SoundEvents.END_PORTAL_FRAME_FILL)
+        provider.accept("enchantment_table", create(CustomSounds.END_PORTAL_FRAME_FILL)
                 .addKey(MenuType.ENCHANTMENT));
 
-        provider.accept("redstone_item_movement", create(SoundEvents.STONE_HIT)
+        provider.accept("redstone_item_movement", create(CustomSounds.ITEM_PICK)
                 .addKey(MenuType.GENERIC_3x3)
                 .addKey(MenuType.HOPPER));
     }

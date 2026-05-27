@@ -72,7 +72,7 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
                 .insertEntriesAtEnd(true)
                 .build();
 
-        builder.title(Component.nullToEmpty("Chat Sounds"));
+        builder.title(Component.literal("Chat Sounds"));
         builder.category(ConfigCategory.createBuilder()
                 .name(Component.translatable("sounds.config.chat.messaging"))
                 .option(HELPER.get("ignoreSystemChats", defaults.ignoreSystemChats, () -> config.ignoreSystemChats, v -> config.ignoreSystemChats = v))

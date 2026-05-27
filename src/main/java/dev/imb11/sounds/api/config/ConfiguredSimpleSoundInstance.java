@@ -1,5 +1,7 @@
 package dev.imb11.sounds.api.config;
 
+import dev.imb11.sounds.config.ModConfig;
+import dev.imb11.sounds.config.SoundsConfig;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.resources.Identifier;
@@ -25,7 +27,7 @@ public class ConfiguredSimpleSoundInstance extends SimpleSoundInstance {
             final double z,
             final boolean relative,
             boolean subtitle) {
-        super(location, source, volume, pitch, random, looping, delay, attenuation, x, y, z, relative);
+        super(location, source, volume*SoundsConfig.get(ModConfig.class).globalVolume, pitch, random, looping, delay, attenuation, x, y, z, relative);
         this.showSubtitle = subtitle;
     }
 

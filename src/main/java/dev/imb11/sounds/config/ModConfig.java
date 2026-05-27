@@ -12,6 +12,8 @@ import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 public class ModConfig extends ConfigGroup<ModConfig> implements YetAnotherConfigLib.ConfigBackedBuilder<ModConfig> {
     @SerialEntry
     public boolean hideSoundsButtonInSoundMenu = false;
+    @SerialEntry
+    public float globalVolume = 1;
 
     public ModConfig() {
         super(ModConfig.class);
@@ -43,6 +45,7 @@ public class ModConfig extends ConfigGroup<ModConfig> implements YetAnotherConfi
                 .category(ConfigCategory.createBuilder()
                         .name(getName())
                         .option(HELPER.get("hideSoundsButtonInSoundMenu", defaults.hideSoundsButtonInSoundMenu, () -> config.hideSoundsButtonInSoundMenu, val -> config.hideSoundsButtonInSoundMenu = val, false))
+                        .option(HELPER.getSlider("globalVolume", 0, 1, .1f, defaults.globalVolume, () -> config.globalVolume, val -> config.globalVolume = val, false))
                         .build());
     }
 }

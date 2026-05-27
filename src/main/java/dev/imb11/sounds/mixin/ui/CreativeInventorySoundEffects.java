@@ -43,7 +43,7 @@ public abstract class CreativeInventorySoundEffects extends net.minecraft.client
         super(screenHandler, playerInventory, text);
     }
 
-    @Inject(method = "refreshSearchResults", at = @At("HEAD"), cancellable = false)
+    @Inject(method = "refreshSearchResults", at = @At("HEAD"))
     public void $inventory_typing_sound_effect(CallbackInfo ci) {
         SoundsConfig.get(UISoundsConfig.class).typingSoundEffect.playSound();
     }
@@ -81,7 +81,7 @@ public abstract class CreativeInventorySoundEffects extends net.minecraft.client
         double currentTime = GLFW.glfwGetTime();
         double timeElapsed = currentTime - sounds$prevDeleteAllTime;
         if (this.originalSlots != null && originalSlots.stream().anyMatch(Slot::hasItem) && timeElapsed >= 0.1)
-            SoundsConfig.get(UISoundsConfig.class).itemDeleteSoundEffect.playSound();
+            SoundsConfig.get(UISoundsConfig.class).itemDeleteSoundEffect.playSound(true);
         sounds$prevDeleteAllTime = currentTime;
     }
 

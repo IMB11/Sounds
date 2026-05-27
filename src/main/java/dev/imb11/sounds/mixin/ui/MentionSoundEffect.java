@@ -71,7 +71,7 @@ public class MentionSoundEffect {
         }
 
         if (isMention)
-            SoundsConfig.get(ChatSoundsConfig.class).mentionSoundEffect.playSound();
+            SoundsConfig.get(ChatSoundsConfig.class).mentionSoundEffect.playSound(true);
         else SoundsConfig.get(ChatSoundsConfig.class).messageSoundEffect.playSound();
     }
 }

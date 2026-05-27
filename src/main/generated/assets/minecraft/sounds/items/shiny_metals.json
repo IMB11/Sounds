@@ -6,5 +6,5 @@
     "minecraft:lapis_lazuli",
     "minecraft:quartz"
   ],
-  "soundEvent": "minecraft:block.amethyst_cluster.hit"
+  "soundEvent": "sounds:item.shiny_metals.dynamic"
 }

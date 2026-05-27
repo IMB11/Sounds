@@ -15,7 +15,6 @@ import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -23,7 +22,6 @@ import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -162,9 +160,13 @@ public class ConfiguredSound {
     protected static long lastShownToast = -1L;
 
     public void playSound() {
+        playSound(false);
+    }
+
+    public void playSound(boolean subtitle) {
         if (this.enabled) {
             try {
-                this.playSound(this.soundEvent, this.pitch, this.volume);
+                this.playSound(this.soundEvent, this.pitch, this.volume, subtitle);
             } catch (Exception ignored) {
                 // Prevent toast spam:
                 ignored.printStackTrace();
@@ -185,7 +187,7 @@ public class ConfiguredSound {
 
     private void playPreviewSound() {
         try {
-            this.playSound(this._pendingSoundEvent, _pendingPitch, _pendingVolume);
+            this.playSound(this._pendingSoundEvent, _pendingPitch, _pendingVolume, false);
         } catch (Exception ignored) {
             if (System.currentTimeMillis() > lastShownToast + 5000) {
                 lastShownToast = System.currentTimeMillis();
@@ -201,23 +203,23 @@ public class ConfiguredSound {
         }
     }
 
-    private void playSound(Identifier soundEvent, float pitch, float volume) {
-        playSound(soundEvent, pitch, volume, BlockPos.ZERO);
+    private void playSound(Identifier soundEvent, float pitch, float volume, boolean subtitle) {
+        playSound(soundEvent, pitch, volume, BlockPos.ZERO, subtitle);
     }
 
-    private void playSound(Identifier soundEvent, float pitch, float volume, BlockPos pos) {
+    private void playSound(Identifier soundEvent, float pitch, float volume, BlockPos pos, boolean subtitle) {
         var attenuation = SoundInstance.Attenuation.LINEAR;
         if (LoaderUtils.isModInstalled("sound_physics_perfected") && Minecraft.getInstance().player != null) {
             attenuation = SoundInstance.Attenuation.NONE;  // Disable Attenuation when using SPP
         }
-        this.playSound(new SimpleSoundInstance(soundEvent, SoundSource.UI, volume, pitch, SoundsClient.RANDOM, false, 0, attenuation, pos.getX(), pos.getY(), pos.getZ(), true));
+        this.playSound(new ConfiguredSimpleSoundInstance(soundEvent, SoundSource.UI, volume, pitch, SoundsClient.RANDOM, false, 0, attenuation, pos.getX(), pos.getY(), pos.getZ(), true, subtitle));
     }
 
-    public @Nullable SimpleSoundInstance getSoundInstance() {
+    public @Nullable ConfiguredSimpleSoundInstance getSoundInstance() {
         if (this.enabled) {
             try {
                 final SoundEvent event = RegistryUtils.getSoundEventRegistry(Minecraft.getInstance().level).apply(this.soundEvent);
-                return SimpleSoundInstance.forUI(event, pitch, volume);
+                return ConfiguredSimpleSoundInstance.forUI(event, pitch, volume);
             } catch (Exception ignored) {
                 return null;
             }
@@ -225,13 +227,13 @@ public class ConfiguredSound {
         return null;
     }
 
-    public void playSound(SoundInstance soundInstance) {
+    public void playSound(ConfiguredSimpleSoundInstance soundInstance) {
         if (this.enabled) {
             Minecraft.getInstance().getSoundManager().play(soundInstance);
         }
     }
 
-    public void stopSound(SoundInstance soundInstance) {
+    public void stopSound(ConfiguredSimpleSoundInstance soundInstance) {
         if (this.enabled) {
             Minecraft.getInstance().getSoundManager().stop(soundInstance);
         }

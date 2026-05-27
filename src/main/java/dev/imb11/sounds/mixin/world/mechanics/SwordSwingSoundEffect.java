@@ -1,5 +1,6 @@
 package dev.imb11.sounds.mixin.world.mechanics;
 
+import dev.imb11.sounds.api.config.ConfiguredSimpleSoundInstance;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.WorldSoundsConfig;
 import net.minecraft.client.Minecraft;
@@ -26,7 +27,7 @@ public class SwordSwingSoundEffect {
     @Shadow
     public int swingTime;
     @Unique
-    public SoundInstance sounds$currentSwordSwooshSound;
+    public ConfiguredSimpleSoundInstance sounds$currentSwordSwooshSound;
     @Unique
     private static long lastPlayed = 0;
     @Unique

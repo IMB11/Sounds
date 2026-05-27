@@ -2,13 +2,12 @@ package dev.imb11.sounds.sound.context;
 
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.SoundDefinition;
+import dev.imb11.sounds.api.config.ConfiguredSimpleSoundInstance;
 import dev.imb11.sounds.api.context.DynamicSoundContext;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
-import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.resources.Identifier;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 
@@ -29,7 +28,7 @@ public class ScreenHandlerSoundContext implements DynamicSoundContext<AbstractCo
     }
 
     @Override
-    public SoundInstance handleContext(AbstractContainerMenu context, Identifier fallback, float pitch, float volume) {
+    public ConfiguredSimpleSoundInstance handleContext(AbstractContainerMenu context, Identifier fallback, float pitch, float volume) {
         Identifier soundEvent = null;
         try {
             var type = context.getType();
@@ -62,6 +61,6 @@ public class ScreenHandlerSoundContext implements DynamicSoundContext<AbstractCo
             soundEvent = fallback;
         }
 
-        return createSoundInstance(soundEvent, pitch, volume);
+        return createSoundInstance(soundEvent, pitch, volume, false);
     }
 }

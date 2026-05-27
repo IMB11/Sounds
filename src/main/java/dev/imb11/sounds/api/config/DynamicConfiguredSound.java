@@ -3,11 +3,10 @@ package dev.imb11.sounds.api.config;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.imb11.sounds.api.context.DynamicSoundContext;
-import dev.isxander.yacl3.api.ButtonOption;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
-import java.lang.reflect.ParameterizedType;
+
 import java.util.ArrayList;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -48,14 +47,14 @@ public class DynamicConfiguredSound<T, F extends DynamicSoundContext<T>> extends
     }
 
     public void playDynamicSound(SoundEvent event) {
-        playSound(SimpleSoundInstance.forUI(event, this.pitch, this.volume));
+        playSound(ConfiguredSimpleSoundInstance.forUI(event, this.pitch, this.volume));
     }
 
     public void playDynamicSound(T context, F contextHandler) {
-        SoundInstance event = contextHandler.handleContext(context, getSoundEvent(), this.pitch, this.volume);
+        ConfiguredSimpleSoundInstance event = contextHandler.handleContext(context, getSoundEvent(), this.pitch, this.volume);
 
         if (event == null || !enableDynamicSounds) {
-            this.playSound();
+            this.playSound(true);
             return;
         }
 

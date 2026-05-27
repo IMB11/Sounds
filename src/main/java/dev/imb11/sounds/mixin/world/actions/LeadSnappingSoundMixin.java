@@ -14,7 +14,7 @@ public interface LeadSnappingSoundMixin {
     @Inject(method = "dropLeash(Lnet/minecraft/world/entity/Entity;ZZ)V", at = @At("TAIL"), cancellable = false)
     private static <E extends Entity & Leashable> void $lead_snapping_sound_effect(E entity, boolean sendPacket, boolean dropItem, CallbackInfo ci) {
         if (dropItem && entity.level().isClientSide()) {
-            SoundsConfig.get(WorldSoundsConfig.class).leadSnappingSoundEffect.playSound();
+            SoundsConfig.get(WorldSoundsConfig.class).leadSnappingSoundEffect.playSound(true);
         }
     }
 }

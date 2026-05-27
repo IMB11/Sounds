@@ -10,11 +10,11 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SmithingTemplateItem;
 import net.minecraft.world.item.SpawnEggItem;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -200,24 +200,24 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.BOW)
                 .addKey(Items.CROSSBOW));
 
-        provider.accept("fishing_rods", create(SoundEvents.POINTED_DRIPSTONE_DRIP_WATER_INTO_CAULDRON)
+        provider.accept("fishing_rods", create(CustomSounds.FISHING_RODS)
                 .addKey(Items.FISHING_ROD));
 
         provider.accept("flint_and_steel", create(CustomSounds.FLINTANDSTEEL_USE)
                 .addKey(Items.FLINT_AND_STEEL));
 
-        provider.accept("dyes", create(SoundEvents.DYE_USE)
+        provider.accept("dyes", create(CustomSounds.DYE)
                 .addKey(ConventionalItemTags.DYES));
 
-        provider.accept("papers", create(SoundEvents.BOOK_PAGE_TURN)
+        provider.accept("papers", create(CustomSounds.PAPER)
                 .addKey(Items.PAPER)
                 .addKey(Items.FILLED_MAP)
                 .addKey(Items.MAP));
 
-        provider.accept("fireworks", create(SoundEvents.BAMBOO_SAPLING_HIT)
+        provider.accept("fireworks", create(CustomSounds.FIREWORKS)
                 .addKey(Items.FIREWORK_ROCKET));
 
-        provider.accept("ingot_metals", create(SoundEvents.METAL_BREAK)
+        provider.accept("ingot_metals", create(CustomSounds.INGOTS)
                 .addKey(Items.IRON_INGOT)
                 .addKey(Items.GOLD_INGOT)
                 .addKey(Items.NETHERITE_INGOT)
@@ -229,7 +229,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.RAW_IRON)
                 .addKey(Items.RAW_COPPER));
 
-        provider.accept("shiny_metals", create(SoundEvents.AMETHYST_CLUSTER_HIT)
+        provider.accept("shiny_metals", create(CustomSounds.SHINY_METALS)
                 .addKey(Items.AMETHYST_SHARD)
                 .addKey(Items.QUARTZ)
                 .addKey(Items.EMERALD)
@@ -301,7 +301,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .setPitch(1.75f)
                 .setVolume(0.75f));
 
-        provider.accept("minecarts", create(SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON)
+        provider.accept("minecarts", create(CustomSounds.MINECARTS)
                 .addKey(Items.MINECART)
                 .addKey(Items.CHEST_MINECART)
                 .addKey(Items.FURNACE_MINECART)
@@ -311,7 +311,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .setPitch(1.75f)
                 .setVolume(0.75f));
 
-        provider.accept("dirty_metals", create(SoundEvents.GRAVEL_HIT)
+        provider.accept("dirty_metals", create(CustomSounds.DIRTY_METALS)
                 .addKey(Items.COAL)
                 .addKey(Items.CHARCOAL)
                 .addKey(Items.FLINT)
@@ -320,15 +320,15 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.GLOWSTONE)
                 .addKey(Items.GUNPOWDER));
 
-        provider.accept("shards", create(SoundEvents.DECORATED_POT_STEP)
+        provider.accept("shards", create(CustomSounds.SHARDS)
                 .addKey(Items.DISC_FRAGMENT_5)
                 .addKey(ItemTags.DECORATED_POT_SHERDS));
 
         provider.accept("smithing_templates", create(CustomSounds.USE_SMITHING_TABLE)
                 .addKey(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)
-                .addKey(TagKey.create(Registries.ITEM, Identifier.parse("trim_templates"))));
+                .addMultipleKeys(BuiltInRegistries.ITEM.stream().filter(i->i instanceof SmithingTemplateItem).toList()));
 
-        provider.accept("filled_buckets", create(SoundEvents.BUCKET_FILL)
+        provider.accept("filled_buckets", create(CustomSounds.BUCKET_FILL)
                 .addKey(ConventionalItemTags.WATER_BUCKETS)
                 .addKey(ConventionalItemTags.ENTITY_WATER_BUCKETS));
 
@@ -348,7 +348,7 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.OMINOUS_BOTTLE)
                 .addKey(Items.LINGERING_POTION));
 
-        provider.accept("wet_mob_drops", create(SoundEvents.SLIME_BLOCK_HIT)
+        provider.accept("wet_mob_drops", create(CustomSounds.WET_MOB_DROPS)
                 .addKey(Items.SLIME_BALL)
                 .addKey(Items.HONEYCOMB)
                 .addKey(Items.HONEY_BOTTLE)
@@ -361,17 +361,17 @@ public class DynamicItemSounds extends SoundDefinitionProvider<Item> {
                 .addKey(Items.MAGMA_CREAM)
                 .addKey(Items.GHAST_TEAR));
 
-        provider.accept("sculk", create(SoundEvents.SCULK_VEIN_FALL)
+        provider.accept("sculk", create(CustomSounds.SCULK)
                 .addKey(Items.ECHO_SHARD));
 
-        provider.accept("bones", create(SoundEvents.BONE_BLOCK_HIT)
+        provider.accept("bones", create(CustomSounds.BONE)
                 .addKey(Items.BONE)
                 .addKey(Items.BONE_MEAL));
 
         // Spawn Eggs
 
         List<Item> spawnEggs = BuiltInRegistries.ITEM.stream().filter(item -> item instanceof SpawnEggItem).toList();
-        provider.accept("spawn_eggs", create(SoundEvents.SNIFFER_EGG_PLOP)
+        provider.accept("spawn_eggs", create(CustomSounds.EGGS)
                 .addKey(Items.EGG)
                 .addMultipleKeys(spawnEggs));
     }

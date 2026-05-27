@@ -2,5 +2,5 @@
   "keys": [
     "minecraft:stonecutter"
   ],
-  "soundEvent": "minecraft:entity.villager.work_mason"
+  "soundEvent": "sounds:block.stonecutter.use"
 }

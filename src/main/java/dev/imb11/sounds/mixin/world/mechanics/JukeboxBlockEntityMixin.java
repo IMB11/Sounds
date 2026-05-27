@@ -13,6 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class JukeboxBlockEntityMixin {
     @Inject(method = "setTheItem", at = @At(value = "HEAD"))
     public void $jukebox_use_sound_effect(ItemStack stack, CallbackInfo ci) {
-        SoundsConfig.get(WorldSoundsConfig.class).jukeboxUseSoundEffect.playSound();
+        SoundsConfig.get(WorldSoundsConfig.class).jukeboxUseSoundEffect.playSound(true);
     }
 }

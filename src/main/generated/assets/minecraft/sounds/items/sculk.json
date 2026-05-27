@@ -2,5 +2,5 @@
   "keys": [
     "minecraft:echo_shard"
   ],
-  "soundEvent": "minecraft:block.sculk_vein.fall"
+  "soundEvent": "sounds:item.sculk.dynamic"
 }

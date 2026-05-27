@@ -12,5 +12,5 @@
     "minecraft:slime_ball",
     "minecraft:spider_eye"
   ],
-  "soundEvent": "minecraft:block.slime_block.hit"
+  "soundEvent": "sounds:item.wet_mob_drops.dynamic"
 }

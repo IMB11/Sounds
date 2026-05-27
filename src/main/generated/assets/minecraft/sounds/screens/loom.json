@@ -2,5 +2,5 @@
   "keys": [
     "minecraft:loom"
   ],
-  "soundEvent": "minecraft:block.tripwire.detach"
+  "soundEvent": "sounds:block.loom.use"
 }

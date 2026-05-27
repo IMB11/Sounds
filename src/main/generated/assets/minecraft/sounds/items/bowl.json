@@ -3,6 +3,6 @@
     "minecraft:bowl"
   ],
   "pitch": 1.85,
-  "soundEvent": "minecraft:block.bamboo_sapling.hit",
+  "soundEvent": "sounds:item.bowl.dynamic",
   "volume": 0.25
 }

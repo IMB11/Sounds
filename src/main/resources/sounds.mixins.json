@@ -26,6 +26,7 @@
     "ui.MentionSoundEffect",
     "ui.PlayerEntityMixin",
     "ui.ScreenSoundEffect",
+    "ui.SubtitleOverlayMixin",
     "world.actions.CakeEatSoundMixin",
     "world.actions.EnderpearlVarietyMixin",
     "world.actions.FrostWalkerSoundsMixin",

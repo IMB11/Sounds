@@ -462,7 +462,7 @@ public class CustomSounds {
 
     public static final SoundEvent TRIAL_KEY = register("block.trial_spawner.spawn_item_begin");
 
-    public static final SoundEvent WIND_CHARGE = register("entity.breeze.wind_burst");
+    public static final SoundEvent WIND_CHARGE = register("item.wind_charge.dynamic");
 
     public static final SoundEvent CHAIN = register("item.armor.equip_chain");
 
@@ -517,6 +517,34 @@ public class CustomSounds {
     public static final SoundEvent USE_LOOM = register("block.loom.use");
 
     public static final SoundEvent BOWL = register("item.bowl.dynamic");
+
+    public static final SoundEvent FISHING_RODS = register("item.fishing_rods.dynamic");
+
+    public static final SoundEvent DYE = register("item.dye.dynamic");
+
+    public static final SoundEvent PAPER = register("item.paper.dynamic");
+
+    public static final SoundEvent FIREWORKS = register("item.fireworks.dynamic");
+
+    public static final SoundEvent INGOTS = register("item.ingots.dynamic");
+
+    public static final SoundEvent SHINY_METALS = register("item.shiny_metals.dynamic");
+
+    public static final SoundEvent MINECARTS = register("item.minecarts.dynamic");
+
+    public static final SoundEvent DIRTY_METALS = register("item.dirty_metals.dynamic");
+
+    public static final SoundEvent SHARDS = register("item.shards.dynamic");
+
+    public static final SoundEvent EGGS = register("item.egg.dynamic");
+
+    public static final SoundEvent BONE = register("item.bone.dynamic");
+
+    public static final SoundEvent SCULK = register("item.sculk.dynamic");
+
+    public static final SoundEvent BUCKET_FILL = register("item.bucket.dynamic");
+
+    public static final SoundEvent WET_MOB_DROPS = register("item.wet_mob_drops.dynamic");
 
     private static SoundEvent register(String name) {
         Identifier id = Identifier.fromNamespaceAndPath("sounds", name);

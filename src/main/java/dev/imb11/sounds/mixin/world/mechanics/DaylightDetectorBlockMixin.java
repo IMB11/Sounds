@@ -20,6 +20,6 @@ public class DaylightDetectorBlockMixin {
     @Inject(method = "useWithoutItem", at = @At(value = "HEAD"))
     public void $daylight_detector_use_sound_effect(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
         if (player instanceof LocalPlayer && player.mayBuild())
-            SoundsConfig.get(WorldSoundsConfig.class).daylightDetectorUseSoundEffect.playSound();
+            SoundsConfig.get(WorldSoundsConfig.class).daylightDetectorUseSoundEffect.playSound(true);
     }
 }

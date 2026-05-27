@@ -11,5 +11,5 @@
     "minecraft:raw_gold",
     "minecraft:raw_iron"
   ],
-  "soundEvent": "minecraft:block.metal.break"
+  "soundEvent": "sounds:item.ingots.dynamic"
 }

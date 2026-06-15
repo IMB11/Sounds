@@ -13,5 +13,5 @@
     "minecraft:copper_spear",
     "minecraft:copper_sword"
   ],
-  "soundEvent": "minecraft:item.armor.equip_copper"
+  "soundEvent": "sounds:item.armor.equip_copper"
 }

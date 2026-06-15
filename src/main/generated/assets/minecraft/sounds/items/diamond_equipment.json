@@ -13,5 +13,5 @@
     "minecraft:diamond_spear",
     "minecraft:diamond_sword"
   ],
-  "soundEvent": "minecraft:item.armor.equip_diamond"
+  "soundEvent": "sounds:item.armor.equip_diamond"
 }

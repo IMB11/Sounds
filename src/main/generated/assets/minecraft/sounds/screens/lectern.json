@@ -2,5 +2,5 @@
   "keys": [
     "minecraft:lectern"
   ],
-  "soundEvent": "minecraft:entity.villager.work_librarian"
+  "soundEvent": "sounds:block.lectern.use"
 }

@@ -3,5 +3,5 @@
     "minecraft:disc_fragment_5",
     "#minecraft:decorated_pot_sherds"
   ],
-  "soundEvent": "minecraft:block.decorated_pot.step"
+  "soundEvent": "sounds:item.shards.dynamic"
 }

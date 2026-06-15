@@ -6,6 +6,6 @@
     "#c:foods/vegetable"
   ],
   "pitch": 1.76,
-  "soundEvent": "minecraft:block.crop.break",
+  "soundEvent": "sounds:item.dynamic.crop_food",
   "volume": 1.0
 }

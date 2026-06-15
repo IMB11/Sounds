@@ -2,7 +2,6 @@ package dev.imb11.sounds.sound.events;
 
 import dev.imb11.sounds.config.EventSoundsConfig;
 import dev.imb11.sounds.config.SoundsConfig;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,9 +37,9 @@ public class PotionEventHelper {
                 if (statusEffect == null) continue;
                 if(SoundsConfig.get(EventSoundsConfig.class).ignoreSilencedStatusEffects && !removedEffects.get(effectId).showIcon()) continue;
                 if (statusEffect.isBeneficial()) {
-                    SoundsConfig.get(EventSoundsConfig.class).positiveStatusEffectLoseSoundEffect.playSound();
+                    SoundsConfig.get(EventSoundsConfig.class).positiveStatusEffectLoseSoundEffect.playSound(true);
                 } else {
-                    SoundsConfig.get(EventSoundsConfig.class).negativeStatusEffectLoseSoundEffect.playSound();
+                    SoundsConfig.get(EventSoundsConfig.class).negativeStatusEffectLoseSoundEffect.playSound(true);
                 }
             }
 
@@ -53,9 +52,9 @@ public class PotionEventHelper {
                 if (statusEffect == null) continue;
                 if(SoundsConfig.get(EventSoundsConfig.class).ignoreSilencedStatusEffects && !addedEffects.get(effectId).showIcon()) continue;
                 if (statusEffect.isBeneficial()) {
-                    SoundsConfig.get(EventSoundsConfig.class).positiveStatusEffectGainSoundEffect.playSound();
+                    SoundsConfig.get(EventSoundsConfig.class).positiveStatusEffectGainSoundEffect.playSound(true);
                 } else {
-                    SoundsConfig.get(EventSoundsConfig.class).negativeStatusEffectGainSoundEffect.playSound();
+                    SoundsConfig.get(EventSoundsConfig.class).negativeStatusEffectGainSoundEffect.playSound(true);
                 }
             }
         }

@@ -5,6 +5,6 @@
     "minecraft:turtle_scute"
   ],
   "pitch": 1.8,
-  "soundEvent": "minecraft:item.armor.equip_turtle",
+  "soundEvent": "sounds:item.armor.equip_turtle",
   "volume": 0.5
 }

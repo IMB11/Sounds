@@ -8,5 +8,5 @@
     "minecraft:gunpowder",
     "minecraft:redstone"
   ],
-  "soundEvent": "minecraft:block.gravel.hit"
+  "soundEvent": "sounds:item.dirty_metals.dynamic"
 }

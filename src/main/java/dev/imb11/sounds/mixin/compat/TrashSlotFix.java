@@ -2,9 +2,6 @@ package dev.imb11.sounds.mixin.compat;
 
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
-import dev.imb11.sounds.dynamic.DynamicSoundHelper;
-import dev.imb11.sounds.sound.context.ItemStackSoundContext;
-import net.blay09.mods.trashslot.TrashHelper;
 import net.blay09.mods.trashslot.client.TrashSlotSlot;
 import net.blay09.mods.trashslot.client.deletion.DefaultDeletionProvider;
 import net.minecraft.world.entity.player.Player;

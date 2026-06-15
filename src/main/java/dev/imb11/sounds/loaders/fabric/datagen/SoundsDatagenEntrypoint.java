@@ -8,11 +8,9 @@ public class SoundsDatagenEntrypoint implements DataGeneratorEntrypoint {
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         final FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
-        /*? if >=1.21 {*/
         pack.addProvider(DynamicItemSounds::new);
         pack.addProvider(DynamicScreenSounds::new);
         pack.addProvider(DynamicTagPairs::new);
-        /*?}*/
     }
 }
 //?}

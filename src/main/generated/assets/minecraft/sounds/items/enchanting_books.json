@@ -4,6 +4,6 @@
     "minecraft:experience_bottle"
   ],
   "pitch": 0.01,
-  "soundEvent": "minecraft:block.end_portal_frame.fill",
+  "soundEvent": "sounds:block.enchantment_table.use",
   "volume": 0.2
 }

@@ -4,6 +4,6 @@
     "minecraft:bamboo_raft"
   ],
   "pitch": 1.75,
-  "soundEvent": "minecraft:block.bamboo_wood.hit",
+  "soundEvent": "sounds:block.bamboo_wood.hit",
   "volume": 0.75
 }

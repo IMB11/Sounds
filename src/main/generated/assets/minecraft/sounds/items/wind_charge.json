@@ -3,6 +3,6 @@
     "minecraft:wind_charge"
   ],
   "pitch": 2.0,
-  "soundEvent": "minecraft:entity.breeze.wind_burst",
+  "soundEvent": "sounds:item.wind_charge.dynamic",
   "volume": 0.1
 }

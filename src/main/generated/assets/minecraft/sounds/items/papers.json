@@ -4,5 +4,5 @@
     "minecraft:map",
     "minecraft:paper"
   ],
-  "soundEvent": "minecraft:item.book.page_turn"
+  "soundEvent": "sounds:item.paper.dynamic"
 }

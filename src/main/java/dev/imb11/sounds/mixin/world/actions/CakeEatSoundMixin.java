@@ -25,7 +25,7 @@ public class CakeEatSoundMixin {
         // nom nom nom
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastPlayed > COOLDOWN) {
-            SoundsConfig.get(WorldSoundsConfig.class).cakeEatSoundEffect.playSound();
+            SoundsConfig.get(WorldSoundsConfig.class).cakeEatSoundEffect.playSound(true);
             lastPlayed = currentTime;
         }
     }

@@ -1,12 +1,12 @@
 package dev.imb11.sounds.sound.context;
 
 import dev.imb11.sounds.api.SoundDefinition;
+import dev.imb11.sounds.api.config.ConfiguredSimpleSoundInstance;
 import dev.imb11.sounds.api.context.DynamicSoundContext;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.mixin.accessors.BlockAccessor;
-import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
@@ -34,7 +34,7 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
     }
 
     @Override
-    public SoundInstance handleContext(ItemStack context, Identifier fallback, float pitch, float volume) {
+    public ConfiguredSimpleSoundInstance handleContext(ItemStack context, Identifier fallback, float pitch, float volume) {
         if (SoundsConfig.get(UISoundsConfig.class).enableDynamicItemSounds) {
 			Item item = context.getItem();
             if (item instanceof BlockItem blockItem) {
@@ -72,6 +72,6 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
                 }
 			}
         }
-        return createSoundInstance(fallback, pitch, volume);
+        return createSoundInstance(fallback, pitch, volume, false);
     }
 }

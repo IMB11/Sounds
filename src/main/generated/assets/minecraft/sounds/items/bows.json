@@ -3,5 +3,5 @@
     "minecraft:bow",
     "minecraft:crossbow"
   ],
-  "soundEvent": "minecraft:entity.arrow.shoot"
+  "soundEvent": "sounds:item.bow"
 }

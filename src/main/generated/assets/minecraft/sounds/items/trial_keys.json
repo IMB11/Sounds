@@ -4,6 +4,6 @@
     "minecraft:trial_key"
   ],
   "pitch": 1.0,
-  "soundEvent": "minecraft:block.trial_spawner.spawn_item_begin",
+  "soundEvent": "sounds:block.trial_spawner.spawn_item_begin",
   "volume": 0.4
 }

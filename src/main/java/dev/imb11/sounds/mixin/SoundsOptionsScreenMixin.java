@@ -17,7 +17,7 @@ public class SoundsOptionsScreenMixin extends Screen {
         super(title);
     }
 
-    @Inject(method = "addOptions", at = @At("TAIL"), cancellable = false)
+    @Inject(method = "addOptions", at = @At("TAIL"))
     public void $add_sounds_button(CallbackInfo ci) {
         assert this.minecraft != null;
 

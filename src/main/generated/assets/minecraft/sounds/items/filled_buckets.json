@@ -3,5 +3,5 @@
     "#c:buckets/entity_water",
     "#c:buckets/water"
   ],
-  "soundEvent": "minecraft:item.bucket.fill"
+  "soundEvent": "sounds:item.bucket.dynamic"
 }

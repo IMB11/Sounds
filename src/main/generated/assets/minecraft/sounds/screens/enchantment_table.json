@@ -2,5 +2,5 @@
   "keys": [
     "minecraft:enchantment"
   ],
-  "soundEvent": "minecraft:block.end_portal_frame.fill"
+  "soundEvent": "sounds:block.enchantment_table.use"
 }

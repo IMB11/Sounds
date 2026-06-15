@@ -2144,5 +2144,767 @@
             "sounds:block/stone_bricks/step5"
         ],
         "subtitle": "subtitles.block.generic.footsteps"
+    },
+    "ui.inventory.scroll": {
+        "sounds": [
+            "note/hat"
+        ]
+    },
+    "ui.inventory.pick": {
+        "sounds": [
+            "step/stone1",
+            "step/stone2",
+            "step/stone3",
+            "step/stone4",
+            "step/stone5",
+            "step/stone6"
+        ]
+    },
+    "ui.inventory.copy": {
+        "sounds": [
+            "random/fizz"
+        ]
+    },
+    "ui.inventory.delete": {
+        "sounds": [
+            "random/fizz"
+        ]
+    },
+    "ui.inventory.drop": {
+        "sounds": [
+            "random/bow"
+        ]
+    },
+    "ui.chat.ping": {
+        "sounds": [
+            "note/icechime"
+        ],
+        "subtitle": "sounds.subtitle.chat_ping"
+    },
+    "event.status_effect.gain_positive": {
+        "sounds": [
+            "item/trident/thunder1",
+            "item/trident/thunder2"
+        ]
+    },
+    "event.status_effect.gain_negative": {
+        "sounds": [
+            "mob/illusion_illager/mirror_move1",
+            "mob/illusion_illager/mirror_move2"
+        ]
+    },
+    "event.status_effect.lose": {
+        "sounds": [
+            "item/trident/riptide1"
+        ]
+    },
+    "block.repeater.click_on": {
+        "sounds": [
+            {
+                "name": "random/click",
+                "pitch": 0.6,
+                "volume": 0.3
+            }
+        ],
+        "subtitle": "sounds.subtitle.block.repeater.click"
+    },
+    "block.daylight_detector.use": {
+        "sounds": [
+            "note/hat"
+        ],
+        "subtitle": "sounds.subtitle.block.daylight_detector.use"
+    },
+    "entity.furnace_minecart.use": {
+        "sounds": [
+            "mob/creeper/say1",
+            "mob/creeper/say2",
+            "mob/creeper/say3",
+            "mob/creeper/say4"
+        ],
+        "subtitle": "sounds.subtitle.entity.furnace_minecart.use"
+    },
+    "item.dynamic.crop_food": {
+        "sounds": [
+            {
+                "name": "block/bamboo/sapling_place1",
+                "volume": 0.9
+            },
+            {
+                "name": "block/bamboo/sapling_place2",
+                "volume": 0.9
+            },
+            {
+                "name": "block/bamboo/sapling_place3",
+                "volume": 0.9
+            },
+            {
+                "name": "block/bamboo/sapling_place4",
+                "volume": 0.9
+            },
+            {
+                "name": "block/bamboo/sapling_place5",
+                "volume": 0.9
+            },
+            {
+                "name": "block/bamboo/sapling_place6",
+                "volume": 0.9
+            }
+        ]
+    },
+    "item.dynamic.soup": {
+        "sounds": [
+            "mob/mooshroom/milk1",
+            {
+                "name": "mob/mooshroom/milk1",
+                "pitch": 0.9
+            },
+            {
+                "name": "mob/mooshroom/milk1",
+                "pitch": 1.1
+            },
+            "mob/mooshroom/milk2",
+            {
+                "name": "mob/mooshroom/milk2",
+                "pitch": 0.9
+            },
+            {
+                "name": "mob/mooshroom/milk2",
+                "pitch": 1.1
+            },
+            "mob/mooshroom/milk3",
+            {
+                "name": "mob/mooshroom/milk3",
+                "pitch": 0.9
+            },
+            {
+                "name": "mob/mooshroom/milk3",
+                "pitch": 1.1
+            }
+        ]
+    },
+    "item.dynamic.meat_and_fish": {
+        "sounds": [
+            {
+                "name": "mob/pufferfish/flop1",
+                "volume": 0.3
+            },
+            {
+                "name": "mob/pufferfish/flop2",
+                "volume": 0.3
+            },
+            {
+                "name": "mob/pufferfish/flop3",
+                "volume": 0.3
+            },
+            {
+                "name": "mob/pufferfish/flop4",
+                "volume": 0.3
+            }
+        ]
+    },
+    "block.wood.hit": {
+        "sounds": [
+            "step/wood1",
+            "step/wood2",
+            "step/wood3",
+            "step/wood4",
+            "step/wood5",
+            "step/wood6"
+        ]
+    },
+    "block.bamboo_wood.hit": {
+        "sounds": [
+            {
+                "name": "block/bamboo_wood/step1",
+                "volume": 0.9
+            },
+            {
+                "name": "block/bamboo_wood/step2",
+                "volume": 0.9
+            },
+            {
+                "name": "block/bamboo_wood/step3",
+                "volume": 0.9
+            },
+            {
+                "name": "block/bamboo_wood/step4",
+                "volume": 0.9
+            },
+            {
+                "name": "block/bamboo_wood/step5",
+                "volume": 0.9
+            },
+            {
+                "name": "block/bamboo_wood/step6",
+                "volume": 0.9
+            }
+        ]
+    },
+    "item.axe.strip": {
+        "sounds": [
+            {
+                "name": "item/axe/strip1",
+                "volume": 0.9
+            },
+            {
+                "name": "item/axe/strip1",
+                "pitch": 0.85,
+                "volume": 0.9
+            },
+            {
+                "name": "item/axe/strip2",
+                "volume": 0.9
+            },
+            {
+                "name": "item/axe/strip2",
+                "pitch": 0.85,
+                "volume": 0.9
+            },
+            {
+                "name": "item/axe/strip3",
+                "volume": 0.9
+            },
+            {
+                "name": "item/axe/strip3",
+                "pitch": 0.85,
+                "volume": 0.9
+            },
+            {
+                "name": "item/axe/strip4",
+                "volume": 0.9
+            },
+            {
+                "name": "item/axe/strip4",
+                "pitch": 0.85,
+                "volume": 0.9
+            }
+        ]
+    },
+    "block.smithing_table.open": {
+        "sounds": [
+            "mob/irongolem/walk1",
+            "mob/irongolem/walk2",
+            "mob/irongolem/walk3",
+            "mob/irongolem/walk4"
+        ]
+    },
+    "block.anvil.fall": {
+        "sounds": [
+            "step/stone1",
+            "step/stone2",
+            "step/stone3",
+            "step/stone4",
+            "step/stone5",
+            "step/stone6"
+        ]
+    },
+    "block.trial_spawner.spawn_item_begin": {
+        "sounds": [
+            "block/trial_spawner/spawn_item_begin1",
+            "block/trial_spawner/spawn_item_begin2",
+            "block/trial_spawner/spawn_item_begin3"
+        ]
+    },
+    "item.wind_charge.dynamic": {
+        "sounds": [
+            {
+                "attenuation_distance": 8,
+                "name": "entity/wind_charge/wind_burst1",
+                "pitch": 1.25
+            },
+            {
+                "attenuation_distance": 8,
+                "name": "entity/wind_charge/wind_burst2",
+                "pitch": 1.25
+            },
+            {
+                "attenuation_distance": 8,
+                "name": "entity/wind_charge/wind_burst3",
+                "pitch": 1.25
+            }
+        ]
+    },
+    "item.armor.equip_chain": {
+        "sounds": [
+            "item/armor/equip_chain1",
+            "item/armor/equip_chain2",
+            "item/armor/equip_chain3",
+            "item/armor/equip_chain4",
+            "item/armor/equip_chain5",
+            "item/armor/equip_chain6"
+        ]
+    },
+    "item.armor.equip_copper": {
+        "sounds": [
+            "item/armor/equip_copper1",
+            "item/armor/equip_copper2",
+            "item/armor/equip_copper3",
+            "item/armor/equip_copper4",
+            "item/armor/equip_copper5",
+            "item/armor/equip_copper6"
+        ]
+    },
+    "item.armor.equip_diamond": {
+        "sounds": [
+            "item/armor/equip_diamond1",
+            "item/armor/equip_diamond2",
+            "item/armor/equip_diamond3",
+            "item/armor/equip_diamond4",
+            "item/armor/equip_diamond5",
+            "item/armor/equip_diamond6"
+        ]
+    },
+    "item.armor.equip_elytra": {
+        "sounds": [
+            "item/armor/equip_leather1",
+            "item/armor/equip_leather2",
+            "item/armor/equip_leather3",
+            "item/armor/equip_leather4",
+            "item/armor/equip_leather5",
+            "item/armor/equip_leather6"
+        ]
+    },
+    "item.armor.equip_generic": {
+        "sounds": [
+            "item/armor/equip_generic1",
+            "item/armor/equip_generic2",
+            "item/armor/equip_generic3",
+            "item/armor/equip_generic4",
+            "item/armor/equip_generic5",
+            "item/armor/equip_generic6"
+        ]
+    },
+    "item.armor.equip_gold": {
+        "sounds": [
+            "item/armor/equip_gold1",
+            "item/armor/equip_gold2",
+            "item/armor/equip_gold3",
+            "item/armor/equip_gold4",
+            "item/armor/equip_gold5",
+            "item/armor/equip_gold6"
+        ]
+    },
+    "item.armor.equip_iron": {
+        "sounds": [
+            "item/armor/equip_iron1",
+            "item/armor/equip_iron2",
+            "item/armor/equip_iron3",
+            "item/armor/equip_iron4",
+            "item/armor/equip_iron5",
+            "item/armor/equip_iron6"
+        ]
+    },
+    "item.armor.equip_leather": {
+        "sounds": [
+            "item/armor/equip_leather1",
+            "item/armor/equip_leather2",
+            "item/armor/equip_leather3",
+            "item/armor/equip_leather4",
+            "item/armor/equip_leather5",
+            "item/armor/equip_leather6"
+        ]
+    },
+    "item.armor.equip_netherite": {
+        "sounds": [
+            {
+                "name": "item/armor/equip_netherite1",
+                "volume": 0.8
+            },
+            {
+                "name": "item/armor/equip_netherite1",
+                "pitch": 0.9,
+                "volume": 0.8
+            },
+            {
+                "name": "item/armor/equip_netherite2",
+                "volume": 0.8
+            },
+            {
+                "name": "item/armor/equip_netherite2",
+                "pitch": 0.9,
+                "volume": 0.8
+            },
+            {
+                "name": "item/armor/equip_netherite3",
+                "volume": 0.8
+            },
+            {
+                "name": "item/armor/equip_netherite3",
+                "pitch": 0.9,
+                "volume": 0.8
+            },
+            {
+                "name": "item/armor/equip_netherite4",
+                "volume": 0.8
+            },
+            {
+                "name": "item/armor/equip_netherite4",
+                "pitch": 0.9,
+                "volume": 0.8
+            }
+        ]
+    },
+    "item.armor.equip_turtle": {
+        "sounds": [
+            "mob/turtle/armor",
+            {
+                "name": "mob/turtle/armor",
+                "pitch": 0.85
+            },
+            {
+                "name": "mob/turtle/armor",
+                "pitch": 1.1
+            }
+        ]
+    },
+    "item.armor.equip_wolf": {
+        "sounds": [
+            "item/armor/equip_wolf1",
+            {
+                "name": "item/armor/equip_wolf1",
+                "pitch": 1.1
+            },
+            "item/armor/equip_wolf2",
+            {
+                "name": "item/armor/equip_wolf2",
+                "pitch": 1.1
+            }
+        ]
+    },
+    "block.enchantment_table.use": {
+        "sounds": [
+            "block/end_portal/eyeplace1",
+            "block/end_portal/eyeplace2",
+            "block/end_portal/eyeplace3"
+        ]
+    },
+    "item.bottle.fill": {
+        "sounds": [
+            "item/bottle/fill1",
+            "item/bottle/fill2",
+            "item/bottle/fill3",
+            "item/bottle/fill4"
+        ]
+    },
+    "block.wool.hit": {
+        "sounds": [
+            "step/cloth1",
+            "step/cloth2",
+            "step/cloth3",
+            "step/cloth4"
+        ]
+    },
+    "item.trident": {
+        "sounds": [
+            "item/trident/pierce1",
+            "item/trident/pierce2",
+            "item/trident/pierce3"
+        ]
+    },
+    "item.bow": {
+        "sounds": [
+            "random/bow"
+        ]
+    },
+    "block.stone.place": {
+        "sounds": [
+            "dig/stone1",
+            "dig/stone2",
+            "dig/stone3",
+            "dig/stone4"
+        ]
+    },
+    "block.amethyst_block.resonate": {
+        "sounds": [
+            {
+                "attenuation_distance": 48,
+                "name": "block/amethyst/resonate1"
+            },
+            {
+                "attenuation_distance": 48,
+                "name": "block/amethyst/resonate2"
+            },
+            {
+                "attenuation_distance": 48,
+                "name": "block/amethyst/resonate3"
+            },
+            {
+                "attenuation_distance": 48,
+                "name": "block/amethyst/resonate4"
+            }
+        ]
+    },
+    "block.anvil.use": {
+        "sounds": [
+            {
+                "name": "random/anvil_land",
+                "volume": 0.5
+            }
+        ]
+    },
+    "item.flintandsteel.use": {
+        "sounds": [
+            "fire/ignite"
+        ]
+    },
+    "block.smoker.use": {
+        "sounds": [
+            "block/campfire/crackle1",
+            "block/campfire/crackle2",
+            "block/campfire/crackle3",
+            "block/campfire/crackle4",
+            "block/campfire/crackle5",
+            "block/campfire/crackle6"
+        ]
+    },
+    "block.furnace.use": {
+        "sounds": [
+            "fire/fire"
+        ]
+    },
+    "block.lectern.use": {
+        "sounds": [
+            {
+                "name": "item/book/open_flip1",
+                "volume": 2.0
+            },
+            {
+                "name": "item/book/open_flip2",
+                "volume": 2.0
+            },
+            {
+                "name": "item/book/open_flip3",
+                "volume": 2.0
+            }
+        ]
+    },
+    "block.stonecutter.use": {
+        "sounds": [
+            "ui/stonecutter/cut1",
+            {
+                "name": "ui/stonecutter/cut1",
+                "pitch": 0.92
+            },
+            "ui/stonecutter/cut2",
+            {
+                "name": "ui/stonecutter/cut2",
+                "pitch": 0.92
+            }
+        ]
+    },
+    "block.cartography_table.use": {
+        "sounds": [
+            "ui/cartography_table/drawmap1",
+            "ui/cartography_table/drawmap2",
+            "ui/cartography_table/drawmap3"
+        ]
+    },
+    "block.brewing_stand.use": {
+        "sounds": [
+            "item/bottle/empty1",
+            "item/bottle/empty2"
+        ]
+    },
+    "block.loom.use": {
+        "sounds": [
+            "random/bowhit1",
+            "random/bowhit2",
+            "random/bowhit3",
+            "random/bowhit4"
+        ]
+    },
+    "item.bowl.dynamic": {
+        "sounds": [
+            {
+                "name": "block/bamboo/sapling_hit1",
+                "volume": 0.8
+            },
+            {
+                "name": "block/bamboo/sapling_hit2",
+                "volume": 0.8
+            },
+            {
+                "name": "block/bamboo/sapling_hit3",
+                "volume": 0.8
+            },
+            {
+                "name": "block/bamboo/sapling_hit4",
+                "volume": 0.8
+            },
+            {
+                "name": "block/bamboo/sapling_hit5",
+                "volume": 0.8
+            }
+        ]
+    },
+    "item.fishing_rods.dynamic": {
+        "sounds": [
+            "block/pointed_dripstone/drip_water_cauldron1",
+            "block/pointed_dripstone/drip_water_cauldron2",
+            "block/pointed_dripstone/drip_water_cauldron3",
+            "block/pointed_dripstone/drip_water_cauldron4",
+            "block/pointed_dripstone/drip_water_cauldron5",
+            "block/pointed_dripstone/drip_water_cauldron6",
+            "block/pointed_dripstone/drip_water_cauldron7",
+            "block/pointed_dripstone/drip_water_cauldron8"
+        ]
+    },
+    "item.dye.dynamic": {
+        "sounds": [
+            "item/dye/dye",
+            {
+                "name": "item/dye/dye",
+                "pitch": 0.9
+            },
+            {
+                "name": "item/dye/dye",
+                "pitch": 0.95
+            },
+            {
+                "name": "item/dye/dye",
+                "pitch": 1.1
+            }
+        ]
+    },
+    "item.paper.dynamic": {
+        "sounds": [
+            {
+                "name": "item/book/open_flip1",
+                "volume": 2.0
+            },
+            {
+                "name": "item/book/open_flip2",
+                "volume": 2.0
+            },
+            {
+                "name": "item/book/open_flip3",
+                "volume": 2.0
+            }
+        ]
+    },
+    "item.fireworks.dynamic": {
+        "sounds": [
+            {
+                "name": "block/bamboo/sapling_hit1",
+                "volume": 0.8
+            },
+            {
+                "name": "block/bamboo/sapling_hit2",
+                "volume": 0.8
+            },
+            {
+                "name": "block/bamboo/sapling_hit3",
+                "volume": 0.8
+            },
+            {
+                "name": "block/bamboo/sapling_hit4",
+                "volume": 0.8
+            },
+            {
+                "name": "block/bamboo/sapling_hit5",
+                "volume": 0.8
+            }
+        ]
+    },
+    "item.ingots.dynamic": {
+        "sounds": [
+            "dig/stone1",
+            "dig/stone2",
+            "dig/stone3",
+            "dig/stone4"
+        ]
+    },
+    "item.shiny_metals.dynamic": {
+        "sounds": [
+            "block/amethyst/step1",
+            "block/amethyst/step2",
+            "block/amethyst/step3",
+            "block/amethyst/step4",
+            "block/amethyst/step5",
+            "block/amethyst/step6",
+            "block/amethyst/step7",
+            "block/amethyst/step8",
+            "block/amethyst/step9",
+            "block/amethyst/step10",
+            "block/amethyst/step11",
+            "block/amethyst/step12"
+        ]
+    },
+    "item.minecarts.dynamic": {
+        "sounds": [
+            {
+                "name": "random/click",
+                "pitch": 0.75,
+                "volume": 0.3
+            }
+        ]
+    },
+    "item.dirty_metals.dynamic": {
+        "sounds": [
+            "step/gravel1",
+            "step/gravel2",
+            "step/gravel3",
+            "step/gravel4"
+        ]
+    },
+    "item.shards.dynamic": {
+        "sounds": [
+            "block/decorated_pot/step1",
+            "block/decorated_pot/step2",
+            "block/decorated_pot/step3",
+            "block/decorated_pot/step4",
+            "block/decorated_pot/step5"
+        ]
+    },
+    "item.egg.dynamic": {
+        "sounds": [
+            {
+                "name": "mob/chicken/plop",
+                "pitch": 0.6
+            },
+            {
+                "name": "mob/chicken/plop",
+                "pitch": 0.7
+            },
+            {
+                "name": "mob/chicken/plop",
+                "pitch": 0.8
+            }
+        ]
+    },
+    "item.bone.dynamic": {
+        "sounds": [
+            "block/bone_block/step1",
+            "block/bone_block/step2",
+            "block/bone_block/step3",
+            "block/bone_block/step4",
+            "block/bone_block/step5"
+        ]
+    },
+    "item.sculk.dynamic": {
+        "sounds": [
+            "block/sculk/step1",
+            "block/sculk/step2",
+            "block/sculk/step3",
+            "block/sculk/step4",
+            "block/sculk/step5",
+            "block/sculk/step6"
+        ]
+    },
+    "item.bucket.dynamic": {
+        "sounds": [
+            "item/bucket/fill1",
+            "item/bucket/fill2",
+            "item/bucket/fill3"
+        ]
+    },
+    "item.wet_mob_drops.dynamic": {
+        "sounds": [
+            "mob/slime/small1",
+            "mob/slime/small2",
+            "mob/slime/small3",
+            "mob/slime/small4",
+            "mob/slime/small5"
+        ]
     }
 }

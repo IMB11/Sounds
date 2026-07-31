@@ -27,10 +27,10 @@
     "fabric-datagen": [
       "dev.imb11.sounds.loaders.fabric.datagen.SoundsDatagenEntrypoint"
     ],
-    "yumi:client_init": [
+    "mru": [
       "dev.imb11.sounds.SoundsClient"
     ],
-    "yumi:init": [
+    "mru_client": [
       "dev.imb11.sounds.SoundsClient"
     ]
   },

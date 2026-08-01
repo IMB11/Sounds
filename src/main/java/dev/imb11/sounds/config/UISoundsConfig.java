@@ -1,5 +1,6 @@
 package dev.imb11.sounds.config;
 
+import dev.imb11.mru.yacl.EntryType;
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.api.config.ConfiguredSound;
 import dev.imb11.sounds.api.config.DynamicConfiguredSound;
@@ -8,12 +9,20 @@ import dev.imb11.sounds.sound.HotbarDynamicConfiguredSound;
 import dev.imb11.sounds.sound.InventoryDynamicConfiguredSound;
 import dev.imb11.sounds.sound.context.ScreenHandlerSoundContext;
 import dev.isxander.yacl3.api.ConfigCategory;
+import dev.isxander.yacl3.api.ListOption;
+import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
+import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static dev.imb11.sounds.config.SoundsConfig.HELPER;
 
@@ -52,6 +61,8 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
     public boolean enableItemSoundCooldown = true;
     @SerialEntry
     public boolean enableDynamicItemSounds = true;
+    @SerialEntry
+    public List<String> ignoredItems = new ArrayList<>();
 
     public UISoundsConfig() {
         super(UISoundsConfig.class);
@@ -94,6 +105,18 @@ public class UISoundsConfig extends ConfigGroup<UISoundsConfig> implements YetAn
         builder.category(ConfigCategory.createBuilder()
                 .name(Component.translatable("sounds.config.ui.item_management"))
                 .option(HELPER.get("enableDynamicItemSounds", defaults.enableDynamicItemSounds, () -> config.enableDynamicItemSounds, v -> config.enableDynamicItemSounds = v))
+                .option(ListOption.<String>createBuilder()
+                        .name(HELPER.getText(EntryType.OPTION_NAME, "ignoredItems"))
+                        .description(OptionDescription.of(HELPER.getText(EntryType.OPTION_DESCRIPTION, "ignoredItems")))
+                        .binding(defaults.ignoredItems, () -> config.ignoredItems, (val) -> config.ignoredItems = val)
+                        .controller(opt -> DropdownStringControllerBuilder.create(opt)
+                                .allowEmptyValue(false)
+                                .values(BuiltInRegistries.ITEM.registryKeySet().stream()
+                                        .map(ResourceKey::identifier)
+                                        .map(Identifier::toString).toList()))
+                        .initial("minecraft:arrow")
+                        .build()
+                )
                 .option(HELPER.get("ignoreEmptyInventorySlots", defaults.ignoreEmptyInventorySlots, () -> config.ignoreEmptyInventorySlots, v -> config.ignoreEmptyInventorySlots = v))
                 .option(HELPER.get("enableItemSoundCooldown", defaults.enableItemSoundCooldown, () -> config.enableItemSoundCooldown, v -> config.enableItemSoundCooldown = v))
                 .option(HELPER.getField("itemSoundCooldown", 0.0f, Float.MAX_VALUE, defaults.itemSoundCooldown, () -> config.itemSoundCooldown, v -> config.itemSoundCooldown = v))

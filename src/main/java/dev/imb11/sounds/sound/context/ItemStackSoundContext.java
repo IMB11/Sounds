@@ -5,6 +5,7 @@ import dev.imb11.sounds.api.config.ConfiguredSimpleSoundInstance;
 import dev.imb11.sounds.api.context.DynamicSoundContext;
 import dev.imb11.sounds.config.SoundsConfig;
 import dev.imb11.sounds.config.UISoundsConfig;
+import dev.imb11.sounds.config.WorldSoundsConfig;
 import dev.imb11.sounds.dynamic.DynamicSoundHelper;
 import dev.imb11.sounds.mixin.accessors.BlockAccessor;
 import net.minecraft.resources.Identifier;
@@ -35,14 +36,14 @@ public class ItemStackSoundContext implements DynamicSoundContext<ItemStack> {
 
     @Override
     public ConfiguredSimpleSoundInstance handleContext(ItemStack context, Identifier fallback, float pitch, float volume) {
-        if (SoundsConfig.get(UISoundsConfig.class).enableDynamicItemSounds) {
+        ResourceKey<Item> key = context.typeHolder().unwrapKey().orElseThrow();
+        if (SoundsConfig.get(UISoundsConfig.class).enableDynamicItemSounds && !SoundsConfig.get(UISoundsConfig.class).ignoredItems.contains(key.identifier().toString())) {
 			Item item = context.getItem();
             if (item instanceof BlockItem blockItem) {
 				Block block = blockItem.getBlock();
                 fallback = this.blockSoundType.getTransformer().apply(((BlockAccessor)block).invokeGetSoundType(block.defaultBlockState()));
             }
 
-            ResourceKey<Item> key = item.builtInRegistryHolder().key();
             if (ITEM_CACHE.containsKey(key)) {
                 SoundDefinition<Item> definition = ITEM_CACHE.get(key);
                 fallback = definition.getSoundEvent();

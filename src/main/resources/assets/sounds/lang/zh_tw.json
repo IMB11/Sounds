@@ -44,6 +44,8 @@
   "sounds.config.world.actions": "動作",
   "sounds.config.option.enableEnderpearlVariety": "啟用終界珍珠多樣性",
   "sounds.config.option.description.enableEnderpearlVariety": "應該隨機播放並且更符合歌萊果傳送音效的方式播放當你拋出終界珍珠時的音效嗎？",
+  "sounds.config.swordSwoosh.option": "劍揮砍",
+  "sounds.config.swordSwoosh.option.description": "當您用劍攻擊時播放的音效。",
   "sounds.config.frostWalker.option": "冰霜行者冰凍效果",
   "sounds.config.frostWalker.option.description": "當冰霜行者靴子凍結水面時播放的音效。",
   "sounds.config.leadSnapping.option": "拴繩斷裂",
@@ -54,6 +56,8 @@
   "sounds.config.plantPotFill.option.description": "當你將植物放入花盆中時播放的音效。",
   "sounds.config.cakeEat.option": "吃蛋糕",
   "sounds.config.cakeEat.option.description": "當你吃掉一塊蛋糕時播放的音效。蛋糕可能是個謊言，但音效卻是真實的！",
+  "sounds.config.iceStress.option": "冰承受壓力",
+  "sounds.config.iceStress.option.description": "當您在冰上跳躍時播放的音效。最初來自 WinterJam 2024 的 Icebreak 模組。",
 
   "sounds.config.world.mobs": "生物",
   "sounds.config.babyChickenChirp.option": "小雞啾啾聲",
@@ -65,10 +69,14 @@
   "sounds.config.world.blocks.description": "從 1.1.0 版開始，方塊音效現在透過資源包管理。如需更多資訊，請考慮點選下方連結查看音效 wiki。您可以在「.minecraft/config/sounds/dynamic_sounds」資料夾中編輯預設資源包。",
   "sounds.config.option.disableBlocksEntirely": "停用所有已修改的方塊音效",
   "sounds.config.option.description.disableBlocksEntirely": "這將停用所有已透過資源包修改的方塊音效。如果您想使用遊戲隨附的預設方塊音效，這會很有用。",
+  "sounds.config.option.ignoredBlocks": "忽略方塊",
+  "sounds.config.option.description.ignoredBlocks": "清單中的方塊不會套用任何自訂音效設定，即使它們所在的標籤已套用音效設定。",
 
   "sounds.config.ui": "UI 介面音效",
 
   "sounds.config.ui.interface": "介面",
+  "sounds.config.option.enableDynamicItemSounds": "動態物品音效",
+  "sounds.config.option.description.enableDynamicItemSounds": "允許透過資源包自訂物品音效。若您希望所有 UI 音效保持一致，請停用此選項。",
   "sounds.config.option.ignoreEmptyHotbarSlots": "忽略空的快捷欄欄位",
   "sounds.config.option.description.ignoreEmptyHotbarSlots": "播放音效時是否應該忽略空的快捷欄欄位？\n\n注意：由於 Mojang 對物品掉落機制的奇怪實作，這不包含快捷欄掉落音效。您應該切換「忽略空的物品欄欄位」選項來處理該問題。",
   "sounds.config.inventoryOpen.option": "物品欄打開",
@@ -77,8 +85,6 @@
   "sounds.config.inventoryScroll.option.description": "當您在任何物品欄中使用滾動條時播放的音效。",
   "sounds.config.inventoryClose.option": "物品欄關閉",
   "sounds.config.inventoryClose.option.description": "當你關閉擁有物品欄的畫面，例如附魔台，播放的音效。",
-  "sounds.config.inventoryTyping.option": "物品欄打字",
-  "sounds.config.inventoryTyping.option.description": "當您在鐵砧命名欄或創造模式物品欄搜索欄中輸入時播放的音效。",
   "sounds.config.hotbarScroll.option": "快捷欄滾動",
   "sounds.config.hotbarScroll.option.description": "當您滾動快捷欄或使用數字鍵選擇快捷欄位時播放的音效。",
   "sounds.config.hotbarPick.option": "選取方塊",
@@ -134,5 +140,18 @@
   "sounds.config.negativeStatusEffectGain.option": "獲得負面狀態效果",
   "sounds.config.negativeStatusEffectGain.option.description": "當您獲得負面狀態效果時播放的音效。",
   "sounds.config.negativeStatusEffectLose.option": "失去負面狀態效果",
-  "sounds.config.negativeStatusEffectLose.option.description": "當您失去負面狀態效果時播放的音效。"
+  "sounds.config.negativeStatusEffectLose.option.description": "當您失去負面狀態效果時播放的音效。",
+  "sounds.config.mod": "特定模組選項",
+  "sounds.config.option.hideSoundsButtonInSoundMenu": "在音樂和音效選項中隱藏按鈕",
+  "sounds.config.option.description.hideSoundsButtonInSoundMenu": "是否應該在原版音樂和音效選項中隱藏用於開啟 Sounds 設定畫面的「音效」按鈕？",
+  "sounds.config.option.enableVerboseSoundTypeLogging": "啟用詳細音效類型紀錄",
+  "sounds.config.option.description.enableVerboseSoundTypeLogging": "是否應該在主控台記錄方塊音效類型的詳細資訊？這對除錯很有幫助。",
+  "sounds.config.option.globalVolume": "全域音量",
+  "sounds.config.option.description.globalVolume": "控制本模組新增的所有音效的音量。",
+
+  "sounds.subtitle.sword_swoosh": "揮劍",
+  "sounds.subtitle.chat_ping": "聊天提示聲",
+  "sounds.subtitle.block.repeater.click": "中繼器滴答聲",
+  "sounds.subtitle.block.daylight_detector.use": "日光感測器滴答聲",
+  "sounds.subtitle.entity.furnace_minecart.use": "熔爐礦車噼啪聲"
 }

@@ -75,6 +75,8 @@
 	"sounds.config.ui": "UI 声音",
 
 	"sounds.config.ui.interface": "界面",
+	"sounds.config.option.enableDynamicItemSounds": "动态物品声音",
+	"sounds.config.option.description.enableDynamicItemSounds": "允许通过资源包自定义物品声音。若想所有 UI 声音保持一致，请将其关闭。",
 	"sounds.config.option.ignoreEmptyHotbarSlots": "忽略空槽位",
 	"sounds.config.option.description.ignoreEmptyHotbarSlots": "播放声音时是否忽略空的快捷栏槽？\n\n注意：由于 Mojank 的奇怪物品掉落执行机制，这并不包括快捷栏丢弃物品声音。为此您需要关闭“忽略空槽位”。",
 	"sounds.config.inventoryOpen.option": "打开物品栏",
@@ -83,8 +85,6 @@
 	"sounds.config.inventoryScroll.option.description": "使用物品栏内滚动条时播放的声音。",
 	"sounds.config.inventoryClose.option": "物品栏关闭",
 	"sounds.config.inventoryClose.option.description": "关闭任意拥有物品栏界面时播放的声音，例如附魔台界面。",
-	"sounds.config.inventoryTyping.option": "物品栏输入",
-	"sounds.config.inventoryTyping.option.description": "在任意拥有物品栏界面内输入文本时播放的声音，例如铁砧命名框和创造模式物品栏搜索框。",
 	"sounds.config.hotbarScroll.option": "快捷栏滚动",
 	"sounds.config.hotbarScroll.option.description": "使用滚轮或快捷键切换快捷栏时播放的声音。",
 	"sounds.config.hotbarPick.option": "选取方块",
@@ -146,7 +146,13 @@
 	"sounds.config.option.description.hideSoundsButtonInSoundMenu": "是否要隐藏在音乐和声音选项中用于打开模组配置的按钮？",
 	"sounds.config.option.enableVerboseSoundTypeLogging": "启用详细声音类型日志",
 	"sounds.config.option.description.enableVerboseSoundTypeLogging": "是否在控制台输出详细的方块声音类型信息？这对调试很有帮助。",
+	"sounds.config.option.globalVolume": "全局音量",
+	"sounds.config.option.description.globalVolume": "控制本模组添加的所有声音的音量。",
 
-	"sounds.subtitle.sword_swoosh": "挥砍"
+	"sounds.subtitle.sword_swoosh": "挥砍",
+	"sounds.subtitle.chat_ping": "聊天提示声",
+	"sounds.subtitle.block.repeater.click": "中继器滴答声",
+	"sounds.subtitle.block.daylight_detector.use": "阳光探测器滴答声",
+	"sounds.subtitle.entity.furnace_minecart.use": "动力矿车噼啪声"
 
 }

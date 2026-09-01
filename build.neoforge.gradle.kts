@@ -35,10 +35,11 @@ jsonlang {
 
 repositories {
     maven {
-        name = "IMB11 Maven"
-        url = uri("https://maven.imb11.dev/releases")
+        name = "Cassian's Maven"
+        url = uri("https://maven.cassian.cc")
         content {
-            includeGroupAndSubgroups("dev.imb11")
+            includeGroupAndSubgroups("cc.cassian")
+            includeGroupAndSubgroups("folk.sisby")
         }
     }
     maven {
@@ -72,6 +73,7 @@ repositories {
         }
     }
     mavenCentral()
+    mavenLocal()
 }
 
 neoForge {
@@ -102,18 +104,13 @@ neoForge {
 }
 
 dependencies {
-
-    implementation("dev.imb11:mru:${property("deps.mru")}-neoforge")
+    implementation("cc.cassian.mru:mru-neoforge:${property("deps.mru")}") {
+        isTransitive = false
+    }
 
     compileOnly("maven.modrinth:trashslot:${property("compile.trashslot")}")
 
     implementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-neoforge")
-
-    jarJar("dev.yumi.mc.core:yumi-mc-foundation:${property("deps.yumi_mc_foundation")}")
-    implementation("dev.yumi.mc.core:yumi-mc-foundation:${property("deps.yumi_mc_foundation")}")
-
-    implementation("io.github.llamalad7:mixinextras-neoforge:0.5.0")
-    jarJar("io.github.llamalad7:mixinextras-neoforge:0.5.0")
 }
 
 tasks.named("processResources") {

@@ -28,7 +28,10 @@
     "fabric-datagen": [
       "dev.imb11.sounds.loaders.fabric.datagen.SoundsDatagenEntrypoint"
     ],
-    "main": [
+    "mru": [
+      "dev.imb11.sounds.SoundsClient"
+    ],
+    "mru_client": [
       "dev.imb11.sounds.SoundsClient"
     ]
   },

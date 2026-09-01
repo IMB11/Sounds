@@ -82,10 +82,11 @@ repositories {
         }
     }
     maven {
-        name = "IMB11 Maven"
-        url = uri("https://maven.imb11.dev/releases")
+        name = "Cassian's Maven"
+        url = uri("https://maven.cassian.cc/")
         content {
-            includeGroupAndSubgroups("dev.imb11")
+            includeGroupAndSubgroups("cc.cassian")
+            includeGroupAndSubgroups("folk.sisby")
         }
     }
     mavenCentral()
@@ -99,13 +100,10 @@ dependencies {
     implementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
     compileOnly("maven.modrinth:trashslot:${property("compile.trashslot")}")
-    implementation("dev.imb11:mru:${property("deps.mru")}-fabric")
+    implementation("cc.cassian.mru:mru-fabric:${property("deps.mru")}")
 
     implementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-fabric")
-    compileOnly("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
-
-//    include("dev.yumi.mc.core:yumi-mc-foundation:${property("deps.yumi_mc_foundation")}")
-//    implementation("dev.yumi.mc.core:yumi-mc-foundation:${property("deps.yumi_mc_foundation")}")
+    implementation("com.terraformersmc:modmenu:${property("runtime.modmenu")}")
 }
 
 fabricApi {

@@ -11,6 +11,8 @@ modId="sounds"
 version="${mod_version}"
 displayName="${mod_name}"
 description="${mod_description}"
+mru = "dev.imb11.sounds.SoundsClient"
+mru_client = "dev.imb11.sounds.SoundsClient"
 
 [[dependencies.sounds]]
 modId="${loader}"
@@ -45,12 +47,6 @@ type = "optional"
 versionRange = " "
 ordering = "NONE"
 side = "CLIENT"
-
-[[modproperties.sounds."yumi:entrypoints"."yumi:init"]]
-value = "dev.imb11.sounds.SoundsClient"
-
-[[modproperties.sounds."yumi:entrypoints"."yumi:client_init"]]
-value = "dev.imb11.sounds.SoundsClient"
 
 [[mixins]]
 config="sounds.mixins.json"

@@ -77,6 +77,8 @@
 	"sounds.config.ui.interface": "Interface",
 	"sounds.config.option.enableDynamicItemSounds": "Dynamic Item Sounds",
 	"sounds.config.option.description.enableDynamicItemSounds": "Allow for item sounds to be customized via resource packs. Disable if you want all UI sounds to be the same.",
+	"sounds.config.option.ignoredItems": "Ignored Items",
+	"sounds.config.option.description.ignoredItems": "A list of items that will not have any custom sound definition settings applied to them, even if they are in a tag that has sound settings applied to it.",
 	"sounds.config.option.ignoreEmptyHotbarSlots": "Ignore Empty Hotbar Slots",
 	"sounds.config.option.description.ignoreEmptyHotbarSlots": "Should empty hotbar slots be ignored when playing sound effects?\n\nNote: This does NOT include the hotbar drop sound effect due to the weird mojank implementation of item dropping mechanics. You should toggle the 'Ignore Empty Inventory Slots' option for that.",
 	"sounds.config.inventoryOpen.option": "Inventory Open",

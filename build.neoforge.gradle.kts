@@ -15,7 +15,7 @@ tasks.named<ProcessResources>("processResources") {
         this["mod_description"] = "A highly configurable sound overhaul mod that adds new sound effects while improving vanilla sounds too."
         this["mod_license"] = "ARR"
         this["target_yacl"] = "*"
-        this["target_mru"] = "1.0.26"
+        this["target_mru"] = "1.0.30"
         this["target_loader"] = "[4, )"
         this["loader"] = "neoforge"
     }

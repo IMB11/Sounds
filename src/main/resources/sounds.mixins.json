@@ -11,6 +11,7 @@
     "SoundManagerMixin",
     "SoundsOptionsScreenMixin",
     "TitleScreenWidget",
+    "UserMixin",
     "accessors.BlockAccessor",
     "compat.InventiveInventoryCompatMixin",
     "compat.InventorioCompatMixin",

@@ -19,8 +19,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "dev.imb11.sounds.loaders.fabric.SoundsFabric",
-      "dev.imb11.sounds.SoundsClient"
+      "dev.imb11.sounds.loaders.fabric.SoundsFabric"
     ],
     "modmenu": [
       "dev.imb11.sounds.loaders.fabric.ModMenuCompat"

@@ -4,6 +4,8 @@ import dev.imb11.sounds.util.MixinStatics;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Prediction;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -22,28 +24,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Pseudo
-@Mixin(Player.class)
-abstract class PlayerEntityMixin extends LivingEntity {
-    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, Level world) {
-        super(entityType, world);
-    }
-
-    @Inject(method = "drop", at = @At("HEAD"))
-    protected void $drop_item_sound_effect(
-            ItemStack stack,
-            boolean throwRandomly,
-            CallbackInfoReturnable<ItemEntity> cir) {
-    }
-}
-
-@Pseudo
-@Mixin(LocalPlayer.class)
-public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
-    @Shadow @Final protected Minecraft minecraft;
-
-    @Shadow public abstract void playSound(@NotNull SoundEvent sound, float volume, float pitch);
-
-    protected ItemDropSoundEffect(EntityType<? extends LivingEntity> entityType, Level world) {
+@Mixin(LivingEntity.class)
+public abstract class ItemDropSoundEffect extends Entity {
+    protected ItemDropSoundEffect(EntityType<? extends Entity> entityType, Level world) {
         super(entityType, world);
     }
 
@@ -69,17 +52,9 @@ public abstract class ItemDropSoundEffect extends PlayerEntityMixin {
     }
 
     @Inject(method = "drop", at = @At("HEAD"))
-    private void $drop_selected_item_sound_effect(boolean entireStack, CallbackInfoReturnable<Boolean> cir) {
-        ItemStack stack = this.getMainHandItem();
-        sounds$playSound(stack);
-    }
-
-    @Override
-    protected void $drop_item_sound_effect(
-            ItemStack stack,
-            boolean throwRandomly,
-            CallbackInfoReturnable<ItemEntity> cir) {
+    private void $drop_selected_item_sound_effect(ItemStack itemStack, boolean thrownFromHand, Prediction prediction, CallbackInfoReturnable<ItemEntity> cir) {
         if (!this.level().isClientSide()) return;
-        sounds$playSound(stack);
+        if (((Object) this instanceof LocalPlayer))
+            sounds$playSound(itemStack);
     }
 }

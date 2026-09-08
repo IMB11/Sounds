@@ -3,6 +3,7 @@ loaderVersion="${target_loader}"
 issueTrackerURL="https://github.com/IMB11-Mods/Sounds/issues"
 displayURL="https://modrinth.com/mod/sound"
 logoFile="assets/sounds/icon.png"
+iconFile="assets/sounds/icon.png"
 authors="IMB11, cassiancc"
 license="${mod_license}"
 

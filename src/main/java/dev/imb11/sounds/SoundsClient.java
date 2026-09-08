@@ -19,6 +19,7 @@ public class SoundsClient implements ClientRegisterEvent, CommonRegisterEvent {
     public static final RandomSource RANDOM = RandomSource.create();
     public static final Path DEFAULT_PACK_PATH = LoaderUtils.getConfigFolder("sounds").resolve("dynamic_sounds");
     public static final Logger LOGGER = LoggerFactory.getLogger("Sounds");
+    public static String username;
 
     public static Identifier id(String id) {
         return Identifier.fromNamespaceAndPath("sounds", id);
@@ -27,6 +28,10 @@ public class SoundsClient implements ClientRegisterEvent, CommonRegisterEvent {
     @Override
     public void onInitialize() {
         CustomSounds.initialize();
+    }
+
+    public static String username() {
+        return username;
     }
 
     @Override

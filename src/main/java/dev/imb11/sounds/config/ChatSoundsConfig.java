@@ -1,6 +1,7 @@
 package dev.imb11.sounds.config;
 
 import dev.imb11.mru.LoaderUtils;
+import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.api.config.ConfiguredSound;
 import dev.imb11.sounds.config.utils.ConfigGroup;
 import dev.imb11.sounds.sound.CustomSounds;
@@ -8,7 +9,6 @@ import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.StringControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 
@@ -25,7 +25,7 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
     public final ConfiguredSound mentionSoundEffect = new ConfiguredSound("mention", CustomSounds.CHAT_PING, true, 1.8f, 0.9f);
     @SerialEntry
     public ArrayList<String> mentionKeywords = new ArrayList<>(List.of(
-            "@" + Minecraft.getInstance().getUser().getName()
+            "@" + SoundsClient.username()
     ));
     @SerialEntry
     public boolean ignoreSystemChats = false;
@@ -68,7 +68,7 @@ public class ChatSoundsConfig extends ConfigGroup<ChatSoundsConfig> implements Y
                 .description(OptionDescription.of(Component.translatable("sounds.config.mentionKeywords.option.description")))
                 .binding(defaults.mentionKeywords, () -> config.mentionKeywords, (value) -> config.mentionKeywords = new ArrayList<>(value))
                 .controller(StringControllerBuilder::create)
-                .initial("@" + Minecraft.getInstance().getUser().getName())
+                .initial("@" + SoundsClient.username())
                 .insertEntriesAtEnd(true)
                 .build();
 

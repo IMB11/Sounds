@@ -1,7 +1,7 @@
 plugins {
     id("net.neoforged.moddev")
     id ("dev.kikugie.postprocess.jsonlang")
-    id("me.modmuss50.mod-publish-plugin")
+//    id("me.modmuss50.mod-publish-plugin")
 }
 
 tasks.named<ProcessResources>("processResources") {

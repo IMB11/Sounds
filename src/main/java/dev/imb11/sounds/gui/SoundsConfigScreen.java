@@ -1,10 +1,12 @@
 package dev.imb11.sounds.gui;
 
+import com.mojang.blaze3d.Blaze3D;
 import dev.imb11.mru.RenderUtils;
 import dev.imb11.sounds.SoundsClient;
 import dev.imb11.sounds.config.*;
 import org.jetbrains.annotations.Nullable;
 
+import java.net.URI;
 import java.util.function.Supplier;
 
 import net.minecraft.ChatFormatting;
@@ -136,8 +138,8 @@ public class SoundsConfigScreen extends Screen {
         int discordAndKoFiButtonsWidth = 80 + 80 + 33; // button widths + left margin of Ko-Fi button + right margin of Discord button
         int doneButtonWidth = this.width - discordAndKoFiButtonsWidth;
         Button buttonWidget = new GreyButton(180, this.height - 30, doneButtonWidth, 20, CommonComponents.GUI_DONE, (btn) -> this.minecraft.gui.setScreen(this.parent), Supplier::get);
-        Button koFiButton = new GreyButton(10, this.height - 30, 80, 20, Component.literal("Donate").withStyle(ChatFormatting.GOLD).withStyle(ChatFormatting.BOLD), (btn) -> Util.getPlatform().openUri("https://ko-fi.com/imb11"), Supplier::get);
-        Button discordButton = new GreyButton(95, this.height - 30, 80, 20, Component.literal("Discord").withStyle(ChatFormatting.AQUA).withStyle(ChatFormatting.BOLD), (btn) -> Util.getPlatform().openUri("https://discord.imb11.dev/"), Supplier::get);
+        Button koFiButton = new GreyButton(10, this.height - 30, 80, 20, Component.literal("Donate").withStyle(ChatFormatting.GOLD).withStyle(ChatFormatting.BOLD), (btn) -> Blaze3D.openUri(URI.create("https://ko-fi.com/imb11")), Supplier::get);
+        Button discordButton = new GreyButton(95, this.height - 30, 80, 20, Component.literal("Discord").withStyle(ChatFormatting.AQUA).withStyle(ChatFormatting.BOLD), (btn) -> Blaze3D.openUri(URI.create("https://discord.imb11.dev/")), Supplier::get);
         this.addRenderableWidget(buttonWidget);
         this.addRenderableWidget(koFiButton);
         this.addRenderableWidget(discordButton);

@@ -1,5 +1,6 @@
 package dev.imb11.sounds.config;
 
+import com.mojang.blaze3d.Blaze3D;
 import dev.imb11.mru.yacl.EntryType;
 import dev.imb11.sounds.api.config.ConfiguredSound;
 import dev.imb11.sounds.api.config.DynamicConfiguredSound;
@@ -10,6 +11,8 @@ import dev.imb11.sounds.sound.context.RepeaterSoundContext;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.DropdownStringControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
+
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.util.Util;
@@ -94,7 +97,7 @@ public class WorldSoundsConfig extends ConfigGroup<WorldSoundsConfig> implements
                 .option(ButtonOption.createBuilder()
                         .name(Component.literal("Open Wiki"))
                         .description(OptionDescription.EMPTY)
-                        .action((screen, option) -> Util.getPlatform().openUri("https://docs.imb11.dev/sounds/data/custom-block-sounds"))
+                        .action((screen, option) -> Blaze3D.openUri(URI.create("https://docs.imb11.dev/sounds/data/custom-block-sounds")))
                         .build())
                 .option(LabelOption.create(Component.empty()))
                 .option(ListOption.<String>createBuilder()
